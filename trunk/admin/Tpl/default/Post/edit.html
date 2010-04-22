@@ -1,0 +1,158 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:主题评论综合表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Post_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Post_update" name="Post_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >评论ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >回复ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="qid" name="qid"  class="input" style="width:300px" value="$list['qid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >楼次</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="l" name="l"  class="input" style="width:300px" value="$list['l']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否引用</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="requery" name="requery"  class="input" style="width:300px" value="$list['requery']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >盖楼上级ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="qidstr" name="qidstr"  class="input" style="width:300px" value="$list['qidstr']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >主题ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="aid" name="aid"  class="input" style="width:300px" value="$list['aid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="gid" name="gid"  class="input" style="width:300px" value="$list['gid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >标题</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="title" name="title"  class="input" style="width:300px" value="$list['title']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="username" name="username"  class="input" style="width:300px" value="$list['username']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户IP</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ip" name="ip"  class="input" style="width:300px" value="$list['ip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发布时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="dateline" name="dateline"  class="input" style="width:300px" value="$list['dateline']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >回复内容</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="message" name="message"  class="input" style="width:300px" value="$list['message']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >回复图片</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="pic" name="pic"  class="input" style="width:300px" value="$list['pic']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >表意用户</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="hotuser" name="hotuser"  class="input" style="width:300px" value="$list['hotuser']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >属性</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="attr" name="attr"  class="input" style="width:300px" value="$list['attr']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >键字关</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="tags" name="tags"  class="input" style="width:300px" value="$list['tags']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最后表意时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="lasttime" name="lasttime"  class="input" style="width:300px" value="$list['lasttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >否是显示</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="is_show" name="is_show"  class="input" style="width:300px" value="$list['is_show']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >评论状态</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="position" name="position"  class="input" style="width:300px" value="$list['position']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >评论级别</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="star" name="star"  class="input" style="width:300px" value="$list['star']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >表态心情</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click" name="click"  class="input" style="width:300px" value="$list['click']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >支持</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ok" name="ok"  class="input" style="width:300px" value="$list['ok']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >微笑</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="smile" name="smile"  class="input" style="width:300px" value="$list['smile']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >反对</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="bad" name="bad"  class="input" style="width:300px" value="$list['bad']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:主题评论综合表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Post_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

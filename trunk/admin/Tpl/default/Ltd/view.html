@@ -1,0 +1,147 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:公司信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Ltd_view" name="Ltd_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uid" name="uid"  value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >公司名称</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="title" name="title"  value="$list['title']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >管理密码</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="passwd" name="passwd"  value="$list['passwd']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >公司信息</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="info" name="info"  value="$list['info']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >营经范围</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="jyfw" name="jyfw"  value="$list['jyfw']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >营业执照副本</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="yyzz" name="yyzz"  value="$list['yyzz']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >书证标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zstitle1" name="zstitle1"  value="$list['zstitle1']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书说明</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zssm1" name="zssm1"  value="$list['zssm1']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书图片</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zspic1" name="zspic1"  value="$list['zspic1']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >书证标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zstitle2" name="zstitle2"  value="$list['zstitle2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书说明</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zssm2" name="zssm2"  value="$list['zssm2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书图片</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zspic2" name="zspic2"  value="$list['zspic2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >书证标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zstitle3" name="zstitle3"  value="$list['zstitle3']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书说明</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zssm3" name="zssm3"  value="$list['zssm3']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书图片</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zspic3" name="zspic3"  value="$list['zspic3']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >书证标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zstitle4" name="zstitle4"  value="$list['zstitle4']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书说明</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zssm4" name="zssm4"  value="$list['zssm4']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >证书图片</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zspic4" name="zspic4"  value="$list['zspic4']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >修改时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mtime" name="mtime"  value="$list['mtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建IP</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="cip" name="cip"  value="$list['cip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >修改IP</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mip" name="mip"  value="$list['mip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否有效</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="status" name="status"  value="$list['status']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

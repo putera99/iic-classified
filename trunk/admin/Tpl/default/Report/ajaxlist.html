@@ -1,0 +1,137 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Report_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Report_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','tid','<php> echo getsorttype('tid');</php>','Report_Grid')"  title="按照信息ID排序">信息ID
+      <php> echo getsorttype('tid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','itype','<php> echo getsorttype('itype');</php>','Report_Grid')"  title="按照资源类型排序">资源类型
+      <php> echo getsorttype('itype',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','is_new','<php> echo getsorttype('is_new');</php>','Report_Grid')"  title="按照是否为新排序">是否为新
+      <php> echo getsorttype('is_new',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','num','<php> echo getsorttype('num');</php>','Report_Grid')"  title="按照被举报次数排序">被举报次数
+      <php> echo getsorttype('num',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','dateline','<php> echo getsorttype('dateline');</php>','Report_Grid')"  title="按照被举报时间排序">被举报时间
+      <php> echo getsorttype('dateline',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','lasttime','<php> echo getsorttype('lasttime');</php>','Report_Grid')"  title="按照最近时间排序">最近时间
+      <php> echo getsorttype('lasttime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','ip','<php> echo getsorttype('ip');</php>','Report_Grid')"  title="按照用户ID排序">用户ID
+      <php> echo getsorttype('ip',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','reason','<php> echo getsorttype('reason');</php>','Report_Grid')"  title="按照被举报原因排序">被举报原因
+      <php> echo getsorttype('reason',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','uids','<php> echo getsorttype('uids');</php>','Report_Grid')"  title="按照举报者ID排序">举报者ID
+      <php> echo getsorttype('uids',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Report','ajaxlist','is_show','<php> echo getsorttype('is_show');</php>','Report_Grid')"  title="按照是否处理排序">是否处理
+      <php> echo getsorttype('is_show',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="信息ID"> <mkrtags:text id="tid" name="tid"  value="$list['tid']"/> </td>
+    
+    <td title="资源类型"> <mkrtags:text id="itype" name="itype"  value="$list['itype']"/> </td>
+    
+    <td title="是否为新"> <mkrtags:text id="is_new" name="is_new"  value="$list['is_new']"/> </td>
+    
+    <td title="被举报次数"> <mkrtags:text id="num" name="num"  value="$list['num']"/> </td>
+    
+    <td title="被举报时间"> <mkrtags:text id="dateline" name="dateline"  value="$list['dateline']"/> </td>
+    
+    <td title="最近时间"> <mkrtags:text id="lasttime" name="lasttime"  value="$list['lasttime']"/> </td>
+    
+    <td title="用户ID"> <mkrtags:text id="ip" name="ip"  value="$list['ip']"/> </td>
+    
+    <td title="被举报原因"> <mkrtags:text id="reason" name="reason"  value="$list['reason']"/> </td>
+    
+    <td title="举报者ID"> <mkrtags:text id="uids" name="uids"  value="$list['uids']"/> </td>
+    
+    <td title="是否处理"> <mkrtags:text id="is_show" name="is_show"  value="$list['is_show']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

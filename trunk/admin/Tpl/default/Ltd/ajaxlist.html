@@ -1,0 +1,215 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Ltd_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Ltd_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','uid','<php> echo getsorttype('uid');</php>','Ltd_Grid')"  title="按照用户ID排序">用户ID
+      <php> echo getsorttype('uid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','title','<php> echo getsorttype('title');</php>','Ltd_Grid')"  title="按照公司名称排序">公司名称
+      <php> echo getsorttype('title',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','passwd','<php> echo getsorttype('passwd');</php>','Ltd_Grid')"  title="按照管理密码排序">管理密码
+      <php> echo getsorttype('passwd',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','info','<php> echo getsorttype('info');</php>','Ltd_Grid')"  title="按照公司信息排序">公司信息
+      <php> echo getsorttype('info',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','jyfw','<php> echo getsorttype('jyfw');</php>','Ltd_Grid')"  title="按照营经范围排序">营经范围
+      <php> echo getsorttype('jyfw',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','yyzz','<php> echo getsorttype('yyzz');</php>','Ltd_Grid')"  title="按照营业执照副本排序">营业执照副本
+      <php> echo getsorttype('yyzz',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zstitle1','<php> echo getsorttype('zstitle1');</php>','Ltd_Grid')"  title="按照书证标题排序">书证标题
+      <php> echo getsorttype('zstitle1',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zssm1','<php> echo getsorttype('zssm1');</php>','Ltd_Grid')"  title="按照证书说明排序">证书说明
+      <php> echo getsorttype('zssm1',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zspic1','<php> echo getsorttype('zspic1');</php>','Ltd_Grid')"  title="按照证书图片排序">证书图片
+      <php> echo getsorttype('zspic1',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zstitle2','<php> echo getsorttype('zstitle2');</php>','Ltd_Grid')"  title="按照书证标题排序">书证标题
+      <php> echo getsorttype('zstitle2',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zssm2','<php> echo getsorttype('zssm2');</php>','Ltd_Grid')"  title="按照证书说明排序">证书说明
+      <php> echo getsorttype('zssm2',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zspic2','<php> echo getsorttype('zspic2');</php>','Ltd_Grid')"  title="按照证书图片排序">证书图片
+      <php> echo getsorttype('zspic2',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zstitle3','<php> echo getsorttype('zstitle3');</php>','Ltd_Grid')"  title="按照书证标题排序">书证标题
+      <php> echo getsorttype('zstitle3',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zssm3','<php> echo getsorttype('zssm3');</php>','Ltd_Grid')"  title="按照证书说明排序">证书说明
+      <php> echo getsorttype('zssm3',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zspic3','<php> echo getsorttype('zspic3');</php>','Ltd_Grid')"  title="按照证书图片排序">证书图片
+      <php> echo getsorttype('zspic3',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zstitle4','<php> echo getsorttype('zstitle4');</php>','Ltd_Grid')"  title="按照书证标题排序">书证标题
+      <php> echo getsorttype('zstitle4',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zssm4','<php> echo getsorttype('zssm4');</php>','Ltd_Grid')"  title="按照证书说明排序">证书说明
+      <php> echo getsorttype('zssm4',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','zspic4','<php> echo getsorttype('zspic4');</php>','Ltd_Grid')"  title="按照证书图片排序">证书图片
+      <php> echo getsorttype('zspic4',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','ctime','<php> echo getsorttype('ctime');</php>','Ltd_Grid')"  title="按照创建时间排序">创建时间
+      <php> echo getsorttype('ctime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','mtime','<php> echo getsorttype('mtime');</php>','Ltd_Grid')"  title="按照修改时间排序">修改时间
+      <php> echo getsorttype('mtime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','cip','<php> echo getsorttype('cip');</php>','Ltd_Grid')"  title="按照创建IP排序">创建IP
+      <php> echo getsorttype('cip',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','mip','<php> echo getsorttype('mip');</php>','Ltd_Grid')"  title="按照修改IP排序">修改IP
+      <php> echo getsorttype('mip',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Ltd','ajaxlist','status','<php> echo getsorttype('status');</php>','Ltd_Grid')"  title="按照是否有效排序">是否有效
+      <php> echo getsorttype('status',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="用户ID"> <mkrtags:text id="uid" name="uid"  value="$list['uid']"/> </td>
+    
+    <td title="公司名称"> <mkrtags:text id="title" name="title"  value="$list['title']"/> </td>
+    
+    <td title="管理密码"> <mkrtags:text id="passwd" name="passwd"  value="$list['passwd']"/> </td>
+    
+    <td title="公司信息"> <mkrtags:text id="info" name="info"  value="$list['info']"/> </td>
+    
+    <td title="营经范围"> <mkrtags:text id="jyfw" name="jyfw"  value="$list['jyfw']"/> </td>
+    
+    <td title="营业执照副本"> <mkrtags:text id="yyzz" name="yyzz"  value="$list['yyzz']"/> </td>
+    
+    <td title="书证标题"> <mkrtags:text id="zstitle1" name="zstitle1"  value="$list['zstitle1']"/> </td>
+    
+    <td title="证书说明"> <mkrtags:text id="zssm1" name="zssm1"  value="$list['zssm1']"/> </td>
+    
+    <td title="证书图片"> <mkrtags:text id="zspic1" name="zspic1"  value="$list['zspic1']"/> </td>
+    
+    <td title="书证标题"> <mkrtags:text id="zstitle2" name="zstitle2"  value="$list['zstitle2']"/> </td>
+    
+    <td title="证书说明"> <mkrtags:text id="zssm2" name="zssm2"  value="$list['zssm2']"/> </td>
+    
+    <td title="证书图片"> <mkrtags:text id="zspic2" name="zspic2"  value="$list['zspic2']"/> </td>
+    
+    <td title="书证标题"> <mkrtags:text id="zstitle3" name="zstitle3"  value="$list['zstitle3']"/> </td>
+    
+    <td title="证书说明"> <mkrtags:text id="zssm3" name="zssm3"  value="$list['zssm3']"/> </td>
+    
+    <td title="证书图片"> <mkrtags:text id="zspic3" name="zspic3"  value="$list['zspic3']"/> </td>
+    
+    <td title="书证标题"> <mkrtags:text id="zstitle4" name="zstitle4"  value="$list['zstitle4']"/> </td>
+    
+    <td title="证书说明"> <mkrtags:text id="zssm4" name="zssm4"  value="$list['zssm4']"/> </td>
+    
+    <td title="证书图片"> <mkrtags:text id="zspic4" name="zspic4"  value="$list['zspic4']"/> </td>
+    
+    <td title="创建时间"> <mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/> </td>
+    
+    <td title="修改时间"> <mkrtags:text id="mtime" name="mtime"  value="$list['mtime']"/> </td>
+    
+    <td title="创建IP"> <mkrtags:text id="cip" name="cip"  value="$list['cip']"/> </td>
+    
+    <td title="修改IP"> <mkrtags:text id="mip" name="mip"  value="$list['mip']"/> </td>
+    
+    <td title="是否有效"> <mkrtags:text id="status" name="status"  value="$list['status']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

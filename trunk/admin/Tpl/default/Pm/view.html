@@ -1,0 +1,82 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:短信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Pm_view" name="Pm_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发送者ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="touid" name="touid"  value="$list['touid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="xid" name="xid"  value="$list['xid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源类别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="itype" name="itype"  value="$list['itype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >接收方ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="fromuid" name="fromuid"  value="$list['fromuid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发送方用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tousername" name="tousername"  value="$list['tousername']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >信件类别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="type" name="type"  value="$list['type']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否新</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ifnew" name="ifnew"  value="$list['ifnew']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="title" name="title"  value="$list['title']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发送时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >内容</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="content" name="content"  value="$list['content']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

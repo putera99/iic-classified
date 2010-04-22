@@ -1,0 +1,155 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:公司信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Ltd_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Ltd_add" name="Ltd_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">id</td>
+		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">用户ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">公司名称</td>
+		<td class="ewTableAltRow"><mkrtags:input id="title" name="title"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">管理密码</td>
+		<td class="ewTableAltRow"><mkrtags:input id="passwd" name="passwd"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">公司信息</td>
+		<td class="ewTableAltRow"><mkrtags:input id="info" name="info"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">营经范围</td>
+		<td class="ewTableAltRow"><mkrtags:input id="jyfw" name="jyfw"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">营业执照副本</td>
+		<td class="ewTableAltRow"><mkrtags:input id="yyzz" name="yyzz"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">书证标题</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zstitle1" name="zstitle1"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书说明</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zssm1" name="zssm1"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书图片</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zspic1" name="zspic1"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">书证标题</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zstitle2" name="zstitle2"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书说明</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zssm2" name="zssm2"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书图片</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zspic2" name="zspic2"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">书证标题</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zstitle3" name="zstitle3"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书说明</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zssm3" name="zssm3"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书图片</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zspic3" name="zspic3"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">书证标题</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zstitle4" name="zstitle4"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书说明</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zssm4" name="zssm4"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">证书图片</td>
+		<td class="ewTableAltRow"><mkrtags:input id="zspic4" name="zspic4"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">创建时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="ctime" name="ctime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">修改时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="mtime" name="mtime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">创建IP</td>
+		<td class="ewTableAltRow"><mkrtags:input id="cip" name="cip"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">修改IP</td>
+		<td class="ewTableAltRow"><mkrtags:input id="mip" name="mip"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否有效</td>
+		<td class="ewTableAltRow"><mkrtags:input id="status" name="status"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:公司信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Ltd_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

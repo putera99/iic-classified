@@ -1,0 +1,92 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:发布广告的用户表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="AdUser_view" name="AdUser_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告的ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ad_id" name="ad_id"  value="$list['ad_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >购买者ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_uid" name="u_uid"  value="$list['u_uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >购买这用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_username" name="u_username"  value="$list['u_username']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >购买天数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_day" name="u_day"  value="$list['u_day']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >u_begintime</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_begintime" name="u_begintime"  value="$list['u_begintime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >u_endtime</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_endtime" name="u_endtime"  value="$list['u_endtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点击</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_hits" name="u_hits"  value="$list['u_hits']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >审核与否</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_yz" name="u_yz"  value="$list['u_yz']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告代码</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_code" name="u_code"  value="$list['u_code']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >价钱</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_money" name="u_money"  value="$list['u_money']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点卡</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_moneycard" name="u_moneycard"  value="$list['u_moneycard']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >提交日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="u_posttime" name="u_posttime"  value="$list['u_posttime']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

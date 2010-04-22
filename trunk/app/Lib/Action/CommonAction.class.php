@@ -1,0 +1,136 @@
+<?php
+/**
+ +------------------------------------------------------------------------------
+ * CommonAction控制器类
+ +------------------------------------------------------------------------------
+ * @category   SubAction
+ * @package  bi
+ * @subpackage  Action
+ * @author   朝闻道 <hydata@gmail.com>
+ * @date 2010-1-14
+ * @time  下午12:06:59
+ +------------------------------------------------------------------------------
+ */
+class CommonAction extends Action{
+	protected $user;
+	
+	protected function _initialize(){
+        header("Content-Type:text/html; charset=utf-8");
+        $this->user=$this->_is_login();
+        $this->assign('user',$this->user);
+        import("ORG.Util.String");
+        import('ORG.Util.Image');
+    }
+    
+    /**
+     * 获取指定分类的关键字
+     * @param unknown_type $cid
+     */
+	protected function _cat_tags($id,$limit) {
+		$tagscat=M("TagsCat");
+		$cat=$tagscat->where("pid=$id AND is_show=1")->findAll();
+		//dump($cat);
+		$tags=M("Tags");
+		$data=array();
+		if ($cat){
+			foreach($cat as $c){
+				$data[$c['id']]=$c;
+				$data[$c['id']]['son']=$tags->where("tcatid={$c['id']}")->limit("0,$limit")->findALl();
+			}
+		}else{
+			$data[$id]=$tags->where("tcatid=$id")->limit("0,$limit")->findALl();
+		}
+		return $data;
+    }// END cat_tags
+    
+    function tag() {
+		$tname=empty($_GET['name'])?$_POST['name']:$_GET['name'];
+		$pid=empty($_GET['pid'])?$_POST['pid']:$_GET['pid'];
+		$type=empty($_GET['type'])?$_POST['type']:$_GET['type'];
+		if(!empty($pid) && !empty($type)){
+			$tagscat=M("TagsCat");
+			$catname=$tagscat->where("id=$pid")->find();
+		}
+		$catname=empty($catname['title'])?$tname:$catname['title'];
+		$this->assign('catname',$catname);
+		if(empty($tname) && !empty($pid) && !empty($type)){
+			$this->assign('cat',$this->_cat_tags($pid,24));
+			$this->iicstat($pid,'tags_cat');
+			$this->display("Public:tag");
+		}elseif(!empty($tname) && empty($pid)){
+			$tags=M("Tags");
+			$tagsid=$tags->where("tagsname='$tname'")->find();
+			$tagslink=M("TagsLink");
+			$data=$tagslink->where("(tagsid={$tagsid['id']} AND type='".MODULE_NAME."') AND is_ok=1")->findALl();
+			$this->iicstat($tagsid['id'],'tags');
+			$this->display("Public:tag");
+		}elseif(!empty($pid)){
+			$this->assign('cat',$this->_cat_tags($pid,'100'));
+			$this->iicstat($pid,'tags_cat');
+			$this->display("Public:tag");
+		}else{
+			echo "参数错误";
+		}
+	}// END tag
+	
+	
+    /**
+     * 检查用户是否登录并获取用户信息
+     */
+    protected function _is_login() {
+    	if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
+    		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username']);
+    	}else $user='0';
+    	return $user;
+    }// END _is_login
+	
+    /**
+     * 按天统计资源点击量
+     * @param int $xid 资源ID
+     * @param string $type 资源类别
+     */
+	protected function iicstat($xid,$type='') {
+		$m=new Model();
+		$type=empty($type)?MODULE_NAME:$type;
+		$mon=mktime(0, 0, 0, date('n'), 1);
+		$d='d'.date('d');
+		$sql="INSERT INTO `iic_stat` (`id`, `xid`, `mon`, `stype`, `$d`) VALUES (NULL, '$xid', '$mon', '$type', '1') ON DUPLICATE KEY UPDATE `$d`=`$d`+1;";
+		return $m->execute($sql);
+	}// END iicstart
+	
+	protected function _top7day($type,$limit='0,10') {
+		$m=new Model();
+		$d7=mktime(0, 0, 0, date('n'), date('d'),date('Y'))-60*60*24*7;
+		//$d7=mktime(0, 0, 0, 03, 03,date('Y'))-60*60*24*7;
+		$mon=mktime(0, 0, 0, date('n'), 1,date('Y'));
+		//$mon=mktime(0, 0, 0, 03, 03,date('Y'));
+		$mon2=mktime(0, 0, 0, date('n',$d7),1,date('Y'));
+		//$mon2=mktime(0, 0, 0, date('n',$d7),1,date('Y'));
+		$t=time();
+		$field='';
+		if ($mon==$mon2){
+			for ($i=1;$i<8;$i++){
+				$dt=$t-(60*60*24)*$i;
+				$field.='`d'.date('d',$dt).'`+';
+			}
+			$field=trim($field,'+');
+			$sql="SELECT xid,stype,$field d FROM `iic_stat` WHERE (`stype`='$type' AND `mon`='$mon') ORDER BY d DESC LIMIT $limit";
+		}else{
+			$field2='';
+			for ($i=1;$i<8;$i++){
+				$dt=$t-(60*60*24)*$i;
+				if(date('d',$dt)>date('d')){
+					$field2.='mm.`d'.date('d',$dt).'`+';
+				}else{
+					$field.='m.`d'.date('d',$dt).'`+';
+				}
+			}
+			$field=trim($field.$field2,'+');
+			$sql="SELECT m.xid xid,m.stype stype,$field d FROM `iic_stat` as m LEFT JOIN `iic_stat` AS mm ON m.xid=mm.xid AND m.stype=mm.stype WHERE m.`stype`='$type' AND (m.`mon`='$mon' or mm.`mon`='$mon2') ORDER BY d DESC LIMIT $limit";
+		}
+		return $m->query($sql);
+	}// END _top7
+	
+	
+}//END CommonAction
+?>

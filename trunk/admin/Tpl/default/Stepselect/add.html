@@ -1,0 +1,34 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:联动管理</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Stepselect_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Stepselect_add" name="Stepselect_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+	<tr>
+		<td class="ewTableHeader" >类别名字</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="itemname" name="itemname"  class="input" style="width:300px" value=""/></td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >英文名称</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="egroup" name="egroup"  class="input" style="width:300px" value="" /></td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >系统</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="Array"  outfield="否,是"  outkey="0,1" id="issystem" name="issystem"  value="" /></td>
+	</tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<include file="../Public/footer" />

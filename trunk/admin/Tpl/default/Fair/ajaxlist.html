@@ -1,0 +1,119 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Fair_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Fair_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','aid','<php> echo getsorttype('aid');</php>','Fair_Grid')"  title="按照资源ID排序">资源ID
+      <php> echo getsorttype('aid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','starttime','<php> echo getsorttype('starttime');</php>','Fair_Grid')"  title="按照开始时间排序">开始时间
+      <php> echo getsorttype('starttime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','endtime','<php> echo getsorttype('endtime');</php>','Fair_Grid')"  title="按照结束时间排序">结束时间
+      <php> echo getsorttype('endtime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','visitor','<php> echo getsorttype('visitor');</php>','Fair_Grid')"  title="按照参展游客排序">参展游客
+      <php> echo getsorttype('visitor',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','exhibitor','<php> echo getsorttype('exhibitor');</php>','Fair_Grid')"  title="按照参展商排序">参展商
+      <php> echo getsorttype('exhibitor',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','product','<php> echo getsorttype('product');</php>','Fair_Grid')"  title="按照产品相册ID排序">产品相册ID
+      <php> echo getsorttype('product',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Fair','ajaxlist','website','<php> echo getsorttype('website');</php>','Fair_Grid')"  title="按照官方网站排序">官方网站
+      <php> echo getsorttype('website',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="资源ID"> <mkrtags:text id="aid" name="aid"  value="$list['aid']"/> </td>
+    
+    <td title="开始时间"> <mkrtags:text id="starttime" name="starttime"  value="$list['starttime']"/> </td>
+    
+    <td title="结束时间"> <mkrtags:text id="endtime" name="endtime"  value="$list['endtime']"/> </td>
+    
+    <td title="参展游客"> <mkrtags:text id="visitor" name="visitor"  value="$list['visitor']"/> </td>
+    
+    <td title="参展商"> <mkrtags:text id="exhibitor" name="exhibitor"  value="$list['exhibitor']"/> </td>
+    
+    <td title="产品相册ID"> <mkrtags:text id="product" name="product"  value="$list['product']"/> </td>
+    
+    <td title="官方网站"> <mkrtags:text id="website" name="website"  value="$list['website']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

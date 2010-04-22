@@ -1,0 +1,115 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:广告信息表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Ad_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Ad_add" name="Ad_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">id</td>
+		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告的关键字</td>
+		<td class="ewTableAltRow"><mkrtags:input id="keywords" name="keywords"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告名称</td>
+		<td class="ewTableAltRow"><mkrtags:input id="name" name="name"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告类型</td>
+		<td class="ewTableAltRow"><mkrtags:input id="type" name="type"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">文字广告位是否新开窗口</td>
+		<td class="ewTableAltRow"><mkrtags:input id="isclose" name="isclose"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告投放开始日期</td>
+		<td class="ewTableAltRow"><mkrtags:input id="begintime" name="begintime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告投放结束日期</td>
+		<td class="ewTableAltRow"><mkrtags:input id="endtime" name="endtime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告代码</td>
+		<td class="ewTableAltRow"><mkrtags:input id="adcode" name="adcode"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">提交日期</td>
+		<td class="ewTableAltRow"><mkrtags:input id="posttime" name="posttime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">排序值</td>
+		<td class="ewTableAltRow"><mkrtags:input id="list" name="list"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">用户ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">点击量</td>
+		<td class="ewTableAltRow"><mkrtags:input id="hits" name="hits"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">广告价格</td>
+		<td class="ewTableAltRow"><mkrtags:input id="money" name="money"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">点卡数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="moneycard" name="moneycard"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否已卖出</td>
+		<td class="ewTableAltRow"><mkrtags:input id="ifsale" name="ifsale"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否自动通过审核</td>
+		<td class="ewTableAltRow"><mkrtags:input id="autoyz" name="autoyz"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:广告信息表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Ad_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

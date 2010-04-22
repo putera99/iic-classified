@@ -1,0 +1,97 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:tags类资源个数</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Tags_view" name="Tags_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >关键字ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >主要分类</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tcatid" name="tcatid"  value="$list['tcatid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >次级分类</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ftcatid" name="ftcatid"  value="$list['ftcatid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建者ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uid" name="uid"  value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关键字</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tagsname" name="tagsname"  value="$list['tagsname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >美容个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mr" name="mr"  value="$list['mr']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >服饰个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="fs" name="fs"  value="$list['fs']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >读书个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="book" name="book"  value="$list['book']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >电影个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="move" name="move"  value="$list['move']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >音乐个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="music" name="music"  value="$list['music']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >BLOG个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="blog" name="blog"  value="$list['blog']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >活动个数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="event" name="event"  value="$list['event']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="dateline" name="dateline"  value="$list['dateline']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否锁定</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="close" name="close"  value="$list['close']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

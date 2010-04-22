@@ -1,0 +1,221 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Area_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Area_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','fup','<php> echo getsorttype('fup');</php>','Area_Grid')"  title="按照fup排序">fup
+      <php> echo getsorttype('fup',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','name','<php> echo getsorttype('name');</php>','Area_Grid')"  title="按照name排序">name
+      <php> echo getsorttype('name',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','class','<php> echo getsorttype('class');</php>','Area_Grid')"  title="按照class排序">class
+      <php> echo getsorttype('class',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','sons','<php> echo getsorttype('sons');</php>','Area_Grid')"  title="按照sons排序">sons
+      <php> echo getsorttype('sons',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','type','<php> echo getsorttype('type');</php>','Area_Grid')"  title="按照type排序">type
+      <php> echo getsorttype('type',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','admin','<php> echo getsorttype('admin');</php>','Area_Grid')"  title="按照admin排序">admin
+      <php> echo getsorttype('admin',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','list','<php> echo getsorttype('list');</php>','Area_Grid')"  title="按照list排序">list
+      <php> echo getsorttype('list',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','listorder','<php> echo getsorttype('listorder');</php>','Area_Grid')"  title="按照listorder排序">listorder
+      <php> echo getsorttype('listorder',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','passwd','<php> echo getsorttype('passwd');</php>','Area_Grid')"  title="按照passwd排序">passwd
+      <php> echo getsorttype('passwd',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','logo','<php> echo getsorttype('logo');</php>','Area_Grid')"  title="按照logo排序">logo
+      <php> echo getsorttype('logo',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','descrip','<php> echo getsorttype('descrip');</php>','Area_Grid')"  title="按照descrip排序">descrip
+      <php> echo getsorttype('descrip',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','style','<php> echo getsorttype('style');</php>','Area_Grid')"  title="按照style排序">style
+      <php> echo getsorttype('style',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','template','<php> echo getsorttype('template');</php>','Area_Grid')"  title="按照template排序">template
+      <php> echo getsorttype('template',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','jumpurl','<php> echo getsorttype('jumpurl');</php>','Area_Grid')"  title="按照jumpurl排序">jumpurl
+      <php> echo getsorttype('jumpurl',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','maxperpage','<php> echo getsorttype('maxperpage');</php>','Area_Grid')"  title="按照maxperpage排序">maxperpage
+      <php> echo getsorttype('maxperpage',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','metakeywords','<php> echo getsorttype('metakeywords');</php>','Area_Grid')"  title="按照metakeywords排序">metakeywords
+      <php> echo getsorttype('metakeywords',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','metadescription','<php> echo getsorttype('metadescription');</php>','Area_Grid')"  title="按照metadescription排序">metadescription
+      <php> echo getsorttype('metadescription',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','allowcomment','<php> echo getsorttype('allowcomment');</php>','Area_Grid')"  title="按照allowcomment排序">allowcomment
+      <php> echo getsorttype('allowcomment',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','allowpost','<php> echo getsorttype('allowpost');</php>','Area_Grid')"  title="按照allowpost排序">allowpost
+      <php> echo getsorttype('allowpost',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','allowviewtitle','<php> echo getsorttype('allowviewtitle');</php>','Area_Grid')"  title="按照allowviewtitle排序">allowviewtitle
+      <php> echo getsorttype('allowviewtitle',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','allowviewcontent','<php> echo getsorttype('allowviewcontent');</php>','Area_Grid')"  title="按照allowviewcontent排序">allowviewcontent
+      <php> echo getsorttype('allowviewcontent',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','allowdownload','<php> echo getsorttype('allowdownload');</php>','Area_Grid')"  title="按照allowdownload排序">allowdownload
+      <php> echo getsorttype('allowdownload',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','forbidshow','<php> echo getsorttype('forbidshow');</php>','Area_Grid')"  title="按照forbidshow排序">forbidshow
+      <php> echo getsorttype('forbidshow',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Area','ajaxlist','config','<php> echo getsorttype('config');</php>','Area_Grid')"  title="按照config排序">config
+      <php> echo getsorttype('config',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="fup"> <mkrtags:text id="fup" name="fup"  value="$list['fup']"/> </td>
+    
+    <td title="name"> <mkrtags:text id="name" name="name"  value="$list['name']"/> </td>
+    
+    <td title="class"> <mkrtags:text id="class" name="class"  value="$list['class']"/> </td>
+    
+    <td title="sons"> <mkrtags:text id="sons" name="sons"  value="$list['sons']"/> </td>
+    
+    <td title="type"> <mkrtags:text id="type" name="type"  value="$list['type']"/> </td>
+    
+    <td title="admin"> <mkrtags:text id="admin" name="admin"  value="$list['admin']"/> </td>
+    
+    <td title="list"> <mkrtags:text id="list" name="list"  value="$list['list']"/> </td>
+    
+    <td title="listorder"> <mkrtags:text id="listorder" name="listorder"  value="$list['listorder']"/> </td>
+    
+    <td title="passwd"> <mkrtags:text id="passwd" name="passwd"  value="$list['passwd']"/> </td>
+    
+    <td title="logo"> <mkrtags:text id="logo" name="logo"  value="$list['logo']"/> </td>
+    
+    <td title="descrip"> <mkrtags:text id="descrip" name="descrip"  value="$list['descrip']"/> </td>
+    
+    <td title="style"> <mkrtags:text id="style" name="style"  value="$list['style']"/> </td>
+    
+    <td title="template"> <mkrtags:text id="template" name="template"  value="$list['template']"/> </td>
+    
+    <td title="jumpurl"> <mkrtags:text id="jumpurl" name="jumpurl"  value="$list['jumpurl']"/> </td>
+    
+    <td title="maxperpage"> <mkrtags:text id="maxperpage" name="maxperpage"  value="$list['maxperpage']"/> </td>
+    
+    <td title="metakeywords"> <mkrtags:text id="metakeywords" name="metakeywords"  value="$list['metakeywords']"/> </td>
+    
+    <td title="metadescription"> <mkrtags:text id="metadescription" name="metadescription"  value="$list['metadescription']"/> </td>
+    
+    <td title="allowcomment"> <mkrtags:text id="allowcomment" name="allowcomment"  value="$list['allowcomment']"/> </td>
+    
+    <td title="allowpost"> <mkrtags:text id="allowpost" name="allowpost"  value="$list['allowpost']"/> </td>
+    
+    <td title="allowviewtitle"> <mkrtags:text id="allowviewtitle" name="allowviewtitle"  value="$list['allowviewtitle']"/> </td>
+    
+    <td title="allowviewcontent"> <mkrtags:text id="allowviewcontent" name="allowviewcontent"  value="$list['allowviewcontent']"/> </td>
+    
+    <td title="allowdownload"> <mkrtags:text id="allowdownload" name="allowdownload"  value="$list['allowdownload']"/> </td>
+    
+    <td title="forbidshow"> <mkrtags:text id="forbidshow" name="forbidshow"  value="$list['forbidshow']"/> </td>
+    
+    <td title="config"> <mkrtags:text id="config" name="config"  value="$list['config']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

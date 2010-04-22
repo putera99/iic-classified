@@ -1,0 +1,139 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:系用栏目列表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Arctype_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Arctype_add" name="Arctype_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+	<tr>
+		<td class="ewTableHeader">上级栏目</td>
+		<td class="ewTableAltRow"><mkrtags:select outtable="Arctype"  outfield="id,typename"  outkey="id"  outcondition="1=1" outorder="id desc" id="reid" name="reid"  class="input"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">顶级栏目</td>
+		<td class="ewTableAltRow"><mkrtags:select outtable="Arctype"  outfield="id,typename"  outkey="id"  outcondition="reid=0" outorder="id asc" id="topid" name="topid"  class="input"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目排序</td>
+		<td class="ewTableAltRow"><mkrtags:input id="sortrank" name="sortrank"  class="input" style="width:50px" value="50"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目名称</td>
+		<td class="ewTableAltRow"><mkrtags:input id="typename" name="typename"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目的英文名</td>
+		<td class="ewTableAltRow"><mkrtags:input id="ename" name="ename"  class="input" style="width:100px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否支持投稿</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="Array" outfield="支持,不支持" outkey="1,0" id="issend" name="issend"  class="input" style="width:300px" value="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">系统模块</td>
+		<td class="ewTableAltRow"><mkrtags:select outtable="SysEnum"  outfield="evalue,ename"  outkey="evalue"  outcondition="egroup='channeltype'" outorder="evalue asc" id="channeltype" name="channeltype"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">城市类别</td>
+		<td class="ewTableAltRow"><mkrtags:checkboxGroup outtable="ActCity" outfield="id,ctitle"  outkey="id"  outcondition="status='1'" outorder="ctitle desc" id="cid" name="cid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">每页记录数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="maxpage" name="maxpage"  class="input" style="width:300px" value="10"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目属性</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="SysEnum" outfield="evalue,ename"  outkey="evalue" outcondition="egroup='ispart'" outorder="id asc" id="ispart" name="ispart"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">浏览权限</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="SysEnum" outfield="evalue,ename"  outkey="evalue"  outcondition="egroup='corank'" outorder="id asc" id="corank" name="corank"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">描述</td>
+		<td class="ewTableAltRow"><mkrtags:textarea id="description" name="description"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">关键字</td>
+		<td class="ewTableAltRow"><mkrtags:input id="keywords" name="keywords"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">SEO标题</td>
+		<td class="ewTableAltRow"><mkrtags:input id="seotitle" name="seotitle"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否启用子域名</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="Array" outfield="启用,不启用" outkey="1,0" id="moresite" name="moresite"  class="input" style="width:300px" value=""/></td>
+	</tr>
+	
+	<tr>
+		<td class="ewTableHeader">绑定域名</td>
+		<td class="ewTableAltRow"><mkrtags:input id="siteurl" name="siteurl"  class="input" style="width:300px" value=""/></td>
+	</tr>
+	
+	<tr>
+		<td class="ewTableHeader">栏目地址</td>
+		<td class="ewTableAltRow"><mkrtags:input id="sitepath" name="sitepath"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否隐藏</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="Array" outfield="隐藏,不隐藏" outkey="1,0" id="ishidden" name="ishidden" value="0"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目交叉</td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="Array" outfield="交叉,不交叉" outkey="1,0" id="cross" name="cross" value="0"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">交叉栏目ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="crossid" name="crossid"  class="input" style="width:100px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">栏目内容</td>
+		<td class="ewTableAltRow">独立页面时必填，其它可不填<br><mkrtags:textarea id="content" name="content" /></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:系用栏目列表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Arctype_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

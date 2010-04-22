@@ -1,0 +1,68 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:成员登录</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Member_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Member_update" name="Member_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="username" name="username"  class="input" style="width:300px" value="$list['username']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >密码</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="password" name="password"  class="input" style="width:300px" value="$list['password']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户邮箱</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="email" name="email"  class="input" style="width:300px" value="$list['email']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户空间英文</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="en" name="en"  class="input" style="width:300px" value="$list['en']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >头像</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="pic" name="pic"  class="input" style="width:300px" value="$list['pic']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否邮件认证</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="is_mail" name="is_mail"  class="input" style="width:300px" value="$list['is_mail']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:成员登录</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Member_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

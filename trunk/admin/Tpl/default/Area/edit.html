@@ -1,0 +1,158 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:城市和地区表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Area_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Area_update" name="Area_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >fup</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="fup" name="fup"  class="input" style="width:300px" value="$list['fup']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >name</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="name" name="name"  class="input" style="width:300px" value="$list['name']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >class</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="class" name="class"  class="input" style="width:300px" value="$list['class']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >sons</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="sons" name="sons"  class="input" style="width:300px" value="$list['sons']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >type</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="type" name="type"  class="input" style="width:300px" value="$list['type']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >admin</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="admin" name="admin"  class="input" style="width:300px" value="$list['admin']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >list</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="list" name="list"  class="input" style="width:300px" value="$list['list']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >listorder</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="listorder" name="listorder"  class="input" style="width:300px" value="$list['listorder']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >passwd</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="passwd" name="passwd"  class="input" style="width:300px" value="$list['passwd']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >logo</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="logo" name="logo"  class="input" style="width:300px" value="$list['logo']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >descrip</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="descrip" name="descrip"  class="input" style="width:300px" value="$list['descrip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >style</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="style" name="style"  class="input" style="width:300px" value="$list['style']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >template</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="template" name="template"  class="input" style="width:300px" value="$list['template']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >jumpurl</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="jumpurl" name="jumpurl"  class="input" style="width:300px" value="$list['jumpurl']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >maxperpage</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="maxperpage" name="maxperpage"  class="input" style="width:300px" value="$list['maxperpage']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >metakeywords</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="metakeywords" name="metakeywords"  class="input" style="width:300px" value="$list['metakeywords']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >metadescription</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="metadescription" name="metadescription"  class="input" style="width:300px" value="$list['metadescription']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowcomment</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="allowcomment" name="allowcomment"  class="input" style="width:300px" value="$list['allowcomment']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowpost</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="allowpost" name="allowpost"  class="input" style="width:300px" value="$list['allowpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowviewtitle</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="allowviewtitle" name="allowviewtitle"  class="input" style="width:300px" value="$list['allowviewtitle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowviewcontent</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="allowviewcontent" name="allowviewcontent"  class="input" style="width:300px" value="$list['allowviewcontent']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowdownload</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="allowdownload" name="allowdownload"  class="input" style="width:300px" value="$list['allowdownload']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >forbidshow</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="forbidshow" name="forbidshow"  class="input" style="width:300px" value="$list['forbidshow']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >config</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="config" name="config"  class="input" style="width:300px" value="$list['config']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:城市和地区表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Area_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

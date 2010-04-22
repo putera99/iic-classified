@@ -1,0 +1,41 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:联动类别</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Stepselect_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Stepselect_update" name="Stepselect_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >类别ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="id" name="id"  value="$list['id']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >类别名字</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="itemname" name="itemname"  class="input" style="width:300px" value="$list['itemname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >英文名称</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="egroup" name="egroup"  class="input" style="width:300px" value="$list['egroup']" /></td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >系统</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="Array"  outfield="否,是"  outkey="0,1" id="issystem" name="issystem"  value="$list['issystem']" /></td>
+	</tr>
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<include file="../Public/footer" />

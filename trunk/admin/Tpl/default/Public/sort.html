@@ -1,0 +1,200 @@
+<include file="../Public/header" />
+
+<div id="main" class="main" >
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function saveSort(){
+	selectAllOption(document.frm.ObjSelect);
+	getS(document.frm.ObjSelect);
+	sendForm('frm','__APP__/{$thismodel}/saveSort/',complete,'result');
+}
+function reload(){
+	location.href=REQUEST_URI;
+}
+
+//-->
+</SCRIPT>
+
+<fieldset >
+
+
+<form name="frm" id="frm" method="POST">
+
+<table cellpadding="0">
+<tr >
+	<th align="center">原本排序</th>
+	<th width="30px" align="center">操作</th>
+	<th align="center">排序结果</th>
+	<th width="30px" align="center">操作</th>
+
+</tr>
+<tr >
+    <td>
+        <select name=SrcSelect  disabled  style="height:140px;" multiple ondblclick="moveLeftOrRight(document.frm.SrcSelect,document.frm.ObjSelect)">
+
+<voList name="sortList" id="module" >
+<option value="{$module.seqNo}">{$module.caption}.[{$module.seqNo}]</option>
+</voList>
+
+        </select>
+
+    </td>
+    <td width="30px">
+        <input align="left" style="width:30px" disabled type=button value=">>" onclick="moveLeftOrRightAll(document.frm.SrcSelect,document.frm.ObjSelect)" ><br><br>
+        <input align="left" style="width:30px" disabled type=button value=" > " onclick="moveLeftOrRight(document.frm.SrcSelect,document.frm.ObjSelect)" ><br><br>
+        <input align="left" style="width:30px" disabled type=button value=" < " onclick="moveLeftOrRight(document.frm.ObjSelect,document.frm.SrcSelect)" ><br><br>
+        <input align="left" style="width:30px" disabled type=button value="<<" onclick="moveLeftOrRightAll(document.frm.ObjSelect,document.frm.SrcSelect)" >
+    </td>
+    <td>
+        <select name=ObjSelect  class="ecv_autoSizeDropDown" style="height:140px;" multiple ondblclick="moveLeftOrRight(document.frm.ObjSelect,document.frm.SrcSelect)">
+
+<voList name="sortList" id="module" >
+<option value="{$module.id}">{$module.caption}.[{$module.seqNo}]</option>
+</voList>
+        </select>
+
+    </td>
+    <td width="30px">
+        <input type=button value="顶层" onclick="moveToTop(document.frm.ObjSelect)" ><br><br>
+        <input type=button value="向上" onclick="moveUp(document.frm.ObjSelect)" ><br><br>
+        <input type=button value="向下" onclick="moveDown(document.frm.ObjSelect)" ><br><br>
+        <input type=button value="底层" onclick="moveToBottom(document.frm.ObjSelect)" >
+
+    </td>
+
+</tr>
+<tr>
+<th  align="center">确认操作</th>
+    <td colspan="2" >
+    <input type="hidden" name="sortvaue" value="">
+        <input type=button value="确认排序" class="button1" onclick="saveSort()" >
+        <input type=button value="重新载入" class="button1" onclick="reload()" >
+    </td>
+</tr>
+</table>
+
+</form>
+</fieldset>
+<script language='javascript'>
+
+function moveLeftOrRight(fromObj,toObj)
+{
+	var fromObjOptions=fromObj.options;
+	for(var i=0;i<fromObjOptions.length;i++){
+		if(fromObjOptions[i].selected){
+			toObj.appendChild(fromObjOptions[i]);
+			i--;
+		}
+	}
+	resetAutoWidth(fromObj);
+	resetAutoWidth(toObj);
+}
+
+function moveLeftOrRightAll(fromObj,toObj)
+{
+	var fromObjOptions=fromObj.options;
+	if(fromObjOptions.length>1000) {
+		//if(!confirm("Are you sure to move options?")) return false;
+	}
+	for(var i=0;i<fromObjOptions.length;i++){
+		fromObjOptions[0].selected=true;
+		toObj.appendChild(fromObjOptions[i]);
+		i--;
+	}
+	resetAutoWidth(fromObj);
+	resetAutoWidth(toObj);
+}
+
+function moveUp(selectObj)
+{
+	var theObjOptions=selectObj.options;
+	for(var i=1;i<theObjOptions.length;i++) {
+		if( theObjOptions[i].selected && !theObjOptions[i-1].selected ) {
+			swapOptionProperties(theObjOptions[i],theObjOptions[i-1]);
+		}
+	}
+}
+
+function moveDown(selectObj)
+{
+	var theObjOptions=selectObj.options;
+	for(var i=theObjOptions.length-2;i>-1;i--) {
+		if( theObjOptions[i].selected && !theObjOptions[i+1].selected ) {
+			swapOptionProperties(theObjOptions[i],theObjOptions[i+1]);
+		}
+	}
+}
+
+function moveToTop(selectObj){
+	var theObjOptions=selectObj.options;
+	var oOption=null;
+	for(var i=0;i<theObjOptions.length;i++) {
+		if( theObjOptions[i].selected && oOption) {
+			selectObj.insertBefore(theObjOptions[i],oOption);
+		}
+		else if(!oOption && !theObjOptions[i].selected) {
+			oOption=theObjOptions[i];
+		}
+	}
+}
+
+function moveToBottom(selectObj){
+	var theObjOptions=selectObj.options;
+	var oOption=null;
+	for(var i=theObjOptions.length-1;i>-1;i--) {
+		if( theObjOptions[i].selected ) {
+			if(oOption) {
+				oOption=selectObj.insertBefore(theObjOptions[i],oOption);
+			}
+			else oOption=selectObj.appendChild(theObjOptions[i]);
+		}
+	}
+
+}
+
+function selectAllOption(selectObj){
+	var theObjOptions=selectObj.options;
+	for(var i=0; i<theObjOptions.length; i++){
+		theObjOptions[i].selected=true;
+
+	}
+
+}
+
+
+function   getS(os)
+{
+	var   so   =   [];
+	for(var   i=0;i<os.length;i++)
+	if(os[i].selected)so[so.length]=os[i].value
+	document.frm.sortvaue.value= so.join(",")
+}
+
+/* private function */
+function swapOptionProperties(option1,option2){
+	//option1.swapNode(option2);
+	var tempStr=option1.value;
+	option1.value=option2.value;
+	option2.value=tempStr;
+	tempStr=option1.text;
+	option1.text=option2.text;
+	option2.text=tempStr;
+	tempStr=option1.selected;
+	option1.selected=option2.selected;
+	option2.selected=tempStr;
+}
+
+function resetAutoWidth(obj){
+	var tempWidth=obj.style.getExpression("width");
+	if(tempWidth!=null) {
+		obj.style.width="auto";
+		obj.style.setExpression("width",tempWidth);
+		obj.style.width=null;
+	}
+}
+
+</script>
+</div>
+<include file="../Public/footer" />

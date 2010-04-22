@@ -1,0 +1,77 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:友情链接</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Flink_view" name="Flink_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >排序</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="sortrank" name="sortrank"  value="$list['sortrank']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >网址</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="url" name="url"  value="$list['url']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >网站名称</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="webname" name="webname"  value="$list['webname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >简介</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="msg" name="msg"  value="$list['msg']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系email</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="email" name="email"  value="$list['email']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >LOGO</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="logo" name="logo"  value="$list['logo']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >放置位置</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="itype" name="itype"  value="$list['itype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >ischeck</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ischeck" name="ischeck"  value="$list['ischeck']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

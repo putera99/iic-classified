@@ -1,0 +1,281 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Stat_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Stat_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','xid','<php> echo getsorttype('xid');</php>','Stat_Grid')"  title="按照资源ID排序">资源ID
+      <php> echo getsorttype('xid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','mon','<php> echo getsorttype('mon');</php>','Stat_Grid')"  title="按照月份排序">月份
+      <php> echo getsorttype('mon',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','stype','<php> echo getsorttype('stype');</php>','Stat_Grid')"  title="按照资源类别排序">资源类别
+      <php> echo getsorttype('stype',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d01','<php> echo getsorttype('d01');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d01',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d02','<php> echo getsorttype('d02');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d02',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d03','<php> echo getsorttype('d03');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d03',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d04','<php> echo getsorttype('d04');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d04',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d05','<php> echo getsorttype('d05');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d05',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d06','<php> echo getsorttype('d06');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d06',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d07','<php> echo getsorttype('d07');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d07',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d08','<php> echo getsorttype('d08');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d08',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d09','<php> echo getsorttype('d09');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d09',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d10','<php> echo getsorttype('d10');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d10',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d11','<php> echo getsorttype('d11');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d11',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d12','<php> echo getsorttype('d12');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d12',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d13','<php> echo getsorttype('d13');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d13',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d14','<php> echo getsorttype('d14');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d14',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d15','<php> echo getsorttype('d15');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d15',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d16','<php> echo getsorttype('d16');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d16',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d17','<php> echo getsorttype('d17');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d17',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d18','<php> echo getsorttype('d18');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d18',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d19','<php> echo getsorttype('d19');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d19',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d20','<php> echo getsorttype('d20');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d20',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d21','<php> echo getsorttype('d21');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d21',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d22','<php> echo getsorttype('d22');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d22',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d23','<php> echo getsorttype('d23');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d23',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d24','<php> echo getsorttype('d24');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d24',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d25','<php> echo getsorttype('d25');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d25',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d26','<php> echo getsorttype('d26');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d26',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d27','<php> echo getsorttype('d27');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d27',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d28','<php> echo getsorttype('d28');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d28',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d29','<php> echo getsorttype('d29');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d29',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d30','<php> echo getsorttype('d30');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d30',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stat','ajaxlist','d31','<php> echo getsorttype('d31');</php>','Stat_Grid')"  title="按照日期排序">日期
+      <php> echo getsorttype('d31',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="资源ID"> <mkrtags:text id="xid" name="xid"  value="$list['xid']"/> </td>
+    
+    <td title="月份"> <mkrtags:text id="mon" name="mon"  value="$list['mon']"/> </td>
+    
+    <td title="资源类别"> <mkrtags:text id="stype" name="stype"  value="$list['stype']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d01" name="d01"  value="$list['d01']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d02" name="d02"  value="$list['d02']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d03" name="d03"  value="$list['d03']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d04" name="d04"  value="$list['d04']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d05" name="d05"  value="$list['d05']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d06" name="d06"  value="$list['d06']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d07" name="d07"  value="$list['d07']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d08" name="d08"  value="$list['d08']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d09" name="d09"  value="$list['d09']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d10" name="d10"  value="$list['d10']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d11" name="d11"  value="$list['d11']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d12" name="d12"  value="$list['d12']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d13" name="d13"  value="$list['d13']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d14" name="d14"  value="$list['d14']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d15" name="d15"  value="$list['d15']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d16" name="d16"  value="$list['d16']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d17" name="d17"  value="$list['d17']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d18" name="d18"  value="$list['d18']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d19" name="d19"  value="$list['d19']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d20" name="d20"  value="$list['d20']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d21" name="d21"  value="$list['d21']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d22" name="d22"  value="$list['d22']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d23" name="d23"  value="$list['d23']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d24" name="d24"  value="$list['d24']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d25" name="d25"  value="$list['d25']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d26" name="d26"  value="$list['d26']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d27" name="d27"  value="$list['d27']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d28" name="d28"  value="$list['d28']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d29" name="d29"  value="$list['d29']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d30" name="d30"  value="$list['d30']"/> </td>
+    
+    <td title="日期"> <mkrtags:text id="d31" name="d31"  value="$list['d31']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

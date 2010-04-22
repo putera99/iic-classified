@@ -1,0 +1,90 @@
+<tagLib name="mkrtags" />
+<table width="100%"   cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    <span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<table id="Stepselect_List" class="list">
+  <tr class="row" >
+    <th width="8"> <input type="checkbox" id="check" onclick="CheckAll('Stepselect_List')">
+    </th>
+	<th> <a class="titleth" href="javascript:AjaxSortBy('Stepselect','ajaxlist','id','<php> echo getsorttype('id');</php>','Stepselect_Grid')"  title="按照类别ID排序">类别ID
+      <php> echo getsorttype('id',1);</php>
+      </a> </th>
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stepselect','ajaxlist','itemname','<php> echo getsorttype('itemname');</php>','Stepselect_Grid')"  title="按照类别名字排序">类别名字
+      <php> echo getsorttype('itemname',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stepselect','ajaxlist','egroup','<php> echo getsorttype('egroup');</php>','Stepselect_Grid')"  title="按照英文名称排序">英文名称
+      <php> echo getsorttype('egroup',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Stepselect','ajaxlist','issign','<php> echo getsorttype('issign');</php>','Stepselect_Grid')"  title="按照级数排序">级数
+      <php> echo getsorttype('issign',1);</php>
+      </a> </th>
+    
+    <th>系统</th>
+    <th>操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key" value="{$list.id}"></td>
+	<td title="id"> <mkrtags:text id="id" name="id"  value="$list['id']"/> </td>
+    <td title="类别名字"> <mkrtags:text id="itemname" name="itemname"  value="$list['itemname']"/> </td>
+    
+    <td title="英文名称"> <mkrtags:text id="egroup" name="egroup"  value="$list['egroup']"/> </td>
+    
+    <td title="级数"> <mkrtags:text id="issign" name="issign"  value="$list['issign']"/> </td>
+    
+    <td title="系统"> <mkrtags:select outtable="Array"  outfield="否,是"  outkey="0,1" id="issystem" name="issystem"  value="$list['issystem']" readonly="1" /> </td>
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>

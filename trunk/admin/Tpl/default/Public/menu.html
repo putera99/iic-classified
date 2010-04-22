@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>菜单</title>
+<link href="../Public/images/menu.css" rel="stylesheet" type="text/css" />
+<base target="mcMainFrame" />
+</head>
+<script language="javascript">
+<!--
+function $(objectId) 
+{
+	 return document.getElementById(objectId);
+}
+
+function showHide(objname)
+{
+    var obj = $(objname);
+    if(obj.style.display == "none")
+    {
+        obj.style.display = "block";
+    }
+    else
+    {
+        obj.style.display = "none";
+    }
+    
+    return false;
+}
+function refreshMainFrame(url)
+{
+    parent.mcMainFrame.document.location = url;
+}
+-->
+</script>
+<base target="mcMainFrame">
+<body>
+<div class="menu">
+<volist name="left" id="leftlist">
+    <dl>
+        <dt><a href="#" onclick="return showHide('items0');" target="_self">{$leftlist.title}</a></dt>
+        <dd id="items0" style="display:block;">
+            <ul>
+				<volist name="leftlist['subapp']" id="sub">
+                <li><a href='__APP__/{$sub.link}'>{$sub.title}</a></li> 
+                </volist>               
+            </ul>
+        </dd>
+    </dl>
+</volist>
+    <if condition="$url">
+    <script type="text/javascript">refreshMainFrame('{$url}');</script>
+	</if>
+<if condition="$index eq 'index'">
+    <dl>
+        <dt><a href="" onclick="return showHide('items0');" target="_self">快捷方式</a></dt>
+        <dd id="items0" style="display:block;">
+            <ul>
+            	<li><a href='__APP__/Apptree/index'>菜单管理</a></li>				
+            </ul>
+        </dd>
+    </dl>
+<script type="text/javascript">refreshMainFrame('__URL__/mainframe');</script>
+</if>
+</switch>
+</div>
+</body>
+</html>

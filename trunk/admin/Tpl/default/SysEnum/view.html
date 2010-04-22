@@ -1,0 +1,56 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:用户相册</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Stepselect_view" name="Stepselect_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域 id 	ename 	evalue 	egroup 	disorder issign -->
+
+	<tr>
+		<td class="ewTableHeader" >ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >枚举名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ename" name="ename"  value="$list['ename']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >枚举值</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="evalue" name="evalue"  value="$list['evalue']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >类别组名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="egroup" name="egroup"  value="$list['egroup']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >组内排序</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="disorder" name="disorder"  value="$list['disorder']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >枚举类型</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="issign" name="issign"  value="$list['issign']"/></td>
+	</tr>
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />
