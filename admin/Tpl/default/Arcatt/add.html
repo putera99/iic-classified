@@ -1,0 +1,45 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:属性数据表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Arcatt_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Arcatt_add" name="Arcatt_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">属性代码</td>
+		<td class="ewTableAltRow"><mkrtags:input id="att" name="att"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">属性名称</td>
+		<td class="ewTableAltRow"><mkrtags:input id="attname" name="attname"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:属性数据表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Arcatt_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

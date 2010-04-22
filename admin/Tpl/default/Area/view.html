@@ -1,0 +1,152 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:城市和地区表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Area_view" name="Area_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >fup</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="fup" name="fup"  value="$list['fup']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >name</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="name" name="name"  value="$list['name']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >class</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="class" name="class"  value="$list['class']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >sons</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="sons" name="sons"  value="$list['sons']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >type</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="type" name="type"  value="$list['type']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >admin</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="admin" name="admin"  value="$list['admin']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >list</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="list" name="list"  value="$list['list']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >listorder</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="listorder" name="listorder"  value="$list['listorder']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >passwd</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="passwd" name="passwd"  value="$list['passwd']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >logo</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="logo" name="logo"  value="$list['logo']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >descrip</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="descrip" name="descrip"  value="$list['descrip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >style</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="style" name="style"  value="$list['style']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >template</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="template" name="template"  value="$list['template']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >jumpurl</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="jumpurl" name="jumpurl"  value="$list['jumpurl']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >maxperpage</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="maxperpage" name="maxperpage"  value="$list['maxperpage']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >metakeywords</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="metakeywords" name="metakeywords"  value="$list['metakeywords']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >metadescription</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="metadescription" name="metadescription"  value="$list['metadescription']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowcomment</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="allowcomment" name="allowcomment"  value="$list['allowcomment']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowpost</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="allowpost" name="allowpost"  value="$list['allowpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowviewtitle</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="allowviewtitle" name="allowviewtitle"  value="$list['allowviewtitle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowviewcontent</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="allowviewcontent" name="allowviewcontent"  value="$list['allowviewcontent']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >allowdownload</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="allowdownload" name="allowdownload"  value="$list['allowdownload']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >forbidshow</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="forbidshow" name="forbidshow"  value="$list['forbidshow']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >config</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="config" name="config"  value="$list['config']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

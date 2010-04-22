@@ -1,0 +1,82 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:活动</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Event_view" name="Event_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="aid" name="aid"  value="$list['aid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >报名截止时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="deadline" name="deadline"  value="$list['deadline']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >活动开始时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="starttime" name="starttime"  value="$list['starttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >活动结束时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="endtime" name="endtime"  value="$list['endtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >公开状态:0私密,1半公开,2完全公开</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="public" name="public"  value="$list['public']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >成员数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="membernum" name="membernum"  value="$list['membernum']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >参与</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="attending" name="attending"  value="$list['attending']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >可能参与</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mightatten" name="mightatten"  value="$list['mightatten']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >不参与</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="notattending" name="notattending"  value="$list['notattending']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >活动详细内容</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="detail" name="detail"  value="$list['detail']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

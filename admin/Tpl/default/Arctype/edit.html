@@ -1,0 +1,203 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:系用栏目列表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Arctype_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Arctype_update" name="Arctype_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >上级栏目</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="reid" name="reid"  class="input" style="width:300px" value="$list['reid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >顶级栏目</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="topid" name="topid"  class="input" style="width:300px" value="$list['topid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目排序</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="sortrank" name="sortrank"  class="input" style="width:300px" value="$list['sortrank']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目名称</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="typename" name="typename"  class="input" style="width:300px" value="$list['typename']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目的英文名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ename" name="ename"  class="input" style="width:300px" value="$list['ename']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >链接地址</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="typedir" name="typedir"  class="input" style="width:300px" value="$list['typedir']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否支持投稿</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="issend" name="issend"  class="input" style="width:300px" value="$list['issend']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >系统模块</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="channeltype" name="channeltype"  class="input" style="width:300px" value="$list['channeltype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >城市类别</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="cid" name="cid"  class="input" style="width:300px" value="$list['cid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >maxpage</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="maxpage" name="maxpage"  class="input" style="width:300px" value="$list['maxpage']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目属性</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ispart" name="ispart"  class="input" style="width:300px" value="$list['ispart']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >浏览权限</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="corank" name="corank"  class="input" style="width:300px" value="$list['corank']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >封面模板</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="tempindex" name="tempindex"  class="input" style="width:300px" value="$list['tempindex']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >列表模板</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="templist" name="templist"  class="input" style="width:300px" value="$list['templist']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >内页面板</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="temparticle" name="temparticle"  class="input" style="width:300px" value="$list['temparticle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >文章命名规则</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="namerule" name="namerule"  class="input" style="width:300px" value="$list['namerule']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >列表命名规则</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="namerule2" name="namerule2"  class="input" style="width:300px" value="$list['namerule2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >模板风格名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="modname" name="modname"  class="input" style="width:300px" value="$list['modname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >描述</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="description" name="description"  class="input" style="width:300px" value="$list['description']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关键字</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="keywords" name="keywords"  class="input" style="width:300px" value="$list['keywords']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >SEO标题</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="seotitle" name="seotitle"  class="input" style="width:300px" value="$list['seotitle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否启用子域名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="moresite" name="moresite"  class="input" style="width:300px" value="$list['moresite']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目地址</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="sitepath" name="sitepath"  class="input" style="width:300px" value="$list['sitepath']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >绑定域名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="siteurl" name="siteurl"  class="input" style="width:300px" value="$list['siteurl']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否隐藏</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ishidden" name="ishidden"  class="input" style="width:300px" value="$list['ishidden']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目交</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="cross" name="cross"  class="input" style="width:300px" value="$list['cross']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目点击</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="hits" name="hits"  class="input" style="width:300px" value="$list['hits']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >提交时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="posttime" name="posttime"  class="input" style="width:300px" value="$list['posttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >修改时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="mtime" name="mtime"  class="input" style="width:300px" value="$list['mtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >交叉栏目ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="crossid" name="crossid"  class="input" style="width:300px" value="$list['crossid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >栏目内容 </td>
+		<td class="ewTableAltRow" ><mkrtags:input id="content" name="content"  class="input" style="width:300px" value="$list['content']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >smalltypes</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="smalltypes" name="smalltypes"  class="input" style="width:300px" value="$list['smalltypes']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:系用栏目列表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Arctype_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

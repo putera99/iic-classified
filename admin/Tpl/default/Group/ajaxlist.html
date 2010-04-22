@@ -1,0 +1,209 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Group_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Group_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','groupname','<php> echo getsorttype('groupname');</php>','Group_Grid')"  title="按照群组名称排序">群组名称
+      <php> echo getsorttype('groupname',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','tags','<php> echo getsorttype('tags');</php>','Group_Grid')"  title="按照相关标签排序">相关标签
+      <php> echo getsorttype('tags',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','membernum','<php> echo getsorttype('membernum');</php>','Group_Grid')"  title="按照用户数排序">用户数
+      <php> echo getsorttype('membernum',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','threadnum','<php> echo getsorttype('threadnum');</php>','Group_Grid')"  title="按照主题数排序">主题数
+      <php> echo getsorttype('threadnum',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','postnum','<php> echo getsorttype('postnum');</php>','Group_Grid')"  title="按照回复数排序">回复数
+      <php> echo getsorttype('postnum',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','close','<php> echo getsorttype('close');</php>','Group_Grid')"  title="按照群组关闭排序">群组关闭
+      <php> echo getsorttype('close',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','announcement','<php> echo getsorttype('announcement');</php>','Group_Grid')"  title="按照群组公告排序">群组公告
+      <php> echo getsorttype('announcement',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','pic','<php> echo getsorttype('pic');</php>','Group_Grid')"  title="按照群组图片排序">群组图片
+      <php> echo getsorttype('pic',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','closeapply','<php> echo getsorttype('closeapply');</php>','Group_Grid')"  title="按照关闭加入排序">关闭加入
+      <php> echo getsorttype('closeapply',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','joinperm','<php> echo getsorttype('joinperm');</php>','Group_Grid')"  title="按照加入权限排序">加入权限
+      <php> echo getsorttype('joinperm',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','viewperm','<php> echo getsorttype('viewperm');</php>','Group_Grid')"  title="按照浏览权限排序">浏览权限
+      <php> echo getsorttype('viewperm',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','threadperm','<php> echo getsorttype('threadperm');</php>','Group_Grid')"  title="按照发表话题权限排序">发表话题权限
+      <php> echo getsorttype('threadperm',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','postperm','<php> echo getsorttype('postperm');</php>','Group_Grid')"  title="按照回复话题权限排序">回复话题权限
+      <php> echo getsorttype('postperm',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','recommend','<php> echo getsorttype('recommend');</php>','Group_Grid')"  title="按照推荐时间排序">推荐时间
+      <php> echo getsorttype('recommend',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','moderator','<php> echo getsorttype('moderator');</php>','Group_Grid')"  title="按照群组群主排序">群组群主
+      <php> echo getsorttype('moderator',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','cat_id','<php> echo getsorttype('cat_id');</php>','Group_Grid')"  title="按照分类ID排序">分类ID
+      <php> echo getsorttype('cat_id',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','fcat_id','<php> echo getsorttype('fcat_id');</php>','Group_Grid')"  title="按照附属分类ID排序">附属分类ID
+      <php> echo getsorttype('fcat_id',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','attr','<php> echo getsorttype('attr');</php>','Group_Grid')"  title="按照附属属性排序">附属属性
+      <php> echo getsorttype('attr',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','ctime','<php> echo getsorttype('ctime');</php>','Group_Grid')"  title="按照建创时间排序">建创时间
+      <php> echo getsorttype('ctime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','lasttime','<php> echo getsorttype('lasttime');</php>','Group_Grid')"  title="按照最后活跃时间排序">最后活跃时间
+      <php> echo getsorttype('lasttime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','en','<php> echo getsorttype('en');</php>','Group_Grid')"  title="按照组英文名排序">组英文名
+      <php> echo getsorttype('en',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Group','ajaxlist','description','<php> echo getsorttype('description');</php>','Group_Grid')"  title="按照群简介排序">群简介
+      <php> echo getsorttype('description',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="群组名称"> <mkrtags:text id="groupname" name="groupname"  value="$list['groupname']"/> </td>
+    
+    <td title="相关标签"> <mkrtags:text id="tags" name="tags"  value="$list['tags']"/> </td>
+    
+    <td title="用户数"> <mkrtags:text id="membernum" name="membernum"  value="$list['membernum']"/> </td>
+    
+    <td title="主题数"> <mkrtags:text id="threadnum" name="threadnum"  value="$list['threadnum']"/> </td>
+    
+    <td title="回复数"> <mkrtags:text id="postnum" name="postnum"  value="$list['postnum']"/> </td>
+    
+    <td title="群组关闭"> <mkrtags:text id="close" name="close"  value="$list['close']"/> </td>
+    
+    <td title="群组公告"> <mkrtags:text id="announcement" name="announcement"  value="$list['announcement']"/> </td>
+    
+    <td title="群组图片"> <mkrtags:text id="pic" name="pic"  value="$list['pic']"/> </td>
+    
+    <td title="关闭加入"> <mkrtags:text id="closeapply" name="closeapply"  value="$list['closeapply']"/> </td>
+    
+    <td title="加入权限"> <mkrtags:text id="joinperm" name="joinperm"  value="$list['joinperm']"/> </td>
+    
+    <td title="浏览权限"> <mkrtags:text id="viewperm" name="viewperm"  value="$list['viewperm']"/> </td>
+    
+    <td title="发表话题权限"> <mkrtags:text id="threadperm" name="threadperm"  value="$list['threadperm']"/> </td>
+    
+    <td title="回复话题权限"> <mkrtags:text id="postperm" name="postperm"  value="$list['postperm']"/> </td>
+    
+    <td title="推荐时间"> <mkrtags:text id="recommend" name="recommend"  value="$list['recommend']"/> </td>
+    
+    <td title="群组群主"> <mkrtags:text id="moderator" name="moderator"  value="$list['moderator']"/> </td>
+    
+    <td title="分类ID"> <mkrtags:text id="cat_id" name="cat_id"  value="$list['cat_id']"/> </td>
+    
+    <td title="附属分类ID"> <mkrtags:text id="fcat_id" name="fcat_id"  value="$list['fcat_id']"/> </td>
+    
+    <td title="附属属性"> <mkrtags:text id="attr" name="attr"  value="$list['attr']"/> </td>
+    
+    <td title="建创时间"> <mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/> </td>
+    
+    <td title="最后活跃时间"> <mkrtags:text id="lasttime" name="lasttime"  value="$list['lasttime']"/> </td>
+    
+    <td title="组英文名"> <mkrtags:text id="en" name="en"  value="$list['en']"/> </td>
+    
+    <td title="群简介"> <mkrtags:text id="description" name="description"  value="$list['description']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

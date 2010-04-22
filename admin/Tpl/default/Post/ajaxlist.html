@@ -1,0 +1,221 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Post_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Post_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','qid','<php> echo getsorttype('qid');</php>','Post_Grid')"  title="按照回复ID排序">回复ID
+      <php> echo getsorttype('qid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','l','<php> echo getsorttype('l');</php>','Post_Grid')"  title="按照楼次排序">楼次
+      <php> echo getsorttype('l',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','requery','<php> echo getsorttype('requery');</php>','Post_Grid')"  title="按照是否引用排序">是否引用
+      <php> echo getsorttype('requery',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','qidstr','<php> echo getsorttype('qidstr');</php>','Post_Grid')"  title="按照盖楼上级ID排序">盖楼上级ID
+      <php> echo getsorttype('qidstr',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','aid','<php> echo getsorttype('aid');</php>','Post_Grid')"  title="按照主题ID排序">主题ID
+      <php> echo getsorttype('aid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','gid','<php> echo getsorttype('gid');</php>','Post_Grid')"  title="按照群组ID排序">群组ID
+      <php> echo getsorttype('gid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','title','<php> echo getsorttype('title');</php>','Post_Grid')"  title="按照标题排序">标题
+      <php> echo getsorttype('title',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','uid','<php> echo getsorttype('uid');</php>','Post_Grid')"  title="按照用户ID排序">用户ID
+      <php> echo getsorttype('uid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','username','<php> echo getsorttype('username');</php>','Post_Grid')"  title="按照用户名排序">用户名
+      <php> echo getsorttype('username',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','ip','<php> echo getsorttype('ip');</php>','Post_Grid')"  title="按照用户IP排序">用户IP
+      <php> echo getsorttype('ip',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','dateline','<php> echo getsorttype('dateline');</php>','Post_Grid')"  title="按照发布时间排序">发布时间
+      <php> echo getsorttype('dateline',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','message','<php> echo getsorttype('message');</php>','Post_Grid')"  title="按照回复内容排序">回复内容
+      <php> echo getsorttype('message',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','pic','<php> echo getsorttype('pic');</php>','Post_Grid')"  title="按照回复图片排序">回复图片
+      <php> echo getsorttype('pic',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','hotuser','<php> echo getsorttype('hotuser');</php>','Post_Grid')"  title="按照表意用户排序">表意用户
+      <php> echo getsorttype('hotuser',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','attr','<php> echo getsorttype('attr');</php>','Post_Grid')"  title="按照属性排序">属性
+      <php> echo getsorttype('attr',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','tags','<php> echo getsorttype('tags');</php>','Post_Grid')"  title="按照键字关排序">键字关
+      <php> echo getsorttype('tags',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','lasttime','<php> echo getsorttype('lasttime');</php>','Post_Grid')"  title="按照最后表意时间排序">最后表意时间
+      <php> echo getsorttype('lasttime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','is_show','<php> echo getsorttype('is_show');</php>','Post_Grid')"  title="按照否是显示排序">否是显示
+      <php> echo getsorttype('is_show',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','position','<php> echo getsorttype('position');</php>','Post_Grid')"  title="按照评论状态排序">评论状态
+      <php> echo getsorttype('position',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','star','<php> echo getsorttype('star');</php>','Post_Grid')"  title="按照评论级别排序">评论级别
+      <php> echo getsorttype('star',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','click','<php> echo getsorttype('click');</php>','Post_Grid')"  title="按照表态心情排序">表态心情
+      <php> echo getsorttype('click',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','ok','<php> echo getsorttype('ok');</php>','Post_Grid')"  title="按照支持排序">支持
+      <php> echo getsorttype('ok',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','smile','<php> echo getsorttype('smile');</php>','Post_Grid')"  title="按照微笑排序">微笑
+      <php> echo getsorttype('smile',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Post','ajaxlist','bad','<php> echo getsorttype('bad');</php>','Post_Grid')"  title="按照反对排序">反对
+      <php> echo getsorttype('bad',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="回复ID"> <mkrtags:text id="qid" name="qid"  value="$list['qid']"/> </td>
+    
+    <td title="楼次"> <mkrtags:text id="l" name="l"  value="$list['l']"/> </td>
+    
+    <td title="是否引用"> <mkrtags:text id="requery" name="requery"  value="$list['requery']"/> </td>
+    
+    <td title="盖楼上级ID"> <mkrtags:text id="qidstr" name="qidstr"  value="$list['qidstr']"/> </td>
+    
+    <td title="主题ID"> <mkrtags:text id="aid" name="aid"  value="$list['aid']"/> </td>
+    
+    <td title="群组ID"> <mkrtags:text id="gid" name="gid"  value="$list['gid']"/> </td>
+    
+    <td title="标题"> <mkrtags:text id="title" name="title"  value="$list['title']"/> </td>
+    
+    <td title="用户ID"> <mkrtags:text id="uid" name="uid"  value="$list['uid']"/> </td>
+    
+    <td title="用户名"> <mkrtags:text id="username" name="username"  value="$list['username']"/> </td>
+    
+    <td title="用户IP"> <mkrtags:text id="ip" name="ip"  value="$list['ip']"/> </td>
+    
+    <td title="发布时间"> <mkrtags:text id="dateline" name="dateline"  value="$list['dateline']"/> </td>
+    
+    <td title="回复内容"> <mkrtags:text id="message" name="message"  value="$list['message']"/> </td>
+    
+    <td title="回复图片"> <mkrtags:text id="pic" name="pic"  value="$list['pic']"/> </td>
+    
+    <td title="表意用户"> <mkrtags:text id="hotuser" name="hotuser"  value="$list['hotuser']"/> </td>
+    
+    <td title="属性"> <mkrtags:text id="attr" name="attr"  value="$list['attr']"/> </td>
+    
+    <td title="键字关"> <mkrtags:text id="tags" name="tags"  value="$list['tags']"/> </td>
+    
+    <td title="最后表意时间"> <mkrtags:text id="lasttime" name="lasttime"  value="$list['lasttime']"/> </td>
+    
+    <td title="否是显示"> <mkrtags:text id="is_show" name="is_show"  value="$list['is_show']"/> </td>
+    
+    <td title="评论状态"> <mkrtags:text id="position" name="position"  value="$list['position']"/> </td>
+    
+    <td title="评论级别"> <mkrtags:text id="star" name="star"  value="$list['star']"/> </td>
+    
+    <td title="表态心情"> <mkrtags:text id="click" name="click"  value="$list['click']"/> </td>
+    
+    <td title="支持"> <mkrtags:text id="ok" name="ok"  value="$list['ok']"/> </td>
+    
+    <td title="微笑"> <mkrtags:text id="smile" name="smile"  value="$list['smile']"/> </td>
+    
+    <td title="反对"> <mkrtags:text id="bad" name="bad"  value="$list['bad']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

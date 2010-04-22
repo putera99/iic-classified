@@ -1,0 +1,46 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:联动分类</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Stepselect_view" name="Stepselect_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域 itemname 	egroup 	issign 	issystem -->
+
+	<tr>
+		<td class="ewTableHeader"> 分类ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >分类名字</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="itemname" name="itemname"  value="$list['itemname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >英文标示</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="egroup" name="egroup"  value="$list['egroup']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >级别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="issign" name="issign"  value="$list['issign']"/></td>
+	</tr>
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

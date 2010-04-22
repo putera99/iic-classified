@@ -1,0 +1,91 @@
+<INCLUDE FILE="../Public/header" />
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+ThinkAjax.updateTip	=	'<IMG SRC="../Public/images/ajaxloading.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="" ALIGN="absmiddle"> 登录中～';
+function loginHandle(data,status){
+	if (status==1)
+	{
+		$byid('result').innerHTML	='<SPAN STYLE="color:blue"><IMG SRC="../Public/images/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="" ALIGN="absmiddle" > 登录成功！3 秒后跳转～</SPAN>';
+		$byid('form1').reset();
+		window.location = APP;
+	}
+}
+function keydown(e){
+	var e = e || event;
+	if (e.keyCode==13)
+	{ThinkAjax.sendForm('form1','__URL__/checkLogin/',loginHandle,'result');
+	}
+}
+function fleshVerify(){
+	//重载验证码
+	var timenow = new Date().getTime();
+	$byid('verifyImg').src= '__URL__/verify/'+timenow;
+}
+function dologin(obj){
+	var v=$byid(obj);
+	if(CheckForm(v,'result')==true){
+		ThinkAjax.sendForm(obj,'__URL__/checkLogin/',loginHandle,'result');
+	}
+}
+
+//-->
+</SCRIPT>
+<div id="result" class="result none"></div>
+
+  <DIV CLASS="tCenter">
+  <DIV CLASS="login tab-pane" ID="loginall"  STYLE="width:450px;">
+    <SCRIPT TYPE="text/javascript">tp1 = new WebFXTabPane($byid("loginall"));</SCRIPT>
+    <DIV CLASS="tab-page" ID="loginform" STYLE="height:120px;">
+      <H2 CLASS="tab">请先登陆</H2>
+      <FORM METHOD=POST NAME="login" ID="form1" >
+      <TABLE WIDTH="100%"  CELLPADDING=1 CELLSPACING=0 ID="checkList" >
+        <TR CLASS="row" HEIGHT="20" >
+          <TH  COLSPAN="4" CLASS="tCenter space" >{$Think.config.P_NAME}</TH>
+        </TR>
+        <TR STYLE="height:5px" >
+          <TD COLSPAN="4"></TD>
+        </TR>
+        <TR CLASS="row" >
+          <TD CLASS="tRight">帐 号：</TD>
+          <TD CLASS="tRight"><INPUT TYPE="text" check="Require" warning="请输入帐号" NAME="account" onclick="popHint(this,'请输入帐号。');"/></TD>
+          <TD ROWSPAN="2" CLASS="tRight">验证码：<BR />
+            对比表：</TD>
+          <TD ROWSPAN="2" ><IMG ID="verifyImg" SRC="__URL__/verify/" ONCLICK="fleshVerify()" STYLE="cursor:pointer" BORDER="0" TITLE="点击刷新验证码" ALIGN="absmiddle" /></TD>
+        </TR>
+        <TR CLASS="row" >
+          <TD CLASS="tRight">密 码：</TD>
+          <TD CLASS="tRight"><INPUT TYPE="password"  check="Require" warning="请输入密码" NAME="password" onclick="popHint(this,'请输入密码。');"/></TD>
+        </TR>
+        <TR CLASS="row" >
+          <TD CLASS="tRight">语 言：</TD>
+          <TD CLASS="tRight">
+          <SELECT NAME="L" CLASS="input" >
+              <OPTION VALUE="zh-cn" SELECTED>简体中文(默认)</OPTION>
+              <OPTION VALUE="en-us" >英语(暂不开放)</OPTION>
+              <OPTION VALUE="zh-cn" >简体中文(默认)</OPTION>
+              <OPTION VALUE="zh-tw">繁体中文(暂不开放)</OPTION>
+            </SELECT>
+            </TD>
+          <TD CLASS="tRight">验证码：</TD>
+          <TD ALIGN="left" ><INPUT TYPE="text" ONKEYDOWN="keydown(event)"  check="Require" warning="请输入验证码" NAME="verify" STYLE="width:180px" title="请对照上表输入验证码。"/></TD>
+        </TR>
+        <TR STYLE="height:5px" >
+          <TD COLSPAN="4"></TD>
+        </TR>
+        <TR CLASS="row" >
+          <TD  ALIGN="left" COLSPAN="4"><INPUT TYPE="hidden" NAME="ajax" VALUE="1"><INPUT TYPE="button" CLASS="button1" VALUE="确定登录进入CRM系统" ONCLICK="dologin('form1');">&nbsp;&nbsp;<INPUT TYPE="reset" CLASS="button1"  VALUE="重置当前表单" ></TD>
+        </TR>
+        <TR STYLE="height:5px" >
+          <TD COLSPAN="4"></TD>
+        </TR>
+      </TABLE>
+      </FORM>
+    </DIV>
+    <DIV CLASS="tab-page" ID="logininfo" STYLE="height:140px">
+      <H2 CLASS="tab">登陆帮助及使用说明</H2>
+      <ul><li>请按照密码的样式输入密码!</li></ul>
+    </DIV>
+  </DIV>
+	<script type="text/javascript">setupAllTabs();</script>
+</BODY>
+</HTML>

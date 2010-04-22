@@ -1,0 +1,52 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:tags资源关系</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="TagsLink_view" name="TagsLink_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >主键</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关键字ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tagsid" name="tagsid"  value="$list['tagsid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源类型</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="types" name="types"  value="$list['types']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tid" name="tid"  value="$list['tid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否失效</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="is_ok" name="is_ok"  value="$list['is_ok']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

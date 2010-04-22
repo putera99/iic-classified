@@ -1,0 +1,150 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:群组信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Group_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Group_add" name="Group_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">群组ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组名称</td>
+		<td class="ewTableAltRow"><mkrtags:input id="groupname" name="groupname"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">相关标签</td>
+		<td class="ewTableAltRow"><mkrtags:input id="tags" name="tags"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">用户数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="membernum" name="membernum"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">主题数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="threadnum" name="threadnum"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">回复数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="postnum" name="postnum"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组关闭</td>
+		<td class="ewTableAltRow"><mkrtags:input id="close" name="close"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组公告</td>
+		<td class="ewTableAltRow"><mkrtags:input id="announcement" name="announcement"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组图片</td>
+		<td class="ewTableAltRow"><mkrtags:input id="pic" name="pic"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">关闭加入</td>
+		<td class="ewTableAltRow"><mkrtags:input id="closeapply" name="closeapply"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">加入权限</td>
+		<td class="ewTableAltRow"><mkrtags:input id="joinperm" name="joinperm"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">浏览权限</td>
+		<td class="ewTableAltRow"><mkrtags:input id="viewperm" name="viewperm"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">发表话题权限</td>
+		<td class="ewTableAltRow"><mkrtags:input id="threadperm" name="threadperm"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">回复话题权限</td>
+		<td class="ewTableAltRow"><mkrtags:input id="postperm" name="postperm"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">推荐时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="recommend" name="recommend"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组群主</td>
+		<td class="ewTableAltRow"><mkrtags:input id="moderator" name="moderator"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">分类ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="cat_id" name="cat_id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">附属分类ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="fcat_id" name="fcat_id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">附属属性</td>
+		<td class="ewTableAltRow"><mkrtags:input id="attr" name="attr"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">建创时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="ctime" name="ctime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">最后活跃时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="lasttime" name="lasttime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">组英文名</td>
+		<td class="ewTableAltRow"><mkrtags:input id="en" name="en"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群简介</td>
+		<td class="ewTableAltRow"><mkrtags:input id="description" name="description"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:群组信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Group_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

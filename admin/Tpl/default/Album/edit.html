@@ -1,0 +1,83 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:用户相册</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Album_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Album_update" name="Album_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >相册ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="id" name="id"  value="$list['id']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >相册名字</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="albumname" name="albumname"  class="input" style="width:300px" value="$list['albumname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value="$list['uid']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="username" name="username"  class="input" style="width:300px" value="$list['username']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >建立时间</td>
+		<td class="ewTableAltRow" ><mkrtags:time id="dateline" name="dateline"  class="input" style="width:300px" value="$list['dateline']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >修改时间</td>
+		<td class="ewTableAltRow" ><mkrtags:time id="updatetime" name="updatetime"  class="input" style="width:300px" value="$list['updatetime']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >照片数量</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="picnum" name="picnum"  class="input" style="width:300px" value="$list['picnum']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >封面照片</td>
+		<td class="ewTableAltRow" ><mkrtags:files id="pic" name="pic"  value="$list['pic']"/><a href="$list['pic']">查看图片</a></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否有图片</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="picflag" name="picflag"  class="input" style="width:300px" value="$list['picflag']" readonly="1" /></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >隐私设置</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="SysEnum" outfield="ename" outkey="evalue" outcondition="egroup='friends'"  outorder="disorder desc" id="friend" name="friend"  value="$list['friend']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >相册密码</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="password" name="password"  class="input" style="width:300px" value="$list['password']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >允许查看相的用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:selectmultiple id="target_ids" name="target_ids"  value="" outtable="Friend"  outfield="fuid,fusername"  outkey="fuid"  outcondition="uid=sess_uid"  outorder=""  outadd="" /></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<include file="../Public/footer" />

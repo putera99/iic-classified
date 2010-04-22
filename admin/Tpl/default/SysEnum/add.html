@@ -1,0 +1,57 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:用户相册</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('SysEnum_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="SysEnum_add" name="SysEnum_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  	 -->
+	<tr>
+		<td class="ewTableHeader" >枚举名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ename" name="ename"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >枚举值</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="evalue" name="evalue"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >类别组名</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="Stepselect"  outfield="itemname,egroup"  outkey="egroup"  outcondition="1=1" id="egroup" name="egroup"  class="input"/></td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >组内排序</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="disorder" name="disorder"  value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >枚举类型</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="Array"  outfield="二级,一级"  outkey="0,1" id="issign" name="issign"  value=""/></td>
+	</tr>
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<fieldset >
+  <legend>增加信息:用户相册</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td align="center"><input type="submit" value="确认增加数据" onclick="$byid('SysEnum_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<include file="../Public/footer" />

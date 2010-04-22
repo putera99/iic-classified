@@ -1,0 +1,113 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="Member_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('Member_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','username','<php> echo getsorttype('username');</php>','Member_Grid')"  title="按照用户名排序">用户名
+      <php> echo getsorttype('username',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','password','<php> echo getsorttype('password');</php>','Member_Grid')"  title="按照密码排序">密码
+      <php> echo getsorttype('password',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','email','<php> echo getsorttype('email');</php>','Member_Grid')"  title="按照用户邮箱排序">用户邮箱
+      <php> echo getsorttype('email',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','en','<php> echo getsorttype('en');</php>','Member_Grid')"  title="按照用户空间英文排序">用户空间英文
+      <php> echo getsorttype('en',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','pic','<php> echo getsorttype('pic');</php>','Member_Grid')"  title="按照头像排序">头像
+      <php> echo getsorttype('pic',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('Member','ajaxlist','is_mail','<php> echo getsorttype('is_mail');</php>','Member_Grid')"  title="按照是否邮件认证排序">是否邮件认证
+      <php> echo getsorttype('is_mail',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="用户名"> <mkrtags:text id="username" name="username"  value="$list['username']"/> </td>
+    
+    <td title="密码"> <mkrtags:text id="password" name="password"  value="$list['password']"/> </td>
+    
+    <td title="用户邮箱"> <mkrtags:text id="email" name="email"  value="$list['email']"/> </td>
+    
+    <td title="用户空间英文"> <mkrtags:text id="en" name="en"  value="$list['en']"/> </td>
+    
+    <td title="头像"> <mkrtags:text id="pic" name="pic"  value="$list['pic']"/> </td>
+    
+    <td title="是否邮件认证"> <mkrtags:text id="is_mail" name="is_mail"  value="$list['is_mail']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

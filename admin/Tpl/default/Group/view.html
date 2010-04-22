@@ -1,0 +1,142 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:群组信息</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Group_view" name="Group_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >群组ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组名称</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="groupname" name="groupname"  value="$list['groupname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >相关标签</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tags" name="tags"  value="$list['tags']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="membernum" name="membernum"  value="$list['membernum']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >主题数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="threadnum" name="threadnum"  value="$list['threadnum']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >回复数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="postnum" name="postnum"  value="$list['postnum']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组关闭</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="close" name="close"  value="$list['close']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组公告</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="announcement" name="announcement"  value="$list['announcement']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组图片</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="pic" name="pic"  value="$list['pic']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关闭加入</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="closeapply" name="closeapply"  value="$list['closeapply']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >加入权限</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="joinperm" name="joinperm"  value="$list['joinperm']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >浏览权限</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="viewperm" name="viewperm"  value="$list['viewperm']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发表话题权限</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="threadperm" name="threadperm"  value="$list['threadperm']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >回复话题权限</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="postperm" name="postperm"  value="$list['postperm']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >推荐时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="recommend" name="recommend"  value="$list['recommend']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群组群主</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="moderator" name="moderator"  value="$list['moderator']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >分类ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="cat_id" name="cat_id"  value="$list['cat_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属分类ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="fcat_id" name="fcat_id"  value="$list['fcat_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属属性</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="attr" name="attr"  value="$list['attr']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >建创时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最后活跃时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="lasttime" name="lasttime"  value="$list['lasttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >组英文名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="en" name="en"  value="$list['en']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >群简介</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="description" name="description"  value="$list['description']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

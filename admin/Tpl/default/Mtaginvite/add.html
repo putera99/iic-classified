@@ -1,0 +1,75 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:邀请加入群组</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Mtaginvite_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Mtaginvite_add" name="Mtaginvite_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">邀请ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">用户ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">用户名</td>
+		<td class="ewTableAltRow"><mkrtags:input id="username" name="username"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">群组ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="tagid" name="tagid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">受邀用户ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="fromuid" name="fromuid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">受邀用户名</td>
+		<td class="ewTableAltRow"><mkrtags:input id="fromusername" name="fromusername"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">邀请时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="dateline" name="dateline"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">邀请有效期</td>
+		<td class="ewTableAltRow"><mkrtags:input id="endtime" name="endtime"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:邀请加入群组</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Mtaginvite_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

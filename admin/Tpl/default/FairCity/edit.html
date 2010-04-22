@@ -1,0 +1,58 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:展会城市</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('FairCity_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="FairCity_update" name="FairCity_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >城市ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >城市中文名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ctitle" name="ctitle"  class="input" style="width:300px" value="$list['ctitle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >城市英文名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="cename" name="cename"  class="input" style="width:300px" value="$list['cename']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ctime" name="ctime"  class="input" style="width:300px" value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >启用状态</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="status" name="status"  class="input" style="width:300px" value="$list['status']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:展会城市</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('FairCity_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

@@ -1,0 +1,57 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:用户相册</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Album_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Album_add" name="Album_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+	<tr>
+		<td class="ewTableHeader" >相册名字</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="albumname" name="albumname"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="uid" name="uid"  class="input" style="width:200px" value=""/>为空则为当前用户ID</td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="username" name="username"  class="input" style="width:200px" value=""/>为空则为当前用户名</td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >封面照片</td>
+		<td class="ewTableAltRow" ><mkrtags:files id="pic" name="pic"  value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >隐私设置</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="SysEnum" outfield="ename" outkey="evalue" outcondition="egroup='friends'"  outorder="disorder desc" id="friend" name="friend"  value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >相册密码</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="password" name="password"  class="input" style="width:200px" value=""/>密码访问时生效</td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >允许查看相的用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:selectmultiple id="target_ids" name="target_ids"  value="" outtable="Friend"  outfield="fuid,fusername"  outkey="fuid"  outcondition="uid='sess_uid'"  outorder=""  outadd="" /></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<include file="../Public/footer" />

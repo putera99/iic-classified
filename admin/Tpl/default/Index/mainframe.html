@@ -1,0 +1,27 @@
+<include file="../Public/header" />
+<script type="text/javascript">
+//重新定义高度
+var thisheight=window.screen.availHeight-205;
+document.write('<style type=\'text/css\'>.dynamic-tab-pane-control .tab-page {height:'+thisheight+'px;overflow:auto;}</' + "style>");
+</script>
+<div class="pagecoltrol">
+  <div id="user_tab" class="tab-pane">
+    <div id="user_tab1" class="tab-page">
+      <h2 class="tab">{$Think.config.P_NAME}首页</h2>
+      <TABLE id="checkList" class="list" cellpadding=0 cellspacing=0 >
+		<tr><td height="5" colspan="5" class="topTd" ></td></tr>
+		<TR class="row" ><th colspan="3" class="space">系统信息</th></tr>
+		<iterate name="info" id="v">
+		<TR class="row" onmouseover="over()" onmouseout="out()" onclick="change()" ><TD width="15%">{$key}</TD><TD>{$v}</TD></TR>
+		</iterate>
+		<tr><td height="5" colspan="5" class="bottomTd"></td></tr>
+		</TABLE>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+setupAllTabs();
+</script>
+
+<include file="../Public/footer" />

@@ -1,0 +1,107 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:广告信息表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Ad_view" name="Ad_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告的关键字</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="keywords" name="keywords"  value="$list['keywords']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告名称</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="name" name="name"  value="$list['name']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告类型</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="type" name="type"  value="$list['type']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >文字广告位是否新开窗口</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="isclose" name="isclose"  value="$list['isclose']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告投放开始日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="begintime" name="begintime"  value="$list['begintime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告投放结束日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="endtime" name="endtime"  value="$list['endtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告代码</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="adcode" name="adcode"  value="$list['adcode']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >提交日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="posttime" name="posttime"  value="$list['posttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >排序值</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="list" name="list"  value="$list['list']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uid" name="uid"  value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点击量</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="hits" name="hits"  value="$list['hits']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >广告价格</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="money" name="money"  value="$list['money']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点卡数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="moneycard" name="moneycard"  value="$list['moneycard']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否已卖出</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ifsale" name="ifsale"  value="$list['ifsale']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否自动通过审核</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="autoyz" name="autoyz"  value="$list['autoyz']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

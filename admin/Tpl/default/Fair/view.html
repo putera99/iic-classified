@@ -1,0 +1,67 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:展会</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Fair_view" name="Fair_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="aid" name="aid"  value="$list['aid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >开始时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="starttime" name="starttime"  value="$list['starttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >结束时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="endtime" name="endtime"  value="$list['endtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >参展游客</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="visitor" name="visitor"  value="$list['visitor']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >参展商</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="exhibitor" name="exhibitor"  value="$list['exhibitor']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >产品相册ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="product" name="product"  value="$list['product']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >官方网站</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="website" name="website"  value="$list['website']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

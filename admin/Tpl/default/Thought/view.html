@@ -1,0 +1,72 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:用户关注</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Thought_view" name="Thought_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >主键</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关注的类别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="types" name="types"  value="$list['types']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tid" name="tid"  value="$list['tid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uid" name="uid"  value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点击次数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="click" name="click"  value="$list['click']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关注程度</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="hot" name="hot"  value="$list['hot']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关注起始时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ctime" name="ctime"  value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最近关注时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mtime" name="mtime"  value="$list['mtime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点击次数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ip" name="ip"  value="$list['ip']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

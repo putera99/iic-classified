@@ -1,0 +1,83 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:友情链接</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Flink_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Flink_update" name="Flink_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >排序</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="sortrank" name="sortrank"  class="input" style="width:300px" value="$list['sortrank']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >网址</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="url" name="url"  class="input" style="width:300px" value="$list['url']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >网站名称</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="webname" name="webname"  class="input" style="width:300px" value="$list['webname']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >简介</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="msg" name="msg"  class="input" style="width:300px" value="$list['msg']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系email</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="email" name="email"  class="input" style="width:300px" value="$list['email']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >LOGO</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="logo" name="logo"  class="input" style="width:300px" value="$list['logo']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >创建日期</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ctime" name="ctime"  class="input" style="width:300px" value="$list['ctime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >放置位置</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="itype" name="itype"  class="input" style="width:300px" value="$list['itype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >ischeck</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ischeck" name="ischeck"  class="input" style="width:300px" value="$list['ischeck']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:友情链接</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Flink_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

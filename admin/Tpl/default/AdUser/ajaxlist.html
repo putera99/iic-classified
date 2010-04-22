@@ -1,0 +1,149 @@
+<tagLib name="mkrtags" />
+<!--  功能操作区域  -->
+
+<table width="100%" cellpadding="0" cellspacing="0" >
+  <tr>
+    <td width="60%">
+	    <span><input type="button"  onclick="add()" class="button1" title="增加数据" value="增加数据" /> </span>
+	    <span><input type="button"  onclick="edit()" class="button1" title="编辑数据" value="编辑数据" /> </span>
+	    <span><input type="button"  onclick="view()" class="button1" title="查看详细数据" value="查看详细" /> </span>
+	    <span><input type="button"  onclick="del()" class="button1" title="删除数据" value="删除数据" /> </span>
+	    
+		    <span>
+			    <input type="button"  onclick="display('searchbox')" class="button1" title="搜索数据" value="搜索数据▼" />
+			    <div class="searchbox" id="searchbox" style="display:none">
+			        <table cellpadding="0" cellspacing="0">
+			          <tr>
+			            <td class="ewTableHeader">关键词:</td>
+			            <td class="ewTableAltRow"><input id="searchkey" type="text"  name="searchkey"  value="{$searchkey}" /></td>
+			          </tr>
+			          <tr>
+			          	<td class="ewTableHeader">条件:</td>
+			            <td class="ewTableAltRow"><mkrtags:radio id="searchtype" name="searchtype"  outtable="Array" value="$searchtype" outfield="AND,OR" outkey="AND,OR" /></td>
+			          </tr>
+			          <tr>
+			            <td colspan="2"  class="ewTableAltRow">
+			            <input type="submit"   class="button1" value="搜索" />
+			            <input type="button" name="delete" onclick="location.href='__URL__/index/'" class="button1" value="清空" />
+			            </td>
+			          </tr>
+			        </table>
+			    </div>
+		    </span>
+	    
+		<span><input type="button"  onclick="location.reload();" class="button1" title="刷新数据" value="刷新数据" /> </span>
+    </td>
+  </tr>
+</table>
+<!-- 功能操作区域结束 -->
+<!-- Myhtml 系统列表组件开始 -->
+<table id="AdUser_List" class="list">
+  <tr class="row">
+    <th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('AdUser_List')">
+    </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','ad_id','<php> echo getsorttype('ad_id');</php>','AdUser_Grid')"  title="按照广告的ID排序">广告的ID
+      <php> echo getsorttype('ad_id',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_uid','<php> echo getsorttype('u_uid');</php>','AdUser_Grid')"  title="按照购买者ID排序">购买者ID
+      <php> echo getsorttype('u_uid',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_username','<php> echo getsorttype('u_username');</php>','AdUser_Grid')"  title="按照购买这用户名排序">购买这用户名
+      <php> echo getsorttype('u_username',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_day','<php> echo getsorttype('u_day');</php>','AdUser_Grid')"  title="按照购买天数排序">购买天数
+      <php> echo getsorttype('u_day',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_begintime','<php> echo getsorttype('u_begintime');</php>','AdUser_Grid')"  title="按照u_begintime排序">u_begintime
+      <php> echo getsorttype('u_begintime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_endtime','<php> echo getsorttype('u_endtime');</php>','AdUser_Grid')"  title="按照u_endtime排序">u_endtime
+      <php> echo getsorttype('u_endtime',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_hits','<php> echo getsorttype('u_hits');</php>','AdUser_Grid')"  title="按照点击排序">点击
+      <php> echo getsorttype('u_hits',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_yz','<php> echo getsorttype('u_yz');</php>','AdUser_Grid')"  title="按照审核与否排序">审核与否
+      <php> echo getsorttype('u_yz',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_code','<php> echo getsorttype('u_code');</php>','AdUser_Grid')"  title="按照广告代码排序">广告代码
+      <php> echo getsorttype('u_code',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_money','<php> echo getsorttype('u_money');</php>','AdUser_Grid')"  title="按照价钱排序">价钱
+      <php> echo getsorttype('u_money',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_moneycard','<php> echo getsorttype('u_moneycard');</php>','AdUser_Grid')"  title="按照点卡排序">点卡
+      <php> echo getsorttype('u_moneycard',1);</php>
+      </a> </th>
+    
+    <th> <a class="titleth" href="javascript:AjaxSortBy('AdUser','ajaxlist','u_posttime','<php> echo getsorttype('u_posttime');</php>','AdUser_Grid')"  title="按照提交日期排序">提交日期
+      <php> echo getsorttype('u_posttime',1);</php>
+      </a> </th>
+    
+    <th >操作区域</th>
+  </tr>
+  <php> if(isset($list)): </php>
+  <php> $i = 0; </php>
+  <php> if( count($list)==0 ) echo "" </php>
+  <php> foreach($list as $key=>$list): </php>
+  <php> ++$i;</php>
+  <php> $mod = (($i % 2 )==0)</php>
+  <php> if(($key%2)==0){ $tablesclass="ewTableAltRow";} else { $tablesclass="ewTableRow";} </php>
+  <tr class="{$tablesclass}" onmouseover="ew_mouseover(this);" onmouseout="ew_mouseout(this);" onclick="ew_click(this);"  >
+    <td><input type="checkbox" name="key"	value="{$list.id}"></td>
+    
+    <td title="广告的ID"> <mkrtags:text id="ad_id" name="ad_id"  value="$list['ad_id']"/> </td>
+    
+    <td title="购买者ID"> <mkrtags:text id="u_uid" name="u_uid"  value="$list['u_uid']"/> </td>
+    
+    <td title="购买这用户名"> <mkrtags:text id="u_username" name="u_username"  value="$list['u_username']"/> </td>
+    
+    <td title="购买天数"> <mkrtags:text id="u_day" name="u_day"  value="$list['u_day']"/> </td>
+    
+    <td title="u_begintime"> <mkrtags:text id="u_begintime" name="u_begintime"  value="$list['u_begintime']"/> </td>
+    
+    <td title="u_endtime"> <mkrtags:text id="u_endtime" name="u_endtime"  value="$list['u_endtime']"/> </td>
+    
+    <td title="点击"> <mkrtags:text id="u_hits" name="u_hits"  value="$list['u_hits']"/> </td>
+    
+    <td title="审核与否"> <mkrtags:text id="u_yz" name="u_yz"  value="$list['u_yz']"/> </td>
+    
+    <td title="广告代码"> <mkrtags:text id="u_code" name="u_code"  value="$list['u_code']"/> </td>
+    
+    <td title="价钱"> <mkrtags:text id="u_money" name="u_money"  value="$list['u_money']"/> </td>
+    
+    <td title="点卡"> <mkrtags:text id="u_moneycard" name="u_moneycard"  value="$list['u_moneycard']"/> </td>
+    
+    <td title="提交日期"> <mkrtags:text id="u_posttime" name="u_posttime"  value="$list['u_posttime']"/> </td>
+    
+    <td>
+    	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
+     	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>
+     	<a href="javascript:view('{$list.id}')" title="查看详细信息">详细</a>
+    </td>
+  </tr>
+  <php> endforeach; </php>
+  <php> endif; </php>
+</table>
+<!--Myhtml系统列表组件结束 -->
+<!--  分页显示区域 -->
+<div class="page">
+  <table width="100%">
+    <tr>
+      <td align="left"></td>
+      <td align="right">{$page}</td>
+    </tr>
+  </table>
+</div>
+<!--  分页显示区域结束 -->

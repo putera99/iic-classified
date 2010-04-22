@@ -1,0 +1,82 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:用户举报表</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Report_view" name="Report_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >主键</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >信息ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="tid" name="tid"  value="$list['tid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源类型</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="itype" name="itype"  value="$list['itype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否为新</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="is_new" name="is_new"  value="$list['is_new']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >被举报次数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="num" name="num"  value="$list['num']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >被举报时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="dateline" name="dateline"  value="$list['dateline']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最近时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="lasttime" name="lasttime"  value="$list['lasttime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ip" name="ip"  value="$list['ip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >被举报原因</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="reason" name="reason"  value="$list['reason']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >举报者ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uids" name="uids"  value="$list['uids']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否处理</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="is_show" name="is_show"  value="$list['is_show']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

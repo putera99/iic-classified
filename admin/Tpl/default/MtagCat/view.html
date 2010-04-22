@@ -1,0 +1,67 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:群组分类</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="MtagCat_view" name="MtagCat_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >分类ID</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >父级ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="pid" name="pid"  value="$list['pid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >分类标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="title" name="title"  value="$list['title']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >排序</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="num" name="num"  value="$list['num']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属属性</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="attr" name="attr"  value="$list['attr']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否显示</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="is_show" name="is_show"  value="$list['is_show']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >描述</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="description" name="description"  value="$list['description']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关键字</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="keywords" name="keywords"  value="$list['keywords']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

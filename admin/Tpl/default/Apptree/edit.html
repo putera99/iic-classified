@@ -1,0 +1,51 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:菜单管理</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Album_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Album_update" name="Album_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+  	<tr>
+		<td class="ewTableHeader" >节点ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="id" name="id"  class="input" value="$list['id']" readonly="1" style="width:300px"/></td>
+	</tr>
+	<tr>
+		<td class="ewTableHeader" >节点名称</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="title" name="title"  class="input" value="$list['title']" style="width:300px"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >PID</td>
+		<td class="ewTableAltRow" ><mkrtags:select id="pid" name="pid" value="$list['pid']" class="input" outtable="Apptree"  outfield="id,title"  outkey="id"  outcondition="1=1" style="width:300px"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >appmodel</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="appmodel" name="appmodel" value="$list['appmodel']" class="input" style="width:300px"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >link</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="link" name="link" value="$list['link']" class="input" style="width:300px"/></td>
+	</tr>
+	
+	<tr>
+		<td class="ewTableHeader" >type</td>
+		<td class="ewTableAltRow" ><mkrtags:select outtable="Array" value="$list['type']" outfield="分类,链接"  outkey="0,1" id="type" name="type"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<include file="../Public/footer" />

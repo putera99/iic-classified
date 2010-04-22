@@ -1,0 +1,103 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>编辑信息:通用评论</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认保存数据" onclick="$byid('Comment_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Comment_update" name="Comment_update" method="post" action="__URL__/update/">
+  <fieldset >
+    <!--  功能操作区域  -->
+    <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >主键</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源ID</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="xid" name="xid"  class="input" style="width:300px" value="$list['xid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >资源类型</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="types" name="types"  class="input" style="width:300px" value="$list['types']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >热度</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="hot" name="hot"  class="input" style="width:300px" value="$list['hot']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >漂亮表态数</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click_6" name="click_6"  class="input" style="width:300px" value="$list['click_6']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >酷毙表态数</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click_7" name="click_7"  class="input" style="width:300px" value="$list['click_7']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >雷人表态数</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click_8" name="click_8"  class="input" style="width:300px" value="$list['click_8']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >鲜花表态数</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click_9" name="click_9"  class="input" style="width:300px" value="$list['click_9']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >鸡蛋表态数</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="click_10" name="click_10"  class="input" style="width:300px" value="$list['click_10']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户名</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="username" name="username"  class="input" style="width:300px" value="$list['username']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >IP</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="ip" name="ip"  class="input" style="width:300px" value="$list['ip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >时间</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="dateline" name="dateline"  class="input" style="width:300px" value="$list['dateline']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >信息</td>
+		<td class="ewTableAltRow" ><mkrtags:input id="message" name="message"  class="input" style="width:300px" value="$list['message']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+  </fieldset>
+</form>
+<fieldset >
+  <legend>编辑信息:通用评论</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认保存数据" onclick="$byid('Comment_update').submit();" class="button1"></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />

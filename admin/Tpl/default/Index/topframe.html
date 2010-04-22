@@ -1,0 +1,22 @@
+<include file="../Public/header" />
+<link href="../Public/images/top.css" rel="stylesheet" type="text/css" />
+<div class="topnav">
+	<div class="sitenav">
+		<div class="welcome">你好，欢迎使用来的管理后台！</div>
+		<div class="sitelink"> 
+			<a href="/" target="_blank">网站主页</a> | 
+			<a href="__APP__/Public/logout" target="_top">安全退出</a>
+		</div>
+	</div>
+	<div class="leftnav">
+		<ul>
+			<li class="navleft"></li>
+			<li><a href="__APP__/Index/left/" target="mcMenuFrame">{$Think.config.P_NAME}首页</a></li>
+			<volist name="top" id="top_vo">
+				<li><a href="__APP__/Index/left/apptreeid/{$top_vo.id}/" target="mcMenuFrame">{$top_vo.title}</a></li>
+			</volist>
+			<li class="navright"></li>
+		</ul>
+	</div>
+</div>
+<include file="../Public/footer" />

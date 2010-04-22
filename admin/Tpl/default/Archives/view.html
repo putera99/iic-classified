@@ -1,0 +1,312 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>查看详细信息:整站档案</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr>
+      <td >
+      <input type="button" value="编辑数据" onclick="location.href='__URL__/edit/id/{$id}';" class="button1">
+      </td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Archives_view" name="Archives_view" method="POST" />
+  <fieldset >
+    <div id="result" class="result none"></div>
+    <!--  功能操作区域  -->
+    <table width="100%" class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader" >id</td>
+		<td class="ewTableAltRow" ><mkrtags: id="id" name="id"  value="$list['id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >主分类</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="typeid" name="typeid"  value="$list['typeid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >次分类</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="typeid2" name="typeid2"  value="$list['typeid2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >行业ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="industry" name="industry"  value="$list['industry']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >所在城市</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="bycity" name="bycity"  value="$list['bycity']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >城市类别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="cid" name="cid"  value="$list['cid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >会员ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uid" name="uid"  value="$list['uid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属属性</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="flag" name="flag"  value="$list['flag']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否审核 </td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ismake" name="ismake"  value="$list['ismake']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >所属模型ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="channel" name="channel"  value="$list['channel']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >阅读权限</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="arcrank" name="arcrank"  value="$list['arcrank']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >点击量</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="click" name="click"  value="$list['click']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="title" name="title"  value="$list['title']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >短标题</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="shorttitle" name="shorttitle"  value="$list['shorttitle']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >标题颜色</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="color" name="color"  value="$list['color']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >作者</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="writer" name="writer"  value="$list['writer']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >来源</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="source" name="source"  value="$list['source']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >缩略图</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="litpic" name="litpic"  value="$list['litpic']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发布日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="pubdate" name="pubdate"  value="$list['pubdate']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >发送日期</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="senddate" name="senddate"  value="$list['senddate']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >关键字</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="keywords" name="keywords"  value="$list['keywords']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最后回复</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="lastpost" name="lastpost"  value="$list['lastpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >星星1</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="star1" name="star1"  value="$list['star1']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >星星1</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="star2" name="star2"  value="$list['star2']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >星星1</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="star3" name="star3"  value="$list['star3']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >星星1</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="star4" name="star4"  value="$list['star4']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >星星1</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="star5" name="star5"  value="$list['star5']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >好评数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="goodpost" name="goodpost"  value="$list['goodpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >差评数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="badpost" name="badpost"  value="$list['badpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >是否开启评论</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="notpost" name="notpost"  value="$list['notpost']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >描述</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="description" name="description"  value="$list['description']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >英文名</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="filename" name="filename"  value="$list['filename']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >用户IP</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="uip" name="uip"  value="$list['uip']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >最后浏览时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="lastview" name="lastview"  value="$list['lastview']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >编辑密码</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="editpwd" name="editpwd"  value="$list['editpwd']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >开始显示时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="showstart" name="showstart"  value="$list['showstart']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >停止显示的时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="showend" name="showend"  value="$list['showend']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >编辑者</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="editer" name="editer"  value="$list['editer']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >编辑时间</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="edittime" name="edittime"  value="$list['edittime']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属相册ID</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="albumid" name="albumid"  value="$list['albumid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >附属图片张数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="albumnum" name="albumnum"  value="$list['albumnum']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >信息性质</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="itype" name="itype"  value="$list['itype']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >信息类别</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="category" name="category"  value="$list['category']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系电话</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="telephone" name="telephone"  value="$list['telephone']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >传真号码</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="fax" name="fax"  value="$list['fax']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系手机</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="mobphone" name="mobphone"  value="$list['mobphone']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系邮箱</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="email" name="email"  value="$list['email']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系QQ</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="oicq" name="oicq"  value="$list['oicq']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系MSN</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="msn" name="msn"  value="$list['msn']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >地图参数</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="maps" name="maps"  value="$list['maps']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >城市信息</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="city_id" name="city_id"  value="$list['city_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >县城或区</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="zone_id" name="zone_id"  value="$list['zone_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >街道或村镇</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="street_id" name="street_id"  value="$list['street_id']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >个人位置</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="position" name="position"  value="$list['position']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系地址</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="contact" name="contact"  value="$list['contact']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >公司信息</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="ltdid" name="ltdid"  value="$list['ltdid']"/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader" >联系人</td>
+		<td class="ewTableAltRow" ><mkrtags:text id="linkman" name="linkman"  value="$list['linkman']"/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+    </table>
+    <!-- 功能操作区域结束 -->
+  </fieldset>
+</form>
+<include file="../Public/footer" />

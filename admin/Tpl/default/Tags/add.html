@@ -1,0 +1,105 @@
+<tagLib name="mkrtags" />
+<include file="../Public/header" />
+<fieldset >
+  <legend>增加信息:tags类资源个数</legend>
+  <!--  功能操作区域  -->
+  <table width="100%"   cellpadding=0 cellspacing=0 >
+    <tr>
+      <td ><input type="button" value="确认增加数据" onclick="$byid('Tags_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<form id="Tags_add" name="Tags_add"  method="POST"  action="__URL__/insert/"/>
+
+<fieldset >
+  <!--  功能操作区域  -->
+  <table width="100%"  class="ewTable">
+  <!--  字段显示区域  -->
+
+	<tr>
+		<td class="ewTableHeader">关键字ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">主要分类</td>
+		<td class="ewTableAltRow"><mkrtags:input id="tcatid" name="tcatid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">次级分类</td>
+		<td class="ewTableAltRow"><mkrtags:input id="ftcatid" name="ftcatid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">创建者ID</td>
+		<td class="ewTableAltRow"><mkrtags:input id="uid" name="uid"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">关键字</td>
+		<td class="ewTableAltRow"><mkrtags:input id="tagsname" name="tagsname"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">美容个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="mr" name="mr"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">服饰个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="fs" name="fs"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">读书个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="book" name="book"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">电影个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="move" name="move"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">音乐个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="music" name="music"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">BLOG个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="blog" name="blog"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">活动个数</td>
+		<td class="ewTableAltRow"><mkrtags:input id="event" name="event"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">创建时间</td>
+		<td class="ewTableAltRow"><mkrtags:input id="dateline" name="dateline"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+	<tr>
+		<td class="ewTableHeader">是否锁定</td>
+		<td class="ewTableAltRow"><mkrtags:input id="close" name="close"  class="input" style="width:300px" value=""/></td>
+	</tr>
+
+  <!--  字段显示区域 结束  -->
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+</form>
+<fieldset >
+  <legend>增加信息:tags类资源个数</legend>
+  <!--  功能操作区域  -->
+  <table width="100%" cellpadding=0 cellspacing=0 >
+    <tr align="center">
+      <td><input type="button" value="确认增加数据" onclick="$byid('Tags_add').submit();" class="button1" /></td>
+    </tr>
+  </table>
+  <!-- 功能操作区域结束 -->
+</fieldset>
+<include file="../Public/footer" />
