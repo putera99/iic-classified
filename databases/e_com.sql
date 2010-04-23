@@ -763,4 +763,22 @@ CREATE TABLE IF NOT EXISTS `iic_member` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='成员登录';
 
+CREATE TABLE IF NOT EXISTS `iic_stepselect` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `itemname` char(30) DEFAULT '' COMMENT '类别名',
+  `egroup` char(20) DEFAULT '' COMMENT '组名称',
+  `issign` tinyint(1) unsigned DEFAULT '0' COMMENT '是否启用',
+  `issystem` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否系统',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='联动数据类';
 
+
+CREATE TABLE IF NOT EXISTS `iic_sys_enum` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `ename` char(30) NOT NULL DEFAULT '' COMMENT '名称',
+  `evalue` smallint(6) NOT NULL DEFAULT '0' COMMENT '值',
+  `egroup` char(20) NOT NULL DEFAULT '' COMMENT '组名',
+  `disorder` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `issign` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否启用',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='联动数据';
