@@ -16,12 +16,6 @@
   <!--  功能操作区域  -->
   <table width="100%"  class="ewTable">
   <!--  字段显示区域  -->
-
-	<tr>
-		<td class="ewTableHeader">城市ID</td>
-		<td class="ewTableAltRow"><mkrtags:input id="id" name="id"  class="input" style="width:300px" value=""/></td>
-	</tr>
-
 	<tr>
 		<td class="ewTableHeader">城市中文名</td>
 		<td class="ewTableAltRow"><mkrtags:input id="ctitle" name="ctitle"  class="input" style="width:300px" value=""/></td>
@@ -33,18 +27,13 @@
 	</tr>
 
 	<tr>
-		<td class="ewTableHeader">创建时间</td>
-		<td class="ewTableAltRow"><mkrtags:input id="ctime" name="ctime"  class="input" style="width:300px" value=""/></td>
-	</tr>
-
-	<tr>
 		<td class="ewTableHeader">城市简介</td>
-		<td class="ewTableAltRow"><mkrtags:input id="content" name="content"  class="input" style="width:300px" value=""/></td>
+		<td class="ewTableAltRow"><mkrtags:textarea id="content" name="content" value=""/></td>
 	</tr>
 
 	<tr>
 		<td class="ewTableHeader">启用状态</td>
-		<td class="ewTableAltRow"><mkrtags:input id="status" name="status"  class="input" style="width:300px" value="1"/></td>
+		<td class="ewTableAltRow"><mkrtags:radio outtable="Array" outfield="启用,不启用" outkey="1,0" id="status" name="status" value="1"/></td>
 	</tr>
 
   <!--  字段显示区域 结束  -->

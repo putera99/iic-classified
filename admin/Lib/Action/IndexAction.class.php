@@ -1,50 +1,50 @@
 <?php
-class IndexAction extends PublicAction{
+class IndexAction extends PublicAction {
 
-	public function index(){
+	public function index() {
 		//总体的
-		 $this->display();
+		$this->display();
 	}
 
-	public function left(){
+	public function left() {
 		//子模板的左边页面
 		$table=D('Apptree');
 		$pid=$_GET['apptreeid'];
-		if($pid){
+		if($pid) {
 			$leftdata=$table->where("type='0' and id ='$pid'")->findAll();
-			foreach($leftdata as $k=>$v){
+			foreach($leftdata as $k=>$v) {
 				$leftdata[$k]['subapp']=$table->where(" pid ={$v['id']}")->field('*')->order('seqNO ASC')->findall();
 			}
 			$this->assign('left',$leftdata);
 			//dump($leftdata);
 			//$this->display();
 			$this->assign('url',$leftdata['link']);
-		}else{
+		}else {
 			$this->assign('index','index');
 		}
 		$this->display("Public:menu");
 	}
 
-	public function mainframe(){
+	public function mainframe() {
 		$info = array(
-            '操作系统:'=>PHP_OS,
-            '运行环境:'=>$_SERVER["SERVER_SOFTWARE"],
-            'PHP运行方式:'=>php_sapi_name(),
-            '上传附件限制:'=>ini_get('upload_max_filesize'),
-            '执行时间限制:'=>ini_get('max_execution_time').'秒',
-            '服务器时间:'=>date("Y年n月j日 H:i:s"),
-            '北京时间:'=>gmdate("Y年n月j日 H:i:s",time()+8*3600),
-            '服务器域名/IP:'=>$_SERVER['SERVER_NAME'].' [ '.gethostbyname($_SERVER['SERVER_NAME']).' ]',
-            '剩余空间:'=>round((@disk_free_space(".")/(1024*1024)),2).'M',
-            'register_globals:'=>get_cfg_var("register_globals")=="1" ? "ON" : "OFF",
-            'magic_quotes_gpc:'=>(1===get_magic_quotes_gpc())?'YES':'NO',
-            'magic_quotes_runtime:'=>(1===get_magic_quotes_runtime())?'YES':'NO',
-            );
-        $this->assign('info',$info);
+				'操作系统:'=>PHP_OS,
+				'运行环境:'=>$_SERVER["SERVER_SOFTWARE"],
+				'PHP运行方式:'=>php_sapi_name(),
+				'上传附件限制:'=>ini_get('upload_max_filesize'),
+				'执行时间限制:'=>ini_get('max_execution_time').'秒',
+				'服务器时间:'=>date("Y年n月j日 H:i:s"),
+				'北京时间:'=>gmdate("Y年n月j日 H:i:s",time()+8*3600),
+				'服务器域名/IP:'=>$_SERVER['SERVER_NAME'].' [ '.gethostbyname($_SERVER['SERVER_NAME']).' ]',
+				'剩余空间:'=>round((@disk_free_space(".")/(1024*1024)),2).'M',
+				'register_globals:'=>get_cfg_var("register_globals")=="1" ? "ON" : "OFF",
+				'magic_quotes_gpc:'=>(1===get_magic_quotes_gpc())?'YES':'NO',
+				'magic_quotes_runtime:'=>(1===get_magic_quotes_runtime())?'YES':'NO',
+		);
+		$this->assign('info',$info);
 		$this->display();
 	}
 
-	public function topframe(){
+	public function topframe() {
 		//顶部的
 		//生成table的树
 		$table=D('Apptree');
@@ -54,13 +54,11 @@ class IndexAction extends PublicAction{
 		$this->display();
 	}
 
-	public function midFrame(){
-		//中间的
+	public function test() {
+		$url=empty ($_GET['url'])?'Index:mainframe':mydecode($_GET['url']);
+		$this->assign('url',$url);
 		$this->display();
 	}
 
 }
-
-
-
 ?>
