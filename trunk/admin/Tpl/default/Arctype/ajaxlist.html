@@ -1,6 +1,5 @@
 <tagLib name="mkrtags" />
 <!--  功能操作区域  -->
-
 <table width="100%" cellpadding="0" cellspacing="0" >
   <tr>
     <td width="60%">
@@ -42,7 +41,7 @@
     <th width="8">
 		<input type="checkbox" id="check" onclick="CheckAll('Arctype_List')">
     </th>
-	<th>ID</th>
+	<th width="40">ID</th>
     <th>栏目名称</th>
     <th>上级栏目</th>
     
@@ -52,31 +51,17 @@
       <php> echo getsorttype('sortrank',1);</php>
       </a> </th>
     
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','ename','<php> echo getsorttype('ename');</php>','Arctype_Grid')"  title="按照栏目的英文名排序">栏目的英文名
-      <php> echo getsorttype('ename',1);</php>
-      </a> </th>
+    <th>英文名</th>
     
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','channeltype','<php> echo getsorttype('channeltype');</php>','Arctype_Grid')"  title="按照系统模块排序">系统模块
-      <php> echo getsorttype('channeltype',1);</php>
-      </a> </th>
+    <th>模块</th>
 
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','moresite','<php> echo getsorttype('moresite');</php>','Arctype_Grid')"  title="按照是否启用子域名排序">是否启用子域名
-      <php> echo getsorttype('moresite',1);</php>
-      </a> </th>
+    <th>属性</th>
  
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','ishidden','<php> echo getsorttype('ishidden');</php>','Arctype_Grid')"  title="按照是否隐藏排序">是否隐藏
-      <php> echo getsorttype('ishidden',1);</php>
-      </a> </th>
+    <th width="20">隐</th>
   
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','hits','<php> echo getsorttype('hits');</php>','Arctype_Grid')"  title="按照栏目点击排序">栏目点击
-      <php> echo getsorttype('hits',1);</php>
-      </a> </th>
- 
-    <th> <a class="titleth" href="javascript:AjaxSortBy('Arctype','ajaxlist','crossid','<php> echo getsorttype('crossid');</php>','Arctype_Grid')"  title="按照交叉栏目ID排序">交叉栏目ID
-      <php> echo getsorttype('crossid',1);</php>
-      </a> </th>
+    <th>点击</th>
     
-    <th >操作区域</th>
+    <th>操作区域</th>
   </tr>
   <php> if(isset($list)): </php>
   <php> $i = 0; </php>
@@ -89,33 +74,33 @@
     <td><input type="checkbox" name="key"	value="{$list.id}"></td>
 	<td title="ID"> <mkrtags:text id="id" name="id"  value="$list['id']"/> </td>
 	
-    <td title="栏目名称"> <mkrtags:text id="typename" name="typename"  value="$list['typename']"/> </td>
+    <td title="栏目名称"> <mkrtags:text id="typename" name="typename" value="$list['typename']"/> </td>
 	
-    <td title="上级栏目"> <mkrtags:select outtable="Arctype"  outfield="id,typename"  outkey="id"  outcondition="1=1" id="reid" name="reid"  value="$list['reid']" readonly='1' /> </td>
+    <td title="上级栏目"><if condition="$list['reid'] eq 0">
+                        根目录
+                        <else />
+                        <mkrtags:select outtable="Arctype" outfield="typename" outkey="id" outcondition="1=1" id="reid" name="reid" class="w100" style="width:100px;" value="$list['reid']" readonly='1' /> </td>
+                        </if>
     
-    <td title="顶级栏目"> <mkrtags:select outtable="Arctype"  outfield="id,typename"  outkey="id"  outcondition="1=1" id="topid" name="topid"  value="$list['topid']" readonly='1' /> </td>
+    <td title="顶级栏目"><if condition="$list['topid'] eq 0">
+                        根目录
+                        <else />
+                        <mkrtags:select outtable="Arctype" outfield="typename"  outkey="id" outcondition="1=1" id="topid" name="topid" class="w100" style="width:100px;" value="$list['topid']" readonly='1' /> </td>
+                        </if>
     
     <td title="栏目排序"> <mkrtags:text id="sortrank" name="sortrank"  value="$list['sortrank']"/> </td>
 
     
-    <td title="英文标识"> <mkrtags:text id="ename" name="ename"  value="$list['ename']"/> </td>
+    <td title="英文标识">{$list['ename']}</td>
     
-    <td title="系统模块"> <mkrtags:select outtable="SysEnum"  outfield="evalue,ename"  outkey="evalue"  outcondition="egroup='channeltype'" outorder="evalue asc" readonly='1' id="channeltype" name="channeltype"  value="$list['channeltype']"/> </td>
+    <td title="系统模块"><mkrtags:select outtable="SysEnum"  outfield="evalue,ename"  outkey="evalue"  outcondition="egroup='channeltype'" outorder="evalue asc" readonly='1' id="channeltype" name="channeltype" value="$list['channeltype']"/> </td>
+    
+    <td title="栏目属性"><mkrtags:select outtable="SysEnum" outfield="evalue,ename"  outkey="evalue" outcondition="egroup='ispart'" outorder="id asc" id="ispart" name="ispart"  value="$list['ispart']"/> </td>
 
-    
-    <td title="栏目属性"> <mkrtags:select outtable="SysEnum" outfield="evalue,ename"  outkey="evalue" outcondition="egroup='ispart'" outorder="id asc" id="ispart" name="ispart"  value="$list['ispart']"/> </td>
-    
+    <td title="是否隐藏">{$list['ishidden']}</td>
 
-    <td title="是否启用子域名"> <mkrtags:select outtable="Array" outfield="启用,不启用" outkey="1,0" id="moresite" name="moresite"  value="$list['moresite']"/> </td>
-    
-
-    <td title="是否隐藏"> <mkrtags:select outtable="Array" outfield="隐藏,不隐藏" outkey="1,0" id="ishidden" name="ishidden"  value="$list['ishidden']"/> </td>
-
-    <td title="栏目点击"> <mkrtags:text id="hits" name="hits"  value="$list['hits']"/> </td>
-    
-    <td title="交叉栏目ID"> <mkrtags:text id="crossid" name="crossid"  value="$list['crossid']"/> </td>
-
-    
+    <td title="栏目点击">{$list['hits']}</td>
+   
     <td>
     	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>
      	<a href="javascript:del('{$list.id}')" title="删除本信息">删除</a>

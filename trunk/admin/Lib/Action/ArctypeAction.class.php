@@ -11,7 +11,7 @@ class ArctypeAction extends PublicAction{
 		$order=!empty($_REQUEST["order"])?$_REQUEST["order"]:$list->getPk(); //排序字段,默认为"Pk"
 		$sortd=!empty($_REQUEST["sort"])?$_REQUEST["sort"]:"asc"; //排序顺序,默认为"asc"
 		$orderBy=$order." ".$sortd;//组合排序条件
-		$feilds='reid,topid,sortrank,typename,ename,typedir,issend,channeltype,uid,cid,maxpage,ispart,corank,tempindex,templist,temparticle,namerule,namerule2,modname,description,keywords,seotitle,moresite,sitepath,siteurl,ishidden,cross,hits,posttime,mtime,crossid,content,smalltypes,id';
+		$feilds='*';
         $condition=Array();//搜索的条件
         //$condition['title']=array('like',"a%");//高级搜索过滤
 	    if(!empty($_REQUEST['searchkey'])){
