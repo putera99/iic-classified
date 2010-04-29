@@ -7,7 +7,7 @@
  * @package  bi
  * @subpackage  Action
  * @author   朝闻道 <hydata@gmail.com>
- * @date 2010-1-14
+ * @date 2010-4-14
  * @time  下午12:06:59
  +------------------------------------------------------------------------------
  */
@@ -98,24 +98,30 @@ class CommonAction extends Action{
 		return $m->execute($sql);
 	}// END iicstart
 	
+	
+	/**
+	 * 获得指定资源类别的最近7天里访问量最大的资源
+	 * @param unknown_type $type 资源类别
+	 * @param unknown_type $limit 条数默认 '0,10'
+	 */
 	protected function _top7day($type,$limit='0,10') {
 		$m=new Model();
-		$d7=mktime(0, 0, 0, date('n'), date('d'),date('Y'))-60*60*24*7;
+		$d7=mktime(0, 0, 0, date('n'), date('d'),date('Y'))-60*60*24*7; //当前时间的前7天的秒数
 		//$d7=mktime(0, 0, 0, 03, 03,date('Y'))-60*60*24*7;
-		$mon=mktime(0, 0, 0, date('n'), 1,date('Y'));
+		$mon=mktime(0, 0, 0, date('n'), 1,date('Y')); //当前月份的秒数
 		//$mon=mktime(0, 0, 0, 03, 03,date('Y'));
-		$mon2=mktime(0, 0, 0, date('n',$d7),1,date('Y'));
+		$mon2=mktime(0, 0, 0, date('n',$d7),1,date('Y')); //当前时间的前7天的秒数的月份的秒数
 		//$mon2=mktime(0, 0, 0, date('n',$d7),1,date('Y'));
 		$t=time();
 		$field='';
-		if ($mon==$mon2){
+		if ($mon==$mon2){//检查是否同月
 			for ($i=1;$i<8;$i++){
 				$dt=$t-(60*60*24)*$i;
 				$field.='`d'.date('d',$dt).'`+';
 			}
 			$field=trim($field,'+');
 			$sql="SELECT xid,stype,$field d FROM `iic_stat` WHERE (`stype`='$type' AND `mon`='$mon') ORDER BY d DESC LIMIT $limit";
-		}else{
+		}else{//不同月需要查询两个表
 			$field2='';
 			for ($i=1;$i<8;$i++){
 				$dt=$t-(60*60*24)*$i;
