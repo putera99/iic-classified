@@ -12,15 +12,42 @@
  +------------------------------------------------------------------------------
  */
 class CommonAction extends Action{
-	protected $user;
+	protected $user=array();//用户信息
+	protected $cid;//城市ID
 	
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
         import("ORG.Util.String");
-        import('ORG.Util.Image');
+        load("extend");
+        $this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
+        //import('ORG.Util.Image');
     }
+    
+    /**
+      *获得城市指南的大类
+      *@date 2010-4-30
+      *@time 上午10:26:06
+      */
+    function _get_cityguide_type() {
+    	//获得城市指南的大类
+    	$dao=D("Arctype");
+    	$data=$dao->where("(id>1000 AND reid=1000) AND ishidden=0")->order("id asc")->findAll();
+    	return $data;
+    }//end _get_cityguide_type
+    
+	/**
+	 *获取分类信息的大类
+	 *@date 2010-4-30
+	 *@time 上午10:35:37
+	 */
+	function _get_classifieds_type() {
+		//获取分类信息的大类
+		$dao=D("Arctype");
+    	$data=$dao->where("((id>1 AND id<1000) AND reid=1) AND ishidden=0")->order("id asc")->findAll();
+    	return $data;
+	}//end _get_classifieds_type
     
     /**
      * 获取指定分类的关键字
@@ -79,7 +106,7 @@ class CommonAction extends Action{
      */
     protected function _is_login() {
     	if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
-    		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username']);
+    		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['usercid']);
     	}else $user='0';
     	return $user;
     }// END _is_login

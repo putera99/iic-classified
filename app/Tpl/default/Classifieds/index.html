@@ -4,8 +4,8 @@
 <div class="search"><img src="__PUBLIC__/default/images/search.gif" alt="search" /></div>
 <div class="nav">
 <ul>
-<li>Home</li>
-<li class="annv">Classifieds</li>
+<li><a href="/">Home</a></li>
+<li class="annv"><a href="__APP__/Classifieds/index">Classifieds</a></li>
 <li>China Biz</li>
 <li>Magazine</li>
 <li>Froum</li>
@@ -50,211 +50,37 @@ Tianyuan and Sushui are a long-....</p>
 <div class="Advertisement"><img src="__PUBLIC__/default/images/pic2.gif" alt="pic2" /></div>
 
 </div>
-<div class="clear"></div>
+<!--div class="clear"></div-->
 
 <div class="mian-center">
-<div class="jianbian">Home > Classifieds > Personals</div>
+<div class="jianbian"><a href="/">Home</a> > <a href="__APP__/Classifieds/index">{$info['typename']}</a></div>
+
+<volist name="list" id="v">
 <div class="center">
-<div class="content_top"><a href="#">Jobs</a></div>
+<div class="content_top"><a href="__APP__/Classifieds/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a></div>
 <div class="content_di">
-<ul>
-<li>Engineering/Quality Control</li>
-<li>Business/Management  </li>
-<li>Journalism/Photography</li>
-<li>Accounting/Finance </li>
-<li>Translators/Interpreter</li>
-<li>Musicians/Singers/DJ</li>
-<li>Hospitality</li>
-</ul>
+<if condition="$v['_son']">
 
 <ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
+<volist name="v['_son']" id="vs" mod="3">
+<li><a href="__APP__/Classifieds/ls/id/{$vs['id']}" title="{$vs['seotitle']}">{$vs['typename']}</a></li>
+</volist>
 </ul>
 
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
+</if>
 </div>
 </div>
-
-<div class="center">
-<div class="content_top"><a href="#">Jobs</a></div>
-<div class="content_di">
-<ul>
-<li>Engineering/Quality Control</li>
-<li>Business/Management  </li>
-<li>Journalism/Photography</li>
-<li>Accounting/Finance </li>
-<li>Translators/Interpreter</li>
-<li>Musicians/Singers/DJ</li>
-<li>Hospitality</li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-</div>
-</div>
-
-<div class="center">
-<div class="content_top"><a href="#">Jobs</a></div>
-<div class="content_di">
-<ul>
-<li>Engineering/Quality Control</li>
-<li>Business/Management  </li>
-<li>Journalism/Photography</li>
-<li>Accounting/Finance </li>
-<li>Translators/Interpreter</li>
-<li>Musicians/Singers/DJ</li>
-<li>Hospitality</li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-</div>
-</div>
-
-<div class="center">
-<div class="content_top"><a href="#">Jobs</a></div>
-<div class="content_di">
-<ul>
-<li>Engineering/Quality Control</li>
-<li>Business/Management  </li>
-<li>Journalism/Photography</li>
-<li>Accounting/Finance </li>
-<li>Translators/Interpreter</li>
-<li>Musicians/Singers/DJ</li>
-<li>Hospitality</li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-</div>
-</div>
-
-<div class="center">
-<div class="content_top"><a href="#">Jobs</a></div>
-<div class="content_di">
-<ul>
-<li>Engineering/Quality Control</li>
-<li>Business/Management  </li>
-<li>Journalism/Photography</li>
-<li>Accounting/Finance </li>
-<li>Translators/Interpreter</li>
-<li>Musicians/Singers/DJ</li>
-<li>Hospitality</li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-<ul>
-<li>Media/Model/Performing </li>
-<li>Bar/Restaurant/Hotel </li>
-<li>Marketing/PR/Sales</li>
-<li>Human Resources</li>
-<li>Customer Service</li>
-<li>Architect/Design</li>
-<li>Science/ R&D </li>
-</ul>
-
-</div>
-</div>
-
-
+</volist>
 
 </div>
 </div>
 
 <div class="main-left">
 <ul>
-<li class="bg-a">City Guide</li>
-<li><a href="#">Arts&Culture </a></li>
-<li><a href="#">Agencies </a></li>
-<li><a href="#">Bars </a></li>
-<li><a href="#">Banking</a></li>
-<li><a href="#">Cafes </a></li>
-<li><a href="#">City Events </a></li>
-<li><a href="#">Consulates </a></li>
-<li><a href="#">Eduction </a></li>
-<li><a href="#">Helth </a></li>
-<li><a href="#">Hotel</a></li>
-<li><a href="#">Leisure </a></li>
-<li><a href="#">Restaurant</a></li>
-<li><a href="#">Shoping </a></li>
+<li class="bg-a"><a href="__APP__/CityGuide/index">City Guide</a></li>
+<volist name="ctype" id="v">
+<li><a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a></li>
+</volist>
 <li class="di-yuan"></li>
 </ul>
 </div>

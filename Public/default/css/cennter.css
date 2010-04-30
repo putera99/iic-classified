@@ -1,0 +1,55 @@
+body{ width:1003px; font-family:arial, helvetica, sans-serif; font-size:12px; font-weight: normal;margin:0px auto; padding:0px;line-height: 20px;color: #fff; background-color:#dfdfdf;}
+a{text-decoration: none;}
+#top{width:950px;padding:0px;margin: 0px auto;}
+#header{ height:26px; margin:0px; padding:0px; background-color:#993366;}
+.header-left{width:234px;margin:0px;padding:0px;float: left;}
+.header-left span{ font-family:arial, helvetica, sans-serif; font-size:12px;color:#fff; margin:0px 0px 0px 10px; padding:0px;}
+.colorz{width:240px;margin:0px;padding:0px;float: right;}
+.colorz ul{margin:3px 0 0 0; padding:0px;list-style-type:none;} 
+.colorz li{float: left;margin:0px;padding: 0px 0px 0px 8px;}
+.clear{line-height:0px;clear: both;height: 0px;}
+.top-content{height: 125px;margin:0px;padding:0px;background:url(../images/bg2.gif) repeat-x;}
+.top-logo{height: 96px;margin:0px;padding:0px;}
+.top-logo h1{width:169px;float:left;margin: 0 0 0 60px; _margin: 0 0 0 30px;padding: 5px 0 0 0;}
+.top-city{ width:466px; margin:0px; padding:25px 0 0 0; float:right;}
+.top-city a{ margin:0px; padding:0 0 0 8px;}
+.top-nav{margin: 0px;padding-left: 25px;width: 906px;}
+.nav{width:500px;height: 20px;margin:0px;padding:0px;}
+.nav a{color: #fff;}
+.nav .annv {background: url(../images/button.png) no-repeat;}
+.annv a{color: #fff;}
+.nav ul{margin:0px;padding:0px;list-style-type:none;}
+.nav li{float:left;padding:0;margin-right:50px;}
+.search{width:230px;float:right;margin: 0px;padding: 0px;}
+.bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
+#main { width:950px; height:500px; margin:0px auto;padding: 0px;}
+.main-left{ width:188px;margin:0px; padding:0px;}
+.main-left ul{ margin:0px; padding:0px; list-style-type:none;}
+.main-left li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.main-left .bg-a{height:24px;font-size: 14px;font-weight: bold;color: #993366;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
+.main-left .di-yuan{ background:url(../images/bg_yuan.gif) no-repeat;}
+.mian-right{width:749px;padding:0px;float:right;margin: 0 0 0 10px;}
+.mian-center{width:509px;padding:0px;background-color: #f3f3f3;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-right-color: #cccccc;border-bottom-color: #cccccc;border-left-color: #cccccc;margin: 0px;float: left;}
+.jianbian{height:25px;margin:0px;background:url(../images/bg6.gif) no-repeat;font-family: verdana, arial, helvetica, sans-serif;color: #393838;font-weight: bold;padding: 0 0 0 16px;}
+.jianbian a{color: #393838;font-weight: bold;}
+.center{width:481px;padding:0px;	border: 1px solid #cccccc;background-color:#fff;margin: 10px auto;}
+.content_top{height:39px;background: url(../images/bg7.gif) no-repeat;font-family: arial, helvetica, sans-serif;font-size: 16px;font-weight: bold;color: #3a3a3a;margin: 2px 0px 0px 2px;padding: 0px 0px 0px 35px;}
+.content_top a{color: #3a3a3a;text-decoration: none;line-height:39px;}
+.content_top a:hover{text-decoration: underline;}
+.content_di{height:184px;background:url(../images/bg8.gif) repeat-x;margin:0px 2px 2px 2px;}
+.content_di ul{margin:10px 0 0 0;padding:0 4px 0 0;list-style-type:none;font-family: arial, helvetica, sans-serif;font-size: 12px;line-height: 22px;color: #656565;float: left;}
+.content_di li{margin:0 0 0 5px; padding:0px;width:150px;float: left;}
+.content_di li a{color: #656565;}
+.content_di li a:hover{text-decoration: underline;}
+.conter-right{width:225px;margin:0px;padding:0px;float: right;background-color: #eeeeee;border: 1px solid #ccc;}
+.conter-group{margin:0px;width: 225px;}
+.group{height:23px;background-color:#6f6c6c;font-family: arial, helvetica, sans-serif;font-weight: bold;padding-left: 25px;line-height:23px;}
+.group-n{width: 225px; margin:5px 0 0 0;padding:0px;position: relative;float: right;}
+.group-n h5{margin:0px;font-weight: bold;color: #993366;font-family: arial, helvetica, sans-serif;font-size: 12px;line-height: 22px;padding: 0 0 0 80px;}
+.group-n img{margin:0px;left: 15px;position: absolute;top:3px;}
+.group-n p{margin:0px;font-family:arial, helvetica, sans-serif;font-size:12px;color:#5c5b5b;padding: 0 0 0 80px;line-height: 14px;}
+.advertisement{margin: 10px 0 0 0; padding:0px;}
+#bottom{width:950px; height: 109px; background: url(../images/bg9.gif) repeat-x;margin: 0px;text-align: center; margin-top:10px; padding: 20px 0 0 0;}
+
+
+
