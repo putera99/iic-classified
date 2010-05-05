@@ -59,10 +59,6 @@
       <php> echo getsorttype('salary',1);</php>
       </a> </th>
     
-    <th> <a class="titleth" href="javascript:AjaxSortBy('AddonJobs','ajaxlist','content','<php> echo getsorttype('content');</php>','AddonJobs_Grid')"  title="按照工作描述排序">工作描述
-      <php> echo getsorttype('content',1);</php>
-      </a> </th>
-    
     <th >操作区域</th>
   </tr>
   <php> if(isset($list)): </php>
@@ -82,8 +78,6 @@
     <td title="工作经验"> <mkrtags:text id="Experience" name="Experience"  value="$list['Experience']"/> </td>
     
     <td title="薪水"> <mkrtags:text id="salary" name="salary"  value="$list['salary']"/> </td>
-    
-    <td title="工作描述"> <mkrtags:text id="content" name="content"  value="$list['content']"/> </td>
     
     <td>
     	<a href="javascript:edit('{$list.id}')" title="编辑本信息">编辑</a>

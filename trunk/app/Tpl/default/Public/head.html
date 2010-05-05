@@ -7,16 +7,19 @@
 <link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
 <meta name="keywords" content="{$page['keywords']}" />
 <meta name="description" content="{$page['description']}" />
-
+<style type="text/css">
+	.top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 5px;}
+	.top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
+	.top-city h2 .on{width:96px; height:26px; line-height:26px; color:#828282;}
+	.top-city h2 a:hover{width:96px; height:26px; line-height:26px;border:1px solid #503442; color:#bcbcbc;}
+</style>
 </head>
 
 <body>
 <div id="top">
 <div id="header">
 <div class="header-left">
-<span>Friday, March 26, 2010   |  
-
-Login/Register
+<span>{$now} |  <a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a>
 </span>
 </div>
 <div class="colorz">
@@ -34,10 +37,11 @@ Login/Register
 </div>
 <div class="top-content">
 <div class="top-logo">
-<h1><img src="__PUBLIC__/default/images/logo.png" alt="logo" /></h1>
-<div class="top-city"><img src="__PUBLIC__/default/images/beijing.gif" alt="beijing" />
-	<img src="__PUBLIC__/default/images/shanghai.gif" alt="shanghai" />  
-	<img src="__PUBLIC__/default/images/guangzhou.gif" alt="guangzhou" />  
-	<img src="__PUBLIC__/default/images/shenzhen.gif" alt="shenzhen" />
+<h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
+<div class="top-city">
+	<h2><a href="__APP__/Public/index/cid/2">Beijing</a></h2>
+	<h2><a href="__APP__/Public/index/cid/3">Shanghai</a></h2>
+	<h2><a href="__APP__/Public/index/cid/1">Guangzhou</a></h2>
+	<h2><a href="__APP__/Public/index/cid/4">Shenzhen</a></h2>
 </div>
 </div>

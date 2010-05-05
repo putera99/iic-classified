@@ -5,6 +5,12 @@ public function index(){
     echo "<a href='".__URL__."/ctype'>导入分类信息类别</a><br>";
     echo "<a href='".__URL__."/excity'>导入城市指南类别</a><br>";
     echo "<a href='".__URL__."/classified/mid/1'>分类信息的JOBS信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/2'>分类信息的Real Estate信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/3'>分类信息的Services信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/4'>分类信息的Biz Opportunities信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/5'>分类信息的Sell &Buy信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/8'>分类信息的Personals信息</a><br>";
+    echo "<a href='".__URL__."/classified/mid/9'>分类信息的Announcement信息</a><br>";
 }
 
     /**
@@ -134,9 +140,12 @@ function classified() {
     $list=$dao->query($sql);
     if($list[0]['c']>($p*50)){
     	$np=$p+1;
-    	$limit="LIMIT {$p1},{$p2}";
+    	$limit="LIMIT {$p1},50";
+    	echo $limit."<hr>";
+    	
     	$sql="SELECT * FROM `bfc_fenlei_content` as fc LEFT JOIN `bfc_fenlei_content_{$mid}` as fcx ON fc.id=fcx.id WHERE fc.mid=$mid ORDER BY fc.id asc $limit";
     	echo $sql.'<br>';
+    	echo '<a href="'.__URL__.'/classified/mid/'.$mid.'/page/'.$np.'">下一页</a>';
     	$list=$dao->query($sql);
     	// 	id 	title 	albumid 	albumname 	mid 	spid 	fid 	fname 	fid_bak1 	fid_bak2 	fid_bak3 	info 	hits 	
     	//comments 	posttime 	list 	uid 	username 	titlecolor 	fonttype 	picurl 	ispic 	yz 	yzer 	yztime 	levels 	
@@ -147,50 +156,114 @@ function classified() {
     	$i=1;
     	if($list){
     		foreach ($list as $v){
-    			echo $i."<hr>";
+    			echo $i;
     			$i++;
     			switch ($mid) {
     				case 1://jobs
     				//dump($v);
     				$t=time();
     				$v['fid']=$v['fid']+1;
-    				$arc="INSERT INTO `iic_archives` (`id`, `typeid`, `typeid2`, `industry`, `bycity`, `cid`, `uid`, `flag`, `ismake`, "
-    					."`channel`, `arcrank`, `click`, `title`, `shorttitle`, `color`, `writer`, "
-    					."`source`, `litpic`, `pubdate`, `senddate`, `keywords`, `lastpost`, `star1`, `star2`, `star3`, `star4`, `star5`, "
-    					."`goodpost`, `badpost`, `notpost`, `description`, `filename`, `uip`, `lastview`, `editpwd`, `showstart`, `showend`, "
-    					."`editer`, `edittime`, `albumid`, `albumnum`, `itype`, `category`, `telephone`, `fax`, `mobphone`, `email`, `oicq`, `msn`, "
-    					."`maps`, `city_id`, `zone_id`, `street_id`, `position`, `contact`, `ltdid`, `linkman`) VALUES "
-    					//values
-    					."(NULL,{$v['fid']}, , '', '', '{$cid[$v['city_id ']]}', '{$v['uid']}', '', , '{$channeltype[$v['mid']]}', '', '{$v['hits']}', '{$v['title']}', "
-    					."'', '{$v['titlecolor']}', '', '', '', NULL, NULL, '{$v['keywords']}', {$v['replytime']}, 0, 0, 0, 0, 0, "
-    					."0, 0, '1', '', '', '{$v['ip']}', $t, '$t', '', , '', , '0', "
-    					."'0', {$v['type']}, '{$v['category']}', '{$v['telephone']}', '', '{$v['mobphone']}', '{$v['email']}', '{$v['oicq']}', '{$v['msn']}', 'maps', '{$v['city_id']}', '{$v['zone_id']}', "
-    					."'{$v['street_id']}', '', '', '0', '');";
-    				echo $arc."<br>";
-    				$aid=$dao->execute($arc);
-    				dump($aid);
+    				
+    				$data=array();
+    				$data['typeid']=$v['fid'];
+    				$data['cid']=$cid[$v['city_id ']];
+    				$data['uid']=$v['uid'];
+    				$data['channel']=$channeltype[$v['mid']];
+    				$data['click']=$v['hits'];
+    				$data['title']=$v['title'];
+    				$data['color']=$v['titlecolor'];
+    				$data['keywords']=$v['keywords'];
+    				$data['lastpost']=$v['replytime'];
+    				$data['uip']=$v['ip'];
+    				$data['lastview']=$t;
+    				$data['editpwd']=$t;
+    				$data['itype']=$v['type'];
+    				$data['category']=$v['category'];
+    				$data['telephone']=$v['telephone'];
+    				$data['mobphone']=$v['mobphone'];
+    				$data['email']=$v['email'];
+    				$data['oicq']=$v['oicq'];
+    				$data['msn']=$v['msn'];
+    				$data['city_id']=$v['city_id'];
+    				$data['zone_id']=$v['zone_id'];
+    				$data['street_id']=$v['street_id'];
+    				
+    				$aid=$dao->Table('iic_archives')->add($data);
     				if ($aid) {
-    					$job="INSERT INTO `iic_addon_jobs` (`id`, `aid`, `joblocated`, `experience`, `salary`, `content`) VALUES "
-    						."(NULL, '$aid', '', '', '', '{$v['content']}');";
-    					$addon_id=$dao->execute($job);
-    					echo $job.'<br>';
-    					if ($addon_id) {
-    						echo '<b>执行成功!<b><br>';
+    					$data=array();
+    					$data['aid']=$aid;
+    					$data['content']=$v['content'];
+    					$addon_id=$dao->Table('iic_addon_jobs')->add($data);
+    					//dump($addon_id);
+    					//dump($dao->getLastSql());
+    					if($addon_id){
+    						echo '执行成功!<br>';
     					}else {
-    						exit('附加表写入失败！');
+    						echo '<b>附加表写入失败！!<b><br>';
+    						//$this->error('附加表写入失败！');
     					}
     				}else{
-    					exit('档案表写入失败！');
+    					$this->error('档案表写入失败！');
+    				}
+    				break;
+    				
+    				case 2:
+    				$t=time();
+    				$v['fid']=$v['fid']+1;
+    				
+    				$data=array();
+    				$data['typeid']=$v['fid'];
+    				$data['cid']=$cid[$v['city_id ']];
+    				$data['uid']=$v['uid'];
+    				$data['channel']=$channeltype[$v['mid']];
+    				$data['click']=$v['hits'];
+    				$data['title']=$v['title'];
+    				$data['color']=$v['titlecolor'];
+    				$data['keywords']=$v['keywords'];
+    				$data['lastpost']=$v['replytime'];
+    				$data['uip']=$v['ip'];
+    				$data['lastview']=$t;
+    				$data['editpwd']=$t;
+    				$data['itype']=$v['type'];
+    				$data['category']=$v['category'];
+    				$data['telephone']=$v['telephone'];
+    				$data['mobphone']=$v['mobphone'];
+    				$data['email']=$v['email'];
+    				$data['oicq']=$v['oicq'];
+    				$data['msn']=$v['msn'];
+    				$data['city_id']=$v['city_id'];
+    				$data['zone_id']=$v['zone_id'];
+    				$data['street_id']=$v['street_id'];
+    				
+    				$aid=$dao->Table('iic_archives')->add($data);
+    				if ($aid) {
+    					$data=array();
+    					$data['aid']=$aid;
+    					$data['price']=$aid;
+    					$data['rooms']=$aid;
+    					$data['content']=$v['content'];
+    					$addon_id=$dao->Table('iic_addon_jobs')->add($data);
+    					//dump($addon_id);
+    					//dump($dao->getLastSql());
+    					if($addon_id){
+    						echo '执行成功!<br>';
+    					}else {
+    						echo '<b>附加表写入失败！!<b><br>';
+    						//$this->error('附加表写入失败！');
+    					}
+    				}else{
+    					$this->error('档案表写入失败！');
     				}
     				break;
     				
     				default:
-    					exit('数据模块不匹配！');
+    					$this->error('数据模块不匹配！');
     				break;
     			}
     			//dump($v);
     		}
-    		//echo '<script>setTimeout(window.location.href="'.__URL__.'/classified/mid/'.$mid.'/page/'.$np.'",30000);</script>';
+    		echo '<script>setTimeout(window.location.href="'.__URL__.'/classified/mid/'.$mid.'/page/'.$np.'",300000);</script>';
+    		echo '<a href="'.__URL__.'/classified/mid/'.$mid.'/page/'.$np.'">下一页</a>';
     	}else{
     		exit('查询出错');
     	}
