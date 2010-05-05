@@ -12,11 +12,32 @@
  +------------------------------------------------------------------------------
  */
 class PublicAction extends CommonAction{
+	
+	/**
+	 *处理选择城市
+	 *@date 2010-5-4
+	 *@time 下午03:16:36
+	 */
+	function index() {
+		//处理选择城市
+		$cid=$_GET['cid'];
+		if($cid){
+			$_SESSION['cid']=$cid;
+			$this->redirect('/Index/index');
+		}else{
+			$this->display();
+		}
+	}//end index
+	
+	
 	function login() {//登录
+		if ($this->user) {
+			$this->error("");
+		}
 		$this->display();
 	}// END login
 	
-	function reg() {//注册
+	function register() {//注册
 		$this->display();
 	}// END reg
 	
@@ -50,4 +71,16 @@ class PublicAction extends CommonAction{
         	Image::buildImageVerify();
         }
 	}//verify function END
+	
+	/**
+	 *选择城市
+	 *@date 2010-5-4
+	 *@time 上午10:12:13
+	 */
+	function select_city() {
+		//选择城市
+		$this->display();
+	}//end select_city
+	
+	
 }//END PublicAction

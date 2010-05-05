@@ -12,7 +12,9 @@
  +------------------------------------------------------------------------------
  */
 class ClassifiedsAction extends CommonAction{
+	protected $pcid='';//页面查询用的独立城市ID
 	//protected $cityguide_type=array();
+	
 	/**
 	  *预处理
 	  *@date 2010-4-30
@@ -20,6 +22,13 @@ class ClassifiedsAction extends CommonAction{
 	  */
 	function _initialize() {
 		//预处理
+		if (intval($_GET['cid'])){
+			
+			$this->pcid=intval($_GET['cid']);
+		}else{
+			$this->_set_cid();
+			$this->pcid=$this->cid;
+		}
 		//$this->$cityguide_type=$this->_get_cityguide_type();
 		parent::_initialize();
 	}//end _initialize()
@@ -56,15 +65,15 @@ class ClassifiedsAction extends CommonAction{
 	function ls() {
 		//分类信息列表页面
 		$typeid=intval($_GET['id']);
-		$cid=empty(intval($_GET['cid']))? $this->cid : intval($_GET['cid']);
+		
 		$now=time();
 		import("ORG.Util.Page");
 		$dao=D("Archives");
-		$count=$dao->where("((typeid={$typeid} AND cid={$cid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
+		$count=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
 		$page=new Page($count);
 		$this->assign('showpage',$page->show());
 		$limit=$page->firstRow.','.$page->listRows;
-		$data=$dao->where("((typeid={$typeid} AND cid={$cid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->limit("$limit")->findAll();
+		$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
 		$this->display();
 	}//end function_name
@@ -76,7 +85,15 @@ class ClassifiedsAction extends CommonAction{
 	 */
 	function show() {
 		//分类信息内容页面
-		
-		
+		$aid=intval($_GET['aid']);
+		if(empty($aid)){
+			$this->error("error: aid is null!");
+		}
+		$dao=D("Archives");
+		$data=$dao->where("id=$aid")->find();
+		$data=$dao->relationGet("jobs");
+		//dump($data);
+		//dump($dao->getLastSql());
+		$this->display();
 	}//end show
 }//end ClassifiedsAction

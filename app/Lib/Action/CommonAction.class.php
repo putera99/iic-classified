@@ -19,11 +19,26 @@ class CommonAction extends Action{
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
+        $this->assign('now',date("l,F d Y",time()));
         import("ORG.Util.String");
         load("extend");
-        $this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
+        //$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
         //import('ORG.Util.Image');
     }
+    
+    /**
+     *设置城市
+     *@date 2010-5-4
+     *@time 上午09:48:13
+     */
+    function _set_cid() {
+    	//设置城市
+    	$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
+    	if(empty($this->cid)){
+    		$this->cid='';
+    		$this->redirect("/Public/select_city");
+    	}
+    }//end _set_cid
     
     /**
       *获得城市指南的大类
@@ -107,7 +122,7 @@ class CommonAction extends Action{
     protected function _is_login() {
     	if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
     		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['usercid']);
-    	}else $user='0';
+    	}else $user=false;
     	return $user;
     }// END _is_login
 	
