@@ -166,7 +166,7 @@ function classified() {
     				
     				$data=array();
     				$data['typeid']=$v['fid'];
-    				$data['cid']=$cid[$v['city_id ']];
+    				$data['cid']=$cid[$v['city_id']];
     				$data['uid']=$v['uid'];
     				$data['channel']=$channeltype[$v['mid']];
     				$data['click']=$v['hits'];
@@ -187,6 +187,7 @@ function classified() {
     				$data['city_id']=$v['city_id'];
     				$data['zone_id']=$v['zone_id'];
     				$data['street_id']=$v['street_id'];
+    				$data['ismake']=1;
     				
     				$aid=$dao->Table('iic_archives')->add($data);
     				if ($aid) {
@@ -284,6 +285,18 @@ function tree() {
 	print_r($news);
 	echo "<pre>";
 }//end tree
+
+/**
+ *清楚HTML批量获取摘要
+ *@date 2010-5-6
+ *@time 下午04:53:09
+ */
+function get_dis() {
+	//清楚HTML批量获取摘要
+	
+}//end get_dis
+
+
 }//class end
 ?>
 

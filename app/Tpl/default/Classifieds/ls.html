@@ -1,0 +1,93 @@
+<include file="Public:head" />
+<link href="__PUBLIC__/default/css/Home.css" rel="stylesheet" type="text/css" />
+<div id="main">
+    <div class="mian-right">
+        <div class="conter-right">
+            <div class="conter-group">
+                <div class="group">Group</div>
+                <div class="group-n">
+                    <h5>Projection whiteboard...</h5>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
+                </div>
+                <div class="group-n">
+                    <h5>Projection whiteboard...</h5>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
+                </div>
+                <div class="group-n">
+                    <h5>Projection whiteboard...</h5>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
+                </div>
+                <div class="group-n">
+                    <h5>Projection whiteboard...</h5>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
+                </div>
+            </div>
+            <div class="advertisement">
+                <img src="__PUBLIC__/default/images/pic2.gif" alt="pic2" />
+            </div>
+        </div>
+        <div class="mian-center">
+            <div class="jianbian">
+                <a href="/">Home</a> > <a href="__APP__/Classifieds/index">Classifieds</a> > 
+				<if condition="$reinfo"><a href="__APP__/Classifieds/ls/id/{$reinfo['id']}">{$reinfo['typename']}</a> ></if>
+            </div>
+            <div class="personals">
+            	<h1>{$info['typename']}</h1>
+                <p>
+					{$showpage}
+                </p>
+				
+            </div>
+			<div class="clear"></div>
+<if condition="$list">
+<volist name="list" id="v">
+            <div class="personals-a">
+                <div class="list-a">
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" />{$v['title']}</h6>
+                    <p>
+                        {$v['description']}...[Detail]
+                    </p>
+                </div>
+                <div class="hui-bg">
+                    <ul>
+                        <li>
+                            Share
+                        </li>
+                        <li>
+                            Save as favorite
+                        </li>
+                        <li>
+                            Report corrections
+                        </li>
+                    </ul>
+                </div>
+            </div>
+</volist>
+</if>
+
+        </div>
+    </div>
+    <div class="main-left">
+        <ul>
+            <li class="bg-a">
+                <a href="__APP__/CityGuide/index">City Guide</a>
+            </li>
+            <volist name="ctype" id="v">
+                <li>
+                    <a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
+                </li>
+            </volist>
+            <li class="di-yuan">
+            </li>
+        </ul>
+    </div>
+</div>
+<include file="Public:foot" />

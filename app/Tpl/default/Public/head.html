@@ -1,47 +1,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{$page['title']}</title>
-<link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
-<meta name="keywords" content="{$page['keywords']}" />
-<meta name="description" content="{$page['description']}" />
-<style type="text/css">
-	.top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 5px;}
-	.top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
-	.top-city h2 .on{width:96px; height:26px; line-height:26px; color:#828282;}
-	.top-city h2 a:hover{width:96px; height:26px; line-height:26px;border:1px solid #503442; color:#bcbcbc;}
-</style>
-</head>
-
-<body>
-<div id="top">
-<div id="header">
-<div class="header-left">
-<span>{$now} |  <a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a>
-</span>
-</div>
-<div class="colorz">
-<ul>
-<li>Pick a Theme:</li>
-<li><img src="__PUBLIC__/default/images/Color1.gif" alt="color" /></li>
-<li><img src="__PUBLIC__/default/images/Color2.gif" alt="color" /></li>
-<li><img src="__PUBLIC__/default/images/Color3.gif" alt="color" /></li>
-<li><img src="__PUBLIC__/default/images/Color4.gif" alt="color" /></li>
-<li><img src="__PUBLIC__/default/images/Color5.gif" alt="color" /></li>
-<li><img src="__PUBLIC__/default/images/Color6.gif" alt="color" /></li>
-</ul>
-</div>
-
-</div>
-<div class="top-content">
-<div class="top-logo">
-<h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
-<div class="top-city">
-	<h2><a href="__APP__/Public/index/cid/2">Beijing</a></h2>
-	<h2><a href="__APP__/Public/index/cid/3">Shanghai</a></h2>
-	<h2><a href="__APP__/Public/index/cid/1">Guangzhou</a></h2>
-	<h2><a href="__APP__/Public/index/cid/4">Shenzhen</a></h2>
-</div>
-</div>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{$page['title']}</title>
+        <link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
+        <meta name="keywords" content="{$page['keywords']}" />
+        <meta name="description" content="{$page['description']}" />
+    </head>
+    <body>
+        <div id="top">
+            <div id="header">
+                <div class="header-left">
+                    <span>{$now} | <a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a></span>
+                </div>
+                <div class="colorz">
+                    <ul>
+                        <li>
+                            Pick a Theme:
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color1.gif" alt="color" />
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color2.gif" alt="color" />
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color3.gif" alt="color" />
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color4.gif" alt="color" />
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color5.gif" alt="color" />
+                        </li>
+                        <li>
+                            <img src="__PUBLIC__/default/images/Color6.gif" alt="color" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="top-content">
+                <div class="top-logo">
+                    <h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
+                    <div class="top-city">
+                        <h2><a href="__APP__/Public/index/cid/2"<eq name="cid" value="2"> class="on"</eq>>Beijing</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/3"<eq name="cid" value="3"> class="on"</eq>>Shanghai</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/1"<eq name="cid" value="1"> class="on"</eq>>Guangzhou</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/4"<eq name="cid" value="4"> class="on"</eq>>Shenzhen</a></h2>
+                    </div>
+                </div>
+                <div class="top-nav">
+                	<div class="search">
+                        <img src="__PUBLIC__/default/images/search.gif" alt="search" />
+                    </div>
+                    <div class="nav">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li class="annv"><a href="__APP__/Classifieds/index">Classifieds</a></li>
+                            <li><a href="__APP__/Biz/index">China Biz</a></li>
+                            <li><a href="__APP__/Magazine/index">Magazine</a></li>
+                            <li><a href="/Forum">Forum</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg">
+                </div>
+            </div>
+        </div>
