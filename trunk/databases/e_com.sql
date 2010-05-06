@@ -18,6 +18,7 @@
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='广告信息表' ;
 
+
 CREATE TABLE IF NOT EXISTS `iic_ad_user` (
   `id` mediumint(7) NOT NULL AUTO_INCREMENT,
   `ad_id` mediumint(7) NOT NULL DEFAULT '0' COMMENT '广告的ID',
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `iic_ad_user` (
   PRIMARY KEY (`id`),
   KEY `u_endtime` (`u_endtime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='发布广告的用户表';
+
 
 CREATE TABLE IF NOT EXISTS `iic_area` (
   `id` mediumint(7) unsigned NOT NULL AUTO_INCREMENT,
@@ -66,12 +68,13 @@ CREATE TABLE IF NOT EXISTS `iic_area` (
   KEY `fup` (`fup`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='城市和地区表';
 
+
 CREATE TABLE IF NOT EXISTS `iic_addon_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `aid` mediumint(8) DEFAULT '0' COMMENT '档案信息ID',
   `typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '所属栏目',
   `pages` smallint(4) NOT NULL DEFAULT '0' COMMENT '文章分页',
-  `body` mediumtext NOT NULL COMMENT '文章内容',
+  `content` mediumtext NOT NULL COMMENT '文章内容',
   `redirecturl` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转的URL',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='文章表';
@@ -84,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `iic_arcatt` (
   `attname` char(30) NOT NULL DEFAULT '' COMMENT '属性名称',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '属性数据表';
+
 
 CREATE TABLE IF NOT EXISTS `iic_archives` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -148,6 +152,7 @@ CREATE TABLE IF NOT EXISTS `iic_archives` (
   KEY `lastpost` (`lastpost`,`goodpost`,`badpost`,`notpost`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='整站档案';
 
+
 CREATE TABLE IF NOT EXISTS `iic_arctype` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `reid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '上级栏目',
@@ -199,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `iic_act_city` (
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='已经开通的城市';
 
+
 CREATE TABLE IF NOT EXISTS `iic_fair_city` (
 	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '城市ID',
 	`ctitle` varchar(50) DEFAULT NULL COMMENT '城市中文名',
@@ -212,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `iic_addon_jobs` (
   `id` mediumint(7) NOT NULL AUTO_INCREMENT,
   `aid` mediumint(8) NOT NULL DEFAULT '0' COMMENT '档案信息ID',
   `joblocated` varchar(100) DEFAULT '' COMMENT '工作地区',
-  `Experience` varchar(50) NOT NULL DEFAULT '' COMMENT '工作经验',
+  `experience` varchar(50) NOT NULL DEFAULT '' COMMENT '工作经验',
   `salary` varchar(20) DEFAULT '0' COMMENT '薪水',
   `content` mediumtext NOT NULL COMMENT '工作描述',
   PRIMARY KEY (`id`),
@@ -224,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `iic_addon_realestate` (
   `id` mediumint(7) NOT NULL AUTO_INCREMENT,
   `aid` mediumint(8) NOT NULL DEFAULT '0' COMMENT '档案信息ID',
   `price` varchar(20) DEFAULT '0' COMMENT '价格',
+  `rooms` varchar(100) DEFAULT '' COMMENT '房间信息',
   `content` mediumtext NOT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   KEY `aid` (`aid`)
@@ -263,6 +270,7 @@ CREATE TABLE IF NOT EXISTS `iic_addon_services` (
 	PRIMARY KEY (`id`),
 	KEY `aid` (`aid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='服务信息';
+
 
 CREATE TABLE `iic_ltd` (
   `id` int(11) NOT NULL auto_increment,
@@ -312,6 +320,7 @@ CREATE TABLE IF NOT EXISTS `iic_feedback` (
   KEY `xid` (`xid`,`ischeck`,`itype`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='通用留言板' ;
 
+
 CREATE TABLE IF NOT EXISTS `iic_pm` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `touid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '发送者ID',
@@ -329,6 +338,7 @@ CREATE TABLE IF NOT EXISTS `iic_pm` (
   KEY `fromuid` (`fromuid`),
   KEY `type` (`type`,`xid`,`itype`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='短信息' ;
+
 
 CREATE TABLE IF NOT EXISTS `iic_ok_bad` (
   `id` int(11) NOT NULL auto_increment COMMENT '主键',
@@ -360,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `iic_report` (
   KEY `is_new` (`is_new`,`dateline`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户举报表';
 
+
 CREATE TABLE IF NOT EXISTS `iic_flink` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `sortrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '排序',
@@ -373,6 +384,7 @@ CREATE TABLE IF NOT EXISTS `iic_flink` (
   `ischeck` smallint(6) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='友情链接' ;
+
 
 CREATE TABLE IF NOT EXISTS `iic_album` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '相册ID',
@@ -394,6 +406,7 @@ CREATE TABLE IF NOT EXISTS `iic_album` (
   KEY `friend` (`friend`,`updatetime`),
   KEY `updatetime` (`updatetime`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户相册';
+
 
 CREATE TABLE IF NOT EXISTS `iic_pic` (
   `id` mediumint(8) NOT NULL auto_increment COMMENT '图片ID',
@@ -419,6 +432,7 @@ CREATE TABLE IF NOT EXISTS `iic_pic` (
   KEY `albumid` (`album_id`,`dateline`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户图片';
 
+
 CREATE TABLE IF NOT EXISTS `iic_comment` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '主键',
   `uid` mediumint(8) unsigned NOT NULL default '0' COMMENT '用户ID',
@@ -439,6 +453,7 @@ CREATE TABLE IF NOT EXISTS `iic_comment` (
   KEY `uid` (`uid`,`types`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='通用评论';
 
+
 CREATE TABLE IF NOT EXISTS `iic_doing` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `uid` mediumint(8) unsigned NOT NULL default '0' COMMENT '用户ID',
@@ -454,6 +469,7 @@ CREATE TABLE IF NOT EXISTS `iic_doing` (
   KEY `uid` (`uid`,`dateline`),
   KEY `dateline` (`dateline`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='个人心情';
+
 
 CREATE TABLE IF NOT EXISTS `iic_event` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '',
@@ -471,6 +487,7 @@ CREATE TABLE IF NOT EXISTS `iic_event` (
   KEY `aid` (`aid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='活动';
 
+
 CREATE TABLE IF NOT EXISTS `iic_fair` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 	`aid` mediumint(8) unsigned NOT NULL default '0' COMMENT '资源ID',
@@ -482,6 +499,7 @@ CREATE TABLE IF NOT EXISTS `iic_fair` (
 	`website` char(100) NOT NULL DEFAULT '' COMMENT '官方网站',
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='展会';
+
 
 CREATE TABLE IF NOT EXISTS `iic_group` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '群组ID',
@@ -513,6 +531,7 @@ CREATE TABLE IF NOT EXISTS `iic_group` (
   KEY `threadnum` (`threadnum`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8  COMMENT='群组信息';
 
+
 CREATE TABLE IF NOT EXISTS `iic_mtaginvite` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '邀请ID',
   `uid` mediumint(8) unsigned NOT NULL default '0' COMMENT '用户ID',
@@ -525,6 +544,7 @@ CREATE TABLE IF NOT EXISTS `iic_mtaginvite` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='邀请加入群组';
 
+
 CREATE TABLE IF NOT EXISTS `iic_mtag_cat` (
   `id` mediumint(8) NOT NULL auto_increment COMMENT '分类ID',
   `pid` mediumint(8) NOT NULL COMMENT '父级ID',
@@ -536,6 +556,7 @@ CREATE TABLE IF NOT EXISTS `iic_mtag_cat` (
   `keywords` varchar(255) default NULL COMMENT '关键字',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='群组分类';
+
 
 CREATE TABLE IF NOT EXISTS `iic_mtag_collection` (
   `id` mediumint(8) NOT NULL auto_increment COMMENT '收藏ID',
@@ -550,6 +571,7 @@ CREATE TABLE IF NOT EXISTS `iic_mtag_collection` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='群组收藏';
 
+
 CREATE TABLE IF NOT EXISTS `iic_user_collection` (
   `id` mediumint(8) NOT NULL auto_increment COMMENT '收藏ID',
   `listid` int(11) DEFAULT '0' COMMENT '共用列表ID',
@@ -561,6 +583,7 @@ CREATE TABLE IF NOT EXISTS `iic_user_collection` (
   `is_show` tinyint(1) NOT NULL default '1' COMMENT '私有或公开',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户收藏';
+
 
 CREATE TABLE IF NOT EXISTS `iic_commlist` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '列表ID',
@@ -601,6 +624,7 @@ CREATE TABLE IF NOT EXISTS `iic_tags_cat` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='关键字分类表';
 
+
 CREATE TABLE IF NOT EXISTS `iic_tags` (
   `id` mediumint(8) NOT NULL auto_increment COMMENT '关键字ID',
   `tcatid` mediumint(8) NOT NULL default '0' COMMENT '主要分类',
@@ -622,6 +646,7 @@ CREATE TABLE IF NOT EXISTS `iic_tags` (
   KEY `iic` (`mr`,`fs`,`book`,`move`,`music`,`event`),
   KEY `name` (`tagsname`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='tags类资源个数';
+
 
 CREATE TABLE IF NOT EXISTS `iic_tags_link` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '主键',
@@ -648,6 +673,7 @@ CREATE TABLE IF NOT EXISTS `iic_thought` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户关注';
 
+
 CREATE TABLE IF NOT EXISTS `iic_settings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `title` varchar(20) NOT NULL DEFAULT '' COMMENT '键名',
@@ -655,6 +681,7 @@ CREATE TABLE IF NOT EXISTS `iic_settings` (
   `about` varchar(50) NOT NULL DEFAULT '' COMMENT '说明',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='系统设置';
+
 
 CREATE TABLE IF NOT EXISTS `iic_stat` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
@@ -696,6 +723,7 @@ CREATE TABLE IF NOT EXISTS `iic_stat` (
   UNIQUE KEY `mon` (`xid`,`mon`,`stype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='点击统计综合' AUTO_INCREMENT=1 ;
 
+
 CREATE TABLE IF NOT EXISTS `iic_post` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论ID',
   `qid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '回复ID',
@@ -726,6 +754,7 @@ CREATE TABLE IF NOT EXISTS `iic_post` (
   KEY `aid` (`aid`,`uid`,`gid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='主题评论综合表' AUTO_INCREMENT=1 ;
 
+
 CREATE TABLE IF NOT EXISTS `iic_friend` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '好友表主键',
   `uid` mediumint(8) unsigned NOT NULL default '0' COMMENT '用户ID',
@@ -752,6 +781,7 @@ CREATE TABLE IF NOT EXISTS `iic_friendlog` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='好友动态';
 
+
 CREATE TABLE IF NOT EXISTS `iic_member` (
   `id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '用户ID',
   `username` char(15) NOT NULL default '' COMMENT '用户名',
@@ -762,6 +792,7 @@ CREATE TABLE IF NOT EXISTS `iic_member` (
   `is_mail` tinyint(1) DEFAULT '0' COMMENT '是否邮件认证',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='成员登录';
+
 
 CREATE TABLE IF NOT EXISTS `iic_stepselect` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
