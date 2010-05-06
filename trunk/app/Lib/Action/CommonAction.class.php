@@ -19,6 +19,7 @@ class CommonAction extends Action{
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
+        $this->assign('cid',$this->cid);
         $this->assign('now',date("l,F d Y",time()));
         import("ORG.Util.String");
         load("extend");
