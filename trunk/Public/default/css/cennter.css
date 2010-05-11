@@ -1,6 +1,8 @@
 body{ width:1003px; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight: normal;margin:0px auto; padding:0px;line-height: 20px;color: #fff; background-color:#dfdfdf;}
 a{text-decoration: none;}
 a img{ border:none;}
+#think_page_trace{color:#000;}
+
 
 /* CSS top 开始 */
 #top{width:950px;padding:0px;margin: 0px auto;}
@@ -21,7 +23,7 @@ a img{ border:none;}
 .top-city{ width:466px; margin:0px; padding:25px 0 0 0; float:right;}
 .top-city a{ margin:0px; padding:0 0 0 8px;}
 .top-nav{margin: 0px;padding-left: 25px;width: 906px;}
-.nav{width:500px;height: 20px;margin:0px;padding:0px;}
+.nav{width:650px;height: 20px;margin:0px;padding:0px;}
 .nav a{color: #fff;}
 .nav .annv {background: url(../images/button.png) no-repeat;}
 .annv a{color: #fff;}
@@ -32,7 +34,7 @@ a img{ border:none;}
 
 
 /* CSS中间开始*/
-#main { width:950px; height:500px; margin:0px auto;padding: 0px;}
+#main {width:950px; height:auto; margin:0 auto;padding: 0px;}
 .main-left{ width:188px;margin:0px; padding:0px;}
 .main-left ul{ margin:0px; padding:0px; list-style-type:none;}
 .main-left li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
@@ -62,18 +64,21 @@ a img{ border:none;}
 #bottom{width:950px; height: 109px; background: url(../images/bg9.gif) repeat-x;margin: 0px;text-align: center; margin-top:10px; padding: 20px 0 0 0;}
 
 
-.n-life{width:735px;padding:0px;margin: 0px;}
+.n-life{width:735px;padding:0px;margin: 0px; height:auto;}
 .classifieds content{ margin:0px; padding:0px;}
 .content-bg {font-weight: bold;color: #212121;font-family: Verdana, Arial, Helvetica, sans-serif;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-n {border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding-top: 5px;padding-left: 10px;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
-.content-n h4 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #b53e79;line-height: 22px;margin: 0px;padding: 5px 0px;}
+.content-life a{color: #7d7c7c;}
+.content-life h1{font-size: 14px;color: #b53e79;line-height: 25px; font-weight:bold;}
+.content-n h4 {font-size: 12px; font-weight:bold;color: #b53e79;line-height: 22px;margin: 0px;padding: 5px 0px;}
 .content-life p{ margin:0px; padding:0px; }
 .content-life ul{padding:0px;list-style-type:none;margin: 20px 0 0 0;color: #FFFFFF;}
-.content-life li{width: 116px;height: 25px;background: url(../images/button.gif) no-repeat; margin:0px;padding: 0 15px 0 0;float: left;text-align: center;}
+.content-life li{width: 116px;height: 25px; line-height:25px;background: url(../images/button.gif) no-repeat; margin:0px;padding: 0 15px 0 0;float: left;text-align: center;}
+.content-life li a{color: #FFFFFF;}
 .Comments-right{width:160px;margin:0px;padding:0px;float:right;}
-.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0;}
-.biaoti {margin:0px;background-position: 1px bottom;background: url(../images/xian.gif) repeat-x;padding: 0px;}
+.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0; height:auto;}
+.biaoti {margin:10px 8px;background-position: 1px bottom;background:url(../images/xian.gif) repeat-x 0 10px;padding: 0px;}
 .biaoti img{margin:0px;padding: 0px;}
 .right{width:200px;padding:0px;float:right;margin-left: 10px;}
 .next lssue { margin:0px; padding: 0px;}
@@ -88,7 +93,7 @@ a img{ border:none;}
 .Main-n p{margin:0px;color:#5c5b5b;line-height:14px;padding-left: 75px;}
 .Main-n img{margin:0px;padding:0px;position: absolute;padding-top: 0;padding-right: 0;padding-bottom: 0;left: 5px;top:8px;}
 
-.Comments-b {margin: 0px;padding: 0px;}
+.Comments-b {margin: 0px;padding: 0px; height:auto;}
 .Comments-pic {width: 70px; margin: 0px;padding: 0 0 0 10px;}
 .Comments-pic p {margin: 0px;padding: 0px 0px 0px 15px;}
 .pic-right {width: 628px;padding: 0px;float: right;background: url(../images/bg12.gif) no-repeat;margin: 0px 5px 0px 0px;}
@@ -98,45 +103,25 @@ margin: 5px 0px 5px 0px;padding-top: 0;font-family: Arial, Helvetica, sans-serif
 .ziti {font-weight: bold;margin: 0px;padding-top: 10px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}
 .ditu {width: 342px;padding: 0px;margin: 0px 5px 0px 5px;}
 .liuyanban {width: 590px; height: 98px; padding: 0px;background-color: #FFFFFF;border: 1px solid #999999;margin: 0px auto;}
-.Submit {width: 60px;height: 25px;margin-left: 580px;margin-top: 10px;background: url(../images/Submit.gif) no-repeat;color: #FFFFFF;text-align: center;}
+.submit {width: 60px;height: 25px; line-height:25px; background: url(../images/Submit.gif) no-repeat;color: #FFFFFF;text-align: center;}
 .fenye {width: 260px;height: 24px;background-color: #FFFFFF;padding: 0px;margin-bottom: 10px;margin-left: 460px;}
+
+.liuyan{margin:10px 0;padding: 0px; height:auto;text-align: center;}
+.liuyan .content {width:98%; height:98px; padding: 0px;background-color: #FFFFFF;border: 1px solid #999999;margin: 0px auto;}
 
 .kuan {margin: 0px;padding: 0px;}
 .gugou {float: right;padding: 0px;margin: 5px 30px 0px 0px;}
 .list-a {margin: 0px 5px 0px 5px;padding: 8px 0px 0px 0px;}
-.list-a h6 {
-	margin: 0px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	line-height: 18px;
-	color: #9f5c7e;
-	font-weight: bold;
-	padding-left: 5px;
-}
-.list-a p {
-	margin: 0px;
-	color: #808080;
-	font-family: Arial, Helvetica, sans-serif;
-	padding-top: 0px;
-	padding-right: 0px;
-	padding-bottom: 0px;
-	padding-left: 10px;
-}
-.personals{
-	margin: 0px 5px;
-	padding-top: 10px;
-	padding-right: 0px;
-	padding-bottom: 8px;
-	padding-left: 0px;
-	border-bottom: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #d3d3d3;
-	height:25px;
-}
+.list-a h6 {margin: 0px;font-family: Arial, Helvetica, sans-serif;font-size: 14px;line-height: 18px;color: #9f5c7e;	font-weight: bold;
+	padding-left: 5px;}
+.list-a h6 a{color: #9f5c7e;}
+.list-a p {margin: 0px;color: #808080;font-family: Arial, Helvetica, sans-serif;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 10px;}
+.list-a p a{color: #808080;}
+.personals{	margin: 0px 5px;padding-top: 10px;padding-right: 0px;padding-bottom: 8px;padding-left: 0px;border-bottom: 1px;border-bottom-style: solid;border-bottom-color: #d3d3d3;height:25px;}
 .personals h1{width:280px; float:left; margin:0; padding:0; color:#000;}
 .personals p{margin:0px;padding:0px;float: right;color: #999999;}
 .personals p a{color: #999999;}
 
 
 /* CSS底部开始*/
-#bottom{width:950px;background: url(../images/bg9.gif) repeat-x;text-align: center;margin:50px auto 0px auto;padding: 20px 0 0 0;height: 107px;}
+#bottom{width:950px;background: url(../images/bg9.gif) repeat-x;text-align: center;margin:10px auto 0px auto;padding: 20px 0 0 0;height: 107px;}

@@ -42,6 +42,33 @@ class CommonAction extends Action{
     }//end _set_cid
     
     /**
+     *获取话题的评论
+     *@date 2010-5-10
+     *@time 下午04:41:17
+     */
+    function _get_comments($aid,$types) {
+    	//获取话题的评论
+    	$dao=D("Comments");
+    	$data=$dao->where("xid=$aid AND types=$types")->findAll();
+    	
+    }//end _get_comments
+    
+    /**
+     *获取当前栏目位置
+     *@date 2010-5-10
+     *@time 上午09:47:29
+     */
+    function _get_dh($typeid) {
+    	//获取当前位置
+    	$dao=D("Arctype");
+    	$data=$dao->where("id=$typeid")->field('id,typename,reid,topid')->find();
+    	if ($data['reid']!=$data['topid']){
+    		$data['_reid']=$dao->where("id={$data['reid']}")->field('id,typename,reid,topid')->find();
+    	}
+    	return $data;
+    }//end _get_dh
+    
+    /**
       *获得城市指南的大类
       *@date 2010-4-30
       *@time 上午10:26:06
