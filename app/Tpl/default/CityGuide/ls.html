@@ -1,0 +1,132 @@
+<include file="Public:head" />
+<link href="__PUBLIC__/default/css/cityguide_content.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/Home.css" rel="stylesheet" type="text/css" />
+<div id="main">
+    <div class="mian-right">
+        <div class="mian-center">
+            <div class="jianbian">
+                Home > City Guide >
+            </div>
+            <div class="personals">
+                <p>{$showpage}</p>
+                <img src="__PUBLIC__/default/images/personals.gif" alt="pr" />
+            </div>
+<if condition="$list">
+	<volist name="list" id="v">
+            <div class="personals-a">
+                <div class="xiangce">
+                    <img src="__PUBLIC__/default/images/pic7.gif" alt="pic_c" />
+                    <div class="kuan">
+                        3 photos
+                    </div>
+                </div>
+                <div class="list-a">
+                    <h6><img src="__PUBLIC__/default/images/1.gif" /><a href="__APP__">{$v['title']}</a></h6>
+                    <p>
+                        Keep On Dancing Vol.6 -- Hip-hop Battle
+                        <br/>
+                        Time:2010/2/26-2010/2/28
+                        <br/>
+                        Venue: Olympic Sports Center 
+                        <br/>
+                        Price: 60/100/150/200/300/350/500
+                        <br/>
+                    </p>
+                </div>
+                <div class="hui-bg">
+                    <ul>
+                        <li>
+                            Share
+                        </li>
+                        <li>
+                            Save as favorite
+                        </li>
+                        <li>
+                            Report corrections
+                        </li>
+                    </ul>
+                </div>
+            </div>
+	</volist>
+</if>
+            <div class="fanye">
+                <img src="__PUBLIC__/default/images/fany.gif" alt="xiu" />
+            </div>
+        </div>
+    </div>
+    <div class="main-left">
+        <div class="city guide">
+            <ul>
+                <li class="bg-A">
+                    Classifeds
+                </li>
+                <li>
+                    <a href="#">Property</a>
+                </li>
+                <li>
+                    <a href="#">Buy&Sell </a>
+                </li>
+                <li>
+                    <a href="#">Personals</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Jobs </a>
+                </li>
+                <li class="di-yuan">
+                </li>
+            </ul>
+        </div>
+        <div class="city guide">
+            <ul>
+                <li class="bg-A">
+                    City Guide
+                </li>
+                <li>
+                    <a href="#">Arts&Culture </a>
+                </li>
+                <li>
+                    <a href="#">Agencies </a>
+                </li>
+                <li>
+                    <a href="#">Bars </a>
+                </li>
+                <li>
+                    <a href="#">Banking</a>
+                </li>
+                <li>
+                    <a href="#">Cafes </a>
+                </li>
+                <li>
+                    <a href="#">City Events </a>
+                </li>
+                <li>
+                    <a href="#">Consulates </a>
+                </li>
+                <li>
+                    <a href="#">Eduction </a>
+                </li>
+                <li>
+                    <a href="#">Helth </a>
+                </li>
+                <li>
+                    <a href="#">Hotel</a>
+                </li>
+                <li>
+                    <a href="#">Leisure </a>
+                </li>
+                <li>
+                    <a href="#">Restaurant</a>
+                </li>
+                <li>
+                    <a href="#">Shoping </a>
+                </li>
+                <li class="di-yuan">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<include file="Public:foot" />

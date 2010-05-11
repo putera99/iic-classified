@@ -51,21 +51,21 @@
 <volist name="list" id="v">
             <div class="personals-a">
                 <div class="list-a">
-                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" />{$v['title']}</h6>
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}"}">{$v['title']}</a></h6>
                     <p>
-                        {$v['description']}...[Detail]
+                        {$v['description']}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
                     </p>
                 </div>
                 <div class="hui-bg">
                     <ul>
                         <li>
-                            Share
+                            <a href="#">Share</a>
                         </li>
                         <li>
-                            Save as favorite
+                            <a href="#">Save as favorite</a>
                         </li>
                         <li>
-                            Report corrections
+                            <a href="#">Report corrections</a>
                         </li>
                     </ul>
                 </div>

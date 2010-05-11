@@ -114,10 +114,32 @@ class ClassifiedsAction extends CommonAction{
 			$this->error("error: aid is null!");
 		}
 		$dao=D("Archives");
-		$data=$dao->where("id=$aid")->find();
-		$data=$dao->relationGet("jobs");
-		//dump($data);
-		//dump($dao->getLastSql());
+		$info=$dao->where("id=$aid")->find();
+		switch (true) {
+			case $info['channel']==4://Jobs
+				$info['_jobs']=$dao->relationGet("jobs");
+				$info['itype']=$info['itype']=='0'?'All':$info['itype']=='1'?'Offered':'Wanted';
+				$category=array("All","Full time","Part time","Internship","Voluntary");
+				$info['category']=$category[$info['category']];
+				//$info['city']=
+			break;
+			
+			case $info['channel']==5://realestate
+			
+			break;
+		}
+
+		$this->assign('info',$info);
+		
+		$page=array();
+		$page['title']=$info['title'].'  -  BeingfunChina';
+		$page['keywords']=$info['keywords'];
+		$page['description']=$info['description'];
+		$this->assign('page',$page);
+		
+		
+		//dump($this->_get_dh($info['typeid']));
+		$this->assign('dh',$this->_get_dh($info['typeid']));
 		$this->display();
 	}//end show
 }//end ClassifiedsAction
