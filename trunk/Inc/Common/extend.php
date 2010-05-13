@@ -292,6 +292,10 @@ function h($text, $tags = null){
 	return $text;
 }
 
+function del_html($text){
+	return $text	=	preg_replace('/<\/?(html|head|meta|link|base|basefont|body|bgsound|title|style|script|form|iframe|frame|frameset|applet|id|ilayer|layer|name|script|style|xml|font|div|span|p|o:p)[^><]*>/i','',$text);
+}
+
 function ubb($Text) {
   $Text=trim($Text);
   //$Text=htmlspecialchars($Text);
