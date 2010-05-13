@@ -100,5 +100,14 @@ class CityGuideAction extends CommonAction{
 		$this->display();
 	}//end function_name
 	
-	
+	/**
+	 *城市指南内容页
+	 *@date 2010-5-12
+	 *@time 下午04:13:26
+	 */
+	function show() {
+		//城市指南内容页
+		
+		
+	}//end show
 }//end CityGuideAction

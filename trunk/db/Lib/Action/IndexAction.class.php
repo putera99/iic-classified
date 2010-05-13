@@ -3,7 +3,7 @@ class IndexAction extends Action{
 public function index(){
     //查出城市
     echo "<a href='".__URL__."/ctype'>导入分类信息类别</a><br>";
-    echo "<a href='".__URL__."/excity'>导入城市指南类别</a><br>";
+    echo "<a href='".__URL__."/excity'>导入城市指南类别</a><br><br>";
     echo "<a href='".__URL__."/classified/mid/1'>分类信息的JOBS信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/2'>分类信息的Real Estate信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/3'>分类信息的Services信息</a><br>";
@@ -11,6 +11,9 @@ public function index(){
     echo "<a href='".__URL__."/classified/mid/5'>分类信息的Sell &Buy信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/8'>分类信息的Personals信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/9'>分类信息的Announcement信息</a><br>";
+    echo "<a href='".__URL__."/get_dis'>生成摘要信息</a><br><br>";
+    echo "<a href='".__URL__."/get_cityguide'>城市指南数据导入</a><br><br>";
+    
 }
 
     /**
@@ -116,6 +119,7 @@ function excity() {
      *@time 下午02:59:24
  */
 function classified() {
+	load("extend");
 	$mid=$_GET['mid'];
 	$p=$_GET['page'];
 	$channeltype=array(
@@ -147,12 +151,6 @@ function classified() {
     	echo $sql.'<br>';
     	echo '<a href="'.__URL__.'/classified/mid/'.$mid.'/page/'.$np.'">下一页</a>';
     	$list=$dao->query($sql);
-    	// 	id 	title 	albumid 	albumname 	mid 	spid 	fid 	fname 	fid_bak1 	fid_bak2 	fid_bak3 	info 	hits 	
-    	//comments 	posttime 	list 	uid 	username 	titlecolor 	fonttype 	picurl 	ispic 	yz 	yzer 	yztime 	levels 	
-    	//levelstime 	keywords 	jumpurl 	iframeurl 	style 	head_tpl 	main_tpl 	foot_tpl 	target 	ishtml 	ip 	
-    	//lastfid 	money 	passwd 	editer 	edittime 	begintime 	endtime 	config 	lastview 	city_id 	zone_id 	
-    	//street_id 	editpwd 	showday 	visit_log 	visit_num 	telephone 	mobphone 	email 	oicq 	msn 	maps 	
-    	//replytime
     	$i=1;
     	if($list){
     		foreach ($list as $v){
@@ -163,6 +161,7 @@ function classified() {
     				//dump($v);
     				$t=time();
     				$v['fid']=$v['fid']+1;
+    				
     				
     				$data=array();
     				$data['typeid']=$v['fid'];
@@ -188,7 +187,8 @@ function classified() {
     				$data['zone_id']=$v['zone_id'];
     				$data['street_id']=$v['street_id'];
     				$data['ismake']=1;
-    				
+    				$data['description']=msubstr(del_html($v['content']),0,200);
+
     				$aid=$dao->Table('iic_archives')->add($data);
     				if ($aid) {
     					$data=array();
@@ -204,7 +204,7 @@ function classified() {
     						//$this->error('附加表写入失败！');
     					}
     				}else{
-    					$this->error('档案表写入失败！');
+    					echo('档案表写入失败！');
     				}
     				break;
     				
@@ -253,12 +253,12 @@ function classified() {
     						//$this->error('附加表写入失败！');
     					}
     				}else{
-    					$this->error('档案表写入失败！');
+    					echo('档案表写入失败！');
     				}
     				break;
     				
     				default:
-    					$this->error('数据模块不匹配！');
+    					echo('数据模块不匹配！');
     				break;
     			}
     			//dump($v);
@@ -287,15 +287,112 @@ function tree() {
 }//end tree
 
 /**
- *清楚HTML批量获取摘要
+ *清除HTML批量获取摘要
  *@date 2010-5-6
  *@time 下午04:53:09
  */
 function get_dis() {
-	//清楚HTML批量获取摘要
+	//清除HTML批量获取摘要
+	load("extend");
+	$dao=new Model();
+	$dao->Table('iic_archives');
+	$count=$dao->count();
+	import("ORG.Util.Page");
+	$page=new Page($count,100);
+	$limit=$page->firstRow.','.$page->listRows;
 	
+	
+	dump($count);
 }//end get_dis
 
+/**
+ *导出城市指南内容
+ *@date 2010-5-12
+ *@time 下午04:58:29
+ */
+function get_cityguide() {
+	//导出城市指南内容
+	$dao=new Model();
+	//$sql="SELECT a.*,b.my_content FROM bfc_article AS a LEFT JOIN bfc_article_content_4 AS b ON a.aid=b.aid";
+	$p1=(empty($p)||($p==1))?0:($p-1)*50;
+    $p2=empty($p)?50:$p*50;
+    $sqlc="SELECT count(*) c FROM bfc_article AS a LEFT JOIN bfc_article_content_4 AS b ON a.aid=b.aid LEFT JOIN bfc_reply AS r ON b.rid=r.rid";
+    $list=$dao->query($sqlc);
+    if($list[0]['c']>($p*50)){
+    	$np=$p+1;
+    	$limit="LIMIT {$p1},50";
+    	echo $limit."<hr>";
+    	
+    	$sql="SELECT a.*,b.my_content,r.content FROM bfc_article AS a LEFT JOIN bfc_article_content_4 AS b ON a.aid=b.aid LEFT JOIN bfc_reply AS r ON b.rid=r.rid $limit";
+    	echo $sql.'<br>';
+    	echo '<a href="'.__URL__.'/get_cityguide/page/'.$np.'">下一页</a>';
+    	//$data_old=$dao->query($sql);
+    	$i=1;
+    	if($data_old){
+    		foreach ($data_old as $v){
+    		$t=time();
+    		$v['fid']=$v['fid']+1000;
+    		/*aid 	title 	smalltitle 	fid 	mid 	fname 	special_id 	bak_id 	info 	hits 	pages 	
+    		comments 	posttime 	list 	uid 	username 	author 	copyfrom 	copyfromurl 	titlecolor 	
+    		fonttype 	titleicon 	picurl 	ispic 	yz 	yzer 	yztime 	levels 	levelstime 	keywords 	
+    		jumpurl 	iframeurl 	style 	template 	target 	ip 	lastfid 	money 	buyuser 	
+    		passwd 	allowdown 	allowview 	editer 	edittime 	begintime 	endtime 	description 	
+    		lastview 	digg_num 	digg_time 	my_content 	content*/
+	    	$data=array();
+	    	$data['typeid']=$v['fid'];
+	    	//$data['cid']=$cid[$v['city_id']];
+	    	$data['uid']=$v['uid'];
+	    	$data['channel']=2;
+	    	$data['click']=$v['hits'];
+	    	$data['title']=$v['title'];
+	    	$data['color']=$v['titlecolor'];
+	    	$data['keywords']=$v['keywords'];
+	    	$data['lastpost']=$v['replytime'];
+	    	$data['pubdate']=$v['posttime'];
+	    	$data['comments']=$v['comments'];
+	    	$data['picurl']=$v['picurl'];
+	    	$data['my_content']=$v['my_content'];
+	    	//$data['uip']=$v['ip'];
+	    	$data['lastview']=$t;
+	    	$data['editpwd']=$t;
+	    	$data['itype']=$v['type'];
+	    	$data['category']=$v['category'];
+	    	$data['telephone']=$v['telephone'];
+	    	$data['mobphone']=$v['mobphone'];
+	    	$data['email']=$v['email'];
+	    	$data['oicq']=$v['oicq'];
+	    	$data['msn']=$v['msn'];
+	    	$data['city_id']=$v['city_id'];
+	    	$data['zone_id']=$v['zone_id'];
+	    	$data['street_id']=$v['street_id'];
+	    	$data['ismake']=1;
+	    	$data['description']=msubstr(del_html($v['my_content']),0,200);
+	
+	    	$aid=$dao->Table('iic_archives')->add($data);
+    		}
+    	}
+    }
+}//end get_cityguide
+
+/**
+ *sm
+ *@date 2010-5-7
+ *@time 下午02:28:04
+ */
+function test() {
+	//sm
+$text=<<<ETO
+<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><font size="2">email: </font><a href="mailto:latinasiagz@gmail.com"><font size="2">latinasiagz@gmail.com</font></a><font size="2"> <span style="">&nbsp;</span><o:p></o:p></font></span></p>
+<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><o:p><font size="2">&nbsp;</font></o:p></span></p>
+<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><font size="2">We are looking for a Textile Specialist for a Mexican company with good knowledge in textile products, fabrics, garments, confection and quality control.<o:p></o:p></font></span></p>
+<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><o:p><font size="2">&nbsp;</font></o:p></span></p>
+<div><font size="2"><font face="Verdana"><span lang="EN-US" style="font-size: 10.5pt; font-family: 'Times New Roman';">Please send your CV to latinasiagz@gmail.com</span> </font></font></div>
+ETO;
+$text	=	preg_replace('/<\/?(html|head|meta|link|base|basefont|body|bgsound|title|style|script|form|iframe|frame|frameset|applet|id|ilayer|layer|name|script|style|xml|font|div|span|p|o:p)[^><]*>/i','',$text);
+
+echo $text;
+
+}//end function_name
 
 }//class end
 ?>
