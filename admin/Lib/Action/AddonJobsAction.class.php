@@ -6,12 +6,12 @@ class AddonJobsAction extends PublicAction{
 	}
 
 	public function ajaxlist(){
-		//招聘与求职_ajaxlist
-		$list=D("AddonJobs");
+		//整站档案_ajaxlist
+		$list=D("Archives");
 		$order=!empty($_REQUEST["order"])?$_REQUEST["order"]:$list->getPk(); //排序字段,默认为"Pk"
 		$sortd=!empty($_REQUEST["sort"])?$_REQUEST["sort"]:"asc"; //排序顺序,默认为"asc"
 		$orderBy=$order." ".$sortd;//组合排序条件
-		$feilds='aid,joblocated,Experience,salary,content,id';
+		$feilds='typeid,industry,bycity,cid,uid,flag,ismake,channel,arcrank,click,title,shorttitle,color,writer,source,litpic,pubdate,senddate,keywords,lastpost,star1,star2,star3,star4,star5,goodpost,badpost,notpost,description,filename,uip,lastview,editpwd,showstart,showend,editer,edittime,albumid,albumnum,itype,category,telephone,fax,mobphone,email,oicq,msn,maps,city_id,zone_id,street_id,position,contact,ltdid,linkman,id';
         $condition=Array();//搜索的条件
         //$condition['title']=array('like',"a%");//高级搜索过滤
 	    if(!empty($_REQUEST['searchkey'])){
@@ -21,10 +21,11 @@ class AddonJobsAction extends PublicAction{
 			$this->assign("searchkey",$_REQUEST["searchkey"]);//显示关键字
 			$this->assign("searchurl",$_SERVER["REQUEST_URI"]);//当前的URL
 			$this->assign("searchtype",$_REQUEST["searchtype"]);//当前的搜索类型
-	
+
 	        $ser_c=array('like',"%$searchkey%");//公共的过滤条件
 	        $condition['id']=array(id,$searchtype);//模糊搜索关键字全局过滤
 	    }
+		$condition['channel']=4;
 		$count= $list->where($condition)->count();//获取分页总数量
 		$p= new ajaxpage($count);
 		$page=$p->ajaxshow();//显示分页
@@ -38,7 +39,7 @@ class AddonJobsAction extends PublicAction{
 			->limit($limit)
 			->findAll();
 		$this->assign("list",$list);
-		$this->display();
+		$this->display("Archives:ajaxlist");
 	}
 
 

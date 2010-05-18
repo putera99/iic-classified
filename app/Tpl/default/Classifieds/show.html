@@ -70,9 +70,9 @@
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                <a href="/">Home</a> > <a href="__APP__/Classifieds/index">Classifieds</a> > 
-				<if condition="$dh[_reid]"><a href="__APP__/Classifieds/ls/id/{$dh[_reid]['id']}">{$dh[_reid]['typename']}</a> ></if>
-				<a href="__APP__/Classifieds/ls/id/{$dh['id']}">{$dh['typename']}</a>
+                <a href="/">Home</a> > <a href="__APP__/Classifieds/index/cid/{$cid}">Classifieds</a> > 
+				<if condition="$dh[_reid]"><a href="__APP__/Classifieds/ls/id/{$dh[_reid]['id']}/cid/{$cid}">{$dh[_reid]['typename']}</a> ></if>
+				<a href="__APP__/Classifieds/ls/id/{$dh['id']}/cid/{$cid}">{$dh['typename']}</a>
             </div>
             <div class="content-n">
                 <if condition="$info['albumnum'] gt 0">
@@ -136,13 +136,13 @@ s							</p>
 </switch>
                     <ul>
                         <li>
-                            <a href="">Share</a>
+                            <a href="__APP__/Member/share/aid/{$info['id']}">Share</a>
                         </li>
                         <li>
-                            <a href="">Save as favorite</a>
+                            <a href="__APP__/Member/favorite/aid/{$info['id']}">Save as favorite</a>
                         </li>
                         <li>
-                            <a href="">Report corrections</a>
+                            <a href="__APP__/Member/report/aid/{$info['id']}">Report corrections</a>
                         </li>
                     </ul>
                     <p>
@@ -166,7 +166,7 @@ s							</p>
                                     brought by Microsoft 
                                 </li>
                                 <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
+                                    <a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
                                 </li>
                             </ul>
                         </div>

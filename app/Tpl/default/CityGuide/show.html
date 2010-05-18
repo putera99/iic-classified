@@ -70,35 +70,36 @@
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                Home>classifieds content
+                <a href="/">Home</a> > <a href="__APP__/CityGuide/index">City Guide</a> > 
+				<if condition="$dh[_reid]"><a href="__APP__/CityGuide/ls/id/{$dh[_reid]['id']}">{$dh[_reid]['typename']}</a> ></if>
+				<a href="__APP__/CityGuide/ls/id/{$dh['id']}">{$dh['typename']}</a>
             </div>
             <div class="content-n">
-                <div class="Comments-right">
-                    <img src="__PUBLIC__/default/images/pic3.gif" alt="pic6" />
-                </div>
+            	
+                <if condition="$info['albumnum'] gt 0">
+                    <div class="Comments-right">
+                        <img src="__PUBLIC__/default/images/pic3.gif" alt="pic6" />
+                        <p>
+                        </p>
+                    </div>
+                </if>
+				
                 <div class="content-life">
-                    <h4>GIANT KHAN Bicycle (now inc. photo!!)</h4>
+                     <h1>{$info['title']}</h1>
                     <p>
-                        Due to your many requests, I have now added a photo. The golf clubs aren't 
-                        included!! I'm leaving Shanghai, so I'm selling my 1 Year old Giant Khan with 
-                        wheel lock, ch	ain lock and basket. It is the 'male' model (with top straight bar frame).
-                    </p>
-                    <h4>500 RMB O.N.O. (or near offer)</h4>
-                    <p>
-                        It's in perfect condition and a dream to cruise around Shanghai on
-                        (they say only those who've ridden a KHAN know the feeling...i think...)
-                        If you've seen one, you've seen them all. Give me a call if you want to know more!
-                        Ben - 13918777821
+                        {$info['my_content']}
+						<hr>
+                        {$info['content']}
                     </p>
                     <ul>
                         <li>
-                            <img src="__PUBLIC__/default/images/button.gif" alt="pci3" />
+                            <a href="">Share</a>
                         </li>
                         <li>
-                            <img src="__PUBLIC__/default/images/button2.gif" alt="pic4" />
+                            <a href="">Save as favorite</a>
                         </li>
                         <li>
-                            <img src="__PUBLIC__/default/images/button3.gif" alt="pic5" />
+                            <a href="">Report corrections</a>
                         </li>
                     </ul>
                 </div>

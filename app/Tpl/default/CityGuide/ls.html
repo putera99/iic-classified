@@ -5,32 +5,27 @@
     <div class="mian-right">
         <div class="mian-center">
             <div class="jianbian">
-                Home > City Guide >
+                <a href="/">Home</a> > <a href="__APP__/CityGuide/index/">City Guide</a> >
+				<if condition="$reinfo"><a href="__APP__/CityGuide/ls/id/{$reinfo['id']}">{$reinfo['typename']}</a> ></if>
             </div>
             <div class="personals">
+                <h1>{$info['typename']}</h1>
                 <p>{$showpage}</p>
-                <img src="__PUBLIC__/default/images/personals.gif" alt="pr" />
             </div>
 <if condition="$list">
 	<volist name="list" id="v">
             <div class="personals-a">
                 <div class="xiangce">
-                    <img src="__PUBLIC__/default/images/pic7.gif" alt="pic_c" />
-                    <div class="kuan">
-                        3 photos
-                    </div>
+                	<if condition="$v['picurl']">
+                    <img src="http://www.beingfunchina.com/upload_files/{$v['picurl']}" alt="{$v['title']}" class="iic_img" />
+					<br>
+                    <a href="#" class="kuan"><if condition="$v['albumnum']">{$v['albumnum']}<else />0</if> photos</a>
+					</if>
                 </div>
-                <div class="list-a">
-                    <h6><img src="__PUBLIC__/default/images/1.gif" /><a href="__APP__/CityGuide/show/aid/{$v['id']}">{$v['title']}</a></h6>
+                <div class="list-a" style="width:560px;">
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" /><a href="__APP__/CityGuide/show/aid/{$v['id']}">{$v['title']}</a></h6>
                     <p>
-                        Keep On Dancing Vol.6 -- Hip-hop Battle
-                        <br/>
-                        Time:2010/2/26-2010/2/28
-                        <br/>
-                        Venue: Olympic Sports Center 
-                        <br/>
-                        Price: 60/100/150/200/300/350/500
-                        <br/>
+                        {$v['my_content']}
                     </p>
                 </div>
                 <div class="hui-bg">
