@@ -20,6 +20,9 @@ class IndexAction extends CommonAction{
 	
 	
     public function index(){
+    	$this->assign('city_type',$this->_get_cityguide_type());
+    	$this->assign('classifieds_type',$this->_get_classifieds_type());
+    	
     	$this->display();
     }
 }

@@ -1,4 +1,6 @@
 <include file="Public:head" />
+<link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
@@ -37,22 +39,22 @@
                 <img src="__PUBLIC__/default/images/pic2.gif" alt="pic2" />
             </div>
         </div><!--div class="clear"></div-->
-        <div class="mian-center">
+        <div class="mian-center-n">
             <div class="jianbian">
                 <a href="/">Home</a>
-                > <a href="__APP__/Classifieds/index">{$info['typename']}</a>
+                > <a href="__APP__/Classifieds/index/cid/{$cid}">{$info['typename']}</a>
             </div>
             <volist name="list" id="v">
                 <div class="center">
                     <div class="content_top">
-                        <a href="__APP__/Classifieds/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
+                        <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
                     </div>
                     <div class="content_di">
                         <if condition="$v['_son']">
                             <ul>
                                 <volist name="v['_son']" id="vs" mod="3">
                                     <li>
-                                        <a href="__APP__/Classifieds/ls/id/{$vs['id']}" title="{$vs['seotitle']}">{$vs['typename']}</a>
+                                        <a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a>
                                     </li>
                                 </volist>
                             </ul>
@@ -69,7 +71,7 @@
             </li>
             <volist name="ctype" id="v">
                 <li>
-                    <a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
+                    <a href="__APP__/CityGuide/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
                 </li>
             </volist>
             <li class="di-yuan">

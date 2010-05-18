@@ -22,13 +22,13 @@ class CityGuideAction extends CommonAction{
 	  */
 	function _initialize() {
 		//预处理
-		if (intval($_GET['cid'])){
+		/*if (intval($_GET['cid'])){
 			
 			$this->pcid=intval($_GET['cid']);
 		}else{
 			$this->_set_cid();
 			$this->pcid=$this->cid;
-		}
+		}*/
 		parent::_initialize();
 	}//end _initialize()
 	
@@ -75,11 +75,11 @@ class CityGuideAction extends CommonAction{
 		$this->assign('showpage',$page->show());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
-		$data=$dao->where("(typeid={$typeid} AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
+		$data=$dao->where("typeid={$typeid} AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
-
-		//城市指南 导航
-		$this->assign('ctype',$this->_get_cityguide_type());
+		dump($dao->getLastSql());
+		//分类信息 导航
+		$this->assign('classifieds_type',$this->_get_classifieds_type());
 		
 		//页面信息
 		$arctype=D("Arctype");
@@ -89,14 +89,13 @@ class CityGuideAction extends CommonAction{
 		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':$info['seotitle'].'  -  BeingfunChina';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
+		$this->assign('page',$page);
 		
-		if($info['reid']!='1'){
+		if($info['reid']!='1000'){
 			$reinfo=$arctype->where("id={$info['reid']}")->find();
 			$this->assign('reinfo',$reinfo);
 		}
-		
-		$this->assign('page',$page);
-		
+
 		$this->display();
 	}//end function_name
 	
@@ -107,7 +106,22 @@ class CityGuideAction extends CommonAction{
 	 */
 	function show() {
 		//城市指南内容页
+		$aid=intval($_GET['aid']);
+		if(empty($aid)){
+			$this->error("error: aid is null!");
+		}
+		$dao=D("CityGuideView");
+		$info=$dao->where("Archives.id=$aid")->find();
+		$this->assign('info',$info);
 		
+		$page=array();
+		$page['title']=$info['title'].'  -  BeingfunChina';
+		$page['keywords']=$info['keywords'];
+		$page['description']=$info['description'];
+		$this->assign('page',$page);
 		
+		$this->assign('dh',$this->_get_dh($info['typeid']));
+		
+		$this->display();
 	}//end show
 }//end CityGuideAction

@@ -2,6 +2,10 @@
 class ArchivesAction extends PublicAction{
 	public function index(){
 		//整站档案_index
+		if(!empty($_REQUEST['channel'])){
+			$channel=$_REQUEST['channel'];
+			$this->assign('channel',$channel);
+		}
 		$this->display();
 	}
 
@@ -25,6 +29,9 @@ class ArchivesAction extends PublicAction{
 	        $ser_c=array('like',"%$searchkey%");//公共的过滤条件
 	        $condition['id']=array(id,$searchtype);//模糊搜索关键字全局过滤
 	    }
+		if(!empty($_REQUEST['channel'])){
+			$condition['channel']=$_REQUEST['channel'];
+		}
 		$count= $list->where($condition)->count();//获取分页总数量
 		$p= new ajaxpage($count);
 		$page=$p->ajaxshow();//显示分页
@@ -38,7 +45,7 @@ class ArchivesAction extends PublicAction{
 			->limit($limit)
 			->findAll();
 		$this->assign("list",$list);
-		$this->display();
+		$this->display("Archives:ajaxlist");
 	}
 
 
