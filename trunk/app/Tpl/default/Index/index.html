@@ -1,40 +1,36 @@
 <include file="Public:head" />
 <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
+<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
             <div class="login-h">
+            	<form action="__APP__/Public/check" method="post" name="login">
                 <div class="dengli">
-                    <form action="an-h" method="post" name="login">
-                        <label>
-                            Username: <input class="inputStyle" type="text" />
-                        </label>
-                        <label>
-                            Password:<input class="inputStyle" name="" type="password" />
-                        </label><input class="loginBtn" type="image" name="imageField" src="__PUBLIC__/default/images/logo.gif" />
-                    </form>
+                    <label>Username:<input class="inputStyle" type="text" name="username" /></label>
+                    <label>Password:<input class="inputStyle" name="password" type="password" /></label>
+					<input class="loginBtn" type="image" src="__PUBLIC__/default/images/logo.gif" />
                 </div>
                 <div class="regsiter-h">
-                    Advance Login Mode
+                    <a href="__APP__/Public/login/cid/{$cid}">Advance Login Mode</a>
                 </div>
                 <div class="lg-item">
-                    <label for="gbfn">
-                        Forgotten your password? 
-                    </label>
-                    <input type="checkbox" name="checkbox1" id="checkbox1" /><a class="zhuce">Remember Me </a>
+                    <a href="__APP__/Public/getpassword" target="_blank">Forgotten your password? </a>
+					<input type="checkbox" name="remember" /><a class="zhuce">Remember Me </a>
                 </div>
-                <div class="item -h">
-                    Register is easy.<a>Register  Now!</a>
+                <div class="item-h">
+                    Register is easy.<a href="__APP__/Public/register/cid/{$cid}">Register Now!</a>
                 </div>
+				</form>
             </div>
             <div class="conter-group">
                 <div class="fair-h">
                     <ul>
                         <li>
-                            China
+                            <a href="#">Biz</a>
                         </li>
                         <li>
-                            Fair
+                            <a href="#">Fair</a>
                         </li>
                     </ul>
                 </div>
@@ -97,9 +93,7 @@
             </div>
         </div>
         <div class="mian-center-n">
-            <div class="jianbian-h">
-                Editor's Pick
-            </div>
+            <div class="jianbian-h">Editor's Pick</div>
             <div class="neirong-h">
                 <div class="center-h">
                     <dl>
@@ -173,64 +167,34 @@
             <div class="banner">
                 <img src="__PUBLIC__/default/images/banner.gif" alt="ban" />
             </div>
-            <div class="Property-h">
+            <div class="property-h">
                 <div class="jianbg-h">
                     <ul>
-                        <li class="anbg-h">
-                            Property<img src="__PUBLIC__/default/images/shuxian.gif" alt="xian" />
-                        </li>
-                        <li>
-                            Buy&Sell <img src="__PUBLIC__/default/images/shuxian.gif" alt="xian" />
-                        </li>
-                        <li>
-                            Personals<img src="__PUBLIC__/default/images/shuxian.gif" alt="xian" />
-                        </li>
-                        <li>
-                            Services<img src="__PUBLIC__/default/images/shuxian.gif" alt="xian" />
-                        </li>
-                        <li>
-                            Jobs<img src="__PUBLIC__/default/images/shuxian.gif" alt="xian" />
-                        </li>
+                    <volist name="classifieds_type" id="v">
+		                <li id="ch_class_{$v['id']}" class="ch <if condition="$i==1">on</if>">
+		                    <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
+		                </li>
+						<li class="span"></li>
+		            </volist>
                     </ul>
                 </div>
                 <div class="news-h">
-                    <ul>
+
+	<volist name="classifieds" id="v">
+                    <ul id="ch_info_{$v['id']}" class="cinfo">
+                    	<volist name="v['_sub']" id="sv">
                         <li>
-                            <span>[Detail]</span>·　ata Conversions – Advisor Workstation Office
+                            <span><a href="__APP__/Classifieds/show/aid/{$sv['id']}">[Detail]</a></span>·　<a href="__APP__/Classifieds/show/aid/{$sv['id']}">{$sv['title']}</a>
                         </li>
-                        <li>
-                            <span>[Detail]</span>·　VP - global logistics
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Seeking waitress for Futian bar
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Account Manager (Futian District) 
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　MANAGER OF ASIAN OPERATIONS 
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Engineer (Building Services)
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　QUALITY ENGINEER 
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Legal Service for Labor, Contract, Cooperate, Marit.. 
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Engineer (Building Services)
-                        </li>
-                        <li>
-                            <span>[Detail]</span>·　Landscape Designer 
-                        </li>
+						</volist>
                     </ul>
+	</volist>
+
                 </div>
             </div>
             <div class="Product-h">
                 <div class="event-h">
-                    <span>>>more </span>Event
+                    <span><a href="__APP__/Event/index"> >>more </a></span><a href="__APP__/Event/index" title="Event">Event</a>
                 </div>
                 <div class="Backdrop-h">
                     <div class="magazine-h">
@@ -330,23 +294,13 @@
         <div class="city guide">
             <ul>
                 <li class="bg-h">
-                    Classifeds
-                </li>
-                <li>
-                    <a href="#">Property</a>
-                </li>
-                <li>
-                    <a href="#">Buy&Sell </a>
-                </li>
-                <li>
-                    <a href="#">Personals</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Jobs </a>
-                </li>
+                <a href="__APP__/Classifieds/index">Classifieds</a>
+	            </li>
+	            <volist name="classifieds_type" id="v">
+	                <li>
+	                    <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
+	                </li>
+	            </volist>
                 <li class="di-yuan">
                 </li>
             </ul>
@@ -354,49 +308,14 @@
         <div class="city guide">
             <ul>
                 <li class="bg-h">
-                    City Guide
-                </li>
-                <li>
-                    <a href="#">Arts&Culture </a>
-                </li>
-                <li>
-                    <a href="#">Agencies </a>
-                </li>
-                <li>
-                    <a href="#">Bars </a>
-                </li>
-                <li>
-                    <a href="#">Banking</a>
-                </li>
-                <li>
-                    <a href="#">Cafes </a>
-                </li>
-                <li>
-                    <a href="#">City Events </a>
-                </li>
-                <li>
-                    <a href="#">Consulates </a>
-                </li>
-                <li>
-                    <a href="#">Eduction </a>
-                </li>
-                <li>
-                    <a href="#">Helth </a>
-                </li>
-                <li>
-                    <a href="#">Hotel</a>
-                </li>
-                <li>
-                    <a href="#">Leisure </a>
-                </li>
-                <li>
-                    <a href="#">Restaurant</a>
-                </li>
-                <li>
-                    <a href="#">Shoping </a>
-                </li>
-                <li class="di-yuan">
-                </li>
+                <a href="__APP__/CityGuide/index">City Guide</a>
+	            </li>
+	            <volist name="city_type" id="v">
+	                <li>
+	                    <a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
+	                </li>
+	            </volist>
+                <li class="di-yuan"></li>
             </ul>
         </div>
         <div class="voices-h">
@@ -415,7 +334,7 @@
                     <label>
                         <input type="text" name="textfield" id="textfield" />
                     </label>
-                </form><img src="__PUBLIC__/default/images/The radio.png" /><a>If not playing, see the solution!</a>
+                </form><img src="__PUBLIC__/default/images/the_radio.png" /><a>If not playing, see the solution!</a>
             </div>
         </div>
     </div>

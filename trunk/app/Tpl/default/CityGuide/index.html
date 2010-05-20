@@ -1,17 +1,24 @@
 <include file="Public:head" />
+<link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/cityguide_index.css" rel="stylesheet" type="text/css" />
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
             <div class="conter-group">
-                <div class="group">Group</div>
-                <div class="group-n">
-                    <h5>Projection whiteboard...</h5>
-                    <p><img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....</p>
+                <div class="group">
+                    Group
                 </div>
                 <div class="group-n">
                     <h5>Projection whiteboard...</h5>
-                    <p><img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....</p>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
+                </div>
+                <div class="group-n">
+                    <h5>Projection whiteboard...</h5>
+                    <p>
+                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
+                    </p>
                 </div>
                 <div class="group-n">
                     <h5>Projection whiteboard...</h5>
@@ -32,48 +39,43 @@
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
-                Home > Classifieds > Personals
+                <a href="/">Home</a>
+                > <a href="__APP__/CityGuide/index">{$info['typename']}</a>
             </div>
-            <div class="personals">
-                <img src="__PUBLIC__/default/images/personals.gif" alt="pr" />
-            </div>
-<if condition="$list">
-	<volist name="list" id="v">
-            <div class="chengshi">
-                <dl>
-                    <dt>
-                        <img src="__PUBLIC__/default/images/pic01.gif" alt="{$v['typename']}" />
-                    </dt>
-                    <dd>
-                        <h2 class="chegn_ttitle"><a href="__APP__/CityGuide/ls/id/{$v['id']}">{$v['typename']}</a></h2>
-			<if condition="$v['_son']">
-				<volist name="v['_son']" id="sv">
-					<a href="__APP__/CityGuide/ls/id/{$sv['id']}">{$sv['typename']}</a> | 
-				</volist>
-			</if>
-                    </dd>
-                </dl>
-            </div>
-	</volist>
-</if>
+            <if condition="$list">
+                <volist name="list" id="v">
+                    <div class="chengshi">
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pic01.gif" alt="{$v['typename']}" />
+                            </dt>
+                            <dd>
+                                <h2 class="chegn_ttitle"><a href="__APP__/CityGuide/ls/id/{$v['id']}">{$v['typename']}</a></h2>
+                                <if condition="$v['_son']">
+                                    <volist name="v['_son']" id="sv">
+                                        <a href="__APP__/CityGuide/ls/id/{$sv['id']}">{$sv['typename']}</a>
+                                        | 
+                                    </volist>
+                                </if>
+                            </dd>
+                        </dl>
+                    </div>
+                </volist>
+            </if>
         </div>
     </div>
     <div class="main-left">
         <ul>
-            <li class="bg-a">Property</li>
-            <li>
-                <a href="#">Buy&Sell </a>
+            <li class="bg-h">
+                <a href="__APP__/Classifieds/index">Classifieds</a>
             </li>
-            <li>
-                <a href="#">Personals </a>
+            <volist name="ctype" id="v">
+                <li>
+                    <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
+                </li>
+            </volist>
+            <li class="di-yuan">
             </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Jobs</a>
-            </li>
-            <li class="di-yuan"></li>
         </ul>
     </div>
 </div>

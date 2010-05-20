@@ -17,6 +17,7 @@ class CpAction extends CommonAction{
 		if (!$this->_is_login()){
 			$this->redirect("/Public/login");
 		}
+		import("ORG.Util.Page");
 		parent::_initialize();
 	}//end _initialize()
 	
@@ -27,7 +28,100 @@ class CpAction extends CommonAction{
 	 */
 	function index() {
 		//控制面板首页
-		$this->display();
+		$page=array();
+		$page['title']='My Control Panel -  BeingfunChina';
+		$page['keywords']='My Control Panel';
+		$page['description']='My Control Panel';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:index');
+		$this->display("Cp:layout");
 	}//end index
 	
+	/**
+	 *我发布的分类信息
+	 *@date 2010-5-20
+	 *@time 下午07:20:28
+	 */
+	function my_classifieds_post() {
+		//我发布的分类信息
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=array('in','4,5,6,7,8,9');
+		$classifieds_type=$this->_get_classifieds_type();
+    	$this->assign('classifieds_type',$classifieds_type);
+    	$typeid=$_REQUEST['id'];
+    	if(!empty($typeid)){
+    		$type=D("Arctype");
+	    	$data=$type->where("id=$typeid")->field('id,typename,reid,topid,ispart')->find();
+	    	$typearr=array();
+	    	if($data['ispart']!=0){
+	    		$typearr=$type->where("reid=$typeid")->field('id,typename,reid,topid,ispart')->findAll();
+	    		$in='';
+	    		foreach ($typearr as $v){
+	    			$in.=$v['id'].',';
+	    		}
+	    		$in=trim($in,',');
+	    		$condition['typeid']=array('IN',$in);
+	    	}else{
+	    		$condition['typeid']=$typeid;
+	    	}
+    	}
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,10);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$classifieds=array();
+    	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+		$this->assign('classifieds',$classifieds);
+    	
+		$page=array();
+		$page['title']='My Classifieds -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Control Panel';
+		$page['description']='My Control Panel';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_classifieds_post');
+		$this->display("Cp:layout");
+	}//end my_classifieds_post
+	
+	/**
+	 *我的站内短信
+	 *@date 2010-5-20
+	 *@time 下午08:02:19
+	 */
+	function my_message() {
+		//我的站内短信
+		
+		
+		
+		$page=array();
+		$page['title']='My Message -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Message';
+		$page['description']='My Message';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_message');
+		$this->display("Cp:layout");
+	}//end my_message
+	
+	/**
+	 *分类信息发布的评论
+	 *@date 2010-5-20
+	 *@time 下午08:38:54
+	 */
+	function my_classifieds_comments() {
+		//分类信息发布的评论
+		
+		$page=array();
+		$page['title']='My Comments -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Comments';
+		$page['description']='My Comments';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_classifieds_comments');
+		$this->display("Cp:layout");
+	}//end my_classifieds_comments
 }//end CpAction

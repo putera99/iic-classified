@@ -1,6 +1,6 @@
 <include file="Public:head" />
+<link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/cityguide_content.css" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__/default/css/Home.css" rel="stylesheet" type="text/css" />
 <div id="main">
     <div class="mian-right">
         <div class="mian-center">
@@ -25,23 +25,24 @@
                 <div class="list-a" style="width:560px;">
                     <h6><img src="__PUBLIC__/default/images/{$i}.gif" /><a href="__APP__/CityGuide/show/aid/{$v['id']}">{$v['title']}</a></h6>
                     <p>
-                        {$v['my_content']}
+                        {$v['my_content']|delete_html}
                     </p>
                 </div>
                 <div class="hui-bg">
                     <ul>
                         <li>
-                            Share
+                            <a href="#">Share</a>
                         </li>
                         <li>
-                            Save as favorite
+                            <a href="#">Save as favorite</a>
                         </li>
                         <li>
-                            Report corrections
+                            <a href="#">Report corrections</a>
                         </li>
                     </ul>
                 </div>
             </div>
+			<div class="clear"></div>
 	</volist>
 </if>
             <div class="fanye">

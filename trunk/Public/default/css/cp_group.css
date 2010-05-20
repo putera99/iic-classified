@@ -1,0 +1,68 @@
+/* CSS top 开始 */
+#top{width:950px;padding:0px;margin: 0px auto;}
+.top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 5px;}
+.top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
+.top-city h2 .on{width:96px; height:26px; line-height:26px; color:#828282;}
+.top-city h2 a:hover{width:96px; height:26px; line-height:26px;border:1px solid #503442; color:#bcbcbc;}
+#header{ height:26px; margin:0px; padding:0px; background-color:#993366;}
+.header-left{width:234px;margin:0px;padding:0px;float: left;}
+.header-left span{ font-family:Arial, Helvetica, sans-serif; font-size:12px;color:#FFF; margin:0px 0px 0px 10px; padding:0px;}
+.colorz{width:240px;margin:0px;padding:0px;float: right;}
+.colorz ul{margin:3px 0 0 0; padding:0px;list-style-type:none;} 
+.colorz li{float: left;margin:0px;padding: 5px 0px 0px 8px;}
+.clear{line-height:0px;clear:both;height: 0px;}
+.top-content{margin:0px;padding:0px;background:url(../images/bg2.gif) repeat-x;}
+.top-logo{margin:0px;padding:0px;}
+.top-logo h1{width:169px;float:left;_margin: 0 0 0 30px;*margin: 0 0 0 30px;margin: 0 0 0 23px;padding: 5px 0 0 0;}
+.top-city{width:466px;padding: 0px;margin: 25px 0 0 0;float: right;}
+.top-city a{ margin:0px; padding:0 0 0 8px;}
+.top-nav{width: 906px;padding: 0px; margin: 0px auto;}
+.nav{width:550px;height: 20px;margin:0px;padding:0px;color: #FFFFFF;}
+.nav .annv {width:94px;background: url(../images/Button.png) no-repeat;text-align: center;}
+.nav ul{margin:0px;padding:0px;list-style-type:none;}
+.nav li{float:left;padding:0;margin-right:50px;}
+.search{width:230px;float:right;margin: 0px;padding: 0px;}
+.bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
+
+/* left开始*/
+.mian{ margin:0px auto; padding:0px;}
+.memcp-left {width: 190px;margin: 0px;padding: 0px;color: #FFFFFF;
+}.welcome{margin:0px;padding:0px;border: 1px solid #cccccc;}
+.welcome-bg{ margin:0px; padding-left:20px; background-color:#6f6c6c;}
+.material{margin:0px;padding-top:10px;text-align: center;color: #99406c;padding-bottom: 5px;font-weight: normal;background-color: #f3f3f3;}
+.material a{margin: 0px;padding: 0px;font-size: 12px;font-weight: bold;color: #8b2557;line-height: 20px;}
+.xinxi{width: 170px;line-height:22px;margin: 0px auto;padding-bottom: 5px;border-bottom: 1px dashed #767676;}
+.xinxi p {margin: 0px;padding: 0px;color: #99406c;}
+.regsiter{margin:5px 0 0 0;padding: 0px;}
+.regsiter a{ margin:0px; padding-right:7px;}
+.information{color:#258faa;text-align: center;margin: 3px 0 0 0;padding: 0px;}
+.information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
+.memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
+.memcp-groups-bg{margin:0px;padding-left:28px;background-color:#6f6c6c;background: url(../images/rentou.gif) no-repeat;background-position: 5px;}
+.neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
+
+
+/* right开始*/
+.memcp-right{width:750px;margin:0px;padding:0px;float:right;}
+.right-neirong {margin: 0px;padding: 0px;}
+.mulu {background: url(../images/bg-m.gif) repeat-x;border: 1px solid #bcbcbc;margin: 0px;padding: 0px;font-weight: bold;color: #4a4a4a;}
+.right-neirong{height: 500px;margin:0px;padding:0px;border: 1px solid #bcbcbc;background-color:#f4f4f4;}
+.right-messages{width:725px;height: 280px;margin: 10px auto 0 auto;padding: 0 0 5px 0;}
+.right-title {border-bottom: 1px solid #dadada;margin: 0 0 5px 0;padding: 0 0 12px 0;}
+.right-title span {float: right;}
+.yangshi {font-family:Verdana, Arial, Helvetica, sans-serif;font-weight: bold;color: #993366;margin:0px;}
+.list ul {padding: 0px;list-style-type: none;margin-top: 8px;margin-right: 0px;margin-bottom: 0px;margin-left: 0px;}
+.list li {margin: 0px;border-bottom: 1px dashed #9f9f9f;padding: 5px 0 7px 8px;}
+.list span {float: right;margin: 0px;padding: 0px;}
+.list img {padding-right: 0px;margin-right: 10px;}
+.list {color: #1b7187;line-height: 22px;}
+.xuhao {width: 260px;height: 20px;background: url(../images/fany.gif) no-repeat;padding: 0px;margin: 20px auto 0px auto;}
+.duanxin {width: 724px;height: 200px;margin: 0px;padding: 0px;color: #717171;}
+.duanxin dl{width: 220px;height: 56px;margin:0px;padding: 5px 0 0 0;border-right: 1px dashed #8b8b8b;clear:both;}
+.duanxin dt {margin: 0px;padding: 0px;clear: both;float: left;}
+.duanxin dd {width: 140px;float: left;margin: 0px;line-height: 14px;padding: 0 5px 0 0 ;}
+.zhuti {font-size: 12px;font-weight: bold;color: #993366;margin: 0px;padding: 0px;}
+.kuan-quanz {width: 235px;float: right;margin: 5px 0 0 0;padding: 0px;}
+
+/* CSS底部开始*/
+#bottom{width:950px;background: url(../images/bg9.gif) repeat-x;color: #FFF;margin: 20px auto 0 auto;padding: 0px;}
