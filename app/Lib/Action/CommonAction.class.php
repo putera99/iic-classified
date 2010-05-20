@@ -28,6 +28,43 @@ class CommonAction extends Action{
     }
     
     /**
+     *获取指定类的信息
+     *@date 2010-5-20
+     *@time 上午09:26:44
+     */
+    protected function _get_carc($typeid,$limit="0,10",$cid,$uid) {
+    	//获取指定类的信息
+    	
+    	$condition=array();
+    	
+    	$type=D("Arctype");
+    	$data=$type->where("id=$typeid")->field('id,typename,reid,topid,ispart')->find();
+    	$typearr=array();
+    	if($data['ispart']!=0){
+    		$typearr=$type->where("reid=$typeid")->field('id,typename,reid,topid,ispart')->findAll();
+    		$in='';
+    		foreach ($typearr as $v){
+    			$in.=$v['id'].',';
+    		}
+    		$in=trim($in,',');
+    		$condition['typeid']=array('IN',$in);
+    	}else{
+    		$condition['typeid']=$typeid;
+    	}
+
+    	$dao=D("Archives");
+    	if ($cid) {
+    		$condition['cid']=$cid;
+    	}
+    	if($uid){
+    		$condition['uid']=$uid;
+    	}
+    	$info=$dao->where($condition)->limit($limit)->findAll();
+    	//dump($info);
+    	return $info;
+    }//end _get_cart
+    
+    /**
      *设置城市
      *@date 2010-5-4
      *@time 上午09:48:13

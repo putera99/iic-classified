@@ -1,0 +1,52 @@
+/* left开始*/
+.mian{ margin:0px auto; padding:0px;}
+.memcp-left {width: 190px;margin: 0px;padding: 0px;color: #FFFFFF;
+}.welcome{margin:0px;padding:0px;border: 1px solid #cccccc;}
+.welcome-bg{ margin:0px; padding-left:20px; background-color:#6f6c6c;}
+.material{margin:0px;padding-top:10px;text-align: center;color: #99406c;padding-bottom: 5px;font-weight: normal;background-color: #f3f3f3;}
+.material a{margin: 0px;padding: 0px;font-size: 12px;font-weight: bold;color: #8b2557;line-height: 20px;}
+.xinxi{width: 170px;line-height:22px;margin: 0px auto;padding-bottom: 5px;border-bottom: 1px dashed #767676;}
+.xinxi p {margin: 0px;padding: 0px;color: #99406c;}
+.regsiter{margin:5px 0 0 0;padding: 0px;}
+.regsiter a{ margin:0px; padding-right:7px;}
+.information{color:#258faa;text-align: center;margin: 3px 0 0 0;padding: 0px;}
+.information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
+.memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
+.memcp-groups-bg{margin:0px;padding-left:28px;background-color:#6f6c6c;background: url(../images/rentou.gif) no-repeat;background-position: 5px;}
+.neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
+
+/* right开始*/
+.memcp-right{width:750px;margin:0px;padding:0px;float:right;}
+.right-neirong {margin: 0px;padding: 0px;}
+.mulu {background: url(../images/bg-m.gif) repeat-x;border: 1px solid #bcbcbc;margin: 0px;padding: 0px;font-weight: bold;color: #4a4a4a;}
+.right-neirong{margin:0px;padding:0px;border: 1px solid #bcbcbc;background-color:#f4f4f4;}
+.right-messages{width:725px;margin: 10px auto 0 auto;padding: 0 0 5px 0;}
+.right-title {margin:0px;padding: 0 0 15px 0;border-bottom: 1px solid #dadada;}
+.right-title span {float: right;}
+.yangshi {font-family:Verdana, Arial, Helvetica, sans-serif;font-weight: bold;color: #993366;margin:0px;}
+.list ul {padding: 0px;list-style-type: none;margin-top: 8px;margin-right: 0px;margin-bottom: 0px;margin-left: 0px;}
+.list li {margin: 0px;border-bottom: 1px dashed #9f9f9f;padding: 5px 0 7px 8px;}
+.list span {float: right;margin: 0px;padding: 0px;}
+.list img {padding-right: 0px;margin-right: 10px;}
+.list {color: #3e3e3e;line-height: 22px;}
+.qunzhu {height: 80px;border-bottom: 1px dashed #9f9f9f;padding: 0 0 5px 0;margin: 0 0 5px 0;}
+.qunzhu dl {margin: 0px;clear: both;padding: 10px 0px 0px 10px;line-height: 24px;}
+.qunzhu dt {margin: 0px;padding: 0px;clear: both;float: left;}
+.qunzhu dd {width: 366px;float: left;margin: 0px;padding: 0 0 0 20px;}
+.qunzhu span {display: block;color: #a42f69;margin: 0px;padding: 0px;font-size: 12px;line-height: 20px;}
+.shuzi {text-align: center;margin-top: 5px;}
+.riqi {width: 100px;float: right;padding: 0px;margin: 10px 0 0 0;}
+.grzl {float: left;margin: 0px;padding: 0px;}
+.cuti {font-weight: bold;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.shuzi {text-align: center;}
+
+.qunzhu-events {height: 70px;border-bottom: 1px dashed #9f9f9f;padding: 0;margin: 0;}
+.qunzhu-events dl {margin: 0px;clear: both;padding: 10px 0px 0px 0px;line-height: 24px;}
+.qunzhu-events dt {margin: 0px;padding: 0px;clear: both;float: left;}
+.qunzhu-events dd {width: 366px;float: left;margin: 0px;padding: 0 0 0 20px;}
+.qunzhu-events span {display: block;color: #a42f69;margin: 0px;padding: 0px;font-size: 12px;line-height: 20px;}
+.duanxin {text-align: right;color: #FFF;margin: 0px;padding: 0px;}
+.duanxin dl{width: 220px;height: 56px;margin:0px;padding: 5px 0 0 0;border-right: 1px dashed #8b8b8b;clear:both;}
+.duanxin dt {margin: 0px;padding: 0px;clear: both;float: left;}
+.duanxin dd {width: 140px;float: left;margin: 0px;line-height: 14px;padding: 0 5px 0 0 ;}
+.subject {color: #993366;font-size: 12px;font-weight: bold;padding-right: 100px;}

@@ -1,5 +1,6 @@
 <include file="Public:head" />
-<link href="__PUBLIC__/default/css/Home.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/classifieds_list.css" rel="stylesheet" type="text/css" />
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
@@ -53,7 +54,7 @@
                 <div class="list-a">
                     <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}"}">{$v['title']}</a></h6>
                     <p>
-                        {$v['description']}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
+                        {$v['description']|delete_html}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
                     </p>
                 </div>
                 <div class="hui-bg">
@@ -77,7 +78,7 @@
     </div>
     <div class="main-left">
         <ul>
-            <li class="bg-a">
+            <li class="bg-h">
                 <a href="__APP__/CityGuide/index">City Guide</a>
             </li>
             <volist name="ctype" id="v">

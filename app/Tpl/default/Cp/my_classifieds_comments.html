@@ -1,0 +1,30 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_classifieds_comments">My Classifieds Comments</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3>My Comments</h3>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="list">
+            <ul>
+<volist name="comments" id="v">
+                <li>
+                    <span>{$v['lastview']|toDate='Y-m-d'}</span>
+                    <a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a>
+                </li>
+</volist>
+            </ul>
+        </div>
+    </div>
+    <div class="xuhao">
+    	{$showpage}
+    </div>
+</div>
+<div class="clear">
+</div>

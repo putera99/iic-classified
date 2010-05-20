@@ -51,7 +51,7 @@ class CityGuideAction extends CommonAction{
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
-		$this->assign('ctype',$this->_get_cityguide_type());
+		$this->assign('ctype',$this->_get_classifieds_type());
 		$this->display();
 	}//end index
 	
@@ -77,7 +77,7 @@ class CityGuideAction extends CommonAction{
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
 		$data=$dao->where("typeid={$typeid} AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
-		dump($dao->getLastSql());
+		//dump($dao->getLastSql());
 		//分类信息 导航
 		$this->assign('classifieds_type',$this->_get_classifieds_type());
 		

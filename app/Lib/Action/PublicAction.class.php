@@ -32,7 +32,7 @@ class PublicAction extends CommonAction{
 	
 	function login() {//登录
 		if ($this->user) {
-			$this->error("");
+			$this->error("login");
 		}
 		$this->display();
 	}// END login
@@ -49,18 +49,54 @@ class PublicAction extends CommonAction{
 		$this->display();
 	}// END mpass
 	
-	function login_out() {//退出
-		unset($_SESSION['uid'],$_SESSION['username']);
+	function logout() {//退出
+		unset($_SESSION['uid']);
+		unset($_SESSION['username']);
 		$this->user='';
-		$this->display();
+		$this->redirect('/Index/index');
 	}// END login_out
 	
-	function check() {//登录校验
-		$this->display('login');
+	function check() {
+		//登录校验
+		$username=trim($_POST['username']);
+		$password=md5($_POST['password']);
+		$dao=new Model();
+		$info=$dao->Table("cdb_members")->where("username='$username'")->find();
+		if ($info) {
+			if ($password==$info['password']) {
+				$_SESSION['uid']=$info['uid'];
+				$_SESSION['username']=$info['username'];
+				$_SESSION["info"]=$info;
+				$this->redirect("/Cp/index");
+			}else{
+				$this->error("ERROR:2!");
+			}
+		}else{
+			$this->error("ERROR:1!");
+		}
+
 	}// END check
 	
 	function reg_add() {//注册写入
-		$this->display();
+		$data['username']=$_POST['username'];
+		$data['password']=$_POST['password'];
+		$data['email']=$_POST['email'];
+		$data['groupid']=10;
+		if ($data['password']!=$_POST['repassword'] || empty($data['password'])||empty($data['email'])||empty($data['username'])) {
+			$this->error("ERROR:1!");
+		}
+		$data['password']=md5($data['password']);
+		$dao=new Model();
+		$uid=$dao->Table("cdb_members")->add($data);
+		if ($uid) {
+			$info=$dao->Table("cdb_members")->where("uid='$uid'")->find();
+			$_SESSION['uid']=$info['uid'];
+			$_SESSION['username']=$info['username'];
+			$_SESSION["info"]=$info;
+			$this->redirect("/Cp/index");
+		}else{
+			$this->error("ERROR:2!");
+		}
 	}// END login
 	
 	public function verify(){

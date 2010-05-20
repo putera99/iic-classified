@@ -21,8 +21,23 @@ class IndexAction extends CommonAction{
 	
     public function index(){
     	$this->assign('city_type',$this->_get_cityguide_type());
-    	$this->assign('classifieds_type',$this->_get_classifieds_type());
+    	$classifieds_type=$this->_get_classifieds_type();
+    	$this->assign('classifieds_type',$classifieds_type);
     	
+    	$classifieds=array();
+    	foreach ($classifieds_type as $v){
+    		$classifieds[$v['id']]['id']=$v['id'];
+    		$classifieds[$v['id']]['_sub']=$this->_get_carc($v['id'],'0,10',$this->pcid);
+    	}
+    	//dump($classifieds);
+    	$this->assign('classifieds',$classifieds);
+    	
+    	$page=array();
+		$page['title']='BeingfunChina';
+		$page['keywords']='BeingfunChina';
+		$page['description']='BeingfunChina';
+		$this->assign('page',$page);
+		
     	$this->display();
     }
 }
