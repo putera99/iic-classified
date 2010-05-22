@@ -14,6 +14,7 @@
 class CommonAction extends Action{
 	protected $user=array();//用户信息
 	protected $cid;//城市ID
+	protected $city=array();
 	
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
@@ -25,6 +26,18 @@ class CommonAction extends Action{
         load("extend");
         //$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
         //import('ORG.Util.Image');
+        
+        if (empty($this->city)) {
+        	$city=F("city");
+        	if (empty($city)) {
+        		$dao=M("ActCity");
+        		$city=$dao->where("status='1'")->order("ctitle desc")->findAll();
+        		F("city",$city);
+        		$this->city=$city;
+        	}else{
+        		$this->city=$city;
+        	}
+        }
     }
     
     /**
@@ -244,6 +257,17 @@ class CommonAction extends Action{
 		return $m->query($sql);
 	}// END _top7
 	
+	protected function _classifieds_tree() {
+		$dao=new Model();
+		$list=$dao->query("SELECT * FROM iic_arctype where topid=1");
+		//echo $dao->getLastSql();
+		//load("extend");
+		$news=list_to_tree($list,'id','reid','_son','1');
+		
+		
+		
+		return $news;
+	}//end tree
 	
 }//END CommonAction
 ?>
