@@ -124,4 +124,39 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_classifieds_comments');
 		$this->display("Cp:layout");
 	}//end my_classifieds_comments
+	
+	/**
+	 *发送分类信息
+	 *@date 2010-5-21
+	 *@time 上午09:21:48
+	 */
+	function my_post_classifieds() {
+		//发送分类信息
+		$class_tree=$this->_classifieds_tree();
+		/*echo "<pre>";
+		print_r($class_tree[0]);
+		echo "<pre>";*/
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->city);
+		
+		$page=array();
+		$page['title']='Post Classifieds -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Classifieds';
+		$page['description']='Post Classifieds';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_post_classifieds');
+		$this->display("Cp:layout");
+	}//end my_post_classifieds
+	
+	/**
+	 *增加分类信息
+	 *@date 2010-5-21
+	 *@time 上午09:22:32
+	 */
+	function add_classifieds() {
+		//增加分类信息
+		
+	}//end add_classifieds
+	
 }//end CpAction

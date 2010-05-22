@@ -7,9 +7,19 @@
         <link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
         
 
-        <script src="__PUBLIC__/js/jquery-1.1.3.1.pack.js"></script>
+        <script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
         <meta name="keywords" content="{$page['keywords']}" />
         <meta name="description" content="{$page['description']|clearh}" />
+		<script type="text/javascript">
+		var HOST		= window.location.host;
+		var Per_host	="http://"+HOST;
+		var JS_PATH		="../Public/js/";
+		var IMG_PATH	="../Public/images/";
+		var URL			='__URL__';
+		var APP			='__APP__';
+		var PUBLIC		='../Public/';
+		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
+		</script>
     </head>
     <body>
         <div id="top">
