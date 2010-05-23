@@ -29,6 +29,7 @@
 .list span {float: right;margin: 0px;padding: 0px;}
 .list img {padding-right: 0px;margin-right: 10px;}
 .list {color: #3e3e3e;line-height: 22px;}
+.list label{width:80px; text-align:center; display:block; float:left;}
 .qunzhu {height: 80px;border-bottom: 1px dashed #9f9f9f;padding: 0 0 5px 0;margin: 0 0 5px 0;}
 .qunzhu dl {margin: 0px;clear: both;padding: 10px 0px 0px 10px;line-height: 24px;}
 .qunzhu dt {margin: 0px;padding: 0px;clear: both;float: left;}

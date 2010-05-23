@@ -9,15 +9,21 @@ a img{ border:none;}
 	_height:expression(this.width > 100 ? this.height*(100/this.width) : auto);/*  IE6 */
 	_width:expression(this.width > 100 ? 100px : auto);/*  IE6 */
 }
+.none{display:none;}
+.class_tree ul,.class_tree ul dl,.class_tree ul dl dt{ margin:0px; padding:0px; list-style-type:none;}
+.class_tree ul dl dt{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.class_tree ul dl dt{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.class_tree ul dl dd{height:24px;margin:0px;padding:0px; background-color:#aaa; border-bottom:#ccc solid 1px; text-align: center;}
+
 /* CSS top 开始 */
-#top{width:950px;padding:0px;margin: 0px auto;}
+#top{color: #FFFFFF;width:950px;padding:0px;margin: 0px auto;}
 .top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 10px;}
 .top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
 .top-city h2 a:hover,.top-city h2 .on{width:96px; height:26px; line-height:26px;border:1px solid #503442; color:#bcbcbc;}
 #header-h{ height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
 .bg-h{height: 8px;margin:0px;padding: 0px;background: url(../images/bg-huan.gif) repeat-x;}
 .main-left .bg-h{height:24px;font-size: 14px;font-weight: bold;color: #e25a02;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
-#header{ height:26px; margin:0px; padding:0px; background-color:#993366;}
+#header{color: #FFFFFF;height:26px; margin:0px; padding:0px; background-color:#993366;}
 .header-left{width:334px;margin:0px;padding:0px;float: left;}
 .header-left span{ font-family:arial, helvetica, sans-serif; font-size:12px;color:#fff; margin:0px 0px 0px 10px; padding:0px;}
 .header-left span a{color:#fff;}
@@ -74,7 +80,7 @@ a img{ border:none;}
 #bottom{width:950px; height: 109px; background: url(../images/bg9.gif) repeat-x;margin: 0px;text-align: center; margin-top:10px; padding: 20px 0 0 0;}
 
 .Advertisement{margin: 10px 0 0 0; padding:0px;}
-#bottom{width:950px;text-align: center;margin: 50px auto 0 auto;padding: 20px 0 0 0;background: url(../images/bg9.gif) no-repeat;}
+#bottom{color: #FFFFFF;width:950px;text-align: center;margin: 50px auto 0 auto;padding: 20px 0 0 0;background: url(../images/bg9.gif) no-repeat;}
 .n-life{width:735px;padding:0px;margin: 0px;}
 .classifieds content{ margin:0px; padding:0px;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
@@ -87,13 +93,14 @@ a img{ border:none;}
 .content-n h4 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;color: #b53e79;line-height: 22px;margin: 0px;padding: 5px 0px;}
 .content-life p{ margin:0px; padding:0px; }
 .content-life ul{padding:0px;list-style-type:none;margin: 20px 0 0 0;}
-.content-life li{width: 116px;height: 25px; line-height:25px; background: url(../images/button.gif) no-repeat; margin:0px 8px;float: left;text-align: center;}
+.content-life li{color: #FFFFFF;width: 116px;height: 25px; line-height:25px; background: url(../images/button.gif) no-repeat; margin:0px 8px;float: left;text-align: center;}
 .content-life li a{color: #FFFFFF; text-decoration:none;}
 .content-life li a:hover{color: #FFFFFF;text-decoration:underline;}
 .Comments-right{width:160px;margin:0px;padding:0px;float:right;}
-.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0;}
-.biaoti {margin:0px;background-position: 1px bottom;background: url(../images/xian.gif) repeat-x;padding: 0px;}
+.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0; height:auto;}
+.biaoti {margin:10px 8px;background-position: 1px bottom;background:url(../images/xian.gif) repeat-x 0 10px;padding: 0px;}
 .biaoti img{margin:0px;padding: 0px;}
+
 .right{width:200px;padding:0px;float:right;margin: 0px;}
 .next lssue { margin:0px; padding: 0px;}
 .next-bg{height:22px;margin: 10px 0 0 0; padding-left:10px; background-color:#706c6d;border: 1px solid #aaaaaa; font-weight:bold;}

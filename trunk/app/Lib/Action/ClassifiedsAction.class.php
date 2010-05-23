@@ -22,6 +22,7 @@ class ClassifiedsAction extends CommonAction{
 	  */
 	function _initialize() {
 		//预处理
+		parent::_initialize();
 		if (intval($_GET['cid'])){
 			
 			$this->pcid=intval($_GET['cid']);
@@ -29,8 +30,7 @@ class ClassifiedsAction extends CommonAction{
 			$this->_set_cid();
 			$this->pcid=$this->cid;
 		}
-		//$this->$cityguide_type=$this->_get_cityguide_type();
-		parent::_initialize();
+		$this->assign('city_type',$this->_get_tree(1000));
 	}//end _initialize()
 	
 	
@@ -53,7 +53,7 @@ class ClassifiedsAction extends CommonAction{
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
-		$this->assign('ctype',$this->_get_cityguide_type());
+		
 		$this->display();
 	}//end index
 	
@@ -66,22 +66,32 @@ class ClassifiedsAction extends CommonAction{
 		//分类信息列表页面
 		$typeid=intval($_GET['id']);
 		
+		$arctype=D("Arctype");
+		$info=$arctype->where("id=$typeid")->find();
+		
+		if($info['ispart']==1){
+			$small=$arctype->where("reid=$typeid")->field("id")->findAll();
+			$str='';
+			foreach ($small as $v){
+				$str.=$v['id'].',';
+			}
+			$str='typeid IN ('.trim($str,',').')';
+		}else{
+			$str="typeid={$typeid}";
+		}
 		//信息列表
 		$now=time();
 		import("ORG.Util.Page");
 		$dao=D("Archives");
 		//$count=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
-		$count=$dao->where("(typeid={$typeid} AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->count();
+		$count=$dao->where("($str AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->count();
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
-		$data=$dao->where("(typeid={$typeid} AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
+		$data=$dao->where("($str AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
-
-		//城市指南 导航
-		$this->assign('ctype',$this->_get_cityguide_type());
 		
 		//页面信息
 		$arctype=D("Arctype");

@@ -132,7 +132,7 @@ class CpAction extends CommonAction{
 	 */
 	function my_post_classifieds() {
 		//发送分类信息
-		$class_tree=$this->_classifieds_tree();
+		$class_tree=$this->_get_tree(1);
 		/*echo "<pre>";
 		print_r($class_tree[0]);
 		echo "<pre>";*/

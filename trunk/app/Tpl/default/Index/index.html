@@ -269,7 +269,7 @@
             </div>
             <div class="product-h">
                 <div class="event-h">
-                    <span>>>more </span>Event
+                    <span>>>more </span>Do You Know?
                 </div>
                 <div class="backdrop-h">
                     <dl>
@@ -291,29 +291,35 @@
         </div>
     </div>
     <div class="main-left">
-        <div class="city guide">
+        <div class="class_tree">
             <ul>
                 <li class="bg-h">
                 <a href="__APP__/Classifieds/index">Classifieds</a>
 	            </li>
 	            <volist name="classifieds_type" id="v">
-	                <li>
-	                    <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
-	                </li>
+	                <dl id="cf_{$v['id']}" class="s_cf">
+	                    <dt><a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+						<volist name="v['_son']" id="vs">
+							<dd class="cf_{$v['id']} none"><a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+						</volist>
+	                </dl>
 	            </volist>
                 <li class="di-yuan">
                 </li>
             </ul>
         </div>
-        <div class="city guide">
+        <div class="class_tree">
             <ul>
                 <li class="bg-h">
                 <a href="__APP__/CityGuide/index">City Guide</a>
 	            </li>
 	            <volist name="city_type" id="v">
-	                <li>
-	                    <a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
-	                </li>
+	            	<dl id="cg_{$v['id']}" class="s_cg">
+	                    <dt><a href="__APP__/CityGuide/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+						<volist name="v['_son']" id="vs">
+							<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+						</volist>
+	                </dl>
 	            </volist>
                 <li class="di-yuan"></li>
             </ul>
