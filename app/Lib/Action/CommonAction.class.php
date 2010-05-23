@@ -41,6 +41,43 @@ class CommonAction extends Action{
     }
     
     /**
+     *用户收藏
+     *@date 2010-5-23
+     *@time 下午03:08:54
+     */
+    public function user_collection($tid,$types,$listid=0) {
+    	//用户收藏
+    	$tid=empty($tid)?$_REQUEST['tid']:$tid;
+    	$types=empty($types)?$_REQUEST['types']:$types;
+    	$listid=empty($_REQUEST['listid'])?0:$_REQUEST['tid'];
+    	if (!$this->_is_login()){
+			$this->ajaxReturn(0,'no login!',0);
+		}else{
+	    	$dao=D("UserCollection");
+	    	$condition=array();
+	    	$condition['uid']=$this->user['uid'];
+	    	$condition['tid']=$types;
+	    	$condition['types']=$types;
+	    	$info=$dao->where($condition)->findAll();
+	    	if ($info) {
+	    		$this->ajaxReturn(0,'资源已经收藏!',0);
+	    	}else{
+	    		$dao->uid=$this->user['uid'];
+	    		$dao->tid=$tid;
+	    		$dao->types=$types;
+	    		$dao->listid=$listid;
+	    		$id=$dao->add();
+	    		if ($id) {
+	    			$this->ajaxReturn($id,'收藏成功！',1);
+	    		}else{
+	    			$this->ajaxReturn(0,'收藏失败！',0);
+	    		}
+	    	}
+		}
+    	
+    }//end _user_collection
+    
+    /**
      *获取指定类的信息
      *@date 2010-5-20
      *@time 上午09:26:44
@@ -82,7 +119,7 @@ class CommonAction extends Action{
      *@date 2010-5-4
      *@time 上午09:48:13
      */
-    function _set_cid() {
+   protected function _set_cid() {
     	//设置城市
     	$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
     	if(empty($this->cid)){
@@ -91,6 +128,17 @@ class CommonAction extends Action{
     	}
     }//end _set_cid
     
+    /**
+     *获取子类
+     *@date 2010-5-23
+     *@time 上午11:02:02
+     */
+    protected function _get_son($id) {
+    	//获取子类
+    	$dao=D("Arctype");
+    	$info=$dao->where("id=$id AND ishidden=0")->field("")->order("id asc")->findAll();
+    	return $data;
+    }//end _get_son
     /**
      *获取话题的评论
      *@date 2010-5-10
@@ -257,15 +305,11 @@ class CommonAction extends Action{
 		return $m->query($sql);
 	}// END _top7
 	
-	protected function _classifieds_tree() {
+	protected function _get_tree($topid) {
 		$dao=new Model();
-		$list=$dao->query("SELECT * FROM iic_arctype where topid=1");
-		//echo $dao->getLastSql();
-		//load("extend");
-		$news=list_to_tree($list,'id','reid','_son','1');
-		
-		
-		
+		$list=$dao->query("SELECT * FROM iic_arctype where topid=$topid AND ishidden=0");
+		$news=list_to_tree($list,'id','reid','_son',$topid);
+		unset($dao);
 		return $news;
 	}//end tree
 	

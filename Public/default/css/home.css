@@ -50,6 +50,7 @@
 .Product-h{ margin:10px 0 0 0; padding:0px;}
 .event-h{margin:0px; padding:0 0 0 20px;background:url(../images/bg6.gif) no-repeat;color:#3a3838;font-weight: bold;}
 .event-h span{ float:right; padding-right:10px; color:#FFFFFF; font-weight:bold;}
+.event-h span a,.event-h a{color:#3a3838;}
 .magazine-h{width: 237px;padding:0px;color:#000000;line-height:20px;float: left;margin: 8px 0px 0px 0px;}
 .magazine-h dl{margin:0px;clear: both;padding: 5px 0px 0px 19px;}
 .magazine-h dt{margin:0px; padding:0px; float:left; clear:both; line-height:14px;}

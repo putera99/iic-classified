@@ -1,6 +1,16 @@
 <?php
-function dafen($cstar,$cmember){
-    return empty($cstar)?0:round(($cstar/($cmember*5)),2)*10;
+
+/**
+ *格式时间
+ *@date 2010-5-20
+ *@time 下午08:35:01
+ */
+function toDate($time,$format='Y年m月d日 H:i:s'){
+	if( empty($time)) {
+		return '';
+	}
+    $format = str_replace('#',':',$format);
+	return date(auto_charset($format),$time);
 }
 function get_username() {
 	return $_SESSION['username'];
@@ -144,19 +154,31 @@ function dhtml($string) {
 	return $string;
 }
 
+/**
+ *清除HTML和双引号
+ *@date 2010-5-19
+ *@time 下午02:20:40
+ */
+function clearh($string) {
+	//清除HTML和双引号
+	$string = preg_replace("/<(\/?.*?)>/si","",$string);
+	//$string = preg_replace('"',"",$string);
+	return $string;
+}//end clearh
+
 function delete_html($string) {
 	if(is_array($string)) {
 		foreach($string as $key => $val) {
 			$string[$key] = shtmlspecialchars($val);
 		}
 	} else {
-		$string = preg_replace("/<(\/?(p|strong|span).*?)>/si","",$string);
+		$string = preg_replace("/<(\/?(p|strong|span|o:p|a|st1).*?)>/si","",$string);
 		$string = preg_replace('/&amp;((#(\d{3,5}|x[a-fA-F0-9]{4})|[a-zA-Z][a-z0-9]{2,5});)/', '&\\1',
 			str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $string));
 	}
 	return nl2br($string);
 }
-
+             
 /**
  * 转换网址
  */

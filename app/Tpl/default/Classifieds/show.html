@@ -1,4 +1,5 @@
 <include file="Public:head" />
+<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="right">
         <img src="__PUBLIC__/default/images/pic6.gif" alt="pci8" />
@@ -138,8 +139,8 @@ s							</p>
                         <li>
                             <a href="__APP__/Member/share/aid/{$info['id']}">Share</a>
                         </li>
-                        <li>
-                            <a href="__APP__/Member/favorite/aid/{$info['id']}">Save as favorite</a>
+                        <li id="{$info['channel']}_{$info['id']}" class="user_collection">
+                            Save as favorite
                         </li>
                         <li>
                             <a href="__APP__/Member/report/aid/{$info['id']}">Report corrections</a>

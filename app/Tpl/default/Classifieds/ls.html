@@ -1,6 +1,7 @@
 <include file="Public:head" />
 <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/classifieds_list.css" rel="stylesheet" type="text/css" />
+<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
@@ -54,7 +55,7 @@
                 <div class="list-a">
                     <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}"}">{$v['title']}</a></h6>
                     <p>
-                        {$v['description']|delete_html}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
+                        {$v['description']|strip_tags}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
                     </p>
                 </div>
                 <div class="hui-bg">
@@ -77,18 +78,22 @@
         </div>
     </div>
     <div class="main-left">
-        <ul>
-            <li class="bg-h">
+        <div class="class_tree">
+            <ul>
+                <li class="bg-h">
                 <a href="__APP__/CityGuide/index">City Guide</a>
-            </li>
-            <volist name="ctype" id="v">
-                <li>
-                    <a href="__APP__/CityGuide/ls/id/{$v['id']}" title="{$vs['seotitle']}">{$v['typename']}</a>
-                </li>
-            </volist>
-            <li class="di-yuan">
-            </li>
-        </ul>
+	            </li>
+	            <volist name="city_type" id="v">
+	            	<dl id="cg_{$v['id']}" class="s_cg">
+	                    <dt><a href="__APP__/CityGuide/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+						<volist name="v['_son']" id="vs">
+							<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+						</volist>
+	                </dl>
+	            </volist>
+                <li class="di-yuan"></li>
+            </ul>
+        </div>
     </div>
 </div>
 <include file="Public:foot" />

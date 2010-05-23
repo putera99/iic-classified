@@ -20,9 +20,11 @@ class IndexAction extends CommonAction{
 	
 	
     public function index(){
-    	$this->assign('city_type',$this->_get_cityguide_type());
+    	
+    	$this->assign('city_type',$this->_get_tree(1000));
+    	$this->assign('classifieds_type',$this->_get_tree(1));
     	$classifieds_type=$this->_get_classifieds_type();
-    	$this->assign('classifieds_type',$classifieds_type);
+    	
     	
     	$classifieds=array();
     	foreach ($classifieds_type as $v){
