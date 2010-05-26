@@ -12,5 +12,13 @@
  +------------------------------------------------------------------------------
  */
 class BizAction extends CommonAction{
-	
+	/**
+	 *展会频道首页
+	 *@date 2010-5-25
+	 *@time 下午01:18:29
+	 */
+	function index() {
+		//展会频道首页
+		$this->display();
+	}//end index
 }//end BizAction

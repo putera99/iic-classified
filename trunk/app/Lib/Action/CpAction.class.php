@@ -159,4 +159,79 @@ class CpAction extends CommonAction{
 		
 	}//end add_classifieds
 	
+	/**
+	 *我发布的城市指南
+	 *@date 2010-5-25
+	 *@time 下午03:29:59
+	 */
+	function my_cityguide_post() {
+		//我发布的城市指南
+		$page=array();
+		$page['title']='My Post CityGuide -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Post CityGuide';
+		$page['description']='My Post CityGuide';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_cityguide_post');
+		$this->display("Cp:layout");
+	}//end my_cityguide_post
+	
+	/**
+	 *发送城市指南
+	 *@date 2010-5-25
+	 *@time 下午03:13:17
+	 */
+	function my_post_cityguide() {
+		//发送城市指南
+		$this->assign('class_tree',$class_tree=$this->_get_tree(1000));
+		
+		$page=array();
+		$page['title']='Post CityGuide" -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post CityGuide';
+		$page['description']='Post CityGuide';
+		$this->assign('page',$page);
+		$this->assign('content','Cp:my_post_cityguide');
+		$this->display("Cp:layout");
+	}//end my_cityguide_post
+	
+	/**
+	 *增加城市指南
+	 *@date 2010-5-25
+	 *@time 下午03:14:18
+	 */
+	function add_cityguide() {
+		//增加城市指南
+		$dao=D("Archives");
+		$vo=$dao->create();
+		if($vo){
+			$vo['description']=String::msubstr($vo['my_content'],0,200);
+			$vo['my_content']=nl2br($vo['my_content']);
+			$t=explode('/',$vo['showstart']);
+			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$t=explode('/',$vo['showend']);
+			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$t=explode('_',$vo['typeid']);
+			$vo['typeid']=$t['1'];
+			$vo['channel']=$t['0'];
+			$aid=$dao->add($vo);
+			if ($aid) {
+				$data=array();
+				$data['content']=nl2br($_REQUEST['content']);
+				$data['aid']=$aid;
+				$id=$dao->Table("iic_addon_article")->add($data);
+				if($id){
+					$this->success('发布成功!');
+				}else{
+					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$this->error("附属表写入失败!");
+				}
+			}else{
+				$this->error('主档案表更新失败!');
+			}
+			//dump($vo);
+		}else{
+			$this->error($dao->getError());
+		}
+	}//end add_cityguide
+	
 }//end CpAction

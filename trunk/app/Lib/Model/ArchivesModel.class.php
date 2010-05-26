@@ -13,7 +13,16 @@
  */
 import("RelationModel");
 class ArchivesModel extends RelationModel{
-	
+	protected $_auto=array(
+		array('uid','get_uid',1,'function'),
+		array('senddate','time',1,'function'),
+		array('pubdate','time',1,'function'),
+		array('uip','client_ip',1,'function'),
+		array('editpwd','time',1,'function'),
+		array('albumnum','0',1),
+		array('click','0',1),
+		array('ismake','1',1),
+	);
 	protected $_link = array(
 		'Jobs'=>array(//关联招聘
 				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY

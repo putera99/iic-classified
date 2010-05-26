@@ -41,6 +41,38 @@ class CommonAction extends Action{
     }
     
     /**
+     *查城市和区
+     *@date 2010-5-26
+     *@time 下午04:54:28
+     */
+    function _get_city($type,$clear=0) {
+    	//查城市和区
+    	$name='city_'.$type;
+    	if($clear==1){
+    		S($name,null);
+    	}
+		$data=S($name);
+		if(empty($data)){
+	    	$dao=M("ActCity");
+	    	$city=$dao->where("$type=1")->findAll();
+	    	$zone=M("Zone");
+	    	$data=array();
+	    	foreach ($city as $v){
+	    		$data[$v['id']]=$v;
+	    		$z='';
+	    		$z=$zone->where("cid={$v['id']}")->order("list asc")->findAll();
+	    		$qu=array();
+	    		foreach ($z as $x){
+	    			$qu[$x['id']]=$x;
+	    		}
+	    		$data[$v['id']]['_zone']=$qu;
+	    	}
+	    	S($name,$data,60*60*60*24);
+		}
+		return $data;
+    }//end _get_city
+    
+    /**
      *用户收藏
      *@date 2010-5-23
      *@time 下午03:08:54
@@ -56,17 +88,21 @@ class CommonAction extends Action{
 	    	$dao=D("UserCollection");
 	    	$condition=array();
 	    	$condition['uid']=$this->user['uid'];
-	    	$condition['tid']=$types;
+	    	$condition['tid']=$tid;
 	    	$condition['types']=$types;
 	    	$info=$dao->where($condition)->findAll();
 	    	if ($info) {
 	    		$this->ajaxReturn(0,'资源已经收藏!',0);
 	    	}else{
-	    		$dao->uid=$this->user['uid'];
-	    		$dao->tid=$tid;
-	    		$dao->types=$types;
-	    		$dao->listid=$listid;
-	    		$id=$dao->add();
+	    		$data=array();
+	    		$data['uid']=$this->user['uid'];
+	    		$data['tid']=$tid;
+	    		$data['types']=$types;
+	    		$data['listid']=$listid;
+	    		$data['username']=get_username();
+	    		$data['ctime']=time();
+	    		$data['is_show']=0;
+	    		$id=$dao->add($data);
 	    		if ($id) {
 	    			$this->ajaxReturn($id,'收藏成功！',1);
 	    		}else{
@@ -101,7 +137,7 @@ class CommonAction extends Action{
     	}else{
     		$condition['typeid']=$typeid;
     	}
-
+		
     	$dao=D("Archives");
     	if ($cid) {
     		$condition['cid']=$cid;
@@ -122,41 +158,55 @@ class CommonAction extends Action{
    protected function _set_cid() {
     	//设置城市
     	$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
+    	$this->cid=empty($this->cid)?$_COOKIE['cid']:$this->cid;
     	if(empty($this->cid)){
     		$this->cid='';
     		$this->redirect("/Public/select_city");
     	}
     }//end _set_cid
     
-    /**
-     *获取子类
-     *@date 2010-5-23
-     *@time 上午11:02:02
-     */
-    protected function _get_son($id) {
-    	//获取子类
-    	$dao=D("Arctype");
-    	$info=$dao->where("id=$id AND ishidden=0")->field("")->order("id asc")->findAll();
-    	return $data;
-    }//end _get_son
+
     /**
      *获取话题的评论
      *@date 2010-5-10
      *@time 下午04:41:17
      */
-    function _get_comments($aid,$types) {
+    protected function _get_comments($aid,$types) {
     	//获取话题的评论
-    	$dao=D("Comments");
-    	$data=$dao->where("xid=$aid AND types=$types")->findAll();
-    	
+    	$dao=D("Comment");
+    	return $dao->where("xid=$aid AND types=$types")->findAll();
     }//end _get_comments
     
+    /**
+     *ajax调用评论
+     *@date 2010-5-24
+     *@time 下午05:51:07
+     */
+    public function ajax_comments() {
+    	//ajax调用评论
+    	$dao=D("Comment");
+    	$condition=array();
+    	$condition['xid']=$_REQUEST['xid'];
+    	$condition['types']=$_REQUEST['types'];
+    	$count=$dao->where($condition)->count();
+    	import("ORG.Util.Page");//引用分页类
+		import("@.Com.ajaxpage");//引用ajax分页类
+		$p= new ajaxpage($count,10);
+		$page=$p->ajaxshow();//显示分页
+		$this->assign("showpage_bot",$page);//显示分页
+		$limit=$p->firstRow.",".$p->listRows;//设定分面的大小
+		$limit=($limit==",")?'':$limit;//分页的大小
+    	$data=$dao->where($condition)->limit($limit)->order('dateline DESC')->findAll();
+    	$this->assign('comments',$data);
+    	//dump($dao->getLastSql());
+		$this->display("Common:ajax_comments");
+    }//end ajax_comments
     /**
      *获取当前栏目位置
      *@date 2010-5-10
      *@time 上午09:47:29
      */
-    function _get_dh($typeid) {
+    protected function _get_dh($typeid) {
     	//获取当前位置
     	$dao=D("Arctype");
     	$data=$dao->where("id=$typeid")->field('id,typename,reid,topid')->find();
@@ -171,11 +221,10 @@ class CommonAction extends Action{
       *@date 2010-4-30
       *@time 上午10:26:06
       */
-    function _get_cityguide_type() {
+    protected function _get_cityguide_type() {
     	//获得城市指南的大类
     	$dao=D("Arctype");
-    	$data=$dao->where("(id>1000 AND reid=1000) AND ishidden=0")->order("id asc")->findAll();
-    	return $data;
+    	return $dao->where("(id>1000 AND reid=1000) AND ishidden=0")->order("id asc")->findAll();
     }//end _get_cityguide_type
     
 	/**
@@ -183,7 +232,7 @@ class CommonAction extends Action{
 	 *@date 2010-4-30
 	 *@time 上午10:35:37
 	 */
-	function _get_classifieds_type() {
+	protected function _get_classifieds_type() {
 		//获取分类信息的大类
 		$dao=D("Arctype");
     	$data=$dao->where("((id>1 AND id<1000) AND reid=1) AND ishidden=0")->order("id asc")->findAll();
@@ -211,7 +260,7 @@ class CommonAction extends Action{
 		return $data;
     }// END cat_tags
     
-    function tag() {
+    public function tag() {
 		$tname=empty($_GET['name'])?$_POST['name']:$_GET['name'];
 		$pid=empty($_GET['pid'])?$_POST['pid']:$_GET['pid'];
 		$type=empty($_GET['type'])?$_POST['type']:$_GET['type'];
@@ -266,6 +315,15 @@ class CommonAction extends Action{
 		return $m->execute($sql);
 	}// END iicstart
 	
+	public function verify(){
+		//verify验证码
+		import('ORG.Util.Image');
+		if(isset($_REQUEST['adv'])) {
+        	Image::showAdvVerify();
+        }else {
+        	Image::buildImageVerify();
+        }
+	}//verify function END
 	
 	/**
 	 * 获得指定资源类别的最近7天里访问量最大的资源
@@ -313,5 +371,37 @@ class CommonAction extends Action{
 		return $news;
 	}//end tree
 	
+	/**
+	 *发布评论
+	 *@date 2010-5-24
+	 *@time 上午09:34:27
+	 */
+	public function post_comment() {
+		//发布评论
+		if (empty($this->user['uid'])) {
+			$this->ajaxReturn(0,'no login',0);
+		}
+		if (empty($_REQUEST['verify']) || md5($_REQUEST['verify'])!=$_SESSION['verify']){
+			$this->ajaxReturn(0,'verify!',0);
+		}
+		$dao=D("Comment");
+		$vo=$dao->create($_REQUEST);
+		if($vo){
+			$vo['uid']=$this->user['uid'];
+			$id=$dao->add($vo);
+			if ($id) {
+				unset($_SESSION['verify']);
+				$this->ajaxReturn($id,'评论成功',1);
+				
+			}else{
+				$this->ajaxReturn(0,'评论失败',0);
+			}
+		}else{
+			//dump($dao->getError());
+			$this->ajaxReturn(0,$dao->getError(),0);
+		}
+
+		//unset($dao);
+	}//end post_comment
 }//END CommonAction
 ?>

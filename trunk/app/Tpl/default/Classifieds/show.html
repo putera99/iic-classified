@@ -76,118 +76,135 @@
 				<a href="__APP__/Classifieds/ls/id/{$dh['id']}/cid/{$cid}">{$dh['typename']}</a>
             </div>
             <div class="content-n">
-                <if condition="$info['albumnum'] gt 0">
-                    <div class="Comments-right">
-                        <img src="__PUBLIC__/default/images/pic3.gif" alt="pic6" />
+                 <h1>{$info['title']}</h1>
+				 <if condition="$info['albumnum'] gt 0">
+                    <div class="right">
+                        <img src="{$info['picurl']}" alt="{$info['title']} photos" />
                         <p>
+                        	{$info['albumnum']} photo
                         </p>
                     </div>
-                </if>
+                	</if>
                 <div class="content-life">
-                    <h1>{$info['title']}</h1>
 <switch name="info['channel']">
     <case value="4">{//JObs}
                             <p>
                                 Type:{$info['itype']}<br>
 								Category:{$info['category']}<br>
+								Valid for:{$info['showstart']|toDate='d/m/Y'}--{$info['showend']|toDate='d-m-Y'}<br>
 								Position:{$info['position']}<br>
 								Salary:{$info['salary']}<br>
 								Experience:{$info['experience']}<br>
 								Job Located in:{$info['joblocated']}<br>
                             </p>
-                            <h4>Description</h4>
-                            <p>
-                                {$info['_jobs']['content']}
-                            </p>
+	<php>$content=$info['_jobs']['content']</php>
     </case>
     <case value="5">{//realestate}
-							<p>
-								Category:<br>
-								Valid for:<br>
-								Located in:<br>
-								Price:<br>
-								Rooms:<br>
-								Published by:<br>
+							<p>//Office/Commercial, Apartment/Flat, Family House/Villa, All
+								Category:{$info['published']}<br>
+								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
+								Located in:{$info['position']}<br>
+								Price:{$info['_realestate']['price']}<br>
+								Rooms:{$info['_realestate']['rooms']}<br>
+								Size:{$info['_realestate']['size']}<br>
+								Published by:{$info['_realestate']['published']}<br>
 							</p>
-							<h4>Description</h4>
-                            <p>
-                                {$info['_realestate']['content']}
-                            </p>
+	<php>$content=$info['_realestate']['content']</php>
     </case>
     <case value="6">{//commerce}
 							<p>
-								Category:<br>
-								Condition:<br>
-								Quantity:<br>
-								Valid for:<br>
-								My Location:<br>
-								Price:<br>
-s							</p>
-							<h4>Description</h4>
-                            <p>
-                                {$info['_realestate']['content']}
-                            </p>
+								Category:{$info['category']}<br>
+								Condition:{$info['itype']}<br>
+								Quantity:{$info['_commerce']['quantity']}<br>
+								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
+								My Location:{$info['position']}<br>
+								Price:{$info['_commerce']['price']}<br>
+							</p>
+	<php>$content=$info['_commerce']['content']</php>
     </case>
     <case value="7">{//agents}
+							<p>
+								My location:{$info['position']}<br>
+								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
+							</p>
+	<php>$content=$info['_agents']['content']</php>
     </case>
     <case value="8">{//personals}
+							<p>
+								My location:{$info['position']}<br>
+								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
+							</p>
+	<php>$content=$info['_personals']['content']</php>
     </case>
     <case value="9">{//services}
+							<p>
+								Type:{$info['itype']}<br>
+								Category:{$info['category']}<br>
+								Service located in:{$info['position']}<br>
+								Contact:{$info['contact']} / {$info['linkman']}<br>
+								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
+							</p>
+	<php>$content=$info['_services']['content']</php>
     </case>
 </switch>
+					</div>
+					<div class="i_content">
+						<h4>Description</h4>
+                            <p>
+                                {$content}
+                            </p>
                     <ul>
-                        <li>
-                            <a href="__APP__/Member/share/aid/{$info['id']}">Share</a>
+                        <li rel="{$info['channel']}_{$info['id']}" class="user_share">
+                            Share
                         </li>
-                        <li id="{$info['channel']}_{$info['id']}" class="user_collection">
+                        <li rel="{$info['channel']}_{$info['id']}" class="user_collection">
                             Save as favorite
                         </li>
-                        <li>
-                            <a href="__APP__/Member/report/aid/{$info['id']}">Report corrections</a>
+                        <li rel="{$info['channel']}_{$info['id']}" class="user_report">
+                            Report corrections
                         </li>
                     </ul>
                     <p>
-                        <a href=""><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)
+                        <a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)
                     </p>
                 </div>
-                <div class="ditu">
-                </div>
+				
                 <div class="Comments">
                     <div class="biaoti">
                         <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
                     </div>
-<if condition="$comments">
-<volist name="comments" id="v">
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optinrealbig.com, paid  $7 million to settle similar charges  
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    <a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>
-                                Lucy
-                            </p>
-                        </div>
-                        <div class="Comments-life">
-                        </div>
-                    </div>
-</volist>
-</if>
-                    <div class="fenye">
-                    </div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							var xid={$info['id']};
+							var types={$info['channel']};
+							$("#comments").load(URL+'/ajax_comments',{xid:xid,types:types});
+						});
+					</script>
+					<div id="comments"></div>
+
                     <div class="liuyan">
-                    	<form action="" method="POST">
-                    		<p><textarea name="content" class="content"></textarea></p>
-							<input class="submit" style=" border:none; padding:0;" type="submit" value="Submit" >
+                    	<form name="post_comment" action="__URL__/post_comment" method="post">
+                    		<p style="text-align:left;" class="star">
+								<span class="nx" id="star_1"></span>
+								<span class="nx" id="star_2"></span>
+								<span class="nx" id="star_3"></span>
+								<span class="nx" id="star_4"></span>
+								<span class="nx" id="star_5"></span>
+								<span id="star_text" class="t"></span>
+							<span style="text-align:left;">
+							验证码:<input type="text" size="4" name="verify" id="verify">
+                    			<a href="javascript:fleshVerify();">
+                    				<img src="__URL__/verify" id="verifyImg" style="vertical-align:-6px;" />
+								</a>
+							</span>
+							</p>
+                    		<p><textarea name="content" id="comment_content" class="content"></textarea></p>
+							<input type="hidden" value="{$info['channel']}_{$info['id']}" id="comment_hidden" name="hidden" >
+							<input type="hidden" value="0" id="click_6" name="click_6" >
+							<P>
+								
+								<input type="button" id="post_comment" class="submit" style="border:none;padding:0;" value="Submit" >
+							</P>
                     	</form>
 						
                     </div>
