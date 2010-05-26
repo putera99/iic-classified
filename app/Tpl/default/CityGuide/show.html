@@ -1,4 +1,5 @@
 <include file="Public:head" />
+<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="right">
         <img src="__PUBLIC__/default/images/pic6.gif" alt="pci8" />
@@ -31,35 +32,35 @@
                 </ul>
             </div>
         </div>
-        <div class="Main-group">
-            <div class="Main-bg">
+        <div class="main-group">
+            <div class="main-bg">
                 Main group
             </div>
-            <div class="Main-n">
+            <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
                 </p>
             </div>
-            <div class="Main-n">
+            <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
                 </p>
             </div>
-            <div class="Main-n">
+            <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan...
                 </p>
             </div>
-            <div class="Main-n">
+            <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
                 </p>
             </div>
-            <div class="Main-n">
+            <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
@@ -75,31 +76,34 @@
 				<a href="__APP__/CityGuide/ls/id/{$dh['id']}">{$dh['typename']}</a>
             </div>
             <div class="content-n">
-            	
-                <if condition="$info['albumnum'] gt 0">
-                    <div class="Comments-right">
-                        <img src="__PUBLIC__/default/images/pic3.gif" alt="pic6" />
+            	 <h1>{$info['title']}</h1>
+                    <div class="right">
+                    	<if condition="$info['picurl']">
+                            <img src="http://www.beingfunchina.com/upload_files/{$info['picurl']}" alt="{$info['title']}" class="iic_img" />
+						</if>
                         <p>
+                        	<a href="#" class="kuan" rel="{$info['albumid']}_{$info['albumnum']}"><if condition="$info['albumnum']">{$info['albumnum']}<else />0</if> photos</a>
                         </p>
                     </div>
-                </if>
-				
                 <div class="content-life">
-                     <h1>{$info['title']}</h1>
+                    
                     <p>
                         {$info['my_content']}
-						<hr>
+					</p>
+					</div>
+					<div class="i_content">
+					<p>
                         {$info['content']}
                     </p>
                     <ul>
-                        <li>
-                            <a href="">Share</a>
+                        <li rel="{$v['channel']}_{$v['id']}" class="user_share">
+                            Share
                         </li>
-                        <li>
-                            <a href="">Save as favorite</a>
+                        <li rel="{$v['channel']}_{$v['id']}" class="user_collection">
+                            Save as favorite
                         </li>
-                        <li>
-                            <a href="">Report corrections</a>
+                        <li rel="{$v['channel']}_{$v['id']}" class="user_report">
+                            Report corrections
                         </li>
                     </ul>
                 </div>
@@ -115,113 +119,37 @@
                     <div class="biaoti">
                         <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
                     </div>
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optinrealbig.com, paid  $7 million to settle similar charges 
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>
-                                Lucy
-                            </p>
-                        </div>
-                        <div class="Comments-life">
-                        </div>
-                    </div>
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optin realbig.com, paid  $7 million to settle similar charges 
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>
-                                Lucy
-                            </p>
-                        </div>
-                        <div class="Comments-life">
-                        </div>
-                    </div>
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optinrealbig.com, paid  $7 million to settle similar charges 
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>
-                                Lucy
-                            </p>
-                        </div>
-                    </div>
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optinrealbig.com, paid  $7 million to settle similar charges 
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>
-                                Lucy
-                            </p>
-                        </div>
-                    </div>
-                    <div class="Comments-b">
-                        <div class="pic-right">
-                            <ul>
-                                <li>
-                                    This is not the first time a Scott Richter company has had to cough up millions of  dollars to fight spam charges. 
-                                    In 2005, his previous company, Optinrealbig.com, paid  $7 million to settle similar charges 
-                                    brought by Microsoft 
-                                </li>
-                                <li class="ziti">
-                                    [ Reply ]   [ quote ]   [ report ]
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="Comments-pic">
-                            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-                            <p>Lucy</p>
-                        </div>
-                    </div>
-                    <div class="fenye"></div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							var xid={$info['id']};
+							var types={$info['channel']};
+							$("#comments").load(URL+'/ajax_comments',{xid:xid,types:types});
+						});
+					</script>
+					<div id="comments"></div>
 					<div class="liuyan">
-                    	<form action="" method="POST">
-                    		<p><textarea name="content" class="content"></textarea></p>
-							<input class="submit" style=" border:none; padding:0;" type="submit" value="Submit" >
+                    	<form name="post_comment" action="__URL__/post_comment" method="post">
+                    		<p style="text-align:left;" class="star">
+								<span class="nx" id="star_1"></span>
+								<span class="nx" id="star_2"></span>
+								<span class="nx" id="star_3"></span>
+								<span class="nx" id="star_4"></span>
+								<span class="nx" id="star_5"></span>
+								<span id="star_text" class="t"></span>
+							<span style="text-align:left;">
+							验证码:<input type="text" size="4" name="verify" id="verify">
+                    			<a href="javascript:fleshVerify();">
+                    				<img src="__URL__/verify" id="verifyImg" style="vertical-align:-6px;" />
+								</a>
+							</span>
+							</p>
+                    		<p><textarea name="content" id="comment_content" class="content"></textarea></p>
+							<input type="hidden" value="{$info['channel']}_{$info['id']}" id="comment_hidden" name="hidden" >
+							<input type="hidden" value="0" id="click_6" name="click_6" >
+							<P>
+								
+								<input type="button" id="post_comment" class="submit" style="border:none;padding:0;" value="Submit" >
+							</P>
                     	</form>
 						
                     </div>

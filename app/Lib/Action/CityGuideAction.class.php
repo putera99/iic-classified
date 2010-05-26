@@ -51,7 +51,7 @@ class CityGuideAction extends CommonAction{
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
-		$this->assign('ctype',$this->_get_classifieds_type());
+		$this->assign('classifieds_type',$this->_get_tree(1));
 		$this->display();
 	}//end index
 	
@@ -73,13 +73,16 @@ class CityGuideAction extends CommonAction{
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
 		$data=$dao->where("typeid={$typeid} AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
 		//dump($dao->getLastSql());
 		//分类信息 导航
-		$this->assign('classifieds_type',$this->_get_classifieds_type());
+		$this->assign('city_type',$this->_get_tree(1000));
+    	$this->assign('classifieds_type',$this->_get_tree(1));
 		
 		//页面信息
 		$arctype=D("Arctype");

@@ -1,6 +1,7 @@
 <include file="Public:head" />
 <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/cityguide_content.css" rel="stylesheet" type="text/css" />
+<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="mian-right">
         <div class="mian-center">
@@ -25,19 +26,19 @@
                 <div class="list-a" style="width:560px;">
                     <h6><img src="__PUBLIC__/default/images/{$i}.gif" /><a href="__APP__/CityGuide/show/aid/{$v['id']}">{$v['title']}</a></h6>
                     <p>
-                        {$v['my_content']|delete_html}
+                        {$v['my_content']|strip_tags="<br>"}
                     </p>
                 </div>
                 <div class="hui-bg">
                     <ul>
-                        <li>
-                            <a href="#">Share</a>
+                        <li rel="{$v['channel']}_{$v['id']}" class="user_share">
+                            Share
                         </li>
-                        <li>
-                            <a href="#">Save as favorite</a>
+                        <li rel="$v['channel']}_{$v['id']}" class="user_collection">
+                            Save as favorite
                         </li>
-                        <li>
-                            <a href="#">Report corrections</a>
+                        <li rel="$v['channel']}_{$v['id']}" class="user_report">
+                            Report corrections
                         </li>
                     </ul>
                 </div>
@@ -46,81 +47,42 @@
 	</volist>
 </if>
             <div class="fanye">
-                <img src="__PUBLIC__/default/images/fany.gif" alt="xiu" />
+		 	{$showpage_bot}
             </div>
         </div>
     </div>
     <div class="main-left">
-        <div class="city guide">
+        <div class="class_tree">
             <ul>
-                <li class="bg-A">
-                    Classifeds
-                </li>
-                <li>
-                    <a href="#">Property</a>
-                </li>
-                <li>
-                    <a href="#">Buy&Sell </a>
-                </li>
-                <li>
-                    <a href="#">Personals</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Jobs </a>
-                </li>
+                <li class="bg-h">
+                <a href="__APP__/Classifieds/index">Classifieds</a>
+	            </li>
+	            <volist name="classifieds_type" id="v">
+	                <dl id="cf_{$v['id']}" class="s_cf">
+	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+						<volist name="v['_son']" id="vs">
+							<dd class="cf_{$v['id']} none"><a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+						</volist>
+	                </dl>
+	            </volist>
                 <li class="di-yuan">
                 </li>
             </ul>
         </div>
-        <div class="city guide">
+        <div class="class_tree">
             <ul>
-                <li class="bg-A">
-                    City Guide
-                </li>
-                <li>
-                    <a href="#">Arts&Culture </a>
-                </li>
-                <li>
-                    <a href="#">Agencies </a>
-                </li>
-                <li>
-                    <a href="#">Bars </a>
-                </li>
-                <li>
-                    <a href="#">Banking</a>
-                </li>
-                <li>
-                    <a href="#">Cafes </a>
-                </li>
-                <li>
-                    <a href="#">City Events </a>
-                </li>
-                <li>
-                    <a href="#">Consulates </a>
-                </li>
-                <li>
-                    <a href="#">Eduction </a>
-                </li>
-                <li>
-                    <a href="#">Helth </a>
-                </li>
-                <li>
-                    <a href="#">Hotel</a>
-                </li>
-                <li>
-                    <a href="#">Leisure </a>
-                </li>
-                <li>
-                    <a href="#">Restaurant</a>
-                </li>
-                <li>
-                    <a href="#">Shoping </a>
-                </li>
-                <li class="di-yuan">
-                </li>
+                <li class="bg-h">
+                <a href="__APP__/CityGuide/index">City Guide</a>
+	            </li>
+	            <volist name="city_type" id="v">
+	            	<dl id="cg_{$v['id']}" class="s_cg">
+	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+						<volist name="v['_son']" id="vs">
+							<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+						</volist>
+	                </dl>
+	            </volist>
+                <li class="di-yuan"></li>
             </ul>
         </div>
     </div>

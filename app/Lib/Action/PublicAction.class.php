@@ -23,6 +23,7 @@ class PublicAction extends CommonAction{
 		$cid=$_GET['cid'];
 		if($cid){
 			$_SESSION['cid']=$cid;
+			$_COOKIE['cid']=$cid;
 			$this->redirect('/Index/index');
 		}else{
 			$this->display();
@@ -98,15 +99,6 @@ class PublicAction extends CommonAction{
 			$this->error("ERROR:2!");
 		}
 	}// END login
-	
-	public function verify(){
-		//verify验证码
-		if(isset($_REQUEST['adv'])) {
-        	Image::showAdvVerify();
-        }else {
-        	Image::buildImageVerify();
-        }
-	}//verify function END
 	
 	/**
 	 *选择城市

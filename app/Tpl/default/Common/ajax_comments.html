@@ -1,0 +1,23 @@
+<if condition="$comments">
+<volist name="comments" id="v">
+    <div class="Comments-b">
+        <div class="pic-right">
+            <ul>
+                <li>{$v['message']}</li>
+                <li class="ziti">
+                    <a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
+                </li>
+            </ul>
+        </div>
+        <div class="Comments-pic">
+            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
+            <p>
+                {$v['username']}
+            </p>
+        </div>
+    </div>
+</volist>
+<div class="fanye">
+	{$showpage_bot}
+</div>
+</if>

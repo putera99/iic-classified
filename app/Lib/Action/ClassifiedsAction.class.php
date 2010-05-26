@@ -88,6 +88,8 @@ class ClassifiedsAction extends CommonAction{
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
 		$data=$dao->where("($str AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
@@ -125,6 +127,10 @@ class ClassifiedsAction extends CommonAction{
 		}
 		$dao=D("Archives");
 		$info=$dao->where("id=$aid")->find();
+		if (empty($info)) {
+			$this->error("error: info is null!");
+		}
+		$city=$this->_get_city('localion');
 		switch (true) {
 			case $info['channel']==4://Jobs
 				$info['_jobs']=$dao->relationGet("jobs");
@@ -135,11 +141,36 @@ class ClassifiedsAction extends CommonAction{
 			break;
 			
 			case $info['channel']==5://realestate
-			
+				$info['_realestate']=$dao->relationGet("realestate");
+			break;
+			case $info['channel']==6://commerce
+				$types=array(1=>'All',2=>'Offered',3=>'Wanted');
+				$cat=array('Brand-new','Second-hand');
+				$info['itype']=$types[$info['type']];
+				$info['category']=$cat[$info['category']];
+				$info['_realestate']=$dao->relationGet("realestate");
+			break;
+			case $info['channel']==7://agents
+				$info['_agents']=$dao->relationGet("agents");
+			break;
+			case $info['channel']==8://personals
+				$info['_personals']=$dao->relationGet("personals");
+			break;
+			case $info['channel']==9://services
+				$info['itype']=$info['itype']==1?'All':$info['itype']==2?'Offered':'Wanted';
+				$info['_services']=$dao->relationGet("services");
 			break;
 		}
-
+		$local='';
+		if($info['zone_id'] && $info['city_id']){
+			$local=$city[$info['city_id']]['_zone'][$info['zone_id']]['name'].','.$city[$info['city_id']]['cename'];
+		}elseif(empty($info['zone_id']) && $info['city_id']) {
+			$local=$city[$info['city_id']]['cename'];
+		}
+		$info['position']=trim($info['position'].','.$local,',');
 		$this->assign('info',$info);
+		
+		//$this->assign('comments',$this->_get_comments($info['id'],$info['channel']));
 		
 		$page=array();
 		$page['title']=$info['title'].'  -  BeingfunChina';
