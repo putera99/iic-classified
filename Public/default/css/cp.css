@@ -12,7 +12,7 @@
 .information{color:#258faa;text-align: center;margin: 3px 0 0 0;padding: 0px;}
 .information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
 .memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
-.memcp-groups-bg{margin:0px;padding-left:28px;background-color:#6f6c6c;background: url(../images/rentou.gif) no-repeat;background-position: 5px;}
+.memcp-groups-bg{margin:0px;padding-left:28px;background: url(../images/rentou.gif) no-repeat #6f6c6c;background-position: 5px; height:25px; line-height:25px;}
 .neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
 
 /* right开始*/

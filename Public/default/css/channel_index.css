@@ -1,0 +1,415 @@
+.xuhao {
+    width: 260px;
+    height: 20px;
+    background: url(../images/fany.gif) no-repeat;
+    padding: 0px;
+    margin: 20px auto 0px auto;
+}
+
+/* left开始*/
+#main {
+    width: 950px;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+.main-left {
+    width: 188px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.main-left {
+    width: 188px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.mian-right {
+    width: 749px;
+    padding: 0px;
+    float: right;
+    margin-left: 0 0 0 10px;
+}
+
+.channel-left {
+    width: 188px;
+    margin: 0px;
+    padding: 0px;
+    color: #FFFFFF;
+}
+
+.national {
+    height: 24px;
+    padding: 0px;
+    background-color: #b6b6b6;
+    margin: 0 0 5px 0;
+}
+
+.national ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 0 15px;
+}
+
+.national li {
+    float: left;
+    margin: 0px;
+    padding: 0 10px 0 0;
+}
+
+.menu {
+    padding: 0px;
+    line-height: 16px;
+    margin: 0px;
+}
+
+.menu ul {
+    padding: 0px;
+    list-style-type: none;
+    margin: 0px;
+}
+
+.menu li {
+    height: 33px;
+    background: url(../images/pc/huixian.gif) repeat-x;
+    padding: 0 0 0 15px;
+    margin: 0px;
+    line-height: 33px;
+}
+
+/*right开始*/
+.jianbian-h {
+    height: 25px;
+    margin: 0px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 0 0 16px;
+    background-color: #888888;
+}
+
+.neirong-h {
+    margin: 0;
+    padding: 0px;
+    background-color: #363636;
+    clear: both;
+}
+
+.neirong-h dl {
+    margin: 0px;
+    padding: 5px 10px 0px 10px;
+}
+
+.neirong-h dt {
+    margin: 0px;
+    padding: 0px;
+    float: left;
+}
+
+.neirong-h dd {
+    width: 320px;
+    margin: 0px;
+    padding-top: 0px 5px 0px 0px;
+    float: right;
+    color: #dadada;
+    display: block;
+}
+
+.neiR-h {
+    width: 240px;
+    position: relative;
+    margin: 0px;
+    float: left;
+    padding: 5px 0 0 5px;
+}
+
+.neiR-h img {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+.neiR-h p {
+    padding-left: 100px;
+    line-height: 16px;
+    margin: 3px 0px 0px 0px;
+}
+
+.xiantiao {
+    width: 500px;
+    background: url(../images/zhixian.gif) repeat-x;
+    margin: 8px auto 0 auto;
+    padding-bottom: 5px;
+}
+
+.list-h {
+    margin: 0px;
+    padding: 0 0 0 8px;
+}
+
+.list-h h5 {
+    margin: 0px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #b3216c;
+    padding: 0px 0px 0px 100px;
+    line-height: 14px;
+}
+
+.mian-center-n {
+    width: 504px;
+    padding: 0px;
+    background-color: #f3f3f3;
+    margin: 0px;
+    float: left;
+    color: #FFFFFF;
+}
+
+.title-h {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #b3216c;
+}
+
+.center-h {
+    width: 482px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.conter-right {
+    width: 225px;
+    padding: 0px;
+    float: right;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    margin: 0px;
+}
+
+.conter-group {
+    margin: 0px;
+    width: 225px;
+}
+
+.xinwen-h ul {
+    margin: 0px;
+    padding: 5px 12px 0 12px;
+    list-style-type: none;
+    float: left;
+}
+
+.xinwen-h li {
+    margin: 0px;
+    padding: 0px;
+}
+
+.exhibition {
+    margin: 0px;
+    background-color: #6f6c6c;
+    border: 1px solid #cacaca;
+    padding: 0 0 0 10px;
+}
+
+.zhanhui {
+    margin: 5px 2px 0px 3px;
+    padding: 0px;
+    color: #5b5b5b;
+}
+
+.zhanhui dl {
+    margin: 0px;
+    padding: 0px;
+    clear: both;
+}
+
+.zhanhui img {
+    clear: both;
+    float: left;
+}
+
+.zhanhui dt {
+    margin: 0px;
+    padding: 0px;
+}
+
+.zhanhui dd {
+    width: 135px;
+    padding: 0px;
+    float: left;
+    margin: 0 0 3px 5px;
+}
+
+.chenshi {
+    color: #626262;
+    margin: 10px 0 0 0;
+    padding: 0px;
+}
+
+.diban {
+    height: 24px;
+    background: url(../images/bg10.gif) no-repeat;
+    margin: 0px;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+}
+
+.hot {
+    padding: 0px;
+    margin: 5px 5px 0px 5px;
+}
+
+.zhuti {
+    border-bottom: 1px solid #d0d0d0;
+    margin-top: 0 0 5px 0;
+    padding: 0 0 5px 15px;
+    font-weight: bold;
+}
+
+.time {
+    text-align: center;
+    border-bottom: 1px dashed #d0d0d0;
+    margin: 5px;
+    padding: 0 0 5px 0;
+}
+
+.dizhi a {
+    padding-left: 5px;
+}
+
+.pindao {
+    padding: 0px;
+    margin: 0 5px 0 5px;
+    line-height: 14px;
+    color: #626262;
+}
+
+.fangy {
+    color: #626262;
+    text-align: right;
+    border-bottom: 1px solid #d0d0d0;
+    padding: 0 10px 5px 0;
+    margin: 0px;
+}
+
+.pingdaozs {
+    height: 210px;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.pingdaozs ul {
+    width: 122px;
+    height: 200px;
+    margin: 0px;
+    list-style-type: none;
+    float: left;
+    border-right: 1px dashed #9f9f9f;
+    text-align: center;
+    color: #a62365;
+    padding: 10px 0 0 0;
+}
+
+.pingdaozs li {
+    margin: 0px;
+    padding: 0px 0px 5px 0px;
+}
+
+.pingdaozs span {
+    font-weight: bold;
+    color: #a62365;
+}
+
+.chegns {
+    color: #cd5c10;
+}
+
+.baid {
+    background: url(../images/pc/bg4.gif) repeat-x;
+}
+
+.yuanjiao {
+    height: 13px;
+    background: url(../images/pc/yuanjiao.gif) no-repeat;
+    margin: 0px;
+    padding: 0px;
+}
+
+.dingt {
+    height: 32px;
+    background: url(../images/pc/bg04.gif) repeat-x;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    line-height: 32px;
+    font-weight: bold;
+    color: #992654;
+}
+
+.wenzi a:link {
+    line-height: 14px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.wenzi a:visited {
+    text-decoration: none;
+}
+
+.wenzi a:hover {
+    text-decoration: underline;
+}
+
+.center-h a {
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+.center-h span {
+    color: #993365;
+}
+
+.guojia {
+    padding: 0px;
+    margin: 0 0 5px 0;
+}
+
+.zhanhui span {
+    color: #a42f69;
+    line-height: 14px;
+    padding: 0 0 3px 0;
+}
+
+.menu a {
+    color: #FFFFFF;
+}
+
+/* CSS连接样式*/
+a:link {
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 26px;
+}
+
+a:hover {
+    color: #b3216c;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 26px;
+}
+
+a:visited {
+    color:#fffff;
+    text-decoration: none;
+}
+
+
