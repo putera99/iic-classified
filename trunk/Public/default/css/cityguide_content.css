@@ -2,12 +2,8 @@
 .personals p{margin:0px;padding:0px;float: right;color: #841f52;}
 .city guide{ margin:0px; padding:0px;}
 .xiangce{width:100px;padding:0px;float:right;margin: 10px 20px 0px 0px; text-align:center;}
-.kuan{padding:0px;background-color:#FFF;color:#15abd1;margin: 3px auto;border: 1px solid #cfcfcf;text-align: center; display:block; width:50px; height:18px; line-height:18px;}
-.fanye{width: 250px; padding:0px;margin: 20px auto 5px auto;}
+.kuan{padding:0px;background-color:#FFF;color:#15abd1;margin:5px auto;border: 1px solid #cfcfcf;text-align: center; display:block; width:60px; height:18px; line-height:18px;}
+.kuan:hover{background-color:#cfcfcf;color:#15abd1;}
 
-
-.hui-bg {height: 15px;padding: 10px 0px 10px 10px;margin: 0px;}
-.hui-bg ul {margin: 0px;list-style-type: none;text-align: center;padding: 0px;color: #727272;}
-.hui-bg li {padding: 0px;background: url(../images/bg-h2.gif) no-repeat;float: left;margin: 0px;width: 120px;}
 .personals-a {border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #8e8e8e;margin: 5px 5px 0px 5px;padding: 0px; height:120px;}
 .list-a img {padding-right:5px;}

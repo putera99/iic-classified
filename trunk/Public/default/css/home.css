@@ -38,7 +38,7 @@
 .jianbg-h li a{font-weight: bold;color: #1c1c1c;}
 .jianbg-h li a:hover,.jianbg-h .on{height: 25px; line-height:25px; margin:0;padding:0;display: block;background: url(../images/bg021.gif) repeat-x;color: #FFFFFF;}
 
-.jianbg-h .span{float:left;margin:5px 0; padding:0; width:1px; height:15px; background:url(../images/shuxian.gif) no-repeat;}
+.jianbg-h .span{float:left;margin:5px 5px; padding:0; width:1px; height:15px; background:url(../images/shuxian.gif) no-repeat;}
 
 
 .news-h{ height:250px; background:url(../images/bg-h3.gif) repeat-x;color: #3a3838;border: 1px solid #c8c8c8;margin: 0px;padding: 0px;}
@@ -94,9 +94,9 @@
 .hot-h p {line-height: 14px;padding-left: 90px;margin-top: 5px;}
 .hot-h ul{ margin:15px 0 0 8px; padding:0px; list-style-type:none;}
 .hot-h li{ margin:0px; padding:0px; }
-.advertisement{ margin:10px 0 0 0; padding:0px;}
-.voices-h{ margin: 10px 0 0 0; padding:0px;}
-.global-h {background-color: #cccccc;font-weight: bold;color: #ec5e00;margin: 0px;padding:0 0 0 10px;}
+.advertisement{ margin:10px 0 0 0; padding:0;}
+.voices-h{ margin:0; padding:0;}
+.global-h {background-color: #cccccc;font-weight: bold;color: #ec5e00;margin: 0px;padding:0 0 0 10px; height:24px; line-height:24px;}
 .xuankuan-h{margin:0px;padding:0px;background:url(../images/bg-h7.gif) repeat-x;text-align: center;border: 1px solid #c8c8c8;}
 .xuankuan-h h5{ margin:0px; padding:10px 0 0 0 ; font-size:12px; font-weight:bold; color:#666666;}
 #textfield {line-height: 20px;margin-bottom: 7px;width: 125px;}
