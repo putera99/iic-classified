@@ -23,7 +23,12 @@ class PublicAction extends CommonAction{
 		$cid=$_GET['cid'];
 		if($cid){
 			$_SESSION['cid']=$cid;
-			$_COOKIE['cid']=$cid;
+			cookie(null,'cid');
+			if ($_REQUEST['remember']) {
+				cookie('cid',$cid,array('expire'=>60*60*60*24*30));
+			}else{
+				cookie('cid',$cid,array('expire'=>60*60*60*24*1));
+			}
 			$this->redirect('/Index/index');
 		}else{
 			$this->display();
@@ -33,7 +38,7 @@ class PublicAction extends CommonAction{
 	
 	function login() {//登录
 		if ($this->user) {
-			$this->error("login");
+			$this->error("is login");
 		}
 		$this->display();
 	}// END login

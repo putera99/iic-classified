@@ -44,59 +44,6 @@
             <div class="clear"></div>
         </div>
         <div class="mian-center-n">
-            <div class="jianbian-h">Biz Focus</div>
-            <div class="neirong-h">
-                <div class="center-h">
-                    <dl>
-                        <dt>
-                            <img src="__PUBLIC__/default/images/pic-h.gif" alt="gn" />
-                        </dt>
-                        <dd>
-                            <a href="#"><span class="title-h">Kung-fu and Dance Drama: Shaolin in Wind </span></a>
-                            Kung-fu and Dance Drama Shaolin in Wind tells 
-                            a legend of a Shaolin monk, a life-and-death  
-                            strug gle between justice and villainy, 
-                            and a love tragedy with restrained Eastern  
-                            beauty. Tianyuan and Sushui are a long-married 
-                            couple working in a theatrical troupe.....<a href="#"><span>[Detail]</span></a>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="clear"></div>
-                <div class="xiantiao"></div>
-
-                <div class="xinwen-h">
-                    <ul>
-                        <li>
-                            • Looking for an American Marketing Rep 
-                        </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            • Looking for an American Marketing Rep 
-                        </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
-                    </ul>
-                </div>
-                <div class="clear"></div>
-            </div>
             <div class="chenshi">
                 <div class="diban">
                     <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China biz</a>
@@ -112,12 +59,17 @@
                     </div>
                 </div>
                 <div class="time">
-                    <span><a href="#">2010 >></a></span> 　  Ap  | May | Ju  | Jul | Aug | Sep | Oct | Nov | De | Jan | Feb | Mar<a href="#"> 　<span>2011 >></span></a>
+                    <span><a href="#">2010 >></a></span> 　
+<volist name="date" id="v">
+					<a href="__URL__/ls/ms/{$v['start']}/me/{$v['end']}">{$v['name']}</a> 
+					<neq name="i" value="12">|</neq>
+</volist>
+					  　<span><a href="#">2011 >></a></span>
                 </div>
             </div>
             <div class="pindao">
                 <div class="fangy">
-                    « Previous | Next »  Page: 1  2   3 
+                    {$showpage}
                 </div>
                 <div class="sdf">
                     <div class="pingdaozs">
@@ -318,7 +270,8 @@
                     </div>
                 </div>
             </div>
-            <div class="xuhao">
+            <div class="fanye">
+            	{$showpage_bot}
             </div>
         </div>
     </div>
@@ -342,7 +295,7 @@
             <ul>
 <volist name="industries" id="v">
                 <li>
-                    <a href="__URL__/ls/id/{$v['id']}">{$v['typename']}</a>
+                    <a href="__URL__/ls/id/{$v['id']}" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>
                 </li>
 </volist>
             </ul>

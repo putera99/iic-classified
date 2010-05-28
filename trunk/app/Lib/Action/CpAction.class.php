@@ -137,8 +137,7 @@ class CpAction extends CommonAction{
 		print_r($class_tree[0]);
 		echo "<pre>";*/
 		$this->assign("class_tree",$class_tree);
-		$this->assign('citylist',$this->city);
-		
+		$this->assign('citylist',$this->_get_city('city'));
 		$page=array();
 		$page['title']='Post Classifieds -  My Control Panel -  BeingfunChina';
 		$page['keywords']='Post Classifieds';
@@ -156,7 +155,72 @@ class CpAction extends CommonAction{
 	 */
 	function add_classifieds() {
 		//增加分类信息
-		
+		$dao=D("Archives");
+		$vo=$dao->create();
+		if($vo){
+			$t=explode('/',$vo['showstart']);
+			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$t=explode('/',$vo['showend']);
+			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$t=explode('_',$vo['typeid']);
+			$vo['typeid']=$t['1'];
+			$vo['channel']=$t['0'];
+			$vo['description']=msubstr(strip_tags($_POST['content']),0,400);
+			
+			$aid=$dao->add($vo);
+			if ($aid) {
+				$data=array();
+				switch (true){
+					case $vo['channel']==4:
+						$data['joblocated']=$_POST['joblocated']['2'].','.$_POST['joblocated']['1'].','.$_POST['joblocated']['0'];
+						$data['experience']=$_POST['experience'];
+						$data['salary']=$_POST['salary'];
+						$table="iic_addon_jobs";
+					break;
+					case $vo['channel']==5:
+						$data['published']=$_POST['published'];
+						$data['size']=$_POST['size'];
+						$data['price']=$_POST['price'];
+						$data['rooms']=$_POST['rooms'];
+						$table="iic_addon_realestate";
+					break;
+					case $vo['channel']==6:
+						$data['quantity']=$_POST['quantity'];
+						$data['price']=$_POST['price'];
+						$table="iic_addon_commerce";
+					break;
+					case $vo['channel']==7:
+						$data['joblocated']=$_POST['joblocated'];
+						$data['experience']=$_POST['experience'];
+						$data['experience']=$_POST['experience'];
+						$data['salary']=$_POST['salary'];
+						$table="iic_addon_agents";
+					break;
+					case $vo['channel']==8:
+						$table="iic_addon_personals";
+					break;
+					case $vo['channel']==9:
+						$table="iic_addon_services";
+					break;
+					default:
+						$this->error("栏目分类读取错误!");
+					break;
+				}
+				$data['content']=nl2br($_POST['content']);
+				$data['aid']=$aid;
+				$id=$dao->Table($table)->add($data);
+				if($id){
+					$this->success('发布成功!');
+				}else{
+					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$this->error("附属表写入失败!");
+				}
+			}else{
+				$this->error('主档案表更新失败!');
+			}
+		}else{
+			$this->error($dao->getError());
+		}
 	}//end add_classifieds
 	
 	/**
@@ -184,9 +248,9 @@ class CpAction extends CommonAction{
 	function my_post_cityguide() {
 		//发送城市指南
 		$this->assign('class_tree',$class_tree=$this->_get_tree(1000));
-		
+		$this->assign('citylist',$this->_get_city('city'));
 		$page=array();
-		$page['title']='Post CityGuide" -  My Control Panel -  BeingfunChina';
+		$page['title']='Post CityGuide -  My Control Panel -  BeingfunChina';
 		$page['keywords']='Post CityGuide';
 		$page['description']='Post CityGuide';
 		$this->assign('page',$page);
@@ -213,6 +277,7 @@ class CpAction extends CommonAction{
 			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
+			$vo['maps']=$_POST['maps']['2'].','.$_POST['maps']['1'].','.$_POST['maps']['0'];
 			$aid=$dao->add($vo);
 			if ($aid) {
 				$data=array();

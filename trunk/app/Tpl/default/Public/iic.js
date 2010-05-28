@@ -1,4 +1,19 @@
 $(document).ready(function(){
+	$("#remember").click(function(){
+		if($("#remember").attr('checked')){
+			for(var i=0;i<4;i++){
+				var x=$(".top-city>h2:eq("+i+")>a");
+				var r=x.attr('href')+'/remember/1'
+				x.attr("href",r);
+			}
+		}else{
+			for(var i=0;i<4;i++){
+				var x=$(".top-city>h2:eq("+i+")>a");
+				var r=x.attr('href').replace('/remember/1','');
+				x.attr("href",r);
+			}
+		}
+	});
 	$(".ch").mouseover(function(){
 		$(".ch").removeClass('on');
 		$('#'+this.id).addClass('on');
@@ -69,7 +84,7 @@ $(document).ready(function(){
 	
 	$(".nx").mouseover(function(){
 		var x=this.id.substr(-1,1);
-		var t={1:'1',2:'2',3:'3',4:'4',5:'5'};
+		var t={1:'Sucks',2:'Bad',3:'Fine',4:'Good',5:'Awesome'};
 		for(var i=1;i<6;i++){
 			var id="#star_"+i;
 			if(i<=x){

@@ -1,0 +1,7 @@
+<volist name="zone" id="v">
+	<if condition="$name eq 0">
+	<option value="{$v['id']}">{$v['name']}</option>
+	<else/>
+	<option value="{$v['name']}">{$v['name']}</option>
+	</if>
+</volist>

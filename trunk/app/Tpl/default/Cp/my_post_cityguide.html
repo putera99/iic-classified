@@ -15,6 +15,14 @@ $(document).ready(function(){
 	});
 	$('.showend_job').datePicker({clickInput:true});
 });
+function zone(obj,id,name){
+	if(name==0){
+		var cid=obj.options[obj.options.selectedIndex].value;
+	}else{
+		var cid=obj.options[obj.options.selectedIndex].className;
+	}
+	$(id).load(URL+'/ajax_zone',{cid:cid,types:'localion',name:name});
+}
 </script>
 <div class="mulu">
 	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
@@ -53,8 +61,30 @@ $(document).ready(function(){
 						<input type="text" name="showstart" id="showend_job" class="showend_job" style="width:80px;">
 						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;">
 					</p>
+					<p>
+						<label for="position">Localtion:</label>
+						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
+							<option value="0">--Favorite City--</option>
+							<volist name="citylist" id="v">
+							<option value="{$v['id']}">{$v['ctitle']}</option>
+							</volist>
+						</select>
+						<select name="zone_id" class="zone_id">
+							<option value="0">--Favorite Zone--</option>
+						</select>
+						<input type="text" name="position" id="position">
+					</p>
 					<p><label for="maps">Maps</label>
-						<input type="text" name="maps" id="maps">
+						<select name="maps[0]" onchange="zone(this,'.maps_zone_id',1)">
+							<option value="0">--Favorite City--</option>
+							<volist name="citylist" id="v">
+							<option value="{$v['ctitle']}" class="{$v['id']}">{$v['ctitle']}</option>
+							</volist>
+						</select>
+						<select name="maps[1]" class="maps_zone_id">
+							<option value="0">--Favorite Zone--</option>
+						</select>
+						<input type="text" name="maps[2]" id="maps">
 					</p>
 					
 				</fieldset>

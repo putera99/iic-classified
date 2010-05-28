@@ -1,6 +1,5 @@
 <include file="Public:head" />
 <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
-<script src="../Public/iic.js"></script>
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
@@ -171,23 +170,27 @@
                 <div class="jianbg-h">
                     <ul>
                     <volist name="classifieds_type" id="v">
+                    	<if condition="$v['id'] neq 8">
 		                <li id="ch_class_{$v['id']}" class="ch <if condition="$i==1">on</if>">
 		                    <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
 		                </li>
 						<li class="span"></li>
+						</if>
 		            </volist>
                     </ul>
                 </div>
                 <div class="news-h">
 
 	<volist name="classifieds" id="v">
-                    <ul id="ch_info_{$v['id']}" class="cinfo">
+		<if condition="$v['id'] neq 8">
+                    <ul id="ch_info_{$v['id']}" class="cinfo <neq name="v['id']" value="2">none</neq>">
                     	<volist name="v['_sub']" id="sv">
                         <li>
-                            <span><a href="__APP__/Classifieds/show/aid/{$sv['id']}">[Detail]</a></span>·　<a href="__APP__/Classifieds/show/aid/{$sv['id']}">{$sv['title']}</a>
+                            <span><a href="__APP__/Classifieds/show/aid/{$sv['id']}">[Detail]</a></span>·　<a href="__APP__/Classifieds/show/aid/{$sv['id']}">{$sv['title']|String::msubstr=0,60}</a>
                         </li>
 						</volist>
                     </ul>
+		</if>
 	</volist>
 
                 </div>
@@ -298,7 +301,7 @@
 	            </li>
 	            <volist name="classifieds_type" id="v">
 	                <dl id="cf_{$v['id']}" class="s_cf">
-	                    <dt><a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
 						<volist name="v['_son']" id="vs">
 							<dd class="cf_{$v['id']} none"><a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
 						</volist>
@@ -315,7 +318,7 @@
 	            </li>
 	            <volist name="city_type" id="v">
 	            	<dl id="cg_{$v['id']}" class="s_cg">
-	                    <dt><a href="__APP__/CityGuide/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
 						<volist name="v['_son']" id="vs">
 							<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
 						</volist>
@@ -330,17 +333,17 @@
             </div>
             <div class="xuankuan-h">
                 <h5>select voices:</h5>
-                <form action="" method="get">
-                    <label>
-                        <input type="text" name="textfield" id="textfield" />
-                    </label>
-                    <label>
-                        <input type="text" name="textfield" id="textfield" />
-                    </label>
-                    <label>
-                        <input type="text" name="textfield" id="textfield" />
-                    </label>
-                </form><img src="__PUBLIC__/default/images/the_radio.png" /><a>If not playing, see the solution!</a>
+					<select name="chau" id="chau" style="width:150px; overflow-x:hidden;">
+					<option>select chau</option>
+					</select>
+                    <select name="country" id="country" style="width:150px; overflow-x:hidden;">
+						<option>select country</option>
+					</select>
+                    <select name="radio" id="radio" style="width:150px; overflow-x:hidden;">
+						<option>select radio</option>
+					</select>
+                <img src="__PUBLIC__/default/images/the_radio.png" id="Play"/>
+				<a href="#">If not playing, see the solution!</a>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@
 		var PUBLIC		='../Public/';
 		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
 		</script>
+		<script src="../Public/iic.js"></script>
     </head>
     <body>
         <div id="top">
@@ -48,11 +49,13 @@
                 <div class="top-logo">
                     <h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
                     <div class="top-city">
-                        <h2><a href="__APP__/Public/index/cid/2"<eq name="cid" value="2"> class="on"</eq>>Beijing</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/3"<eq name="cid" value="3"> class="on"</eq>>Shanghai</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/1"<eq name="cid" value="1"> class="on"</eq>>Guangzhou</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/4"<eq name="cid" value="4"> class="on"</eq>>Shenzhen</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/2" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/3" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/1" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/4" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+						<span style="float:right; margin-right:10px; font-size:10px;"><input type="checkbox" value="1" name="remember" id="remember" />Remember my choice</span>
                     </div>
+					
                 </div>
                 <div class="clear">
                 </div>

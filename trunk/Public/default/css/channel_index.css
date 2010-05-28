@@ -73,10 +73,27 @@
 .menu li {
     height: 33px;
     background: url(../images/pc/huixian.gif) repeat-x;
-    padding: 0 0 0 15px;
     margin: 0px;
     line-height: 33px;
 }
+.menu li a{
+	padding: 0 0 0 15px;
+    height: 33px;
+    margin: 0px;
+    line-height: 33px;
+	display:block;
+}
+.menu li a:hover,.menu li .on{
+	padding: 0 0 0 15px;
+    height: 33px;
+    margin: 0px;
+    line-height: 33px;
+	display:block;
+	background-color:#666;
+	color:#fff;
+	font:bold 14px;
+}
+
 
 /*right开始*/
 .jianbian-h {
@@ -195,7 +212,10 @@
     margin: 0px;
     width: 225px;
 }
-
+.xinwen-h{
+	margin-bottom:10px;
+	height:90px;
+}
 .xinwen-h ul {
     margin: 0px;
     padding: 5px 12px 0 12px;
@@ -246,7 +266,6 @@
 
 .chenshi {
     color: #626262;
-    margin: 10px 0 0 0;
     padding: 0px;
 }
 
@@ -390,11 +409,6 @@
 }
 
 /* CSS连接样式*/
-a:link {
-    color: #ffffff;
-    text-decoration: none;
-    line-height: 26px;
-}
 
 a:hover {
     color: #b3216c;
@@ -402,14 +416,18 @@ a:hover {
 }
 
 a:active {
-    color: #ffffff;
+    color: #ff0000;
     text-decoration: none;
     line-height: 26px;
 }
 
-a:visited {
-    color:#fffff;
-    text-decoration: none;
-}
 
+.star{height:18px; margin:0 10px;}
+.star .nx{background:url(../../img/nst.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
+.star .x{background:url(../../img/sth.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
+.star .t{float:left; margin-top:3px; margin-left:3px; height:20px; width:65px;padding:0; }
 
+.fanye{width:400px;;margin:15px auto; float:right; height:25px;}
+.fanye span{margin:0 5px; width:24px; height:17px; float:left;}
+.fanye span a{text-align:center; display:block;width:24px; height:17px; background:url(../images/huibg.gif) no-repeat 0 0; color:#000; line-height:17px;}
+.fanye span a:hover,.fanye .on{text-align:center;display:block;width:24px; height:17px; background:url(../images/hongbg.gif) no-repeat 0 0; color:#fff; line-height:17px;}

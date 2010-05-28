@@ -11,7 +11,6 @@ public function index(){
     echo "<a href='".__URL__."/classified/mid/5'>分类信息的Sell &Buy信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/8'>分类信息的Personals信息</a><br>";
     echo "<a href='".__URL__."/classified/mid/9'>分类信息的Announcement信息</a><br>";
-    echo "<a href='".__URL__."/get_dis'>生成摘要信息</a><br><br>";
     echo "<a href='".__URL__."/get_cityguide'>城市指南数据导入</a><br><br>";
     
 }
@@ -61,18 +60,6 @@ function ctype() {
 
 }//end ctype
 
-
-
-//INSERT INTO `iic_arctype` (`id`, `reid`, `topid`, `sortrank`, `typename`, `ename`, `typedir`, `issend`, `channeltype`, `uid`, `cid`, `maxpage`, `ispart`, `corank`, `tempindex`, `templist`, `temparticle`, `namerule`, `namerule2`, `modname`, `description`, `keywords`, `seotitle`, `moresite`, `sitepath`, `siteurl`, `ishidden`, `cross`, `hits`, `posttime`, `mtime`, `crossid`, `content`, `smalltypes`)
-//                   VALUES (NULL, 'reid', 'topid', NULL      , 'typename', 'ename', NULL     , NULL    , 'channeltype', NULL  , 'cid', NULL    , 'ispart', NULL    , NULL, NULL, NULL, NULL, NULL, NULL, 'description', 'keywords', 'seotitle', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-    /**
-     *
-     *@date 2010-4-24
-     *@time 下午02:58:56
-     */
-function cityguide() {
-
-}//end cityguide
 
 /**
    *导入城市指南分类
@@ -327,24 +314,7 @@ function tree() {
 	echo "<pre>";
 }//end tree
 
-/**
- *清除HTML批量获取摘要
- *@date 2010-5-6
- *@time 下午04:53:09
- */
-function get_dis() {
-	//清除HTML批量获取摘要
-	load("extend");
-	$dao=new Model();
-	$dao->Table('iic_archives');
-	$count=$dao->count();
-	import("ORG.Util.Page");
-	$page=new Page($count,100);
-	$limit=$page->firstRow.','.$page->listRows;
-	
-	
-	dump($count);
-}//end get_dis
+
 
 /**
  *导出城市指南内容
@@ -353,6 +323,12 @@ function get_dis() {
  */
 function get_cityguide() {
 	load("extend");
+	 $cid=array(
+    	1=>'2',//bj
+    	2=>'3',//sh
+    	27=>'1',//gz
+    	28=>'4',//sz
+    );
 	$p=$_GET['page'];
 	//导出城市指南内容
 	$dao=new Model();
@@ -369,10 +345,12 @@ function get_cityguide() {
     	$sql="SELECT a.*,b.my_content,r.content FROM bfc_article AS a LEFT JOIN bfc_article_content_4 AS b ON a.aid=b.aid LEFT JOIN bfc_reply AS r ON b.rid=r.rid ORDER BY a.aid $limit";
     	echo $sql.'<br>';
     	echo '<a href="'.__URL__.'/get_cityguide/page/'.$np.'">下一页</a>';
-    	$data_old=$dao->query($sql);
+    	$list=$dao->query($sql);
+    	echo $dao->getLastSql();
     	$i=1;
-    	if($data_old){
-    		foreach ($data_old as $v){
+    	//dump(empty($list));
+    	if(!empty($list)){
+    		foreach ($list as $v){
     			
 	    		$t=time();
 	    		$v['fid']=$v['fid']+1000;
@@ -384,25 +362,35 @@ function get_cityguide() {
 		    	$data['channel']=2;
 		    	$data['click']=$v['hits'];
 		    	$data['title']=$v['title'];
-		    	$data['color']=$v['titlecolor'];
-		    	$data['keywords']=$v['keywords'];
-		    	$data['lastpost']=$v['replytime'];
+		    	
 		    	$data['pubdate']=$v['posttime'];
+    			$data['senddate']=$v['posttime'];
+    			$data['senddate']=$v['posttime'];
+    			$data['showstart']=$v['posttime'];
+
+    			$kw=str_word_count($v['title'],1);
+    			$keywords="";
+    			foreach ($kw as $vkw){
+    				$keywords.=$vkw.',';
+    			}
+    			$data['keywords']=empty($v['keywords'])?trim($keywords,','):$v['keywords'];
+
+
 		    	$data['comments']=$v['comments'];
 		    	$data['picurl']=$v['picurl'];
-		    	$data['my_content']=empty($v['my_content'])?'':$v['my_content'];
+		    	$data['my_content']=empty($v['my_content'])?'':nl2br(strip_tags($v['my_content']));
 		    	$data['uip']=$v['ip'];
 		    	
-		    	$data['lastview']=$t;
-		    	$data['editpwd']=$t;
+    			
+    			$data['uid']=$v['uid'];
+		    	$data['lastview']=$v['lastview'];
+		    	$data['editpwd']=$v['edittime'];
 
 		    	$data['ismake']=$v['yz'];
 		    	$data['description']=msubstr(strip_tags($v['my_content']),0,200);
 
 		    	$aid=$dao->Table('iic_archives')->add($data);
 		    	if($aid){
-		    		//INSERT INTO `e_com_test`.`iic_addon_article` (`id` ,`aid` ,`pages` ,`content` ,`redirecturl`)VALUES (
-		    		//NULL , '1', '2', 'content', 'red');
 		    		$article=array();
 		    		$article['aid']=$aid;
 		    		$article['content']=$v['content'];
@@ -428,37 +416,14 @@ function get_cityguide() {
 }//end get_cityguide
 
 /**
- *sm
- *@date 2010-5-7
- *@time 下午02:28:04
+ *
+ *@date 2010-5-27
+ *@time 下午04:10:49
  */
-function test() {
-	//sm
-$text=<<<ETO
-<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><font size="2">email: </font><a href="mailto:latinasiagz@gmail.com"><font size="2">latinasiagz@gmail.com</font></a><font size="2"> <span style="">&nbsp;</span><o:p></o:p></font></span></p>
-<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><o:p><font size="2">&nbsp;</font></o:p></span></p>
-<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><font size="2">We are looking for a Textile Specialist for a Mexican company with good knowledge in textile products, fabrics, garments, confection and quality control.<o:p></o:p></font></span></p>
-<p style="margin: 0cm 0cm 0pt;" class="MsoNormal"><span lang="EN-US" style=""><o:p><font size="2">&nbsp;</font></o:p></span></p>
-<div><font size="2"><font face="Verdana"><span lang="EN-US" style="font-size: 10.5pt; font-family: 'Times New Roman';">Please send your CV to latinasiagz@gmail.com</span> </font></font></div>
-ETO;
-$text	=	preg_replace('/<\/?(html|head|meta|link|base|basefont|body|bgsound|title|style|script|form|iframe|frame|frameset|applet|id|ilayer|layer|name|script|style|xml|font|div|span|p|o:p)[^><]*>/i','',$text);
-
-echo $text;
-
+function function_name() {
+	//
+	
 }//end function_name
-
-/**
- *ceui
- *@date 2010-5-25
- *@time 下午05:40:04
- */
-function cesi() {
-	//ceui
-	$x=mktime(0, 0, 0, date('n'), date('d')+180,date('Y'));
-	echo date('Y/m/d',1231570189+60*60*24*30);
-	echo '<br>';
-	echo date('Y/m/d',1231570189);
-}//end cesi
 
 }//class end
 ?>
