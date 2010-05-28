@@ -14,7 +14,6 @@
 class CommonAction extends Action{
 	protected $user=array();//用户信息
 	protected $cid;//城市ID
-	protected $city=array();
 	
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
@@ -27,17 +26,7 @@ class CommonAction extends Action{
         //$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
         //import('ORG.Util.Image');
         
-        if (empty($this->city)) {
-        	$city=F("city");
-        	if (empty($city)) {
-        		$dao=M("ActCity");
-        		$city=$dao->where("status='1'")->order("ctitle desc")->findAll();
-        		F("city",$city);
-        		$this->city=$city;
-        	}else{
-        		$this->city=$city;
-        	}
-        }
+
     }
     
     /**
@@ -71,6 +60,22 @@ class CommonAction extends Action{
 		}
 		return $data;
     }//end _get_city
+    
+    /**
+     *ajax获得城市下的区
+     *@date 2010-5-28
+     *@time 下午02:26:38
+     */
+   Public function ajax_zone($cid,$types,$name=0) {
+    	//ajax获得城市下的区
+    	$cid=empty($cid)?$_REQUEST['cid']:$cid;
+    	$types=empty($types)?$_REQUEST['types']:$types;
+    	$name=empty($_REQUEST['name'])?0:$_REQUEST['name'];
+    	$data=$this->_get_city($types);
+    	$this->assign('name',$name);
+    	$this->assign("zone",$data[$cid]['_zone']);
+    	$this->display("Common:ajax_zone");
+    }//end ajax_zone
     
     /**
      *用户收藏
@@ -158,7 +163,7 @@ class CommonAction extends Action{
    protected function _set_cid() {
     	//设置城市
     	$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
-    	$this->cid=empty($this->cid)?$_COOKIE['cid']:$this->cid;
+    	$this->cid=empty($this->cid)?cookie('cid'):$this->cid;
     	if(empty($this->cid)){
     		$this->cid='';
     		$this->redirect("/Public/select_city");

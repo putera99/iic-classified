@@ -100,7 +100,7 @@
 	<php>$content=$info['_jobs']['content']</php>
     </case>
     <case value="5">{//realestate}
-							<p>//Office/Commercial, Apartment/Flat, Family House/Villa, All
+							<p>
 								Category:{$info['published']}<br>
 								Valid for:({$info['showstart']|toDate='d/m/Y'}) -- ({$info['showend']|toDate='d/m/Y'})<br>
 								Located in:{$info['position']}<br>
@@ -163,10 +163,8 @@
                         <li rel="{$info['channel']}_{$info['id']}" class="user_report">
                             Report corrections
                         </li>
+						<li class="pm"><a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)</li>
                     </ul>
-                    <p>
-                        <a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)
-                    </p>
                 </div>
 				
                 <div class="Comments">
@@ -192,7 +190,7 @@
 								<span class="nx" id="star_5"></span>
 								<span id="star_text" class="t"></span>
 							<span style="text-align:left;">
-							验证码:<input type="text" size="4" name="verify" id="verify">
+							Verification code:<input type="text" size="4" name="verify" id="verify">
                     			<a href="javascript:fleshVerify();">
                     				<img src="__URL__/verify" id="verifyImg" style="vertical-align:-6px;" />
 								</a>

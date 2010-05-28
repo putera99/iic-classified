@@ -137,25 +137,28 @@ class ClassifiedsAction extends CommonAction{
 				$info['itype']=$info['itype']=='0'?'All':$info['itype']=='1'?'Offered':'Wanted';
 				$category=array("All","Full time","Part time","Internship","Voluntary");
 				$info['category']=$category[$info['category']];
-				//$info['city']=
 			break;
 			
 			case $info['channel']==5://realestate
 				$info['_realestate']=$dao->relationGet("realestate");
 			break;
+			
 			case $info['channel']==6://commerce
 				$types=array(1=>'All',2=>'Offered',3=>'Wanted');
 				$cat=array('Brand-new','Second-hand');
 				$info['itype']=$types[$info['type']];
 				$info['category']=$cat[$info['category']];
-				$info['_realestate']=$dao->relationGet("realestate");
+				$info['_commerce']=$dao->relationGet("realestate");
 			break;
+			
 			case $info['channel']==7://agents
 				$info['_agents']=$dao->relationGet("agents");
 			break;
+			
 			case $info['channel']==8://personals
 				$info['_personals']=$dao->relationGet("personals");
 			break;
+			
 			case $info['channel']==9://services
 				$info['itype']=$info['itype']==1?'All':$info['itype']==2?'Offered':'Wanted';
 				$info['_services']=$dao->relationGet("services");

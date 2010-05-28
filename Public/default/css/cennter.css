@@ -96,6 +96,8 @@ a img{ border:none;}
 .content-life p,.content-n .i_content p{ margin:0px; padding:0px;}
 .content-n .i_content ul{padding:0px;list-style-type:none;margin: 20px 0 0 0; height:30px;}
 .content-n .i_content li{color: #FFFFFF;width: 116px;height: 25px; line-height:25px; background: url(../images/button.gif) no-repeat; margin:0px 8px;float: left;text-align: center;}
+.content-n .i_content .pm{background:none;color: #717171;}
+.content-n .i_content .pm img{vertical-align:-6px;}
 .content-n .i_content li a{color: #FFFFFF; text-decoration:none;}
 .content-n .i_content li a:hover{color: #FFFFFF;text-decoration:underline;}
 .content-n .right{width:160px;margin:0px;padding:0px;float:right;}
@@ -127,7 +129,7 @@ a img{ border:none;}
 .pic-right-a {width: 628px;padding: 0px;float: right;background: url(../images/bg12.gif) no-repeat;margin: 0px 5px 0px 0px;}
 .pic-right ul {list-style-type: none;padding-right: 5px;padding-left: 30px;margin: 5px 0px 5px 0px;padding-top: 0;font-size: 12px;line-height: 14px;font-weight: normal;color: #FFFFFF;}
 .ziti {font-weight: bold;margin: 0px;padding-top: 10px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}
-.ditu {width: 342px;padding: 0px;margin: 0px 5px 0px 5px;}
+.ditu {width: 342px; height:242px; padding: 0px;margin: 0px 5px 0px 5px;}
 .liuyan{margin:10px 0;padding: 0px; height:auto;text-align: center;}
 .liuyan .content {width:98%; height:98px; padding: 0px;background-color: #FFFFFF;border: 1px solid #999999;margin: 0px auto;}
 
@@ -151,10 +153,10 @@ a img{ border:none;}
 .title-h {display: block;font-size: 12px;font-weight: bold;color: #ef5f01;}
 
 
-.star{height:18px;}
+.star{height:18px; margin:0 10px;}
 .star .nx{background:url(../../img/nst.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
 .star .x{background:url(../../img/sth.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
-.star .t{float:left; margin:0; height:20px; width:50px;padding:0; }
+.star .t{float:left; margin-top:3px; margin-left:3px; height:20px; width:65px;padding:0; }
 
 .fanye{width:400px;;margin:15px auto; float:right; height:25px;}
 .fanye span{margin:0 5px; width:24px; height:17px; float:left;}
