@@ -293,12 +293,23 @@
     text-align: center;
     border-bottom: 1px dashed #d0d0d0;
     margin: 5px;
-    padding: 0 0 5px 0;
+    padding:0 0 5px 0;
 }
+.time span{float:left; border:#ccc 1px solid; margin:0 4px 0 0;}
+.time .y{padding:0;}
+.time .m{text-align:center;}
+.time .m a,.time .y a{display:block;padding:0 3px;}
+.time .m a:hover,.time .m .on,.time .y a:hover,.time .y .on{display:block; background-color:#666; color:#fff;}
 
-.dizhi a {
-    padding-left: 5px;
+.dizhi{
+	margin-top:5px;
+	padding:0 0 5px 0;
+	height:20px;
+	width:auto;
 }
+.dizhi span{float:left; border:#ccc 1px solid; margin:0 4px 0 0;text-align:center;}
+.dizhi span a{display:block;padding:0 3px;}
+.dizhi span a:hover,.dizhi span .on{display:block; background-color:#666; color:#fff;}
 
 .pindao {
     padding: 0px;
@@ -414,13 +425,6 @@ a:hover {
     color: #b3216c;
     text-decoration: underline;
 }
-
-a:active {
-    color: #ff0000;
-    text-decoration: none;
-    line-height: 26px;
-}
-
 
 .star{height:18px; margin:0 10px;}
 .star .nx{background:url(../../img/nst.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}

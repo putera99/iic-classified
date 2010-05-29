@@ -13,36 +13,21 @@
         <div class="clear">
         </div>
         <div class="list">
-            <ul>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-            </ul>
+             <dl class="h350">
+            	<dt class="w420">Subject</dt>
+				<dt class="w100">Type</dt>
+				<dt class="w100">View</dt>
+				<dt class="w100">Time</dt>
+<volist name="cityguide" id="v">
+                	<dd>
+						<span class="w420"><a href="__APP__/CityGuide/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w100 c">{$v['channel']|get_type}</span>
+						<span class="w100 c">{$v['click']}</span>
+						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
+					</dd>
+                    
+</volist>
+            </dl>
         </div>
     </div>
     <div class="xuhao">

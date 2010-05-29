@@ -183,6 +183,35 @@ class CommonAction extends Action{
     }//end _get_comments
     
     /**
+     *ajax用户收藏
+     *@date 2010-5-29
+     *@time 下午02:40:33
+     */
+    public function ajax_user_collection($types=0,$uid=0,$pn=10) {
+    	//ajax用户收藏
+    	$uid=empty($_REQUEST['uid'])?$uid:$_REQUEST['uid'];
+    	$types=empty($_REQUEST['types'])?$types:$_REQUEST['types'];
+    	$pn=empty($_REQUEST['pn'])?$pn:$_REQUEST['pn'];
+    	$dao=D("UserCollection");
+    	$condition=array();
+    	$condition['uid']=$uid==0?$this->user['uid']:$uid;
+    	if($types!=0){
+    		$condition['types']=$types;
+    	}
+    	$count=$dao->where($condition)->count();
+    	import("ORG.Util.Page");//引用分页类
+		import("@.Com.ajaxpage");//引用ajax分页类
+		$p= new ajaxpage($count,$pn);
+		$page=$p->ajaxshow();//显示分页
+		$this->assign("showpage_bot",$page);//显示分页
+		$limit=$p->firstRow.",".$p->listRows;//设定分面的大小
+		$limit=($limit==",")?'':$limit;//分页的大小
+    	$data=$dao->where($condition)->limit($limit)->order('ctime DESC')->findAll();
+    	$this->assign('collection',$data);
+		$this->display("Common:ajax_user_collection");
+    }//end ajax_user_collection
+    
+    /**
      *ajax调用评论
      *@date 2010-5-24
      *@time 下午05:51:07

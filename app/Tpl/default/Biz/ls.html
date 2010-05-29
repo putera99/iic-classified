@@ -54,17 +54,16 @@
                     </div>
                     <div class="dizhi">
 <volist name="city" id="v">
-						<a href="__URL__/ls/bycity/{$v['id']}">{$v['ctitle']}</a>
+						<span><a href="__URL__/ls/bycity/{$v['id']}" <if condition="$_SESSION['bycity'] eq $v['id']">class="on"</if>>{$v['ctitle']}</a></span>
 </volist>
                     </div>
                 </div>
                 <div class="time">
-                    <span><a href="#">2010 >></a></span> 　
+                    <span class="y"><a href="__URL__/ls/ms/{$year['sy']['ms']}/me/{$year['sy']['me']}/tn/{$year['sy']['name']}/year/{$year['sy']['name']}" <if condition="$_SESSION['tn'] eq $year['sy']['name']">class="on"</if>>{$year['sy']['name']}</a></span> 　
 <volist name="date" id="v">
-					<a href="__URL__/ls/ms/{$v['start']}/me/{$v['end']}">{$v['name']}</a> 
-					<neq name="i" value="12">|</neq>
+					<span class="m"><a href="__URL__/ls/ms/{$v['start']}/me/{$v['end']}/tn/{$v['name']}" <if condition="$_SESSION['tn'] eq $v['name']">class="on"</if>>{$v['name']}</a></span> 
 </volist>
-					  　<span><a href="#">2011 >></a></span>
+					  　<span class="y"><a href="__URL__/ls/ms/{$year['ny']['ms']}/me/{$year['ny']['me']}/tn/{$year['ny']['name']}" <if condition="$_SESSION['tn'] eq $year['ny']['name']">class="on"</if>>{$year['ny']['name']}</a></span>
                 </div>
             </div>
             <div class="pindao">
@@ -279,7 +278,7 @@
         <div class="national">
             <ul>
                 <li>
-                    <a href="#"><span>China</span></a>
+                    <a href="#"><span>中文</span></a>
                     <img src="__PUBLIC__/default/images/pc/chian.gif" alt="fbv" />
                 </li>
                 <li>

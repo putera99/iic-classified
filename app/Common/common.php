@@ -1,6 +1,48 @@
 <?php
 
 /**
+ *给出类名
+ *@date 2010-5-29
+ *@time 下午02:59:17
+ */
+function get_type($type) {
+	$ch='';
+	switch (true) {
+		case $type==1:
+			$ch='Article';
+		break;
+		case $type==2:
+			$ch='CityGuide';
+		break;
+		case $type>=4 && $type<=9:
+			$ch='Classifields';
+		break;
+		case $type=10:
+			$ch='Event';
+		break;
+		case $type=11:
+			$ch='Fair';
+		break;
+	}
+	return $ch;
+}//end function_name
+
+function get_title($aid){
+	$dao=D("Archives");
+	$title=$dao->where("id=$aid")->field("title")->find();
+	unset($dao);
+	return $title['title'];
+}
+
+function getkey($arr,$k) {
+	$narr=array();
+	foreach ($arr as $v){
+		$narr[$k]=$v;
+	}
+	return $narr;
+}
+
+/**
  *格式时间
  *@date 2010-5-20
  *@time 下午08:35:01

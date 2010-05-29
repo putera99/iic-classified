@@ -1,0 +1,25 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_stuff">My stuff</a>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#collection").load(URL+'/ajax_user_collection',{pn:25});
+	});
+</script>
+<div class="right-neirong">
+    <div class="right-messages">
+        <div class="right-title">
+            <span><img src="__PUBLIC__/default/images/View all.gif" alt="dcsc" /></span><img src="__PUBLIC__/default/images/My stuff.gif" alt="dvfd" />
+        </div>
+        <div class="list">
+
+        	<dl class="h350" id="collection">
+        		
+        	</dl>
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>
+
