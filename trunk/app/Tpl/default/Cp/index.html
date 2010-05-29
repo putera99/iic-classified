@@ -1,6 +1,11 @@
 <div class="mulu">
     <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$("#collection").load(URL+'/ajax_user_collection');
+	});
+</script>
 <div class="right-neirong">
     <div class="right-messages">
         <div class="right-title">
@@ -212,39 +217,16 @@
     </div>
     <div class="right-messages">
         <div class="right-title">
-            <span><img src="__PUBLIC__/default/images/View all.gif" alt="dcsc" /></span><img src="__PUBLIC__/default/images/My stuff.gif" alt="dvfd" />
-        </div>
-        <div class="duanxin">
-            <span class="subject">Subject</span>
-            <span class="subject">From</span>
-            <span class="subject">Traffic</span>
-            <span class="subject">Time</span>
+            <span><a href="__URL__/my_stuff"><img src="__PUBLIC__/default/images/View all.gif" alt="View All in My stuff" /></a></span><img src="__PUBLIC__/default/images/My stuff.gif" alt="My stuff" />
         </div>
         <div class="list">
-            <ul>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-                <li>
-                    <span>2008-10-12</span>
-                    I have a U.S. version of Zhejiang people of the world famous comic.　　　　　　　gssg 　　　　　　　　21 
-                </li>
-            </ul>
+
+        	<dl class="h350" id="collection">
+        		
+        	</dl>
         </div>
     </div>
 </div>
 <div class="clear">
 </div>
+

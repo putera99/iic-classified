@@ -40,14 +40,12 @@ class BizAction extends CommonAction{
 		//展会列表
 		if ($_REQUEST['year']) {
 			$_SESSION['year']=$_REQUEST['year'];
-			$_SESSION['ms']=mktime(0,0,0,1,1,$_REQUEST['year']);
-			$_SESSION['me']=mktime(0,0,0,1,1,$_REQUEST['year']+1)-1;
 		}
 		if ($_REQUEST['id']) {
 			$_SESSION['fair_id']=$_REQUEST['id'];
 		}
 		if ($_REQUEST['bycity']) {
-			$_SESSION['cid']=$_REQUEST['bycity'];
+			$_SESSION['bycity']=$_REQUEST['bycity'];
 		}
 		if ($_REQUEST['ms']) {
 			$_SESSION['ms']=$_REQUEST['ms'];
@@ -55,23 +53,41 @@ class BizAction extends CommonAction{
 		if ($_REQUEST['me']) {
 			$_SESSION['me']=$_REQUEST['me'];
 		}
+		if ($_REQUEST['tn']) {
+			$_SESSION['tn']=$_REQUEST['tn'];
+		}
 		if($_REQUEST['order']){
 			$_SESSION['order']=$_REQUEST['order'];
 		}else{
 			$_SESSION['order']='DESC';
 		}
 		$condition=array();
+		$year=array();
+		$nowyear=date('Y');
 		if ($_SESSION['year']) {
 			$this->assign('date',$this->_get_time($_SESSION['year']));
-			$condition['year']=$_REQUEST['year'];
+			$condition['year']=$_SESSION['year'];
+			$year['sy']['name']=$_SESSION['year'];
+			$year['sy']['ms']=mktime(0,0,0,1,1,$_SESSION['year']);
+			$year['sy']['me']=mktime(0,0,0,1,1,$_SESSION['year']+1)-1;
+			$year['ny']['name']=$_SESSION['year']+1;
+			$year['ny']['ms']=mktime(0,0,0,1,1,$_SESSION['year']+1);
+			$year['ny']['me']=mktime(0,0,0,1,1,$_SESSION['year']+2)-1;
 		}else{
 			$this->assign('date',$this->_get_time());
+			$year['sy']['name']=$nowyear;
+			$year['sy']['ms']=mktime(0,0,0,1,1,$nowyear);
+			$year['sy']['me']=mktime(0,0,0,1,1,$nowyear+1)-1;
+			$year['ny']['name']=$nowyear+1;
+			$year['ny']['ms']=mktime(0,0,0,1,1,$nowyear+1);
+			$year['ny']['me']=mktime(0,0,0,1,1,$nowyear+2)-1;
 		}
+		$this->assign('year',$year);
 		if ($_SESSION['fair_id']) {
 			$condition['typeid']=$_SESSION['fair_id'];
 		}
-		if ($_SESSION['cid']) {
-			$condition['cid']=$_SESSION['cid'];
+		if ($_SESSION['bycity']) {
+			$condition['bycity']=$_SESSION['bycity'];
 		}
 		if ($_SESSION['ms']) {
 			$condition['showstart']=array('egt',$_SESSION['ms']);
@@ -95,6 +111,19 @@ class BizAction extends CommonAction{
 		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->findAll();
 
 		$this->assign('info',$data);
+		
+		$arctype=D("Arctype");
+		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();
+		$this->assign('info',$info);
+		$page=array();
+		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':$info['seotitle'].'  -  BeingfunChina';
+		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
+		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
+		if($info['reid']!='1232'){
+			$reinfo=$arctype->where("id={$info['reid']}")->find();
+			$this->assign('reinfo',$reinfo);
+		}
+		$this->assign('page',$page);
 		$this->display();
 	}//end ls
 	

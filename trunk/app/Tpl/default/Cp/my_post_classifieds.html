@@ -4,18 +4,23 @@
 $(document).ready(function(){
 	$("#typeid").change(function(){
 		var id=this.value;
-		id=id.split('_');
-		var cache=$("#cache").html();
-		id="#channel_"+id['0'];
-		if(id!=cache){
-			$("#channel").html($(id).html());
-			$("#cache").html(id);
-		}
-		//alert(id);
+		ch_type(id);
 	});
 	$('.showend_job').datePicker({clickInput:true});
-
+	var typeid=$("#typeid").val();
+	if(typeid!=0){
+		ch_type(typeid);
+	}
 });
+function ch_type(id){
+	id=id.split('_');
+	var cache=$("#cache").html();
+	id="#channel_"+id['0'];
+	if(id!=cache){
+		$("#channel").html($(id).html());
+		$("#cache").html(id);
+	}
+}
 function zone(obj,id,name){
 	if(name==0){
 		var cid=obj.options[obj.options.selectedIndex].value;

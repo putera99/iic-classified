@@ -72,6 +72,15 @@ class ArchivesModel extends RelationModel{
 		        'mapping_name'=>'services',
 		        //'mapping_order'=>'ctime desc'
 			),
+		'Article'=>array(//关联服务
+				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY
+				'mapping_type'=>HAS_ONE,
+				'class_name'=>'AddonArticle',
+		        'foreign_key'=>'aid',
+		        'mapping_name'=>'article',
+				//'as_fields'=>'content',
+		        //'mapping_order'=>'ctime desc'
+			),
     );
     
 }//end ArchivesModel

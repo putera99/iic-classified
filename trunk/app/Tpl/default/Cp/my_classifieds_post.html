@@ -7,19 +7,27 @@
     </div>
     <div class="right-messages">
         <div class="right-title">
+        	<span><a href="__URL__/my_post_classifieds">Post</a></span>
             <h3>My Classifieds</h3>
         </div>
         <div class="clear">
         </div>
         <div class="list">
-            <ul>
+            <dl class="h350">
+            	<dt class="w420">Subject</dt>
+				<dt class="w100">Type</dt>
+				<dt class="w100">View</dt>
+				<dt class="w100">Time</dt>
 <volist name="classifieds" id="v">
-                <li>
-                    <span>{$v['lastview']|toDate='Y-m-d'}</span>
-                    <a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a>
-                </li>
+                	<dd>
+						<span class="w420"><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w100 c">{$v['channel']|get_type}</span>
+						<span class="w100 c">{$v['click']}</span>
+						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
+					</dd>
+                    
 </volist>
-            </ul>
+            </dl>
         </div>
     </div>
     <div class="xuhao">

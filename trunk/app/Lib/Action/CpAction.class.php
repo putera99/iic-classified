@@ -28,6 +28,8 @@ class CpAction extends CommonAction{
 	 */
 	function index() {
 		//控制面板首页
+		
+		
 		$page=array();
 		$page['title']='My Control Panel -  BeingfunChina';
 		$page['keywords']='My Control Panel';
@@ -230,6 +232,39 @@ class CpAction extends CommonAction{
 	 */
 	function my_cityguide_post() {
 		//我发布的城市指南
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=2;
+		$cityguide_type=$this->_get_cityguide_type();
+    	$this->assign('cityguide_type',$cityguide_type);
+    	$typeid=$_REQUEST['id'];
+    	if(!empty($typeid)){
+    		$type=D("Arctype");
+	    	$data=$type->where("id=$typeid")->field('id,typename,reid,topid,ispart')->find();
+	    	$typearr=array();
+	    	if($data['ispart']!=0){
+	    		$typearr=$type->where("reid=$typeid")->field('id,typename,reid,topid,ispart')->findAll();
+	    		$in='';
+	    		foreach ($typearr as $v){
+	    			$in.=$v['id'].',';
+	    		}
+	    		$in=trim($in,',');
+	    		$condition['typeid']=array('IN',$in);
+	    	}else{
+	    		$condition['typeid']=$typeid;
+	    	}
+    	}
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$cityguide=array();
+    	$cityguide=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+    	dump($dao->getLastSql());
+		$this->assign('cityguide',$cityguide);
+		
 		$page=array();
 		$page['title']='My Post CityGuide -  My Control Panel -  BeingfunChina';
 		$page['keywords']='My Post CityGuide';
@@ -298,5 +333,41 @@ class CpAction extends CommonAction{
 			$this->error($dao->getError());
 		}
 	}//end add_cityguide
+	
+	/**
+	 *我的收藏夹
+	 *@date 2010-5-29
+	 *@time 下午04:27:12
+	 */
+	function my_stuff() {
+		//我的收藏夹
+		$page=array();
+		$page['title']='My Stuff -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Stuff';
+		$page['description']='My Stuff';
+		$this->assign('page',$page);
+		$this->assign('content','Cp:my_stuff');
+		$this->display("Cp:layout");
+	}//end my_stuff
+	
+	/**
+	 *发布一个展会信息
+	 *@date 2010-5-29
+	 *@time 下午05:33:40
+	 */
+	function my_post_fair() {
+		//发布一个展会信息
+		$class_tree=$this->_get_tree(1232);
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('fair'));
+		$page=array();
+		$page['title']='Post Fair -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Fair';
+		$page['description']='Post Fair';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_post_fair');
+		$this->display("Cp:layout");
+	}//end my_post_fair
 	
 }//end CpAction

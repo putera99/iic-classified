@@ -113,10 +113,12 @@ class CityGuideAction extends CommonAction{
 		if(empty($aid)){
 			$this->error("error: aid is null!");
 		}
-		$dao=D("CityGuideView");
-		$info=$dao->where("Archives.id=$aid")->find();
+		/*$dao=D("CityGuideView");
+		$info=$dao->where("Archives.id=$aid")->find();*/
+		$dao=D("Archives");
+		$info=$dao->where("id=$aid")->find();
+		$info['content']=$dao->relationGet("article");
 		$this->assign('info',$info);
-		
 		$page=array();
 		$page['title']=$info['title'].'  -  BeingfunChina';
 		$page['keywords']=$info['keywords'];
