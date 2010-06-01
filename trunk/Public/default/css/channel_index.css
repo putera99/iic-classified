@@ -29,7 +29,7 @@
     width: 749px;
     padding: 0px;
     float: right;
-    margin-left: 0 0 0 10px;
+    margin-left:10px;
 }
 
 .channel-left {
@@ -91,7 +91,8 @@
 	display:block;
 	background-color:#666;
 	color:#fff;
-	font:bold 14px;
+	font-size:14px;
+	font-weight:bold;
 }
 
 
@@ -127,7 +128,7 @@
 .neirong-h dd {
     width: 320px;
     margin: 0px;
-    padding-top: 0px 5px 0px 0px;
+    padding-top:5px;
     float: right;
     color: #dadada;
     display: block;
@@ -284,7 +285,7 @@
 
 .zhuti {
     border-bottom: 1px solid #d0d0d0;
-    margin-top: 0 0 5px 0;
+    margin-top:5px;
     padding: 0 0 5px 15px;
     font-weight: bold;
 }
@@ -334,7 +335,6 @@
 }
 
 .pingdaozs ul {
-    width: 122px;
     height: 200px;
     margin: 0px;
     list-style-type: none;
@@ -344,11 +344,15 @@
     color: #a62365;
     padding: 10px 0 0 0;
 }
+.pingdaozs .w120{ width:120px;}
+.pingdaozs .w200{ width:200px;}
+.pingdaozs .w180{ width:180px;}
+.pingdaozs .w88{ width:88px;}
+.pingdaozs .w100{ width:100px;}
+.pingdaozs .c{text-align:center;}
+.pingdaozs .l{text-align:left;}
 
-.pingdaozs li {
-    margin: 0px;
-    padding: 0px 0px 5px 0px;
-}
+.pingdaozs li {margin: 0px;padding: 0px 0px 5px 0px;}
 
 .pingdaozs span {
     font-weight: bold;

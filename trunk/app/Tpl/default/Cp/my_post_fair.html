@@ -11,6 +11,21 @@ $(document).ready(function(){
 	if(typeid!=0){
 		ch_type(typeid);
 	}
+	$("#add_ltd").click(function(){
+		var title=$("#ltdtitle").val();
+		if(title){
+			var tourl=URL+'/ajax_add_ltd';
+			$.post(tourl,{title:title},function(data){
+				if(data['status']==1){
+					var t="<option value='"+data[data]+"' selected='selected'>"+title+"</option>";
+					$("#ltdid").append(t);
+					alert(data['info']);
+				}else{
+					alert(data['info']);
+				}
+			},'json')
+		}
+	});
 });
 function ch_type(id){
 	id=id.split('_');
@@ -42,7 +57,7 @@ function zone(obj,id,name){
             <h3 style="margin:0;">Post Classifieds</h3>
         </div>
         <div class="list">
-            <form action="__URL__/add_classifieds" method="post">
+            <form action="__URL__/add_fair" method="post" enctype="multipart/form-data">
             	<fieldset>
 				<legend>Basic Elements:</legend>
 	            	<p>
@@ -56,8 +71,22 @@ function zone(obj,id,name){
 						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;">
 					</p>
 					<p>
-						<label for="cid">By City</label>
-						<select name="cid" id="cid">
+						<label for="position">Venue:</label>
+						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
+							<option value="0">--Select City--</option>
+							<volist name="citylist" id="v">
+							<option value="{$v['id']}">{$v['ctitle']}</option>
+							</volist>
+						</select>
+						<select name="zone_id" class="zone_id" onchange="maps('maps[1]',this.)">
+							<option value="0">--Select Zone--</option>
+						</select>
+						<input type="text" name="position" id="position">
+						
+					</p>
+					<p>
+						<label for="bycity">By City</label>
+						<select name="bycity" id="bycity">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
 							<option value="{$v['id']}">{$v['ctitle']}</option>
@@ -66,7 +95,55 @@ function zone(obj,id,name){
 					</p>
 				</fieldset>
 				<fieldset>
-					<legend>联系方式</legend>
+				<legend>Select Industries:</legend>
+					<p>
+						<label for="typeid">Industries:</label>
+						<select id="typeid" name="typeid">
+							<option value="0">---Select Main Category---</option>
+							<volist name="class_tree" id="v">
+								<if condition="$v['ispart'] eq 1">
+									<optgroup label="{$v['typename']}">
+										<volist name="v['_son']" id="vs">
+											<option value="{$v['channeltype']}_{$vs['id']}">{$vs['typename']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="{$v['channeltype']}_{$v['id']}">{$v['typename']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+					<p>
+						<label for="typeid2">Second<br>Category:</label>
+						<select id="typeid2" name="typeid2" size="5" >
+							<option value="0">---Select Second Category---</option>
+							<volist name="class_tree" id="v">
+								<if condition="$v['ispart'] eq 1">
+									<optgroup label="{$v['typename']}">
+										<volist name="v['_son']" id="vs">
+											<option value="{$vs['id']}">{$vs['typename']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="{$v['id']}">{$v['typename']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+				</fieldset>
+				<fieldset>
+					<legend>Fair info:</legend>
+					<p><label for="ltdid">Organizer:</label>
+						<select name="ltdid" id="ltdid">
+							<option value='0'>---Select Organizer---</option>
+							<volist name="ltd" id="l">
+								<option value="{$l['id']}">{$l['title']}</option>
+							</volist>
+						</select> Or
+						<input type="text" name="ltdtitle" id="ltdtitle"><input type="button" id="add_ltd" value="Add Organizer">
+					</p>
 					<p><label for="contact">Address:</label>
 						<input type="text" name="contact" id="contact">
 					</p>
@@ -91,101 +168,22 @@ function zone(obj,id,name){
 					<p><label for="linkman">Contact:</label>
 						<input type="text" name="linkman" id="linkman">
 					</p>
-				</fieldset>
-				<fieldset>
-				<legend>Select Info Category:</legend>
-					<p>
-						<label for="typeid">MainCategory:</label>
-						<select id="typeid" name="typeid">
-							<option value="0">---Select Main Category---</option>
-							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}">{$vs['typename']}</option>
-										</volist>
-									</optgroup>
-								<else/>
-									<option value="{$v['id']}">{$v['typename']}</option>
-								</if>
-														
-							</volist>
-						</select>
+					<p><label for="visitor">Visitor's Profile:</label>
+						<textarea cols="50" rows="5" name="visitor" id="visitor"></textarea>
+					</p>
+					<p><label for="my_content">Event Profile:</label>
+						<textarea cols="50" rows="5" name="my_content" id="my_content"></textarea>
+					</p>
+					<p><label for="exhibitor">Exhibitor's Profile:</label>
+						<textarea cols="50" rows="5" name="exhibitor" id="exhibitor"></textarea>
 					</p>
 					<p>
-						<label for="typeid2">Second<br>Category:</label>
-						<select id="typeid2" name="typeid2" size="5" >
-							<option value="0">---Select Second Category---</option>
-							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}">{$vs['typename']}</option>
-										</volist>
-									</optgroup>
-								<else/>
-									<option value="{$v['id']}">{$v['typename']}</option>
-								</if>
-														
-							</volist>
-						</select>
-					</p>
-				</fieldset>
-				<fieldset class="channel">
-				<legend>Jobs:</legend>
-					<p>
-						<label for="itype">Type:</label>
-						<select name="itype" id="itype">
-							<option value="0">All</option>
-							<option value="1">Offered</option>
-							<option value="2">Wanted</option>
-						</select>
+						<label for="product">Products:</label>
+						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" />
 					</p>
 					<p>
-						<label for="category">Category:</label>
-						<select name="category" id="category">
-							<option value="0">All</option>
-							<option value="1">Full time</option>
-							<option value="2">Part time</option>
-							<option value="3">Internship</option>
-							<option value="4">Voluntary</option>
-						</select>
-					</p>
-					<p>
-						<label for="position">Position:</label>
-						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
-							<option value="0">--Favorite City--</option>
-							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
-							</volist>
-						</select>
-						<select name="zone_id" class="zone_id">
-							<option value="0">--Favorite Zone--</option>
-						</select>
-						<input type="text" name="position" id="position">
-					</p>
-					<p><label for="salary">Salary</label>
-						<input type="text" name="salary" id="salary">
-					</p>
-					<p><label for="experience">Experience</label>
-						<input type="text" name="experience" id="experience">
-					</p>
-
-					<p><label for="joblocated">Job located in</label>
-						<select name="joblocated[0]" class="city_id" onchange="zone(this,'.job_zone_id',1)">
-							<option value="0">--Favorite City--</option>
-							<volist name="citylist" id="v">
-							<option value="{$v['ctitle']}" class="{$v['id']}">{$v['ctitle']}</option>
-							</volist>
-						</select>
-						<select name="joblocated[1]" class="job_zone_id">
-							<option value="0">--Favorite Zone--</option>
-						</select>
-						<input type="text" name="joblocated[2]" id="joblocated">
-					</p>
-					<p>
-						<label for="content">Description:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<label for="website">website:</label>
+						<input type="text" name="website" id="website"/>
 					</p>
 				</fieldset>
 				<p>

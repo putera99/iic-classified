@@ -42,9 +42,10 @@ $(document).ready(function(){
 	});
 	
 	$(".user_collection").click(function(){
-		var id=$(".user_collection").attr('rel');
-		var types=id.substr(0,1);
-		var tid=id.substr(2);
+		//var id=$(".user_collection").attr('rel');
+		var id=this.id;
+		var types=id.substr(2,1);
+		var tid=id.substr(4);
 		var tourl=URL+'/user_collection';
 		$.post(tourl,{tid:tid,types:types},function(data){
 			if(data['status']==1){

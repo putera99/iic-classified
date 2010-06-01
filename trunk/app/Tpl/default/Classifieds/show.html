@@ -93,9 +93,9 @@
 								Category:{$info['category']}<br>
 								Valid for:{$info['showstart']|toDate='d/m/Y'}--{$info['showend']|toDate='d-m-Y'}<br>
 								Position:{$info['position']}<br>
-								Salary:{$info['salary']}<br>
-								Experience:{$info['experience']}<br>
-								Job Located in:{$info['joblocated']}<br>
+								Salary:{$info['_jobs']['salary']}<br>
+								Experience:{$info['_jobs']['experience']}<br>
+								Job Located in:{$info['_jobs']['joblocated']}<br>
                             </p>
 	<php>$content=$info['_jobs']['content']</php>
     </case>
@@ -150,23 +150,23 @@
 					</div>
 					<div class="i_content">
 						<h4>Description</h4>
-                            <p>
+                            <div class="con">
                                 {$content}
-                            </p>
-                    <ul>
-                        <li rel="{$info['channel']}_{$info['id']}" class="user_share">
-                            Share
-                        </li>
-                        <li rel="{$info['channel']}_{$info['id']}" class="user_collection">
-                            Save as favorite
-                        </li>
-                        <li rel="{$info['channel']}_{$info['id']}" class="user_report">
-                            Report corrections
-                        </li>
-						<li class="pm"><a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)</li>
-                    </ul>
-                </div>
-				
+                            </div>
+		                    <ul>
+		                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
+		                            Share
+		                        </li>
+		                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
+		                            Save as favorite
+		                        </li>
+		                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
+		                            Report corrections
+		                        </li>
+								<li class="pm"><a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)</li>
+		                    </ul>
+                	</div>
+					
                 <div class="Comments">
                     <div class="biaoti">
                         <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />

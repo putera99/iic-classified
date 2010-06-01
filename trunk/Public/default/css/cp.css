@@ -45,6 +45,11 @@
 .list dl .w100{ width:100px;}
 .list dl .w50{ width:50px;}
 
+.list .album{padding: 0px;list-style-type: none; margin:0px;}
+.list .album li{margin:0 5px;border-bottom: 1px dashed #9f9f9f; padding:0px; width:140px; float:left; height:auto;}
+.list .album li img{border:none; margin:0;}
+
+
 
 .qunzhu {height: 80px;border-bottom: 1px dashed #9f9f9f;padding: 0 0 5px 0;margin: 0 0 5px 0;}
 .qunzhu dl {margin: 0px;clear: both;padding: 10px 0px 0px 10px;line-height: 24px;}
