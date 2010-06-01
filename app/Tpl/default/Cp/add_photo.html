@@ -1,0 +1,118 @@
+<script src="__PUBLIC__/js/jquery.datePicker-min.js" type="text/javascript"></script>
+<link href="__PUBLIC__/js/datePicker.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+	$("#typeid").change(function(){
+		var id=this.value;
+		ch_type(id);
+	});
+	$('.showend_job').datePicker({clickInput:true});
+	var typeid=$("#typeid").val();
+	if(typeid!=0){
+		ch_type(typeid);
+	}
+});
+function ch_type(id){
+	id=id.split('_');
+	var cache=$("#cache").html();
+	id="#channel_"+id['0'];
+	if(id!=cache){
+		$("#channel").html($(id).html());
+		$("#cache").html(id);
+	}
+}
+function zone(obj,id,name){
+	if(name==0){
+		var cid=obj.options[obj.options.selectedIndex].value;
+	}else{
+		var cid=obj.options[obj.options.selectedIndex].className;
+	}
+	$(id).load(URL+'/ajax_zone',{cid:cid,types:'localion',name:name});
+}
+</script>
+<div class="mulu">
+	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/add_photo">My Photos</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3 style="margin:0;">My Photos</h3>
+        </div>
+        <div class="list">
+        	
+			<dl>
+				<dt class="w420">Title</dt>
+				<dt class="w100">username</dt>
+				<dt class="w100">size</dt>
+				<dt class="w100">Time</dt>
+<volist name="pic" id="v">
+                <dd>
+                	<span class="w420"><a href="{$v['filepath']}{$v['filename']}">{$v['title']}</a></span>
+					<span class="w100 c">{$v['username']}</span>
+					<span class="w100 c">{$v['size']}</span>
+					<span class="w100 c">{$v['dateline']|toDate='d/m/Y'}</span>
+                </dd>
+</volist>
+			</dl>
+			<div class="clear"></div>
+            <form action="__URL__/add_photo" method="post" enctype="multipart/form-data">
+            	<fieldset>
+            		<legend>Add Album</legend>
+					<p>
+						<label for="albumname">AlbumName:</label>
+						<input type="text" name="albumname" id="albumname">
+					</p>
+					<p>
+						<label for="pic">CoverImage::</label>
+						<input type="file" name="pic" id="pic">
+					</p>
+					<input type="hidden" name="type" value="album">
+					<input type="hidden" name="info" value="{$arc_info['channel']}_{$arc_info['id']}">
+					<input type="submit" value="Submit">
+				</fieldset>
+            </form>
+            <form action="__URL__/add_photo" method="post" enctype="multipart/form-data">
+            	<fieldset>
+				<legend>Photo:</legend>
+	            	<p>
+	            		<label for="album_id">Album:</label>
+						<select name="album_id" id="album_id">
+							<option value="0" >---Select Album---</option>	
+						<volist name="album" id="v">
+							<option value="{$v['id']}" <if condition="$arc_info['albumid'] == $v['id']">selected="selected"</if>>{$v['albumname']}</option>							
+						</volist>
+						</select>
+						<br><br>
+					</p>
+<php>
+	for($i=0;$i<5;$i++){
+</php>
+					<p>
+						<label for="title[{$i}]">title:</label><input type="text" name="title[{$i}]" id="title[{$i}]">
+					</p><p>
+						<label for="filename[{$i}]">Photo:</label><input type="file" name="filename[{$i}]" id="filename[{$i}]" style="width:300px;">
+					</p><p>
+						<label for="msg[{$i}]">msg:</label><textarea name="msg[{$i}]" id="msg[{$i}]"></textarea>
+	            	</p>
+					<p><br></p>
+<php>
+	}
+</php>
+					
+				</fieldset>
+				<p>
+					<input type="hidden" name="type" value="photo">
+					<input type="hidden" name="info" value="{$arc_info['channel']}_{$arc_info['id']}">
+					<input type="submit" value="Submit">            
+					<input type="reset" value="Reset">            
+				</p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+

@@ -15,7 +15,7 @@ function get_type($type) {
 			$ch='CityGuide';
 		break;
 		case $type>=4 && $type<=9:
-			$ch='Classifields';
+			$ch='Classifieds';
 		break;
 		case $type=10:
 			$ch='Event';
@@ -27,11 +27,41 @@ function get_type($type) {
 	return $ch;
 }//end function_name
 
+function get_arctype($typeid,$field){
+	$arctype=D("Arctype");
+	$info=$arctype->where("id=$typeid")->find();
+	if($field){
+		return $info[$field];
+	}else{
+		return $info;
+	}
+}
+
+function get_ltd($ltd_id,$field){
+	$dao=D("Ltd");
+	$info=$dao->where("id=$ltd_id")->find();
+	//dump($info);
+	if($field){
+		return $info[$field];
+	}else{
+		return $info;
+	}
+}
+
 function get_title($aid){
 	$dao=D("Archives");
 	$title=$dao->where("id=$aid")->field("title")->find();
 	unset($dao);
 	return $title['title'];
+}
+function get_city($cid,$field){
+	$dao=M("ActCity");
+	$city=$dao->where("id=$cid")->find();
+	if($field){
+	return $city[$field];
+	}else{
+		return $city;
+	}
 }
 
 function getkey($arr,$k) {

@@ -5,5 +5,5 @@
 .kuan{padding:0px;background-color:#FFF;color:#15abd1;margin:5px auto;border: 1px solid #cfcfcf;text-align: center; display:block; width:60px; height:18px; line-height:18px;}
 .kuan:hover{background-color:#cfcfcf;color:#15abd1;}
 
-.personals-a {border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #8e8e8e;margin: 5px 5px 0px 5px;padding: 0px; height:120px;}
+.personals-a {border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #8e8e8e;margin: 5px 5px 0px 5px;padding: 0px; height:auto;}
 .list-a img {padding-right:5px;}

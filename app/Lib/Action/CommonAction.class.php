@@ -78,6 +78,41 @@ class CommonAction extends Action{
     }//end ajax_zone
     
     /**
+     *ajax增加公司
+     *@date 2010-6-1
+     *@time 上午11:52:40
+     */
+    public function ajax_add_ltd() {
+    	//ajax增加公司
+    	$dao=D("Ltd");
+    	$data=array();
+    	$data=$dao->create($_REQUEST);
+    	$info=$dao->where("title='{$_REQUEST['title']}'")->findAll();
+    	if(empty($info)){
+	    	$ltd_id=$dao->add($data);
+	    	if($ltd_id){
+	    		$this->ajaxReturn($ltd_id,'add '.$data['title'],1);
+	    	}else{
+	    		$this->ajaxReturn(0,'ERROR',0);
+	    	}
+    	}else{
+    		$this->ajaxReturn(0,'ERROR',0);
+    	}
+    }//end ajax_add_ltd
+    
+    /**
+     *获取公司信息
+     *@date 2010-6-1
+     *@time 下午02:43:18
+     */
+    protected function _get_ltd() {
+    	//获取公司信息
+    	$dao=D("Ltd");
+    	return $dao->where("status=1")->findAll();
+    }//end _get_ltd
+    
+    
+    /**
      *用户收藏
      *@date 2010-5-23
      *@time 下午03:08:54
@@ -404,6 +439,79 @@ class CommonAction extends Action{
 		unset($dao);
 		return $news;
 	}//end tree
+	
+    protected function _upload($tid){
+        import("ORG.Net.UploadFile");
+        $upload = new UploadFile();
+        //设置上传文件大小
+        $upload->maxSize  = 3292200 ;
+        //设置上传文件类型
+        $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
+        //设置附件上传目录
+        $tid=empty($tid)?$_REQUEST['typeid']:$tid;
+        $path=$tid.'/'.date('Y-m').'/';
+        $upload->savePath =  './Public/Uploads/'.$path;
+        mk_dir($upload->savePath);
+        $path='/Public/Uploads/'.$path;
+	    //设置需要生成缩略图，仅对图像文件有效
+       $upload->thumb =  true;
+       //设置需要生成缩略图的文件后缀
+	    $upload->thumbPrefix   =  's_';  //生产2张缩略图
+       //设置缩略图最大宽度
+		$upload->thumbMaxWidth =  '120';
+       //设置缩略图最大高度
+		$upload->thumbMaxHeight = '140';
+	   //设置上传文件规则
+	   $upload->saveRule = uniqid;
+	   //删除原图
+	   $upload->thumbRemoveOrigin = true;
+        if(!$upload->upload()) {
+            //捕获上传异常
+            $this->error($upload->getErrorMsg());
+        }else {
+            //取得成功上传的文件信息
+            $uploadList = $upload->getUploadFileInfo();
+            $_POST['picurl']  = $path.$uploadList[0]['savename'];
+        }
+        
+        return $_POST['picurl'];
+	}
+	
+    protected function _photo($tid){
+        import("ORG.Net.UploadFile");
+        $upload = new UploadFile();
+        //设置上传文件大小
+        $upload->maxSize  = 3292200 ;
+        //设置上传文件类型
+        $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
+        //设置附件上传目录
+        $tid=empty($tid)?$_REQUEST['typeid']:$tid;
+        $path=$tid.'/'.date('Y-m').'/';
+        $upload->savePath =  './Public/album/'.$path;
+        mk_dir($upload->savePath);
+        $path='/Public/album/'.$path;
+	    //设置需要生成缩略图，仅对图像文件有效
+       $upload->thumb =  true;
+       //设置需要生成缩略图的文件后缀
+	    $upload->thumbPrefix   =  'm_,s_';  //生产2张缩略图
+       //设置缩略图最大宽度
+		$upload->thumbMaxWidth =  '800,200';
+       //设置缩略图最大高度
+		$upload->thumbMaxHeight = '600,150';
+	   //设置上传文件规则
+	   $upload->saveRule = uniqid;
+	   //删除原图
+	   $upload->thumbRemoveOrigin = true;
+        if(!$upload->upload()) {
+            //捕获上传异常
+            $this->error($upload->getErrorMsg());
+        }else {
+            //取得成功上传的文件信息
+            $uploadList = $upload->getUploadFileInfo();
+        }
+        
+        return $uploadList;
+	}
 	
 	/**
 	 *发布评论

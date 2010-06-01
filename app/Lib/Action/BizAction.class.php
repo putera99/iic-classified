@@ -22,6 +22,38 @@ class BizAction extends CommonAction{
 		$this->assign('industries',$this->_get_fair());
 		$this->assign("city",$this->_get_city('fair'));
 		$this->assign('date',$this->_get_time());
+		
+		$year=array();
+		$nowyear=date('Y');
+		$year['sy']['name']=$nowyear;
+		$year['sy']['ms']=mktime(0,0,0,1,1,$nowyear);
+		$year['sy']['me']=mktime(0,0,0,1,1,$nowyear+1)-1;
+		$year['ny']['name']=$nowyear+1;
+		$year['ny']['ms']=mktime(0,0,0,1,1,$nowyear+1);
+		$year['ny']['me']=mktime(0,0,0,1,1,$nowyear+2)-1;
+		$this->assign('year',$year);
+		$condition=array();
+
+		$small=$this->_get_fair();
+		$str='';
+		foreach ($small as $v){
+			$str.=$v['id'].',';
+		}
+		$str=trim($str,',');
+		$condition['typeid']=array('IN',$str);
+		$condition['ismake']=1;
+		$dao=D("Archives");
+		$count=$dao->where($condition)->order("id DESC")->count();
+		import("ORG.Util.Page");
+		$page=new Page($count,10);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage_bot',$page->show_img());
+		$limit=$page->firstRow.','.$page->listRows;
+		$data=$dao->where($condition)->order("id DESC")->findAll();
+		$this->assign('data',$data);
+		
 		$page=array();
 		$page['title']='China Biz  -  BeingfunChina';
 		$page['keywords']="China,Biz,Fair";
@@ -38,6 +70,9 @@ class BizAction extends CommonAction{
 	 */
 	function ls() {
 		//展会列表
+		if($_REQUEST['bycity']=='0'){
+			unset($_SESSION['bycity']);
+		}
 		if ($_REQUEST['year']) {
 			$_SESSION['year']=$_REQUEST['year'];
 		}
@@ -47,12 +82,7 @@ class BizAction extends CommonAction{
 		if ($_REQUEST['bycity']) {
 			$_SESSION['bycity']=$_REQUEST['bycity'];
 		}
-		if ($_REQUEST['ms']) {
-			$_SESSION['ms']=$_REQUEST['ms'];
-		}
-		if ($_REQUEST['me']) {
-			$_SESSION['me']=$_REQUEST['me'];
-		}
+		
 		if ($_REQUEST['tn']) {
 			$_SESSION['tn']=$_REQUEST['tn'];
 		}
@@ -66,13 +96,15 @@ class BizAction extends CommonAction{
 		$nowyear=date('Y');
 		if ($_SESSION['year']) {
 			$this->assign('date',$this->_get_time($_SESSION['year']));
-			$condition['year']=$_SESSION['year'];
+			
 			$year['sy']['name']=$_SESSION['year'];
 			$year['sy']['ms']=mktime(0,0,0,1,1,$_SESSION['year']);
 			$year['sy']['me']=mktime(0,0,0,1,1,$_SESSION['year']+1)-1;
 			$year['ny']['name']=$_SESSION['year']+1;
 			$year['ny']['ms']=mktime(0,0,0,1,1,$_SESSION['year']+1);
 			$year['ny']['me']=mktime(0,0,0,1,1,$_SESSION['year']+2)-1;
+			$_SESSION['ms']=$year['sy']['ms'];
+			$_SESSION['me']=$year['sy']['me'];
 		}else{
 			$this->assign('date',$this->_get_time());
 			$year['sy']['name']=$nowyear;
@@ -83,21 +115,32 @@ class BizAction extends CommonAction{
 			$year['ny']['me']=mktime(0,0,0,1,1,$nowyear+2)-1;
 		}
 		$this->assign('year',$year);
+		if ($_REQUEST['ms']) {
+			$_SESSION['ms']=$_REQUEST['ms'];
+		}
+		if ($_REQUEST['me']) {
+			$_SESSION['me']=$_REQUEST['me'];
+		}
 		if ($_SESSION['fair_id']) {
 			$condition['typeid']=$_SESSION['fair_id'];
+		}else{
+			$small=$this->_get_fair();
+			$str='';
+			foreach ($small as $v){
+				$str.=$v['id'].',';
+			}
+			$str=trim($str,',');
+			$condition['typeid']=array('IN',$str);
 		}
 		if ($_SESSION['bycity']) {
 			$condition['bycity']=$_SESSION['bycity'];
 		}
-		if ($_SESSION['ms']) {
-			$condition['showstart']=array('egt',$_SESSION['ms']);
-		}
-		if ($_SESSION['me']) {
-			$condition['showend']=array('elt',$_SESSION['me']);
+		if ($_SESSION['ms'] || $_SESSION['me']) {
+			$condition['_string'] = "(`showstart`>='{$_SESSION['ms']}' AND `showstart`<='{$_SESSION['me']}') OR (`showend`>='{$_SESSION['ms']}' AND `showend`>='{$_SESSION['me']}')";
 		}
 		$this->assign('industries',$this->_get_fair());
 		$this->assign("city",$this->_get_city('fair'));
-		
+		$condition['ismake']=1;
 		
 		$dao=D("Archives");
 		$count=$dao->where($condition)->order("id {$_SESSION['order']}")->count();
@@ -109,8 +152,8 @@ class BizAction extends CommonAction{
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->findAll();
-
-		$this->assign('info',$data);
+		dump($dao->getLastSql());
+		$this->assign('data',$data);
 		
 		$arctype=D("Arctype");
 		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();

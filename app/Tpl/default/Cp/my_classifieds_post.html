@@ -14,16 +14,18 @@
         </div>
         <div class="list">
             <dl class="h350">
-            	<dt class="w420">Subject</dt>
+            	<dt class="w320">Subject</dt>
 				<dt class="w100">Type</dt>
 				<dt class="w100">View</dt>
 				<dt class="w100">Time</dt>
+				<dt class="w100">Action</dt>
 <volist name="classifieds" id="v">
                 	<dd>
-						<span class="w420"><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></span>
 						<span class="w100 c">{$v['channel']|get_type}</span>
 						<span class="w100 c">{$v['click']}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
+						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a></span>
 					</dd>
                     
 </volist>

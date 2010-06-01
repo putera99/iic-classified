@@ -46,13 +46,15 @@
         <div class="mian-center-n">
             <div class="chenshi">
                 <div class="diban">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China biz</a>
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China biz</a> > 
+					<a href="__APP__/Biz/ls/id/{$info['id']}">{$info['typename']}</a>
                 </div>
                 <div class="hot">
                     <div class="zhuti">
                         By City
                     </div>
                     <div class="dizhi">
+                    	<span><a href="__URL__/ls/bycity/0" <if condition="$_SESSION['bycity'] eq 0">class="on"</if>>All</a></span>
 <volist name="city" id="v">
 						<span><a href="__URL__/ls/bycity/{$v['id']}" <if condition="$_SESSION['bycity'] eq $v['id']">class="on"</if>>{$v['ctitle']}</a></span>
 </volist>
@@ -71,202 +73,41 @@
                     {$showpage}
                 </div>
                 <div class="sdf">
-                    <div class="pingdaozs">
-                        <ul>
-                            <li>
-                                <img src="__PUBLIC__/default/images/pc/xiaotu.gif" alt="sc" />
-                            </li>
-                            <li>
-                                DEX Electronic Exhibition & DPX Photonics Exhibition
-                            </li>
-                            <li>
-                                [04/02/2010]
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
+<volist name="data" id="v">
+					<div class="pingdaozs">
+                        <ul class="w120 c">
+                            <li><img src="{$v['picurl']}" alt="{$v['title']}" /></li>
+                            <li><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></li>
+                            <li>[{$v['showstart']|toDate='d/m/Y'}]</li>
+                            <li>({$v['bycity']|get_city='ctitle'})</li>
                         </ul>
-                        <ul>
+                        <ul class="w180 l">
                             <li>
                                 <span>Venue:</span>
-                                China Shenzhen Convention & Exhibition Center
+                                {$v['maps']}
                             </li>
                             <li>
-                                Telephone:86-0755-82848900
+                            	<span>Telephone:</span>
+                                {$v['telephone']}
                             </li>
                             <li>
                                 <span>Products:</span>
                                 ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
                             </li>
-                            <li>
-                                (beijing)
-                            </li>
                         </ul>
-                        <ul>
+                        <ul class="w100 l">
                             <li>
                                 <span>Organizer:</span>
-                                Shenzhen China 
-                                High-Tech Transfer Center
-                                (Shenzhen Convention and
-                                Exhibition Center)E-mail this
-                                organizer
+                                {$v['ltdid']|get_ltd='title'}
                             </li>
                         </ul>
-                        <ul>
+                        <ul class="w88 c">
                             <li>
-                                BeComputer 
-                                &Consumer 
-                                Electronicsijing
+                                {$v['typeid']|get_arctype='typename'}
                             </li>
                         </ul>
                     </div>
-                    <div class="pingdaozs">
-                        <ul>
-                            <li>
-                                <img src="__PUBLIC__/default/images/pc/xiaotu.gif" alt="sc" />
-                            </li>
-                            <li>
-                                DEX Electronic Exhibition & DPX Photonics Exhibition
-                            </li>
-                            <li>
-                                [04/02/2010]
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Venue:</span>
-                                China Shenzhen Convention & Exhibition Center
-                            </li>
-                            <li>
-                                Telephone:86-0755-82848900
-                            </li>
-                            <li>
-                                <span>Products:</span>
-                                ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Organizer:</span>
-                                Shenzhen China 
-                                High-Tech Transfer Center
-                                (Shenzhen Convention and
-                                Exhibition Center)E-mail this
-                                organizer
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                BeComputer 
-                                &Consumer 
-                                Electronicsijing
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pingdaozs">
-                        <ul>
-                            <li>
-                                <img src="__PUBLIC__/default/images/pc/xiaotu.gif" alt="sc" />
-                            </li>
-                            <li>
-                                DEX Electronic Exhibition & DPX Photonics Exhibition
-                            </li>
-                            <li>
-                                [04/02/2010]
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Venue:</span>
-                                China Shenzhen Convention & Exhibition Center
-                            </li>
-                            <li>
-                                Telephone:86-0755-82848900
-                            </li>
-                            <li>
-                                <span>Products:</span>
-                                ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Organizer:</span>
-                                Shenzhen China 
-                                High-Tech Transfer Center
-                                (Shenzhen Convention and
-                                Exhibition Center)E-mail this
-                                organizer
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                BeComputer 
-                                &Consumer 
-                                Electronicsijing
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="pingdaozs">
-                        <ul>
-                            <li>
-                                <img src="__PUBLIC__/default/images/pc/xiaotu.gif" alt="sc" />
-                            </li>
-                            <li>
-                                DEX Electronic Exhibition & DPX Photonics Exhibition
-                            </li>
-                            <li>
-                                [04/02/2010]
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Venue:</span>
-                                China Shenzhen Convention & Exhibition Center
-                            </li>
-                            <li>
-                                Telephone:86-0755-82848900
-                            </li>
-                            <li>
-                                <span>Products:</span>
-                                ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
-                            </li>
-                            <li>
-                                (beijing)
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>Organizer:</span>
-                                Shenzhen China 
-                                High-Tech Transfer Center
-                                (Shenzhen Convention and
-                                Exhibition Center)E-mail this
-                                organizer
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                BeComputer 
-                                &Consumer 
-                                Electronicsijing
-                            </li>
-                        </ul>
-                    </div>
+</volist>
                 </div>
             </div>
             <div class="fanye">
