@@ -1,0 +1,37 @@
+.xuhao {width: 260px;height: 20px;background: url(../images/fany.gif) no-repeat;padding: 0px;margin: 20px auto 0px auto;}
+.yanse {color: #9f1058;margin: 0px;padding-left: 5px;}
+
+
+/* left开始*/
+#main {width:950px;padding: 0px;margin: 0px auto;}
+.main-left{ width:188px;margin:0px; padding:0px;}
+.main-left{width:188px;margin:0px; padding:0px;}
+.mian-right{width:749px;padding:0px;float:right;}
+.channel-left {width: 188px;margin: 0px;padding: 0px;color: #FFFFFF;}
+.dingt {height: 32px;background: url(../images/pc/bg04.gif) repeat-x;margin: 0px;padding: 0px;text-align: center;line-height: 32px;font-weight: bold;color: #992654;}
+.yuanjiao {height: 13px;background: url(../images/pc/yuanjiao.gif) no-repeat;margin: 0px;padding: 0px;}
+
+
+/*right开始*/
+.mian-right{width:749px;padding:0px;margin: 0px;float:right;}
+.guagngao{ margin:0px; padding:0px;}
+.biz-content{ margin:10px 0 0 0; padding:0px;}
+.biz-page {height: 26px;background: url(../images/pc/bg.gif) repeat-x;border: 1px solid #bfbfbf;padding-left:10px;font-weight: bold;color: #353535;}
+.biz-city{border: 1px solid #bfbfbf;margin: 0px;background-color:#f7f7f7;padding: 0px;}
+.bycity {padding:0px;margin: 10px 5px 10px 5px;}
+.bycity h5{ margin:0px; padding-bottom:5px; border-bottom: 1px solid #bfbfbf;}
+.riqi {padding: 0 0 5px 0; margin: 0px 5px 10px 5px;text-align: center;  border-bottom: 1px solid #bfbfbf;}
+.biz-title span {margin: 0px;padding: 0px;font-weight: bold;color: #333333;}
+.biz-kuan {width: 50px; height: 20px; border: 1px solid #d5d5d5;background-color: #FFFFFF;color: #b12169;}
+.biz-title {margin: 0px 5px 0px 5px;padding: 0 0 0 5px;line-height: 24px;}
+.biz-title h6 {font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #B12169;margin: 0px;padding: 0px;}
+.yans {color: #8a0e4c;}
+.biz-xinxi {height: 300px;padding: 0px;margin: 10px 5px 0px 5px;}
+.biz-right{width:390px;margin:0px;padding:0px;float:left;}
+.biz-right ul {margin: 0px;padding: 0px;list-style-type: none;}
+.biz-right span {font-weight: bold;color: #8a0e4c;}
+.biz-left{width: 342px;margin:0px;padding:0px;float: right;}
+.biz-left dl{float: left;margin: 10px 0 0 0;padding: 0px;text-align: center;}
+.biz-left dt{ margin:0px; padding:0px;}
+.biz-left dd{width: 80px;margin:0px;padding:0px;text-align: center;line-height: 16px;}
+

@@ -55,7 +55,7 @@
 .national li {
     float: left;
     margin: 0px;
-    padding: 0 10px 0 0;
+    padding: 5px 10px 0 0;
 }
 
 .menu {
@@ -353,7 +353,13 @@
 .pingdaozs .l{text-align:left;}
 
 .pingdaozs li {margin: 0px;padding: 0px 0px 5px 0px;}
-
+.pingdaozs li img{
+	vertical-align: middle;
+	max-width:100px;   /* FF IE7 */
+	max-height:100px; /* FF IE7 */
+	_height:expression(this.width > 100 ? this.height*(100/this.width) : auto);/*  IE6 */
+	_width:expression(this.width > 100 ? 100px : auto);/*  IE6 */
+}
 .pingdaozs span {
     font-weight: bold;
     color: #a62365;
