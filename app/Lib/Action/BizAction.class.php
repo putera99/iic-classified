@@ -152,14 +152,13 @@ class BizAction extends CommonAction{
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->findAll();
-		dump($dao->getLastSql());
 		$this->assign('data',$data);
 		
 		$arctype=D("Arctype");
 		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':$info['seotitle'].'  -  BeingfunChina';
+		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':'Fair  -  BeingfunChina';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		if($info['reid']!='1232'){
@@ -169,6 +168,49 @@ class BizAction extends CommonAction{
 		$this->assign('page',$page);
 		$this->display();
 	}//end ls
+	
+	/**
+	 *展会信息
+	 *@date 2010-6-2
+	 *@time 上午10:38:22
+	 */
+	function show() {
+		//展会信息
+		$aid=intval($_REQUEST['aid']);
+		if(empty($aid)){
+			$this->error("error: aid is null!");
+		}
+		$this->assign('industries',$this->_get_fair());
+		$this->assign("city",$this->_get_city('fair'));
+		$this->assign('date',$this->_get_time());
+		
+		$year=array();
+		$nowyear=date('Y');
+		$year['sy']['name']=$nowyear;
+		$year['sy']['ms']=mktime(0,0,0,1,1,$nowyear);
+		$year['sy']['me']=mktime(0,0,0,1,1,$nowyear+1)-1;
+		$year['ny']['name']=$nowyear+1;
+		$year['ny']['ms']=mktime(0,0,0,1,1,$nowyear+1);
+		$year['ny']['me']=mktime(0,0,0,1,1,$nowyear+2)-1;
+		$this->assign('year',$year);
+		
+		
+		$dao=D("Archives");
+		$info=$dao->where("id=$aid")->find();
+		$info['_fair']=$dao->relationGet("fair");
+		$this->assign('info',$info);
+		$page=array();
+		$page['title']=$info['title'].' China Biz  -  BeingfunChina';
+		$page['keywords']=$info['keywords'].',fair,china,biz';
+		$page['description']=$info['description'];
+		$this->assign('page',$page);
+		
+		$this->assign('dh',$this->_get_dh($info['typeid']));
+		
+		$this->display();
+	}//end show
+	
+	
 	
 	/**
 	 *获取展会的类别

@@ -464,14 +464,14 @@ class CommonAction extends Action{
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
-	   $upload->thumbRemoveOrigin = true;
+	   $upload->thumbRemoveOrigin = false;
         if(!$upload->upload()) {
             //捕获上传异常
             $this->error($upload->getErrorMsg());
         }else {
             //取得成功上传的文件信息
             $uploadList = $upload->getUploadFileInfo();
-            $_POST['picurl']  = $path.$uploadList[0]['savename'];
+            $_POST['picurl']  = $path.'s_'.$uploadList[0]['savename'];
         }
         
         return $_POST['picurl'];
@@ -501,7 +501,7 @@ class CommonAction extends Action{
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
-	   $upload->thumbRemoveOrigin = true;
+	   $upload->thumbRemoveOrigin = false;
         if(!$upload->upload()) {
             //捕获上传异常
             $this->error($upload->getErrorMsg());
