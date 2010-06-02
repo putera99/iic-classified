@@ -1,10 +1,262 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{$page['title']}</title>
+		<link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/default/css/channel_index.css" rel="stylesheet" type="text/css" />
+		<link href="__PUBLIC__/default/css/biz_list.css" rel="stylesheet" type="text/css" />
 
-</body>
-</html>
+        <script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
+        <meta name="keywords" content="{$page['keywords']}" />
+        <meta name="description" content="{$page['description']|clearh}" />
+		<script type="text/javascript">
+		var HOST		= window.location.host;
+		var Per_host	="http://"+HOST;
+		var JS_PATH		="../Public/js/";
+		var IMG_PATH	="../Public/images/";
+		var URL			='__URL__';
+		var APP			='__APP__';
+		var PUBLIC		='../Public/';
+		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
+		</script>
+		<script src="../Public/iic.js"></script>
+<if condition="$info['maps']">
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;hl=en&amp;key={&GOOGLE_MAP_API}" type="text/javascript"></script>
+<script type="text/javascript">
+function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        var geocoder = new GClientGeocoder();
+        var address = "{$info['maps']}"
+        map.addControl(new GSmallMapControl());
+        geocoder.getLatLng(address, function(point) {
+                if (!point) {
+                  alert('Google Maps');
+                } else {
+                  map.setCenter(point, 13);
+                  var marker = new GMarker(point);
+                  map.addOverlay(marker);
+                  marker.openInfoWindowHtml("{$info['maps']}");
+                }
+          });
+      }
+    }
+</script>
+</if>
+    </head>
+    <body onload="load()" onunload="GUnload()">
+
+<div id="main">
+    <div class="mian-right">
+        <div class="guagngao">
+            <img src="__PUBLIC__/default/images/pc/banner02.gif" alt="pic" width="748" height="90" />
+        </div>
+        <div class="biz-content">
+            <div class="biz-page">
+                Home > china biz column page
+            </div>
+            <div class="biz-city">
+				<div class="hot">
+                    <div class="zhuti">
+                        By City
+                    </div>
+                    <div class="dizhi">
+                    	<span><a href="__URL__/ls/bycity/0" <if condition="$_SESSION['bycity'] eq 0">class="on"</if>>All</a></span>
+<volist name="city" id="v">
+						<span><a href="__URL__/ls/bycity/{$v['id']}" <if condition="$_SESSION['bycity'] eq $v['id']">class="on"</if>>{$v['ctitle']}</a></span>
+</volist>
+                    </div>
+                </div>
+                <div class="time">
+                    <span class="y"><a href="__URL__/ls/ms/{$year['sy']['ms']}/me/{$year['sy']['me']}/tn/{$year['sy']['name']}/year/{$year['sy']['name']}" <if condition="$_SESSION['tn'] eq $year['sy']['name']">class="on"</if>>{$year['sy']['name']}</a></span> 　
+<volist name="date" id="v">
+					<span class="m"><a href="__URL__/ls/ms/{$v['start']}/me/{$v['end']}/tn/{$v['name']}" <if condition="$_SESSION['tn'] eq $v['name']">class="on"</if>>{$v['name']}</a></span> 
+</volist>
+					  　<span class="y"><a href="__URL__/ls/ms/{$year['ny']['ms']}/me/{$year['ny']['me']}/tn/{$year['ny']['name']}" <if condition="$_SESSION['tn'] eq $year['ny']['name']">class="on"</if>>{$year['ny']['name']}</a></span>
+                </div>
+                <div class="biz-title">
+                    <h1>{$info['title']}</h1>
+                    <span>Time 1:　</span>{$info['showstart']|toDate='M d, Y'} - {$info['showend']|toDate='M d, Y'}({$info['bycity']|get_city='ctitle'})
+                </div>
+                <table width="99%" border="1" align="center" cellpadding="0" cellspacing="0">
+                    <tr align="center">
+                        <td class="yans" width="14%">
+                            Fair
+                        </td>
+                        <td class="yans" width="36%">
+                            Briefing
+                        </td>
+                        <td class="yans" width="25%">
+                            Industry
+                        </td>
+                        <td class="yans" width="25%">
+                            Organizer 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="82" align="center" cellpadding="0" cellspacing="2">
+                                <tr>
+                                    <td width="80" align="left">
+                                        <img src="{$info['picurl']}" alt="{$info['title']}" width="79" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="biz-kuan">
+                                        {$info['albumnum']} photos
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="yans" valign="middle">
+                            <table width="100%" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center">
+                                        Venue: {$info['maps']}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        Telephone: {$info['telephone']}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="yans" align="center" bordercolor="#CCCCCC">
+                            {$info['typeid']|get_arctype='typename'}
+                        </td>
+                        <td class="yans">
+                            {$info['ltdid']|get_ltd='title'}
+                        </td>
+                    </tr>
+                </table>
+                <div class="biz-xinxi">
+                    <div class="biz-left">
+                        <span><div class="ditu" id="map"></div></span>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <img src="__PUBLIC__/default/images/pc/pic5.gif" alt="edv" />
+                            </dt>
+                            <dd>
+                                ndustrial-use Equipment
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="biz-right">
+                        <ul>
+                            <li>
+                                <span> Event Profile:</span>{$info['my_content']}
+                            </li>
+                            <li>
+                                <span>Visitor's Profile:</span>
+                                {$info['_fair']['visitor']}
+                            </li>
+                            <li>
+                                <span>Exhibitor's Profile:</span>{$info['_fair']['exhibitor']}
+                            </li>
+                            <li>
+                                <span>E-mail:</span> 　{$info['email']}
+                            </li>
+                            <li>
+                                <span>Tel:</span> 　{$info['telephone']}
+                            </li>
+                            <li>
+                                <span>Fax:</span> 　{$info['fax']}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="channel-left">
+        <div class="national">
+            <ul>
+                <li>
+                    <a href="#"><span>中文</span></a>
+                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="fbv" />
+                </li>
+                <li>
+                    <a href="#"><span>Einglish</span></a>
+                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="fbv" />
+                </li>
+            </ul>
+        </div>
+        <div class="dingt">
+            By Industries
+        </div>
+         <div class="menu">
+            <ul>
+<volist name="industries" id="v">
+                <li>
+                    <a href="__URL__/ls/id/{$v['id']}" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>
+                </li>
+</volist>
+            </ul>
+            <div class="yuanjiao">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="Public:foot" />
