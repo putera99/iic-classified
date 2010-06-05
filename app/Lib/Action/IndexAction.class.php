@@ -20,6 +20,9 @@ class IndexAction extends CommonAction{
 	
 	
     public function index(){
+    	$this->assign('pick',$this->_new_list(2001,'h','0,1'));
+    	$this->assign('pick2',$this->_new_list(2001,'p','0,2'));
+    	$this->assign('pick8',$this->_new_list(2001,'','2,8'));
     	
     	$this->assign('city_type',$this->_get_tree(1000));
     	$this->assign('classifieds_type',$this->_get_tree(1));
@@ -39,8 +42,10 @@ class IndexAction extends CommonAction{
 		$page['keywords']='BeingfunChina';
 		$page['description']='BeingfunChina';
 		$this->assign('page',$page);
-		
+
     	$this->display();
     }
+    
+    
 }
 ?>

@@ -90,6 +90,15 @@ class ArchivesModel extends RelationModel{
 				//'as_fields'=>'content',
 		        //'mapping_order'=>'ctime desc'
 			),
+		'Arc'=>array(//关联文章
+				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY
+				'mapping_type'=>HAS_ONE,
+				'class_name'=>'AddonArc',
+		        'foreign_key'=>'aid',
+		        'mapping_name'=>'arc',
+				//'as_fields'=>'content',
+		        //'mapping_order'=>'ctime desc'
+			),
     );
     
 }//end ArchivesModel

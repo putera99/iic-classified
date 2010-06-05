@@ -48,17 +48,14 @@
             <div class="neirong-h">
                 <div class="center-h">
                     <dl>
-                        <dt>
-                            <img src="__PUBLIC__/default/images/pic-h.gif" alt="gn" />
+                        <dt class="m">
+                            <a href="__APP__/Arc/show/aid/{$pick['id']}">
+                            	<img src="{$pick['picurl']}" alt="{$pick['title']}" width="132" />
+							</a>
                         </dt>
                         <dd>
-                            <a href="#"><span class="title-h">Kung-fu and Dance Drama: Shaolin in Wind </span></a>
-                            Kung-fu and Dance Drama Shaolin in Wind tells 
-                            a legend of a Shaolin monk, a life-and-death  
-                            strug gle between justice and villainy, 
-                            and a love tragedy with restrained Eastern  
-                            beauty. Tianyuan and Sushui are a long-married 
-                            couple working in a theatrical troupe.....<a href="#"><span>[Detail]</span></a>
+                            <span class="title-h">{$pick['title']}</span>
+                            {$pick['my_content']|String::msubstr=0,120}<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
                         </dd>
                     </dl>
                 </div>
@@ -67,32 +64,15 @@
 
                 <div class="xinwen-h">
                     <ul>
+<volist name="pick8" id="v">
                         <li>
-                            • Looking for an American Marketing Rep 
+                            <a href="__APP__/Arc/show/aid/{$v['id']}" title="{$v['title']}">• {$v['title']|String::msubstr=0,35}</a>
                         </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
+	<if condition="$i==4">
                     </ul>
-                    <ul>
-                        <li>
-                            • Looking for an American Marketing Rep 
-                        </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
+            		<ul>
+	</if>
+</volist>
                     </ul>
                 </div>
                 <div class="clear"></div>

@@ -440,7 +440,36 @@ class CommonAction extends Action{
 		return $news;
 	}//end tree
 	
-    protected function _upload($tid){
+	protected function _get_flag(){
+		$dao=M("Arcatt");
+		return $dao->findAll();
+	}
+	
+	protected function _new_list($typeid,$flag='',$limit="0,10"){
+    	$dao=D("Archives");
+    	$condition=array();
+    	$condition['typeid']=$typeid;
+    	if($flag){
+    		$arr=explode(',',$flag);
+    		foreach ($arr as $v){
+    			if($v=='p'){
+    				$condition['_string'].="picurl<>''";
+    			}else{
+    				$condition['_string'].="FIND_IN_SET('$v',`flag`) > 0";
+    			}
+    		}
+    	}
+    	if($limit=='0,1'||$limit=='1'){
+    		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->find();
+    	}else{
+    		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->findAll();
+    	}
+    	//dump($dao->getLastSql());
+    	return $data;
+    }
+    
+    
+    protected function _upload($tid,$width='120',$height='140'){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
         //设置上传文件大小

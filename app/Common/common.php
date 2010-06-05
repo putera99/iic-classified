@@ -17,17 +17,20 @@ function get_type($type) {
 		case $type>=4 && $type<=9:
 			$ch='Classifieds';
 		break;
-		case $type=10:
+		case $type==10:
 			$ch='Event';
 		break;
-		case $type=11:
+		case $type==11:
 			$ch='Fair';
+		break;
+		case $type==12:
+			$ch='News';
 		break;
 	}
 	return $ch;
 }//end function_name
 
-function get_arctype($typeid,$field){
+function get_arctype($typeid,$field='typename'){
 	$arctype=D("Arctype");
 	$info=$arctype->where("id=$typeid")->find();
 	if($field){

@@ -96,68 +96,44 @@
             <div class="neirong-h">
                 <div class="center-h">
                     <dl>
-                        <dt>
-                            <img src="__PUBLIC__/default/images/pic-h.gif" alt="gn" />
+                        <dt class="m">
+                            <a href="__APP__/Arc/show/aid/{$pick['id']}">
+                            	<img src="{$pick['picurl']}" alt="{$pick['title']}" width="132" />
+							</a>
                         </dt>
                         <dd>
-                            <span class="title-h">Kung-fu and Dance Drama: Shaolin in Wind</span>
-                            Kung-fu and Dance Drama Shaolin in Wind tells 
-                            a legend of a Shaolin monk, a life-and-death  
-                            struggle between justice and villainy, 
-                            and a love tragedy with restrained Eastern  
-                            beauty. Tianyuan and Sushui are a long-married 
-                            couple working in a theatrical troupe.....<a href="#">[Detail]</a>
+                            <span class="title-h">{$pick['title']}</span>
+                            {$pick['my_content']}<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
                         </dd>
                     </dl>
                 </div>
                 <div class="xiantiao">
                 </div>
                 <div class="list-h">
+<volist name="pick2" id="v">
                     <div class="neiR-h">
-                        <h5>Tianyuan and Sushui are a long-married...</h5>
+                        <h5><a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']}</a></h5>
                         <p>
-                            <img src="__PUBLIC__/default/images/pic-h01.gif" alt="hym" />Tianyuan and Sushui 
-                            are a long-married couple working ...
+                            <span class="m"><a href="__APP__/Arc/show/aid/{$v['id']}">
+                            	<img src="{$v['picurl']}" alt="{$v['title']}" width="100" /></a></span>
+							{$v['my_content']|String::msubstr=0,60}
                         </p>
                     </div>
-                    <div class="neiR-h">
-                        <h5>Tianyuan and Sushui are a long-married...</h5>
-                        <p>
-                            <img src="__PUBLIC__/default/images/pic-h01.gif" alt="hym" />Tianyuan and Sushui 
-                            are a long-married couple working ...
-                        </p>
-                    </div>
+</volist>
                 </div>
                 <div class="clear">
                 </div>
                 <div class="xinwen-h">
                     <ul>
+<volist name="pick8" id="v">
                         <li>
-                            • Looking for an American Marketing Rep 
+                            <a href="__APP__/Arc/show/aid/{$v['id']}" title="{$v['title']}">• {$v['title']|String::msubstr=0,35}</a>
                         </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
+	<if condition="$i==4">
                     </ul>
-                    <ul>
-                        <li>
-                            • Looking for an American Marketing Rep 
-                        </li>
-                        <li>
-                            • Foreign Interns
-                        </li>
-                        <li>
-                            • Magician wanted in Beijing
-                        </li>
-                        <li>
-                            • Business development assistant
-                        </li>
+            		<ul>
+	</if>
+</volist>
                     </ul>
                 </div>
                 <div class="clear">

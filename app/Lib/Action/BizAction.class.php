@@ -23,6 +23,8 @@ class BizAction extends CommonAction{
 		$this->assign("city",$this->_get_city('fair'));
 		$this->assign('date',$this->_get_time());
 		
+		$this->assign('pick',$this->_new_list(2003,'h','0,1'));
+    	$this->assign('pick8',$this->_new_list(2003,'','1,8'));
 		$year=array();
 		$nowyear=date('Y');
 		$year['sy']['name']=$nowyear;
