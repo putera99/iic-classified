@@ -1,0 +1,89 @@
+<include file="Public:head" />
+<link href="__PUBLIC__/default/css/group_index.css" rel="stylesheet" type="text/css" />
+<div id="main">
+    <div class="right">
+    	<div class="next_lssue">
+    		<div class="next-bg">Search</div>
+			<div class="next-n">
+				<form id="so" action="__URL__/ls" method="post" style="padding:5px 10px;">
+				<label for="kw">Keyword:</label><input type="text" name="kw" id="kw" size="12"><br>
+				<input type="submit" name='mode' value="Group"> OR <input type="submit" name='mode' value="Thread">
+				</form>
+			</div>
+    	</div>
+        <img src="images/pic6.gif" alt="pci8" />
+        <div class="next_lssue">
+            <div class="next-bg">Next lssue</div>
+            <div class="next-n">
+                <ul>
+                    <li>
+                        1、Philosophy of the people, 
+                        has become the  professional  ...
+                    </li>
+                    <li>
+                        2、Philosophy of the people, 
+                        has become the  professional  ...
+                    </li>
+                    <li>
+                        3、Philosophy of the people, 
+                        has become the  professional  ...
+                    </li>
+                    <li>
+                        4、Philosophy of the people, 
+                        has become the  professional  ...
+                    </li>
+                    <li>
+                        5、Philosophy of the people, 
+                        has become the  professional  ...
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="n-life">
+        <div class="classifieds content">
+            <div class="content-bg">
+               <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a>
+            </div>
+            <div class="content-n">
+                <div class="welcome">
+                    <h1>Welcome ...</h1>
+                </div>
+                <div class="welcome-quan">
+<volist name="hot" id="v">
+                    <div class="renshu">
+                        <h5><a href="__APP__/Group/show/id/{$v['id']}">{$v['groupname']}</a></h5>
+                        <p>
+                            <img src="{$v['pic']}" alt="{$v['groupname']}" />({$v['membernum']})
+                        </p>
+                    </div>
+</volist>
+
+                </div>
+                <div class="welcome">
+                    <h2>Group Category</h2>
+                </div>
+                <div class="class-xinxi">
+                    <h3>Biz Opportunities(2366)</h3>
+                    <a href="#">For Buyers</a>
+                    | <a href="#">For Sellers</a>
+                    | <a href="#">Agents & Distributors</a>
+                    | <a href="#">Partners/Entrepreneurs</a>
+                    | <a href="#">Investment/Loans </a>
+                    | <a href="#">Trade Fairs</a>
+                    | <a href="#">Others</a>
+                    <h3>Sell &Buy (2366)</h3>
+                    <a href="#">For Buyers</a>
+                    | <a href="#">For Sellers</a>
+                    | <a href="#">Agents & Distributors</a>
+                    | <a href="#">Partners/Entrepreneurs</a>
+                    | <a href="#">Investment/Loans </a>
+                    | <a href="#">Trade Fairs</a>
+                    | <a href="#">Others</a>
+ 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:foot"/>

@@ -28,8 +28,6 @@ class CpAction extends CommonAction{
 	 */
 	function index() {
 		//控制面板首页
-		
-		
 		$page=array();
 		$page['title']='My Control Panel -  BeingfunChina';
 		$page['keywords']='My Control Panel';
@@ -597,5 +595,121 @@ class CpAction extends CommonAction{
 		}
 	}//end add_fair
 	
+	
+	/**
+	 *发布新闻
+	 *@date 2010-6-3
+	 *@time 下午02:48:59
+	 */
+	function post_art() {
+		//发布新闻
+		$this->assign('flag',$this->_get_flag());
+		$class_tree=$this->_get_tree(2000);
+		$this->assign("class_tree",$class_tree);
+		$page=array();
+		$page['title']='Post Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Articles';
+		$page['description']='Post Articles';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:post_art');
+		$this->display("Cp:layout");
+	}//end post_art
+	
+	/**
+	 *增加新闻
+	 *@date 2010-6-3
+	 *@time 下午04:06:38
+	 */
+	function add_art() {
+		//增加新闻
+		$dao=D("Archives");
+		if(!empty($_FILES["picurl"]["name"])) {
+			$this->_upload('',132,105);
+		}
+		if (!empty($_POST['flag'])) {
+			$flag='';
+			foreach ($_POST['flag'] as $v){
+				$flag.=$v.',';
+			}
+			$_POST['flag']=trim($flag,',');
+		}else{
+			$_POST['flag']='';
+		}
+		$vo=$dao->create();
+		if($vo){
+			$vo['description']=String::msubstr($vo['my_content'],0,200);
+			$vo['my_content']=nl2br($vo['my_content']);
+			if($vo['showstart']){
+				$t=explode('/',$vo['showstart']);
+				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else {
+				$vo['showstart']=0;
+			}
+			if($vo['showend']){
+				$t=explode('/',$vo['showend']);
+				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else{
+				$vo['showend']=0;
+			}
+			$t=explode('_',$vo['typeid']);
+			$vo['typeid']=$t['1'];
+			$vo['channel']=$t['0'];
+			$kw=str_word_count($vo['my_content'],1);
+    			$keywords="";
+    			foreach ($kw as $vkw){
+    				$keywords.=$vkw.',';
+    			}
+    		$vo['keywords']=trim($keywords,',');
+			$aid=$dao->add($vo);
+			if ($aid) {
+				$data=array();
+				$data['content']=nl2br($_REQUEST['content']);
+				$data['aid']=$aid;
+				$id=$dao->Table("iic_addon_arc")->add($data);
+				if($id){
+					$this->success('发布成功!');
+				}else{
+					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$this->error("附属表写入失败!");
+				}
+			}else{
+				$this->error('主档案表更新失败!');
+			}
+			//dump($vo);
+		}else{
+			$this->error($dao->getError());
+		}
+	}//end add_art
+	
+	/**
+	 *我的新闻
+	 *@date 2010-6-3
+	 *@time 下午02:48:59
+	 */
+	function my_art() {
+		//发布新闻
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']='12';
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$classifieds=array();
+    	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+		$this->assign('classifieds',$classifieds);
+		
+		$page=array();
+		$page['title']='Post Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Articles';
+		$page['description']='Post Articles';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_art');
+		$this->display("Cp:layout");
+	}//end my_art
 	
 }//end CpAction
