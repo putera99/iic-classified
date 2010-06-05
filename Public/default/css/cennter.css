@@ -42,7 +42,7 @@ a img{ border:none;}
 .nav .annv {background: url(../images/button.png) no-repeat;}
 .annv a{color: #fff;}
 .nav ul{margin:0px;padding:0px;list-style-type:none;}
-.nav li{float:left;padding:0;margin-right:50px;}
+.nav li{float:left;padding:0;margin-right:30px;}
 .search{width:230px;float:right;margin: 0px;padding: 0px;}
 .bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
 
@@ -77,10 +77,8 @@ a img{ border:none;}
 .group-n img{margin:0px;left: 15px;position: absolute;top:3px;}
 .group-n p{margin:0px;font-family:arial, helvetica, sans-serif;font-size:12px;color:#5c5b5b;padding: 0 0 0 80px;line-height: 14px;}
 .advertisement{margin: 10px 0 0 0; padding:0px;}
-#bottom{width:950px; height: 109px; background: url(../images/bg9.gif) repeat-x;margin: 0px;text-align: center; margin-top:10px; padding: 20px 0 0 0;}
 
 .Advertisement{margin: 10px 0 0 0; padding:0px;}
-#bottom{color: #FFFFFF;width:950px;text-align: center;margin: 50px auto 0 auto;padding: 20px 0 0 0;background: url(../images/bg9.gif) no-repeat;}
 .n-life{width:735px;padding:0px;margin: 0px;}
 .classifieds content{ margin:0px; padding:0px;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
@@ -89,8 +87,8 @@ a img{ border:none;}
 
 .content-life{width:520px;margin:0px;color: #7d7c7c;padding: 0px; height:auto; border:1px solid #7d7c7c; padding:0 10px;}
 .content-n h1{ font-size:14px; font-weight:bold; color: #7d7c7c;border-bottom:1px solid #7d7c7c; padding-bottom:5px; margin-right:10px; }
-.content-n .i_content{ border-bottom:#7d7c7c 1px dotted; margin-right:10px; padding-bottom:10px; height:300px;}
-.content-n .i_content .con{height:200px;}
+.content-n .i_content{ border-bottom:#7d7c7c 1px dotted; margin-right:10px; padding-bottom:10px; height:auto; min-height:300px;}
+.content-n .i_content .con{ height:auto; min-height:200px;}
 .content-life a{color: #7d7c7c; text-decoration:underline;}
 .content-life a:hover{text-decoration:blink;}
 .content-n h4 {font-size: 14px;color: #b53e79;line-height: 22px;margin: 0px;padding: 5px 0px;}
@@ -111,8 +109,8 @@ a img{ border:none;}
 .biaoti img{margin:0px;padding: 0px;}
 
 .right{width:200px;padding:0px;float:right;margin: 0px;}
-.next lssue { margin:0px; padding: 0px;}
-.next-bg{height:22px;margin: 10px 0 0 0; padding-left:10px; background-color:#706c6d;border: 1px solid #aaaaaa; font-weight:bold;}
+.next_lssue{ margin:0 0 10px 0; padding: 0px;}
+.next-bg{color:#fff; height:22px;margin: 0; padding-left:10px; background-color:#706c6d;border: 1px solid #aaaaaa; font-weight:bold;}
 .next-n{margin:0px;padding:0px; border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;}
 .next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #535353;padding-bottom:5px;}
@@ -150,7 +148,7 @@ a img{ border:none;}
 .personals p a{color: #999999;}
 
 /* CSS底部开始*/
-#bottom{width:950px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:20px auto;;padding: 0;}
+#bottom{width:950px;height: 109px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:20px auto;;padding: 0; color:#fff;}
 .title-h {display: block;font-size: 12px;font-weight: bold;color: #ef5f01;}
 
 

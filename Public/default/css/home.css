@@ -4,14 +4,21 @@
 .main-left .bg-h a{font-size: 14px;font-weight: bold;color: #e25a02;}
 .jianbian-h{height:25px;margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #fff;font-weight: bold;padding: 0 0 0 16px; background-color:#888888;}
 .neirong-h{margin: 0;padding:0px;background-color: #363636;clear: both;}
-.neirong-h dl{margin:0px;padding: 5px 10px 0px 10px;}
-.neirong-h dt{ margin:0px; padding:0px; float:left;}
-.neirong-h dd{width:320px;margin:0px;padding-top: 0px 5px 0px 0px;float:right;color:#dadada;display: block;}
+.center-h dl{margin:0px;padding: 5px 10px 0px 10px;}
+.center-h dt{ margin:0px; padding:0px; float:left;}
+.center-h .m{ height:125px; display:table;}
+.center-h .m a{display:table-cell; vertical-align:middle;}
+.center-h dd{width:320px;margin:0px;padding-top: 0px 5px 0px 0px;float:right;color:#dadada;display: block;}
+.center-h dd a{color:#dadada;}
 .xiantiao{width: 500px;background: url(../images/zhixian.gif) repeat-x;margin:8px auto 0 auto;padding-bottom: 5px;}
 .list-h {margin: 0px;padding: 0 0 0 8px;}
-.list-h h5{margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;font-weight: normal;color: #ff6600;padding: 0px 0px 0px 100px;line-height: 14px;}
+.list-h h5{margin:0px;font-size: 12px;font-weight: normal;color: #ff6600;padding: 0px 0px 0px 100px;line-height: 14px;}
+.list-h h5 a{color: #ff6600;}
+.list-h .m{height:80px; display:table;position: absolute;left: 5px;top: 5px;}
+.list-h .m a{display:table-cell; vertical-align:middle; }
+
 .neiR-h {width: 240px;position:relative;margin: 0px;float: left;padding: 5px 0 0 5px;}
-.neiR-h img {margin: 0px;padding: 0px;position: absolute;left: 5px;top: 5px;}
+
 .neiR-h p {padding-left: 100px;line-height: 16px;margin: 3px 0px 0px 0px;}
 .center-h {width: 482px; margin: 0px;padding: 0px; height:130px;}
 
@@ -30,6 +37,7 @@
 
 .xinwen-h ul{ margin:0px; padding:5px 12px 0 12px; list-style-type:none; float:left; }
 .xinwen-h li{ margin:0px; padding:0px;}
+.xinwen-h li a{ color:#fff;}
 .banner{ margin:10px 0 0 0; padding:0px;}
 .property-h {padding: 0px;margin: 10px 0 0 0;}
 .jianbg-h{height: 25px; line-height:25px; margin:0;padding:0;display: block;font-weight: bold;color: #1c1c1c;background:url(../images/bg02.gif) no-repeat;}
