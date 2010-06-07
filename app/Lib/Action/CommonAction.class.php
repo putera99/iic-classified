@@ -666,6 +666,22 @@ class CommonAction extends Action{
 		return $count;
 		
 	}//end _get_catnum
+	
+		/**
+	   *等记群组关系
+	   *@date 2010-6-7
+	   *@time 下午09:15:29
+	   */
+	protected function _add_tagspace($gid,$grade,$uid='',$username='') {
+		//等记群组关系
+		$dao=new Model();
+		$ctime=time();
+		$uid=$uid==''?$this->user['uid']:$uid;
+		$username=$username==''?$this->user['username']:$username;
+		$sql="INSERT INTO `iic_tagspace` (`id`,`tagid`,`uid`,`username`,`grade`,`ctime`)VALUES (NULL , '$gid', '$uid', '$username', '$grade', '$ctime') ON DUPLICATE KEY UPDATE `grade`='$grade';";
+		return $dao->execute($sql);
+	}//end _add_tagspace
+	
 ///////////////////////////////群组的共用类————end//////////////////////////
 }//END CommonAction
 ?>

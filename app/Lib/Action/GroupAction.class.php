@@ -91,7 +91,9 @@ class GroupAction extends CommonAction{
 	 */
 	function show() {
 		//群组页面
+		$id=intval($_REQUEST['id']);
 		
+		$this->display();
 	}//end show
 	
 	

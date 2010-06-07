@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{$page['title']}</title>
+        
+
+        <script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
+        <meta name="keywords" content="{$page['keywords']}" />
+        <meta name="description" content="{$page['description']|clearh}" />
+		<script type="text/javascript">
+		var HOST		= window.location.host;
+		var Per_host	="http://"+HOST;
+		var JS_PATH		="../Public/js/";
+		var IMG_PATH	="../Public/images/";
+		var URL			='__URL__';
+		var APP			='__APP__';
+		var PUBLIC		='../Public/';
+		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
+		</script>
+		<script src="../Public/iic.js"></script>
+    </head>
+    <body>
+        <div id="top">
+            <div id="header-h">
+                <div class="header-left">
+                    <span>{$now} | 
+					<empty name="Think.SESSION.uid">
+						<a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a></span>
+					<else/>
+						<a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
+					</empty>
+                </div>
+                <div class="colorz">
+                    <ul>
+                        <li>Pick a Theme:</li>
+                        <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
+                        <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
+                        <li><img src="__PUBLIC__/default/images/color3.gif" alt="color" /></li>
+                        <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
+                        <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
+                        <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="top-content">
+                <div class="top-logo">
+                    <h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
+                    <div class="top-city">
+                        <h2><a href="__APP__/Public/index/cid/2" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/3" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/1" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
+                        <h2><a href="__APP__/Public/index/cid/4" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+						<span style="float:right; margin-right:10px; font-size:10px;"><input type="checkbox" value="1" name="remember" id="remember" />Remember my choice</span>
+                    </div>
+					
+                </div>
+                <div class="clear">
+                </div>
+                <div class="top-nav">
+                    <div class="search">
+                        <img src="__PUBLIC__/default/images/search.gif" alt="search" />
+                    </div>
+                    <div class="nav">
+                        <ul>
+                            <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/">Home</a></li>
+                            <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/Classifieds/index">Classifieds</a></li>
+							<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/CityGuide/index">City Guide</a></li>
+                            <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/Biz/index">China Biz</a></li>
+                            <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index">Magazine</a></li>
+                            <li <eq name="Think.MODULE_NAME" value="Forum"> class="annv"</eq>><a href="/Forum">Forum</a></li>
+                            <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/Group/index">Group</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-h">
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+<link href="__PUBLIC__/default/css/group_index.css" rel="stylesheet"
+	type="text/css" />
+<link href="__PUBLIC__/default/css/group_list.css" rel="stylesheet"
+	type="text/css" />
+<link href="__PUBLIC__/default/css/group_content.css" rel="stylesheet"
+	type="text/css" />
+<!--中间开始-->
+<div id="main">
+
+<div class="right">
+
+<div class="next lssue">
+
+<div class="next-bg">New members</div>
+<div class="chengyuan">
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+</dl>
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+</dl>
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+
+</dl>
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+</dl>
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+</dl>
+<dl>
+	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
+	<dd>Projection whiteboard</dd>
+</dl>
+<div class="clear"></div>
+
+</div>
+
+<div class="next-bg">Group frequented</div>
+<div class="next-n">
+<dl>
+	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
+	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
+	long-....</dd>
+</dl>
+
+<dl>
+	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
+	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
+	long-....</dd>
+</dl>
+
+<dl>
+	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
+	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
+	long-....</dd>
+</dl>
+
+<dl>
+	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
+	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
+	long-....</dd>
+
+</dl>
+
+<dl>
+	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
+	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
+	long-....</dd>
+</dl>
+
+</div>
+
+<div class="guang"><img src="images/pc/pic6.gif" alt="dsc" /></div>
+</div>
+
+
+</div>
+
+<div class="n-life">
+<div class="classifieds content">
+
+<div class="content-bg">Home>classifieds content</div>
+<div class="content-n">
+<div class="touxiang"><span><img src="images/pc/pic7.gif"
+	alt="szx" /></span>
+<ul>
+	<li>Time: April 12, 2010 at 7:30pm to April 13, 2010 at 12am</li>
+	<li>Location: Orient Express (No.1 shamian north street
+	广州市沙面北街1号之一)</li>
+	<li>City/Town: Guangzhou</li>
+	<li>Phone:020-8358 6125</li>
+
+	<li>Event Type: single, party</li>
+	<li>Organized By:that's PRD</li>
+	<li>Latest Activity: 16 hours agoExport to Outlook or iCal
+	(.ics)Share</li>
+</ul>
+<div class="anjian">
+<ul>
+	<li>Join group</li>
+	<li>Recommend</li>
+</ul>
+</div>
+<div class="GroupTopics">Group Topics</div>
+
+<div class="huati">
+<ul>
+	<li>Topic</li>
+	<li>Author</li>
+	<li>Response</li>
+	<li>Last response</li>
+</ul>
+</div>
+<div class="xiaoxin">
+<ul>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
+	people of the world famous comic. gssg 8</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="clear"></div>
+</div>
+<include file="Public:foot" />

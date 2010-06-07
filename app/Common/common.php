@@ -1,6 +1,39 @@
 <?php
 
 /**
+   *获取群组级别
+   *@date 2010-6-7
+   *@time 下午09:50:09
+   */
+function get_grade($id) {
+	//获取群组级别
+	$arr=array(
+		1=>'群主',
+		2=>'管理员',
+		3=>'VIP',
+		4=>'一般',
+		5=>'禁止',
+	);
+	return $arr[$id];
+}//end get_grade
+
+/**
+   *获取群组名称
+   *@date 2010-6-7
+   *@time 下午09:42:30
+   */
+function get_info($gid,$field='groupname',$table="Group") {
+	//获取群组名称
+	$dao=D($table);
+	$info=$dao->where("id=$gid")->find();
+	if($field){
+		return $info[$field];
+	}else{
+		return $info;
+	}
+}//end function_name
+
+/**
  *给出类名
  *@date 2010-5-29
  *@time 下午02:59:17

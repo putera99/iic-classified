@@ -1,0 +1,36 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/group_my">My Group</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+        	<span><a href="__URL__/group_create">Create Group</a></span>
+            <h3>My Group</h3>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="list">
+            <dl class="h350">
+            	<dt class="w420">Subject</dt>
+				<dt class="w100">grade</dt>
+				<dt class="w200">Join Time</dt>
+<volist name="group" id="v">
+                	<dd>
+						<span class="w420"><a href="__APP__/Group/show/id/{$v['tagid']}">{$v['tagid']|get_info=groupname,Group}</a></span>
+						<span class="w100 c">{$v['grade']|get_grade}</span>
+						<span class="w200 c">{$v['ctime']|toDate='Y-m-d'}</span>
+					</dd>
+                    
+</volist>
+            </dl>
+        </div>
+    </div>
+    <div class="xuhao">
+    	{$showpage}
+    </div>
+</div>
+<div class="clear">
+</div>

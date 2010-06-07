@@ -711,7 +711,7 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_art');
 		$this->display("Cp:layout");
 	}//end my_art
-	
+////////////////////////////////群组——start///////////////////////////////////
 	/**
 	 *创建群组
 	 *@date 2010-6-7
@@ -743,7 +743,18 @@ class CpAction extends CommonAction{
 			$this->_group_up('',132,105);
 		}
 		$vo=$dao->create();
-		dump($vo);
+		if($vo){
+			$gid=$dao->add($vo);
+			if ($gid){
+				$this->_add_tagspace($gid,1);
+				$this->assign('jumpUrl',__URL__.'/group_my');
+				$this->success("Create Group Success!");
+			}else{
+				$this->error($dao->getDbError());
+			}
+		}else {
+			$this->error($dao->getDbError());
+		}
 	}//end add_group
 	
 	/**
@@ -783,10 +794,29 @@ class CpAction extends CommonAction{
 	 */
 	function group_my() {
 		//我的群组
+		$dao=D("Tagspace");
+		$condition=array();
+		$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,10);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$group=array();
+    	$group=$dao->where($condition)->order("ctime DESC")->limit("$limit")->findAll();
+		$this->assign('group',$group);
 		
+		$page=array();
+		$page['title']='My Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Group';
+		$page['description']='My Group';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:group_my');
+		$this->display("Cp:layout");
 	}//end group_my
 	
-	
+
 	
 	
 	
