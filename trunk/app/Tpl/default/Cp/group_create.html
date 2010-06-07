@@ -28,19 +28,19 @@
 								<if condition="$v['is_dir'] eq 1">
 									<optgroup label="{$v['title']}">
 										<volist name="v['_son']" id="vs">
-											<option value="13_{$vs['id']}">{$vs['title']}</option>
+											<option value="{$vs['id']}">{$vs['title']}</option>
 										</volist>
 									</optgroup>
 								<else/>
-									<option value="13_{$v['id']}">{$v['title']}</option>
+									<option value="{$v['id']}">{$v['title']}</option>
 								</if>
 														
 							</volist>
 						</select>
 					</p>
 					<p>
-						<label for="typeid2">Second<br>Category:</label>
-						<select id="typeid2" name="typeid2" size="5" >
+						<label for="fcat_id">Second<br>Category:</label>
+						<select id="fcat_id" name="fcat_id" size="5" >
 							<option value="0">---Select Second Category---</option>
 							<volist name="cat" id="v">
 								<if condition="$v['is_dir'] eq 1">
