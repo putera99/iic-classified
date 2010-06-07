@@ -5,7 +5,10 @@
 .content-bg {font-weight: bold;color: #212121;font-family: Verdana, Arial, Helvetica, sans-serif;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-n {border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding: 5px 0 0 0;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
-.welcome {border-bottom: 1px solid #b5b5b5;margin: 5px 7px 10px 7px;padding: 0 0 8px 0;line-height: 14px;color: #333333;font-weight: bold;}
+.welcome {border-bottom: 1px solid #b5b5b5;margin: 5px 7px 10px 7px;padding: 0 0 8px 0; height:20px; line-height: 20px;color: #333333;font-weight: bold;}
+.welcome span{float:right; margin-bottom:2px;}
+.welcome span a{display:block; padding:0px 5px; border:1px #cccccc solid; color:#333333;}
+.welcome span a:hover{color:#fff; background-color:#706c6d;}
 .mian-right{width:749px;padding:0px;float:right;margin-left:0 0 0 10px;}
 .qun-xinx {width: 500px;padding:0px;margin: 0 5px 0 5px;float: left;}
 .qun-xinx dl{margin:0px;padding:0px;line-height: 14px;clear: both;}
@@ -23,7 +26,7 @@
 .next lssue { margin:0px; padding: 0px;}
 .next-bg{height:22px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0;}
 .next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0;}
-.next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;}
+.next-n ul{padding:0px; padding-bottom:5px; list-style-type:none;margin: 0px 5px 0px 3px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width:1px;border-bottom-style:dashed;border-bottom-color: #535353;padding-bottom:5px;}
 .class-xinxi h6 {font-size: 12px;color: #79214d;margin: 0px;padding: 5px 0 0 0; }
 .class-xinxi a {color: #353535;text-decoration: none;padding-left: 10px;}

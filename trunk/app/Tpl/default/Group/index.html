@@ -64,23 +64,12 @@
                     <h2>Group Category</h2>
                 </div>
                 <div class="class-xinxi">
-                    <h3>Biz Opportunities(2366)</h3>
-                    <a href="#">For Buyers</a>
-                    | <a href="#">For Sellers</a>
-                    | <a href="#">Agents & Distributors</a>
-                    | <a href="#">Partners/Entrepreneurs</a>
-                    | <a href="#">Investment/Loans </a>
-                    | <a href="#">Trade Fairs</a>
-                    | <a href="#">Others</a>
-                    <h3>Sell &Buy (2366)</h3>
-                    <a href="#">For Buyers</a>
-                    | <a href="#">For Sellers</a>
-                    | <a href="#">Agents & Distributors</a>
-                    | <a href="#">Partners/Entrepreneurs</a>
-                    | <a href="#">Investment/Loans </a>
-                    | <a href="#">Trade Fairs</a>
-                    | <a href="#">Others</a>
- 
+<volist name="cat" id="v">
+                    <h3><a href="__URL__/ls/id/{$v['id']}">{$v['title']}</a>({$v['count']})</h3>
+	<volist name="v['_son']" id="vs">
+                    <a href="__URL__/ls/id/{$vs['id']}">{$vs['title']}</a> | 
+	</volist>
+</volist>
                 </div>
             </div>
         </div>

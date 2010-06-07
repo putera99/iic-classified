@@ -3,177 +3,94 @@
 <link href="__PUBLIC__/default/css/group_list.css" rel="stylesheet" type="text/css" />
 <!--中间开始-->
 <div id="main">
-<div class="right">
-
-<div class="next lssue">
-<div class="next-bg">Next lssue</div>
-<div class="next-n">
-<ul>
-
- <li> 1、Philosophy of the people, 
-has become the  professional  ...
-</li>
-  <li> 2、Philosophy of the people, 
-has become the  professional  ...
-</li>
- <li> 3、Philosophy of the people, 
-has become the  professional  ...
-</li>
- <li> 4、Philosophy of the people, 
-has become the  professional  ...
-</li>
- <li> 5、Philosophy of the people, 
-has become the  professional  ...
-
-</li>
-</ul>
-</div>
-<div class="guang"><img src="images/pc/pic6.gif" alt="dsc" /></div>
-</div>
-  
-  
-  
-</div>
-
-<div class="n-life">
-<div class="classifieds content">
-
-<div class="content-bg">Home>classifieds content</div>
-<div class="content-n">
-<div class="welcome">Investment/Loans</div>
-<div class="qunbu">
-
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-
-</dl>
-</div>
-</div>
-
-<div class="qunbu">
-<div class="riqi">[Founded in 2009/5/14 300]</div>
-<div class="qun-xinx">
-<dl>
-<dt><img src="images/pc/pic.gif" alt="dv" /></dt>
-<dd><span>posted a new listing titled</span>
-Funny,u are from USA,but in English level part,it says beginner,u should be native,
-lol,anyway,welcome !</dd>
-</dl>
-</div>
-</div>
-
-</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="clear"></div>
+    <div class="right">
+<if condition="$son">
+        <div class="next_lssue">
+            <div class="next-bg">Subclass</div>
+            <div class="next-n">
+                <ul>
+	<volist name="son" id="v">
+                    <li>
+                        <a href="__URL__/ls/id/{$v['id']}">{$v['title']}</a>({$v['count']})
+                    </li>
+	</volist>
+                </ul>
+            </div>
+            <div class="guang">
+                <img src="images/pc/pic6.gif" alt="dsc" />
+            </div>
+        </div>
+</if>
+        <div class="next_lssue">
+            <div class="next-bg">
+                Search
+            </div>
+            <div class="next-n">
+                <form id="so" action="__URL__/ls" method="post" style="padding:5px 10px;">
+                    <label for="kw">
+                        Keyword:
+                    </label>
+                    <input type="text" name="kw" id="kw" size="12">
+                    <br>
+                    <input type="submit" name='mode' value="Group">OR <input type="submit" name='mode' value="Thread">
+                </form>
+            </div>
+        </div>
+		<div class="next_lssue">
+            <div class="next-bg">
+                Create My Group
+            </div>
+            <div class="next-n">
+                
+            </div>
+        </div>
+    </div>
+    <div class="n-life">
+        <div class="classifieds content">
+            <div class="content-bg">
+                <a href="">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+                <if condition="$dh">
+                    <if condition="$dh[_pid]">
+                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+                    </if>
+                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+                </if>
+                <if condition="$kw">
+                    Search "{$kw}"
+                </if>
+            </div>
+            <div class="content-n">
+                <div class="welcome">
+                   <span>
+				   <a href="__APP__/Cp/group_create/">Create My Group</a>
+				   </span>
+					{$info['title']} 
+                </div>
+                <volist name="list" id="v">
+                    <div class="qunbu">
+                        <div class="riqi">
+                            [Founded in {$v['citme']|toDate=m/d/Y}]
+                        </div>
+                        <div class="qun-xinx">
+                            <dl>
+                                <dt>
+                                    <img src="images/pc/pic.gif" alt="dv" />
+                                </dt>
+                                <dd>
+                                    <span>posted a new listing titled</span>
+                                    Funny,u are from USA,but in English level part,it says beginner,u should be native,
+                                    lol,anyway,welcome !
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
 </div>
 <include file="Public:foot"/>

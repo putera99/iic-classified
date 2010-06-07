@@ -712,4 +712,83 @@ class CpAction extends CommonAction{
 		$this->display("Cp:layout");
 	}//end my_art
 	
+	/**
+	 *创建群组
+	 *@date 2010-6-7
+	 *@time 下午05:08:07
+	 */
+	function group_create() {
+		//创建群组
+		$this->assign('cat',$this->_get_mtag());
+		
+		$page=array();
+		$page['title']='Create Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Create Group';
+		$page['description']='Create Group';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:group_create');
+		$this->display("Cp:layout");
+	}//end group_create
+	
+	/**
+	 *增加群组
+	 *@date 2010-6-7
+	 *@time 下午05:57:16
+	 */
+	function add_group() {
+		//增加群组
+		$dao=D("Group");
+		if(!empty($_FILES["pic"]["name"])) {
+			$this->_group_up('',132,105);
+		}
+		$vo=$dao->create();
+		dump($vo);
+	}//end add_group
+	
+	/**
+	 *我推荐到群组的资源
+	 *@date 2010-6-7
+	 *@time 下午05:08:45
+	 */
+	function group_collection() {
+		//我推荐到群组的资源
+		
+	}//end group_collection
+	
+	/**
+	 *我参与过的话题
+	 *@date 2010-6-7
+	 *@time 下午05:09:23
+	 */
+	function group_tread_join() {
+		//我参与过的话题
+		
+	}//end group_tread_join
+	
+	/**
+	 *我发布的话题
+	 *@date 2010-6-7
+	 *@time 下午05:09:57
+	 */
+	function group_tread() {
+		//我发布的话题
+		
+	}//end group_tread
+	
+	/**
+	 *我的群组
+	 *@date 2010-6-7
+	 *@time 下午05:10:18
+	 */
+	function group_my() {
+		//我的群组
+		
+	}//end group_my
+	
+	
+	
+	
+	
+	
 }//end CpAction
