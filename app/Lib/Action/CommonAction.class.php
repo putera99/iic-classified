@@ -270,6 +270,7 @@ class CommonAction extends Action{
     	//dump($dao->getLastSql());
 		$this->display("Common:ajax_comments");
     }//end ajax_comments
+    
     /**
      *获取当前栏目位置
      *@date 2010-5-10
@@ -506,6 +507,43 @@ class CommonAction extends Action{
         return $_POST['picurl'];
 	}
 	
+	protected function _group_up($tid,$width='120',$height='140'){
+        import("ORG.Net.UploadFile");
+        $upload = new UploadFile();
+        //设置上传文件大小
+        $upload->maxSize  = 3292200 ;
+        //设置上传文件类型
+        $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
+        //设置附件上传目录
+        $tid=empty($tid)?$_REQUEST['typeid']:$tid;
+        $path=$tid.'/'.date('Y-m').'/';
+        $upload->savePath =  './Public/Uploads/Group/'.$path;
+        mk_dir($upload->savePath);
+        $path='/Public/Uploads/Group/'.$path;
+	    //设置需要生成缩略图，仅对图像文件有效
+       $upload->thumb =  true;
+       //设置需要生成缩略图的文件后缀
+	    $upload->thumbPrefix   =  's_';  //生产2张缩略图
+       //设置缩略图最大宽度
+		$upload->thumbMaxWidth =  '120';
+       //设置缩略图最大高度
+		$upload->thumbMaxHeight = '140';
+	   //设置上传文件规则
+	   $upload->saveRule = uniqid;
+	   //删除原图
+	   $upload->thumbRemoveOrigin = false;
+        if(!$upload->upload()) {
+            //捕获上传异常
+            $this->error($upload->getErrorMsg());
+        }else {
+            //取得成功上传的文件信息
+            $uploadList = $upload->getUploadFileInfo();
+            $_POST['pic']  = $path.'s_'.$uploadList[0]['savename'];
+        }
+        
+        return $_POST['pic'];
+	}
+	
     protected function _photo($tid){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
@@ -574,5 +612,60 @@ class CommonAction extends Action{
 
 		//unset($dao);
 	}//end post_comment
+	
+	
+///////////////////////////////群组的共用类————start//////////////////////////
+	/**
+	 *获取制定类下的子类信息
+	 *@date 2010-6-5
+	 *@time 上午11:54:24
+	 */
+	protected function _get_mtag($pid='1'){
+		//获取制定类下的子类信息
+		$dao=D("MtagCat");
+		$condition=array();
+		$condition['pid']=$pid;
+		$arr=$dao->where($condition)->order("num asc")->findAll();
+		$data=array();
+		foreach ($arr as $v){
+			$data[$v['id']]=$v;
+			$data[$v['id']]['count']=$this->_get_catnum($v['id']);
+			$son=$dao->where("pid={$v['id']}")->order("num asc")->findAll();
+			if($son){
+				$son_data=array();
+				foreach ($son as $s){
+					$son_data[$s['id']]=$s;
+					$son_data[$s['id']]['count']=$this->_get_catnum($s['id']);
+				}
+			$data[$v['id']]['_son']=$son_data;
+			}
+		}
+		return $data;
+	}//end _get_mtag
+	
+		/**
+	*计算群组类下的群组个数
+	*@date Mon Jun 07 10:43:17 CST 2010
+	*@time 10:43:17
+	*/
+	function _get_catnum($typeid){
+		//计算群组类下的群组个数
+		$group=D("Group");
+		$cat=D("MtagCat");
+		$son=$cat->where("pid=$typeid AND is_show=1")->field("id,title")->findAll();
+		$str='';
+		if($son){
+			foreach ($son as $v){
+				$str.=$v['id'].',';
+			}
+			$str=trim($str,',');
+		}else {
+			$str=$typeid;
+		}
+		$count=$group->where("cat_id in($str) OR fcat_id in ($str)")->count();
+		return $count;
+		
+	}//end _get_catnum
+///////////////////////////////群组的共用类————end//////////////////////////
 }//END CommonAction
 ?>

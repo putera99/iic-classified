@@ -35,16 +35,52 @@ class GroupAction extends CommonAction{
 	function ls() {
 		//群组列表页
 		$condition=array();
-		if (intval($_GET['id'])) {
-			$condition['cat_id']=intval($_GET['id']);
-		}
+		$dh='';
 		if ($_POST['kw']) {
 			$condition['groupname']=array("like","%{$_POST['kw']}%");
+			$this->assign('kw',$_POST['kw']);
+		}
+		if (intval($_GET['id'])) {
+			$condition['cat_id']=intval($_GET['id']);
+			$dh=$this->_get_pinfo($condition['cat_id']);
 		}
 		if(empty($condition)){
 			$this->error('参数错误！');
 		}
 		$dao=D("Group");
+		if ($condition['cat_id']) {
+			$cat=D("MtagCat");
+			$info=$cat->where("id={$condition['cat_id']} AND is_show=1")->find();
+			$this->assign('info',$info);
+			if($info['is_dir']=='1'){
+				$son=$cat->where("pid={$condition['cat_id']} AND is_show=1")->field("id,title")->findAll();
+				$arr=array();
+				foreach ($son as $v){
+					$arr[$v['id']]=$v;
+					$arr[$v['id']]['count']=$this->_get_catnum($v['id']);
+				}
+				$this->assign("son",$arr);
+				$str='';
+				if($son){
+					foreach ($son as $v){
+						$str.=$v['id'].',';
+					}
+					$str=trim($str,',');
+					$condition['cat_id']=array('IN',$str);
+				}
+			}
+		}
+		$data=$dao->where($condition)->order("ctime DESC")->findAll();
+		$this->assign("list",$data);
+		
+		$page=array();
+		$page['title']=empty($info['title'])?$info['title'].'  -  BeingfunChina':'Group list  -  BeingfunChina';
+		$page['keywords']=empty($info['keywords'])?"Group,list":$info['keywords'];
+		$page['description']=empty($info['description'])?"Groups in BeingfunChina":$info['description'];
+	
+		$this->assign('page',$page);
+		
+		$this->assign('dh',$dh);
 		$this->display();
 	}//end ls
 	
@@ -120,31 +156,7 @@ class GroupAction extends CommonAction{
 		
 	}//end add_group_check
 	
-	/**
-	 *获取制定类下的子类信息
-	 *@date 2010-6-5
-	 *@time 上午11:54:24
-	 */
-	protected function _get_mtag($pid='1'){
-		//获取制定类下的子类信息
-		$dao=D("MtagCat");
-		$condition=array();
-		$condition['pid']=$pid;
-		$arr=$dao->where($condition)->order("num asc")->findAll();
-		$data=array();
-		foreach ($arr as $v){
-			$data[$v['id']]=$v;
-			$son=$dao->where("pid={$v['id']}")->order("num asc")->findAll();
-			if($son){
-				$son_data=array();
-				foreach ($son as $s){
-					$son_data[$s['id']]=$s;
-				}
-			$data[$v['id']]['_son']=$son_data;
-			}
-		}
-		return $data;
-	}//end _get_mtag
+
 	
 	
 	/**
@@ -163,10 +175,27 @@ class GroupAction extends CommonAction{
 			$order="ctime DESC";
 		}
 		$data=$dao->where($str)->order($order)->limit($limit)->findAll();
-		dump($dao->getlastSql());
+		//dump($dao->getlastSql());
 		return $data;
 	}//end _get_hot
 	
+
+	
+	    /**
+     *获取当前栏目位置
+     *@date 2010-5-10
+     *@time 上午09:47:29
+     */
+    protected function _get_pinfo($typeid) {
+    	//获取当前位置
+    	$dao=D("MtagCat");
+    	$data=$dao->where("id=$typeid AND is_show=1")->field('id,pid,title,is_dir')->find();
+    	if ($data['is_dir']=='0'){
+    		$data['_pid']=$dao->where("id={$data['pid']}")->field('id,pid,title,is_dir')->find();
+    	}
+    	return $data;
+    }//end _get_dh
+    
 }// END GroupAction
 
 ?>

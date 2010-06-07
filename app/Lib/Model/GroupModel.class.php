@@ -15,6 +15,8 @@ class GroupModel extends Model{
 	protected $_auto=array(
 		array('close',0,1),
 		array('membernum',1,1),
+		array('uid',"get_uid",1,'function'),
+		array('username',"get_username",1,'function'),
 		array('threadnum',0,1),
 		array('postnum',0,1),
 		array('closeapply',0,1),

@@ -1,0 +1,83 @@
+<div class="mulu">
+	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/group_my">My Group</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3 style="margin:0;">Create Group</h3>
+        </div>
+        <div class="list">
+            <form action="__URL__/add_group" method="post" enctype="multipart/form-data">
+            	<fieldset>
+				<legend>Basic Elements:</legend>
+	            	<p>
+	            		<label for="groupname">Group Name:</label><input type="text" name="groupname" id="groupname" style="width:300px;">
+					</p>
+					<p>
+						<label for="pic">CoverImage:</label><input type="file" name="pic" id="pic" style="width:300px;">
+	            	</p>
+					
+					<p>
+						<label for="cat_id">Category:</label>
+						<select id="cat_id" name="typeid">
+							<option value="0">---Select Main Category---</option>
+							<volist name="cat" id="v">
+								<if condition="$v['is_dir'] eq 1">
+									<optgroup label="{$v['title']}">
+										<volist name="v['_son']" id="vs">
+											<option value="13_{$vs['id']}">{$vs['title']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="13_{$v['id']}">{$v['title']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+					<p>
+						<label for="typeid2">Second<br>Category:</label>
+						<select id="typeid2" name="typeid2" size="5" >
+							<option value="0">---Select Second Category---</option>
+							<volist name="cat" id="v">
+								<if condition="$v['is_dir'] eq 1">
+									<optgroup label="{$v['title']}">
+										<volist name="v['_son']" id="vs">
+											<option value="{$vs['id']}">{$vs['title']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="{$v['id']}">{$v['title']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+<if condition="$edit eq 1">
+					<p><label for="close">close</label>
+						<input type="radio" name="close" id="close" value="0" <eq name="info['close']" value="0">checked="checked"</eq>>open
+						<input type="radio" name="close" id="close" value="1" <eq name="info['close']" value="1">checked="checked"</eq>>close
+					</p>
+</if>
+				</fieldset>
+				<fieldset>
+					<legend>Group info:</legend>
+					
+					<p><label for="announcement">announcement:</label>
+						<textarea cols="50" rows="5" name="announcement" id="announcement"></textarea>
+					</p>
+				</fieldset>
+				<p>
+					<input type="submit" value="Submit">            
+					<input type="reset" value="Reset">            
+				</p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
