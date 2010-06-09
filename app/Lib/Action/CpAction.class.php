@@ -743,6 +743,9 @@ class CpAction extends CommonAction{
 			$this->_group_up('',132,105);
 		}
 		$vo=$dao->create();
+		$vo['announcement']=nl2br($vo['announcement']);
+		/*dump($vo);
+		dump($dao->getDbError());*/
 		if($vo){
 			$gid=$dao->add($vo);
 			if ($gid){
