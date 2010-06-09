@@ -13,29 +13,14 @@
     	</div>
         <img src="images/pic6.gif" alt="pci8" />
         <div class="next_lssue">
-            <div class="next-bg">Next lssue</div>
+            <div class="next-bg">New Group</div>
             <div class="next-n">
                 <ul>
+<volist name="new" id="v">
                     <li>
-                        1、Philosophy of the people, 
-                        has become the  professional  ...
+                        {$i}、<a href="__APP__/Group/show/id/{$v['id']}">{$v['groupname']}</a>
                     </li>
-                    <li>
-                        2、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        3、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        4、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        5、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
+</volist>
                 </ul>
             </div>
         </div>

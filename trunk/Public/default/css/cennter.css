@@ -80,7 +80,7 @@ a img{ border:none;}
 
 .Advertisement{margin: 10px 0 0 0; padding:0px;}
 .n-life{width:735px;padding:0px;margin: 0px;}
-.classifieds content{ margin:0px; padding:0px;}
+.classifieds_content{ margin:0px; padding:0px;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-bg a{font-weight: bold;color: #212121;}
 .content-n {border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding-top: 5px;padding-left: 10px;}
@@ -111,7 +111,7 @@ a img{ border:none;}
 .right{width:200px;padding:0px;float:right;margin: 0px;}
 .next_lssue{ margin:0 0 10px 0; padding: 0px;}
 .next-bg{color:#fff; height:22px;margin: 0; padding-left:10px; background-color:#706c6d;border: 1px solid #aaaaaa; font-weight:bold;}
-.next-n{margin:0px;padding:0px; border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;}
+.next-n{margin:0px;padding:0px; border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px; padding-bottom:5px;}
 .next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #535353;padding-bottom:5px;}
 .main-group {padding: 0px;border: 1px solid #aaaaaa;margin: 10px 0 0 0;height: auto;}
