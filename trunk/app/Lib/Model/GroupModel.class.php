@@ -29,9 +29,4 @@ class GroupModel extends Model{
 		array('ctime','time',1,'function'),
 		array('lasttime','time',1,'function'),
 	);
-	
-	protected $_validate=array(
-		array('groupname','','Group name is Must!',0,'unique',1),
-		array('cat_id','','Select Category is Must!',0,'unique',1),
-	);
 }//end GroupModel

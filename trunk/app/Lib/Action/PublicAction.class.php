@@ -69,19 +69,47 @@ class PublicAction extends CommonAction{
 		$dao=new Model();
 		$info=$dao->Table("cdb_members")->where("username='$username'")->find();
 		if ($info) {
-			if ($password==$info['password']) {
+			if($password==$info['password']) {
 				$_SESSION['uid']=$info['uid'];
 				$_SESSION['username']=$info['username'];
 				$_SESSION["info"]=$info;
-				$this->redirect("/Cp/index");
+				if ($_REQUEST['is_ajax']) {
+					$this->ajaxReturn("{$info['uid']}",'登录成功','1');
+				}else{
+					$this->redirect("/Cp/index");
+				}
 			}else{
-				$this->error("ERROR:2!");
+				if ($_REQUEST['is_ajax']) {
+					$this->ajaxReturn("0",'密码错误','0');
+				}else{
+					$this->error("ERROR:2!");
+				}
 			}
 		}else{
-			$this->error("ERROR:1!");
+			if ($_REQUEST['is_ajax']) {
+					$this->ajaxReturn("0",'用户名错误','0');
+				}else{
+					$this->error("ERROR:1!");
+				}
 		}
 
 	}// END check
+	
+	/**
+	 *ajax检查是否登录
+	 *@date 2010-6-8
+	 *@time 下午05:17:23
+	 */
+	function ajax_is_login() {
+		//ajax检查是否登录
+		$user=$this->_is_login();
+		if ($user){
+			$this->ajaxReturn($user,'已经登录','1');
+		}else {
+			$this->ajaxReturn("0",'请先登录','0');
+		}
+		
+	}//end ajax_is_login
 	
 	function reg_add() {//注册写入
 		$data['username']=$_POST['username'];

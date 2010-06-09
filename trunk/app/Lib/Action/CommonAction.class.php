@@ -515,7 +515,7 @@ class CommonAction extends Action{
         //设置上传文件类型
         $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
         //设置附件上传目录
-        $tid=empty($tid)?$_REQUEST['typeid']:$tid;
+        $tid=empty($tid)?$_REQUEST['cat_id']:$tid;
         $path=$tid.'/'.date('Y-m').'/';
         $upload->savePath =  './Public/Uploads/Group/'.$path;
         mk_dir($upload->savePath);

@@ -153,7 +153,7 @@ class BizAction extends CommonAction{
 		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
-		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->findAll();
+		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->limit($limit)->findAll();
 		$this->assign('data',$data);
 		
 		$arctype=D("Arctype");
