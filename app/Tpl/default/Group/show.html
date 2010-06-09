@@ -1,241 +1,323 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{$page['title']}</title>
-        
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$page['title']}</title>
+<meta name="keywords" content="{$page['keywords']}" />
+<meta name="description" content="{$page['description']|clearh}" />
+<script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.simplemodal.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/group_content.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#simplemodal-overlay {background-color:#000; cursor:wait;}
+	#simplemodal-container {height:320px; width:600px; color:#111; background-color:#eee; border:4px solid #444; padding:12px;}
+	#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; margin-bottom:12px; padding:4px 6px 6px;}
+	#simplemodal-container a {color:#ddd;}
+	#simplemodal-container a.modalCloseImg {background:url(__PUBLIC__/default/images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+	#simplemodal-container #basic-modal-content {padding:8px;}
+</style>
+<script type="text/javascript">
+    var HOST = window.location.host;
+    var Per_host = "http://" + HOST;
+    var JS_PATH = "../Public/js/";
+    var IMG_PATH = "../Public/images/";
+    var URL = '__URL__';
+    var APP = '__APP__';
+    var PUBLIC = '../Public/';
+    var REQUEST_URI = '{$_SERVER.REQUEST_URI}';
+	$(document).ready(function () {
+		$('a.add_post').click(function (e) {
+			e.preventDefault();
+			var tourl=APP+'Public/ajax_is_login';
+			$.post(tourl,'',function(data){
+				if(data['status']==1){
+					$('#basic-modal-content').modal();
+				}else{
+					alert(data['info']);
+					$('#login').modal();
+				}
+			},'json');
+		});
+		var option={dataType:'json',success:processJson};
+		var option_login={dataType:'json',success:login};
+	    $('#add_post').ajaxForm(option);
+	    $('#post_login').ajaxForm(option_login);
+		
+	});
+	function processJson(data){
+		if(data['status']==1){
+			alert(data['info']);
+			
+			var text='<dd><span class="w410"><a href="__URL__/thread/id/'+data['data']['id']+'">'+$("#title").val()+'</a></span>';
+				text+='<span class="w100 c">'+data['data']['username']+'</span>';
+				text+='<span class="w100 c">'+data['data']['lasttime']+'</span>';
+				text+='<span class="w100 c">'+data['data']['dateline']+'</span></dd>';
+			$("#post_ok").prepend(text);
+			$("#post_ok").show();
+			$.modal.close();
+		}else{
+			alert(data['data']);
+			if(data['data']=="login"){
+				$.modal.close();
+				$('#login').modal();
+			}else{
+				alert(data['info']);
+			}
 
-        <script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
-        <meta name="keywords" content="{$page['keywords']}" />
-        <meta name="description" content="{$page['description']|clearh}" />
-		<script type="text/javascript">
-		var HOST		= window.location.host;
-		var Per_host	="http://"+HOST;
-		var JS_PATH		="../Public/js/";
-		var IMG_PATH	="../Public/images/";
-		var URL			='__URL__';
-		var APP			='__APP__';
-		var PUBLIC		='../Public/';
-		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
-		</script>
-		<script src="../Public/iic.js"></script>
-    </head>
-    <body>
-        <div id="top">
-            <div id="header-h">
-                <div class="header-left">
-                    <span>{$now} | 
-					<empty name="Think.SESSION.uid">
-						<a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a></span>
-					<else/>
-						<a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
-					</empty>
+		} 
+	}
+	function login(data){
+		if(data['status']==1){
+			alert(data['info']);
+			$.modal.close();
+			$('#basic-modal-content').modal();
+		}else{
+			alert(data['info']);
+
+		} 
+	}
+</script>
+<script src="../Public/iic.js"></script>
+</head>
+<body>
+<include file="Public:top"/>
+
+    <!--中间开始-->
+    <div id="main">
+        <div class="right">
+            <div class="next lssue">
+                <div class="next-bg">
+                    New members
                 </div>
-                <div class="colorz">
-                    <ul>
-                        <li>Pick a Theme:</li>
-                        <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
-                        <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
-                        <li><img src="__PUBLIC__/default/images/color3.gif" alt="color" /></li>
-                        <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
-                        <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
-                        <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="top-content">
-                <div class="top-logo">
-                    <h1><img src="__PUBLIC__/default/images/logo.png" alt="{&P_NAME}" /></h1>
-                    <div class="top-city">
-                        <h2><a href="__APP__/Public/index/cid/2" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/3" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/1" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
-                        <h2><a href="__APP__/Public/index/cid/4" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
-						<span style="float:right; margin-right:10px; font-size:10px;"><input type="checkbox" value="1" name="remember" id="remember" />Remember my choice</span>
+                <div class="chengyuan">
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/toux.gif" alt="sz" />
+                        </dt>
+                        <dd>
+                            Projection whiteboard
+                        </dd>
+                    </dl>
+                    <div class="clear">
                     </div>
-					
                 </div>
-                <div class="clear">
+                <div class="next-bg">
+                    Group frequented
                 </div>
-                <div class="top-nav">
-                    <div class="search">
-                        <img src="__PUBLIC__/default/images/search.gif" alt="search" />
-                    </div>
-                    <div class="nav">
-                        <ul>
-                            <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/">Home</a></li>
-                            <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/Classifieds/index">Classifieds</a></li>
-							<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/CityGuide/index">City Guide</a></li>
-                            <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/Biz/index">China Biz</a></li>
-                            <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index">Magazine</a></li>
-                            <li <eq name="Think.MODULE_NAME" value="Forum"> class="annv"</eq>><a href="/Forum">Forum</a></li>
-                            <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/Group/index">Group</a></li>
-                        </ul>
-                    </div>
+                <div class="next-n">
+                    <dl>
+                        <dt>
+                            <img src="images/pc/pic1.gif" alt="gth" />
+                        </dt>
+                        <dd>
+                            <span>Projection whiteboard</span>
+                            Tianyuan and Sushui are a
+                            long-....
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/pic1.gif" alt="gth" />
+                        </dt>
+                        <dd>
+                            <span>Projection whiteboard</span>
+                            Tianyuan and Sushui are a
+                            long-....
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/pic1.gif" alt="gth" />
+                        </dt>
+                        <dd>
+                            <span>Projection whiteboard</span>
+                            Tianyuan and Sushui are a
+                            long-....
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/pic1.gif" alt="gth" />
+                        </dt>
+                        <dd>
+                            <span>Projection whiteboard</span>
+                            Tianyuan and Sushui are a
+                            long-....
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <img src="images/pc/pic1.gif" alt="gth" />
+                        </dt>
+                        <dd>
+                            <span>Projection whiteboard</span>
+                            Tianyuan and Sushui are a
+                            long-....
+                        </dd>
+                    </dl>
                 </div>
-                <div class="bg-h">
+                <div class="guang">
+                    <img src="images/pc/pic6.gif" alt="dsc" />
                 </div>
-            </div>
-            <div class="clear">
             </div>
         </div>
-<link href="__PUBLIC__/default/css/group_index.css" rel="stylesheet"
-	type="text/css" />
-<link href="__PUBLIC__/default/css/group_list.css" rel="stylesheet"
-	type="text/css" />
-<link href="__PUBLIC__/default/css/group_content.css" rel="stylesheet"
-	type="text/css" />
-<!--中间开始-->
-<div id="main">
+        <div class="n-life">
+            <div class="classifieds content">
+                <div class="content-bg">
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a>
+					
+                </div>
+                <div class="content-n">
+                	<h1>{$info['groupname']}</h1>
+                    <div class="touxiang">
+                        <span>
+                        	<img src="{$info['pic']}" alt="{$info['groupname']}" />
+						</span>
+                        <ul>
+                            <li>
+                                群主: {$info['username']} 创建于 {$info['ctime']|toDate=m/d/Y}
+                            </li>
+                            <li>
+                               共有 用户 {$info['membernum']} ／ 主题 {$info['threadnum']} ／ 回复 {$info['postnum']}
+                            </li>
+                            <li>
+                                最后活跃时间: {$info['lasttime']|toDate}
+                            </li>
+                            <li>
+                                关键词: {$info['tags']}
+                            </li>
+							<li>
+                                简介: {$info['announcement']}
+                            </li>
+                        </ul>
+                        <div class="anjian">
+                            <ul>
+                                <li>
+                                    <a href="">Join group</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add_post">发起新话题</a>
+                                </li>
+                            </ul>
+                        </div>
+						
+                        <div class="GroupTopics">
+                            <span style="float:right; height:auto;"><a href="__URL__/topic/id/{$info['id']}">View All</a></span>Group Topics
+                        </div>
+						<dl class="h350">
+			            	<dt class="w410">Subject</dt>
+							<dt class="w100">username</dt>
+							<dt class="w100">Review time</dt>
+							<dt class="w100">Post time</dt>
+							<div id="post_ok" style="display:none;"></div>
 
-<div class="right">
-
-<div class="next lssue">
-
-<div class="next-bg">New members</div>
-<div class="chengyuan">
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-</dl>
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-</dl>
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-
-</dl>
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-</dl>
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-</dl>
-<dl>
-	<dt><img src="images/pc/toux.gif" alt="sz" /></dt>
-	<dd>Projection whiteboard</dd>
-</dl>
-<div class="clear"></div>
-
+<if condition="$thread">
+<volist name="thread" id="v">
+		                	<dd>
+								<span class="w410"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
+								<span class="w100 c">{$v['username']}</span>
+								<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
+								<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
+							</dd>
+		                    
+</volist>
+<else/>
+<dd>
+	<span class="w410">暂无话题！</span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+</dd>
+</if>
+		            </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
 </div>
-
-<div class="next-bg">Group frequented</div>
-<div class="next-n">
-<dl>
-	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
-	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
-	long-....</dd>
-</dl>
-
-<dl>
-	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
-	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
-	long-....</dd>
-</dl>
-
-<dl>
-	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
-	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
-	long-....</dd>
-</dl>
-
-<dl>
-	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
-	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
-	long-....</dd>
-
-</dl>
-
-<dl>
-	<dt><img src="images/pc/pic1.gif" alt="gth" /></dt>
-	<dd><span>Projection whiteboard</span> Tianyuan and Sushui are a
-	long-....</dd>
-</dl>
-
+<div id="basic-modal-content" style="display:none;">
+<form action="__URL__/add_post" method="post" id="add_post">
+	<input type="hidden" name="gid" value="{$info['id']}" />
+	<fieldset class="post">
+		<legend>ADD Thread</legend>
+		<p>
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" style="width:450px;" />
+		</p>
+		<p>
+			<label for="message">Content:</label>
+			<textarea name="message" id="message" cols="45" rows="8"></textarea>
+		</p>
+		<p style=" text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
+<span id="v_title"></span>
+<span id="v_message"></span>
 </div>
-
-<div class="guang"><img src="images/pc/pic6.gif" alt="dsc" /></div>
-</div>
-
-
-</div>
-
-<div class="n-life">
-<div class="classifieds content">
-
-<div class="content-bg">Home>classifieds content</div>
-<div class="content-n">
-<div class="touxiang"><span><img src="images/pc/pic7.gif"
-	alt="szx" /></span>
-<ul>
-	<li>Time: April 12, 2010 at 7:30pm to April 13, 2010 at 12am</li>
-	<li>Location: Orient Express (No.1 shamian north street
-	广州市沙面北街1号之一)</li>
-	<li>City/Town: Guangzhou</li>
-	<li>Phone:020-8358 6125</li>
-
-	<li>Event Type: single, party</li>
-	<li>Organized By:that's PRD</li>
-	<li>Latest Activity: 16 hours agoExport to Outlook or iCal
-	(.ics)Share</li>
-</ul>
-<div class="anjian">
-<ul>
-	<li>Join group</li>
-	<li>Recommend</li>
-</ul>
-</div>
-<div class="GroupTopics">Group Topics</div>
-
-<div class="huati">
-<ul>
-	<li>Topic</li>
-	<li>Author</li>
-	<li>Response</li>
-	<li>Last response</li>
-</ul>
-</div>
-<div class="xiaoxin">
-<ul>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-	<li><span>2008-10-12</span> I have a U.S. version of Zhejiang
-	people of the world famous comic. gssg 8</li>
-</ul>
-
-</div>
-</div>
-
-</div>
-
-</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="clear"></div>
+<div id="login" style="display:none;">
+<form action="__APP__/Public/check" method="post" id="post_login">
+	<input type="hidden" name="is_ajax" value="1" />
+	<fieldset class="post">
+		<legend>Login</legend>
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" name="username" id="username" style="width:200px;" />
+		</p>
+		<p>
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" style="width:200px;"/>
+		</p>
+		<p style=" text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
 </div>
 <include file="Public:foot" />
