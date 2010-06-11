@@ -775,7 +775,7 @@ class CpAction extends CommonAction{
 	 *@date 2010-6-7
 	 *@time 下午05:09:23
 	 */
-	function group_tread_join() {
+	function group_thread_join() {
 		//我参与过的话题
 		
 	}//end group_tread_join
@@ -785,9 +785,27 @@ class CpAction extends CommonAction{
 	 *@date 2010-6-7
 	 *@time 下午05:09:57
 	 */
-	function group_tread() {
+	function group_thread() {
 		//我发布的话题
+		$dao=D("Post");
+		$condition=array('uid'=>$this->user['uid'],'l'=>'1');
+		$count=$dao->where($condition)->count();
+		$page=new Page($count,10);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$list=array();
+    	$list=$dao->where($condition)->order("ctime DESC")->limit("$limit")->findAll();
+    	$this->assign('list',$list);
+    	
+    	$page=array();
+		$page['title']='My Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Group';
+		$page['description']='My Group';
+		$this->assign('page',$page);
 		
+		$this->assign('content','Cp:group_thread');
+		$this->display("Cp:layout");
 	}//end group_tread
 	
 	/**
@@ -819,7 +837,15 @@ class CpAction extends CommonAction{
 		$this->display("Cp:layout");
 	}//end group_my
 	
-
+	/**
+	 *退出群组
+	 *@date 2010-6-10
+	 *@time 下午04:51:56
+	 */
+	function out_group() {
+		//退出群组
+		$gid=$_REQUEST['gid'];
+	}//end function_name
 	
 	
 	

@@ -116,6 +116,8 @@ class GroupAction extends CommonAction{
 		
 		$thread=$post->where($condition)->order("dateline DESC")->limit($limit)->findAll();
 		$this->assign('thread',$thread);
+		
+		
 		$this->display();
 	}//end show
 	
@@ -203,6 +205,11 @@ class GroupAction extends CommonAction{
 		
 		$this->assign('info',$info);
 		
+		$ginfo=get_info($info['gid'],'');
+		$this->assign('ginfo',$ginfo);
+		$dh=$this->_get_pinfo($ginfo['cat_id']);
+		$this->assign('dh',$dh);
+		
 		$page=array();
 		$page['title']=empty($info['title'])?$info['title'].'  -  BeingfunChina':'Group Thread  -  BeingfunChina';
 		$page['keywords']=empty($info['tags'])?"Group,Thread":$info['tags'];
@@ -226,10 +233,47 @@ class GroupAction extends CommonAction{
 	 *@date 2010-6-4
 	 *@time 下午04:02:01
 	 */
-	function members() {
+	function members($gid,$limit="0,8") {
 		//群内成员
 		
 	}//end members
+	
+	/**
+	   *加入群组
+	   *@date 2010-6-9
+	   *@time 下午10:45:32
+	   */
+	function join_group() {
+		//加入群组
+		$gid=intval($_REQUEST['gid']);
+		if (empty($gid)){
+			$this->ajaxReturn('0','参数错误','0');
+		}
+		if(!$this->_is_login()){
+			$this->ajaxReturn('login',"请先登录!",'0');
+		}
+		$dao=D("Tagspace");
+		$condition=array();
+		$condition['tagid']=$gid;
+		$condition['uid']=$this->user['uid'];
+		$info=$dao->where($condition)->find();
+		if($info){
+			unset($info);
+			$this->ajaxReturn('0','您已经加入该群组','0');
+		}else{
+			$condition['grade']="3";
+			$condition['username']=$this->user['username'];
+			$condition['ctime']=time();
+			$id=$dao->add($condition);
+			if ($id) {
+				$this->ajaxReturn($id,"成功加入！",'1');
+			}else{
+				$this->ajaxReturn('0',"加入不成功!",'0');
+			}
+		}
+		
+		
+	}//end join_group
 	
 	/**
 	 *发表话题
@@ -321,6 +365,7 @@ class GroupAction extends CommonAction{
     	}
     	return $data;
     }//end _get_dh
+    
     
 }// END GroupAction
 

@@ -1,6 +1,15 @@
-<include file="Public:head"/>
-<link href="__PUBLIC__/default/css/group_index.css" rel="stylesheet" type="text/css" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$page['title']}</title>
+    <meta name="keywords" content="{$page['keywords']}" />
+    <meta name="description" content="{$page['description']|clearh}" />
+	<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/group_list.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="Public:top"/>
 <!--中间开始-->
 <div id="main">
     <div class="right">
@@ -48,7 +57,7 @@
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                <a href="">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+                <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a> > 
                 <if condition="$dh">
                     <if condition="$dh[_pid]">
                         <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
@@ -67,23 +76,16 @@
 					{$info['title']} 
                 </div>
                 <volist name="list" id="v">
-                    <div class="qunbu">
-                        <div class="riqi">
-                            [Founded in {$v['citme']|toDate=m/d/Y}]
-                        </div>
-                        <div class="qun-xinx">
-                            <dl>
-                                <dt>
-                                    <img src="images/pc/pic.gif" alt="dv" />
-                                </dt>
-                                <dd>
-                                    <span>posted a new listing titled</span>
-                                    Funny,u are from USA,but in English level part,it says beginner,u should be native,
-                                    lol,anyway,welcome !
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
+                	<div class="thread">
+						<h3><a href="__URL__/show/id/{$v['id']}">{$v['groupname']}</a></h3>
+						<div class="face">
+							<img src="{$v['pic']}" alt="{$v['groupname']}" />
+						</div>
+						<div class="message">
+							{$v['announcement']|String::msubstr=0,200}
+							<span class="time">[{$v['username']} / {$v['ctime']|toDate='m-d-Y H:m:s'}]</span>
+						</div>
+					</div>
                 </volist>
             </div>
             <div class="clear">

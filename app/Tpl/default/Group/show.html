@@ -28,12 +28,22 @@
     var PUBLIC = '../Public/';
     var REQUEST_URI = '{$_SERVER.REQUEST_URI}';
 	$(document).ready(function () {
+		var tourl=APP+'Public/ajax_is_login';
 		$('a.add_post').click(function (e) {
 			e.preventDefault();
-			var tourl=APP+'Public/ajax_is_login';
 			$.post(tourl,'',function(data){
 				if(data['status']==1){
 					$('#basic-modal-content').modal();
+				}else{
+					alert(data['info']);
+					$('#login').modal();
+				}
+			},'json');
+		});
+		$('a.join_group').click(function (e) {
+			$.post(tourl,'',function(data){
+				if(data['status']==1){
+					join_group();
 				}else{
 					alert(data['info']);
 					$('#login').modal();
@@ -72,14 +82,28 @@
 		if(data['status']==1){
 			alert(data['info']);
 			$.modal.close();
-			$('#basic-modal-content').modal();
+			//$('#basic-modal-content').modal();
 		}else{
 			alert(data['info']);
 
 		} 
 	}
+
+	function join_group(){
+		var tourl=URL+'/join_group';
+		var gid="{$info['id']}";
+		$.post(tourl,{gid:gid},function(data){
+			if(data['status']=='1'){
+				alert(data['info']);
+			}else if(data['data']=='login'){
+				alert(data['info']);
+				$('#login').modal();
+			}else{
+				alert(data['info']);
+			}
+		},'json');
+	}
 </script>
-<script src="../Public/iic.js"></script>
 </head>
 <body>
 <include file="Public:top"/>
@@ -100,93 +124,12 @@
                             Projection whiteboard
                         </dd>
                     </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
-                        </dt>
-                        <dd>
-                            Projection whiteboard
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
-                        </dt>
-                        <dd>
-                            Projection whiteboard
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
-                        </dt>
-                        <dd>
-                            Projection whiteboard
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
-                        </dt>
-                        <dd>
-                            Projection whiteboard
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
-                        </dt>
-                        <dd>
-                            Projection whiteboard
-                        </dd>
-                    </dl>
-                    <div class="clear">
-                    </div>
+                    <div class="clear"></div>
                 </div>
                 <div class="next-bg">
                     Group frequented
                 </div>
                 <div class="next-n">
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic1.gif" alt="gth" />
-                        </dt>
-                        <dd>
-                            <span>Projection whiteboard</span>
-                            Tianyuan and Sushui are a
-                            long-....
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic1.gif" alt="gth" />
-                        </dt>
-                        <dd>
-                            <span>Projection whiteboard</span>
-                            Tianyuan and Sushui are a
-                            long-....
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic1.gif" alt="gth" />
-                        </dt>
-                        <dd>
-                            <span>Projection whiteboard</span>
-                            Tianyuan and Sushui are a
-                            long-....
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic1.gif" alt="gth" />
-                        </dt>
-                        <dd>
-                            <span>Projection whiteboard</span>
-                            Tianyuan and Sushui are a
-                            long-....
-                        </dd>
-                    </dl>
                     <dl>
                         <dt>
                             <img src="images/pc/pic1.gif" alt="gth" />
@@ -204,10 +147,15 @@
             </div>
         </div>
         <div class="n-life">
-            <div class="classifieds content">
+            <div class="classifieds_content">
                 <div class="content-bg">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a>
-					
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+					<if condition="$dh">
+	                    <if condition="$dh[_pid]">
+	                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+	                    </if>
+	                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+	                </if>
                 </div>
                 <div class="content-n">
                 	<h1>{$info['groupname']}</h1>
@@ -235,7 +183,7 @@
                         <div class="anjian">
                             <ul>
                                 <li>
-                                    <a href="">Join group</a>
+                                    <a href="#group_{$info['id']}" id="group_{$info['id']}" class="join_group">Join group</a>
                                 </li>
                                 <li>
                                     <a href="#" class="add_post">发起新话题</a>
@@ -243,7 +191,7 @@
                             </ul>
                         </div>
 						
-                        <div class="GroupTopics">
+					<div class="grouptopics">
                             <span style="float:right; height:auto;"><a href="__URL__/topic/id/{$info['id']}">View All</a></span>Group Topics
                         </div>
 						<dl class="h350">
@@ -272,6 +220,36 @@
 </dd>
 </if>
 		            </dl>
+					
+					<div class="clear"></div>
+                        <div class="grouptopics">
+                            <span style="float:right; height:auto;"><a href="__URL__/collection/id/{$info['id']}">View All</a></span>Group Collection
+                        </div>
+						<dl class="h350">
+			            	<dt class="w410">CollectionName</dt>
+							<dt class="w100">Sharer</dt>
+							<dt class="w100">Channel</dt>
+							<dt class="w100">Share time</dt>
+<if condition="$collection">
+<volist name="thread" id="v">
+		                	<dd>
+								<span class="w410"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
+								<span class="w100 c">{$v['username']}</span>
+								<span class="w100 c">{$v['types']|get_type}</span>
+								<span class="w100 c">{$v['ctime']|toDate='Y-m-d'}</span>
+							</dd>
+		                    
+</volist>
+<else/>
+<dd>
+	<span class="w410">暂无小组收藏！</span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+</dd>
+</if>
+		            </dl>
+					
                     </div>
                 </div>
             </div>
