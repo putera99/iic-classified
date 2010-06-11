@@ -27,30 +27,40 @@
     var APP = '__APP__';
     var PUBLIC = '../Public/';
     var REQUEST_URI = '{$_SERVER.REQUEST_URI}';
-	$(document).ready(function () {
-		$('a.add_post').click(function (e) {
-			id=this.id.substr(6);
-			act=this.id.substr(0,5);
-			if(act=="quote"){
-				$("#requery").val(id);
-			}
-			e.preventDefault();
-			var tourl=APP+'Public/ajax_is_login';
-			$.post(tourl,'',function(data){
-				if(data['status']==1){
-					$('#basic-modal-content').modal();
-				}else{
-					alert(data['info']);
-					$('#login').modal();
+	function ready(){
+		$(document).ready(function(){
+			$('a.add_post').click(function(e){
+				id = this.id.substr(6);
+				act = this.id.substr(0, 5);
+				if (act == "quote") {
+					$("#requery").val(id);
 				}
-			},'json');
+				e.preventDefault();
+				var tourl = APP + 'Public/ajax_is_login';
+				$.post(tourl, '', function(data){
+					if (data['status'] == 1) {
+						$('#basic-modal-content').modal();
+					}
+					else {
+						alert(data['info']);
+						$('#login').modal();
+					}
+				}, 'json');
+			});
+			var option = {
+				dataType: 'json',
+				success: processJson
+			};
+			var option_login = {
+				dataType: 'json',
+				success: login
+			};
+			$('#add_post').ajaxForm(option);
+			$('#post_login').ajaxForm(option_login);
+			
 		});
-		var option={dataType:'json',success:processJson};
-		var option_login={dataType:'json',success:login};
-	    $('#add_post').ajaxForm(option);
-	    $('#post_login').ajaxForm(option_login);
-		
-	});
+	}
+	ready();
 	function processJson(data){
 		//var id=this.id.substr(6);
 		//var act=this.id.substr(0,5);
@@ -67,12 +77,12 @@
 				id="#new_post";
 				var text='<div class="reply" id="thread_'+data['data']['id']+'"><h2>'+$("#title").val()+'</h2>';
 					text+='<div class="face"><img src="" /><br>'+data['data']['username']+'</div>';
-					text+='<div class="message">'+$("#message").val()+'<span class="time"><a href="#" id="'+data['data']['id']+'" class="add_post">[ Reply ]</a>   <a href="#" id="quote_'+data['data']['id']+'" class="add_post">[ Quote ]</a>   <a href="#">[ Report ]</a>';
+					text+='<div class="message">'+$("#message").val()+'<span class="time"><a href="#" id="reply_'+data['data']['id']+'" class="add_post">[ Reply ]</a>   <a href="#" id="quote_'+data['data']['id']+'" class="add_post">[ Quote ]</a>   <a href="#">[ Report ]</a>';
 					text+='</span><span class="time"><a href="#thread_'+data['data']['l']+'">#'+data['data']['l']+'</a> '+data['data']['dateline']+'</span><div id="new_reply_'+data['data']['id']+'" style="display:none;"></div>';
 			}
-			alert(id);
 			$(id).prepend(text);
 			$(id).show();
+			ready();
 			$.modal.close();
 		}else{
 			alert(data['data']);
@@ -151,7 +161,14 @@
         <div class="n-life">
             <div class="classifieds content">
                 <div class="content-bg">
-                    Home>classifieds content
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+                <if condition="$dh">
+                    <if condition="$dh[_pid]">
+                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+                    </if>
+                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+                </if>
+                	<a href="__APP__/Group/show/id/{$ginfo['id']}">{$ginfo['groupname']}</a>
                 </div>
                 <div class="content-n">
                 	<div class="thread">

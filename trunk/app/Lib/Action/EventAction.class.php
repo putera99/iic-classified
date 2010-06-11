@@ -11,16 +11,9 @@
 	 +------------------------------------------------------------------------------
 	 */
 	class EventAction extends CommonAction{
-		protected $pcid='';//页面查询用的独立城市ID
 		function _initialize() {
-		if (intval($_GET['cid'])){
-			$this->pcid=intval($_GET['cid']);
-		}else{
-			$this->_set_cid();
-			$this->pcid=$this->cid;
-		}
-		parent::_initialize();
-	}//end _initialize()
+			parent::_initialize();
+		}//end _initialize()
 		
 		/**
 		 *活动频道首页
@@ -29,7 +22,7 @@
 		function index() {
 			//活动频道首页
 			
-			
+			$this->display();
 		}//end index
 		
 		/**
@@ -39,10 +32,19 @@
 		function ls() {
 			//活动列表页
 			
-			
+			$this->display();
 		}//end ls
 
-
+		/**
+		 *活动内容页
+		 *@date 2010-6-10
+		 *@time 下午03:28:48
+		 */
+		function show() {
+			//活动内容页
+			
+			$this->display();
+		}//end show
 		
 	}// END EventAction
 ?>
