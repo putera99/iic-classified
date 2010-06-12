@@ -1,6 +1,17 @@
 <?php
 
 /**
+ *格式化时间
+ *@date 2010-6-12
+ *@time 下午12:02:45
+ */
+function ftime($oldtime) {
+	//格式化时间
+	$t=explode('/',$oldtime);
+	return mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+}//end ftime
+
+/**
    *获取群组级别
    *@date 2010-6-7
    *@time 下午09:50:09
