@@ -310,10 +310,13 @@
             <div class="xuankuan-h">
                 <h5>select voices:</h5>
 					<select name="chau" id="chau" style="width:150px; overflow-x:hidden;">
-					<option>select chau</option>
+						<option>select chau</option>
+<volist name="chau" id="v">
+						<option value='{$v['ename']}'>{$v['name']}</option>
+</volist>
 					</select>
                     <select name="country" id="country" style="width:150px; overflow-x:hidden;">
-						<option>select country</option>
+						<option>country Or province</option>
 					</select>
                     <select name="radio" id="radio" style="width:150px; overflow-x:hidden;">
 						<option>select radio</option>
@@ -324,4 +327,40 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var radio_url=URL+'/radio'
+	$("#chau").change(
+		function (){
+				var chau_ename=this.value;
+				$.get(radio_url,{act:'country',chau:chau_ename},function(data){
+					$('#country').html(data);
+				});
+			}	
+	);
+	$("#country").change(
+		function (){
+				var chau_ename=$("#chau").val();
+				var country_ename=this.value;
+				$.get(radio_url,{act:'radio',country:country_ename,chau:chau_ename},function(data){
+					$('#radio').html(data);
+				});
+			}	
+		);
+	$('#Play').click(
+		function(){
+				var url=$("#radio").val();
+				if(url){
+					PopModalWindow(url,50,50);
+				}else{
+					alert('select radio');
+				}
+			}
+		);
+});
+function PopModalWindow(url,width,height){
+	var result=window.showModalDialog(url,"win","dialogWidth:"+width+"px;dialogHeight:"+height+"px;center:yes;status:no;scroll:no;dialogHide:no;resizable:no;help:no;edge:sunken;");
+	return result;
+}
+</script>
 <include file="Public:foot" />

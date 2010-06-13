@@ -10,8 +10,10 @@
 .anjian {width: 250px;height: 50px;margin:0 0 0 150px;}
 .anjian ul {list-style-type: none;font-weight: 500;color: #efefef;margin: 0px;padding: 0px;text-align: center;}
 .anjian li {width: 82px;height: 25px;background: url(../images/pc/button02.gif) no-repeat;float: left;padding: 0px;margin: 10px 10px 0 10px;}
-.GroupTopics {border-bottom: 1px solid #b9b9b9;font-weight: bold;color: #333333;margin: 0px 0px 5px 0px;padding: 0 0 7px 10px;}
-.GroupTopics h5 {font-size: 12px;color: #393939;margin: 0 0 0 5px;padding: 0px;}
+.anjian li a{color: #efefef;}
+.grouptopics {border-bottom: 1px solid #b9b9b9;font-weight: bold;color: #333333;margin: 0px 0px 5px 0px;padding: 0 0 7px 10px;}
+.grouptopics a{color: #333333;}
+.grouptopics h5 {font-size: 12px;color: #393939;margin: 0 0 0 5px;padding: 0px;}
 .huati {height: 30px;padding: 0px;border-bottom: 1px solid #dadada;margin: 10px 0 0 5px;}
 .huati ul {margin: 0px;padding: 0px;}
 .huati li {float: right;font-weight: bold;color: #711041;margin: 0px;padding:0 105px 0 0;}

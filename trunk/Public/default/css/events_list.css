@@ -1,0 +1,47 @@
+/* left开始*/
+#main {width:950px;padding: 0px;margin: 0px auto 0px auto;}
+.main-left{ width:188px;margin:0px; padding:0px;}
+.main-left ul{ margin:0px; padding:0px; list-style-type:none;}
+.main-left li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.main-left .bg-b{height:24px;font-size: 14px;font-weight: bold;color: #993366;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
+.main-left .di-yuan{ background:url(../images/bg_yuan.gif) no-repeat;}
+.welcome{margin:0px;padding:0px;border: 1px solid #cccccc;}
+.welcome-bg{ margin:0px; padding-left:20px; background-color:#6f6c6c;}
+.material{margin:0px;padding-top:10px;text-align: center;color: #99406c;padding-bottom: 5px;font-weight: normal;background-color: #f3f3f3;}
+.material a{margin: 0px;padding: 0px;font-size: 12px;font-weight: bold;color: #8b2557;line-height: 20px;}
+.xinxi{width: 170px;line-height:22px;margin: 0px auto;padding-bottom: 5px;border-bottom: 1px dashed #767676;}
+.xinxi p {margin: 0px;padding: 0px;color: #99406c;}
+.regsiter{margin:5px 0 0 0;padding: 0px;}
+.regsiter a{ margin:0px; padding-right:7px;}
+.information{color:#258faa;text-align: center;margin: 3px 0 0 0;padding: 0px;}
+.information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
+.memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
+.memcp-groups-bg{margin:0px;padding-left:28px;background-color:#6f6c6c;background-position: 5px;background: url(../images/pc/rentou.gif) no-repeat;}
+.neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
+.xuhao {width: 260px;height: 20px;background: url(../images/fany.gif) no-repeat;padding: 0px;margin: 20px auto 0px auto;}
+
+
+
+/* right开始*/
+.mian-right{width:750px;padding:0px;float:right;background-color: #f3f3f3;margin: 0px 0px 0px 10px;}
+.events_poular{height:23px;margin: 0px 0px 10px 0px;padding: 0px 0px 0px 10px;background: url(../images/pc/bg02.gif) repeat-x;border: 1px solid #bababa;font-weight: bold;color: #3a3a3a;}
+.events_neibiao{height: 117px;margin: 0px 5px 10px 5px;padding: 0px 0px 0px 10px;border-bottom: 1px dashed #434343;}
+.events_neibiao ul{ margin:0px; padding:0px; list-style-type:none;}
+.events_neibiao ul{ margin:0px; padding:0px;}
+.events_neibiao span {margin:0px;float: left;padding: 0px 7px 0px 0px;}
+.events_neibiao .biaop {font-weight: bold;color: #993366;}
+.xiahhua {margin: 0px;padding: 0px;text-decoration: underline;color: #0f7892;}
+	
+
+/* CSS链接样式*/
+.main-left a{line-height: 22px;font-weight: normal;text-decoration: none; color:#FFFFFF;}
+.main-left a:hover{color:#078ba8;text-decoration: underline;}
+.daohan a:link {font-size: 12px;text-decoration: none;color: #FFFFFF;}
+.daohan a:visited {text-decoration: none;}
+.daohan a:hover {color: #8e1345;text-decoration: underline;}
+.daohn a:active {color: #FFFFFF;text-decoration: none;}
+	
+	
+
+	
+	
