@@ -595,7 +595,7 @@ class CpAction extends CommonAction{
 		}
 	}//end add_fair
 	
-	
+///////////////////////////////////////文章 start///////////////////////////
 	/**
 	 *发布新闻
 	 *@date 2010-6-3
@@ -711,6 +711,8 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_art');
 		$this->display("Cp:layout");
 	}//end my_art
+///////////////////////////////////////文章 start///////////////////////////
+
 ////////////////////////////////群组——start///////////////////////////////////
 	/**
 	 *创建群组
@@ -846,8 +848,175 @@ class CpAction extends CommonAction{
 		//退出群组
 		$gid=$_REQUEST['gid'];
 	}//end function_name
+////////////////////////////////群组——end///////////////////////////////////
+	
+///////////////////////////////////////////活动部分开始//////////////////////////////////////////////
+	/**
+	 *我发起的活动
+	 *@date 2010-6-11
+	 *@time 下午03:59:04
+	 */
+	function event_my_post() {
+		//我发起的活动
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']='10';
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$classifieds=array();
+    	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+    	//dump($dao->getLastSql());
+		$this->assign('event',$classifieds);
+		
+		$page=array();
+		$page['title']='My Event -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Event';
+		$page['description']='My Event';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:event_my_post');
+		$this->display("Cp:layout");
+	}//end event_my_post
 	
 	
+	/**
+	 *系统推荐的活动
+	 *@date 2010-6-11
+	 *@time 下午03:59:42
+	 */
+	function event_cool() {
+		//系统推荐的活动
+		
+		$page=array();
+		$page['title']='My Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Group';
+		$page['description']='My Group';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:event_cool');
+		$this->display("Cp:layout");
+	}//end event_cool
 	
+	/**
+	 *我参与评论的活动
+	 *@date 2010-6-11
+	 *@time 下午04:00:26
+	 */
+	function event_my_join() {
+		//我参与评论的活动
+		
+		$page=array();
+		$page['title']='My Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Group';
+		$page['description']='My Group';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:event_my_join');
+		$this->display("Cp:layout");
+	}//end event_my_join
+	
+	/**
+	 *我表态的活动
+	 *@date 2010-6-11
+	 *@time 下午04:00:51
+	 */
+	function event_attention() {
+		//我表态的活动
+		
+		$page=array();
+		$page['title']='My Group -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Group';
+		$page['description']='My Group';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:event_attention');
+		$this->display("Cp:layout");
+	}//end function_name
+	
+	/**
+	 *发起活动
+	 *@date 2010-6-11
+	 *@time 下午04:14:12
+	 */
+	function event_create() {
+		//发起活动
+		$this->assign('citylist',$this->_get_city('city'));
+		$class_tree=$this->_get_tree(2050);
+		$this->assign('class_tree',$class_tree);
+		$page=array();
+		$page['title']='Create My Event -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Create My Event';
+		$page['description']='Create My Event';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:event_create');
+		$this->display("Cp:layout");
+	}//end event_create
+	
+	/**
+	 *增加活动信息
+	 *@date 2010-6-11
+	 *@time 下午04:54:49
+	 */
+	function event_add() {
+		//增加活动信息
+		$dao=D("Archives");
+		if(!empty($_FILES["picurl"]['name'])) {
+			$this->_upload();
+		}
+		$vo=$dao->create();
+		//dump($vo);
+		if($vo){
+			$area=$this->_get_city('fair');
+			$vo['description']=String::msubstr($vo['my_content'],0,200);
+			$vo['my_content']=nl2br($vo['my_content']);
+			$t=explode('/',$vo['showstart']);
+			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$t=explode('/',$vo['showend']);
+			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			
+			$t=explode('_',$vo['typeid']);
+			$vo['typeid']=$t['1'];
+			$vo['channel']=$t['0'];
+			$vo['maps']=$_POST['position'].','.$area[$_POST['city_id']]['_zone'][$_POST['zone_id']]['name'].','.$area[$_POST['city_id']]['ctitle'];
+			$kw=str_word_count($vo['my_content'],1);
+    			$keywords="";
+    			foreach ($kw as $vkw){
+    				$keywords.=$vkw.',';
+    			}
+    		$vo['keywords']=trim($keywords,',');
+			$aid=$dao->add($vo);
+
+			if ($aid) {
+				$data=array();
+				
+				$data['deadline']=ftime($_REQUEST['deadline']);
+				$data['starttime']=ftime($_REQUEST['starttime']);
+				$data['endtime']=ftime($_REQUEST['endtime']);
+				$data['detail']=nl2br(strip_tags($_REQUEST['detail']));
+				$data['aid']=$aid;
+				$data['public']='2';
+				$data['membernum']='0';
+				$id=$dao->Table("iic_event")->add($data);
+				if($id){
+					$this->success('发布成功!');
+				}else{
+					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$this->error("附属表写入失败!");
+				}
+			}else{
+				$this->error('主档案表更新失败!');
+			}
+			//dump($vo);
+		}else{
+			$this->error($dao->getError());
+		}
+	}//end event_add
+	
+///////////////////////////////////////////活动部分结束//////////////////////////////////////////////
 	
 }//end CpAction
