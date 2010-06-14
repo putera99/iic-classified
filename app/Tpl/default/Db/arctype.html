@@ -1,0 +1,69 @@
+<tagLib name="html" /> <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <load href='__PUBLIC__/Css/style.css' /><load href="__PUBLIC__/Js/Base.js" /><load href="__PUBLIC__/Js/prototype.js" /><load href="__PUBLIC__/Js/mootools.js" /><load href="__PUBLIC__/Js/Ajax/ThinkAjax.js" /><load href="__PUBLIC__/Js/Form/CheckForm.js" /><load href="__PUBLIC__/Js/common.js" /><load href="__PUBLIC__/Js/Util/ImageLoader.js" />
+        <script language="JavaScript">
+            <!--
+            //指定当前组模块URL地址 
+            var URL = '__URL__';
+            var APP = '__APP__';
+            var PUBLIC = '__PUBLIC__';
+            ThinkAjax.image = ['__PUBLIC__/Images/loading2.gif', '__PUBLIC__/Images/ok.gif', '__PUBLIC__/Images/update.gif']
+            ImageLoader.add("__PUBLIC__/Images/bgline.gif", "__PUBLIC__/Images/bgcolor.gif", "__PUBLIC__/Images/titlebg.gif");
+            ImageLoader.startLoad();
+            //-->
+        </script>
+        <title>Insert title here</title>
+    </head>
+    <body>
+        <form action="__URL__/del" method="post">
+            <!--html:list datasource="news" id="l" name="v" style="list" checkbox="true" show="id,reid,typename" /-->
+<table width="100%">
+	<tr>
+		<th width="100">S</th>
+		<th width="100">id</th>
+		<th width="100">reid</th>
+		<th>name</th>
+	</tr>
+<volist name="news" id="v">
+	<tr>
+		<td><input type="checkbox" name="old_reid[]" value="{$v['id']}"></td>
+		<td>{$v['id']}</td>
+		<td>{$v['reid']}</td>
+		<td>{$v['typename']}</td>
+	</tr>
+	<volist name="v['_son']" id="vs">
+		<tr>
+			<td><input type="checkbox" name="old_reid[]" value="{$vs['id']}"></td>
+			<td>{$vs['id']}</td>
+			<td>{$vs['reid']}</td>
+			<td>+-----{$vs['typename']}</td>
+		</tr>
+		<volist name="vs['_son']" id="vss">
+		<tr>
+			<td><input type="checkbox" name="old_reid[]" value="{$vss['id']}"></td>
+			<td>{$vss['id']}</td>
+			<td>{$vss['reid']}</td>
+			<td>+-----+-----{$vss['typename']}</td>
+		</tr>
+	</volist>
+	</volist>
+</volist>
+</table>
+			<p>
+			移动到<input type="text" name="new_id">  <input type="radio" name="arc" value="0">移动内容  
+			<input type="radio" name="arc" value="1">移动栏目  <br>
+			cid<select name="new_cid">
+				<option value="0">--Favorite City--</option>
+				<option value="1">Guangzhou</option>
+				<option value="2">Beijing</option>
+				<option value="3">Shanghai</option>
+				<option value="4">Shenzhen</option>						
+				</select>
+			<input type="submit">
+			</p>
+        </form>
+    </body>
+</html>
