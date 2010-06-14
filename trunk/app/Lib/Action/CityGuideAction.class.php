@@ -22,13 +22,13 @@ class CityGuideAction extends CommonAction{
 	  */
 	function _initialize() {
 		//预处理
-		/*if (intval($_GET['cid'])){
+		if (intval($_GET['cid'])){
 			
 			$this->pcid=intval($_GET['cid']);
 		}else{
 			$this->_set_cid();
 			$this->pcid=$this->cid;
-		}*/
+		}
 		parent::_initialize();
 	}//end _initialize()
 	
