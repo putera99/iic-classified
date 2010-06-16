@@ -30,10 +30,9 @@
 			$condition['showend']=array('gt',$time);
 			$list=$dao->where($condition)->order("showstart DESC")->limit("0,11")->findAll();
 			$this->assign('list',$list);
-			
 			$condition['showend']=array('lt',$time);
 			$old=$dao->where($condition)->order("showstart DESC")->limit("0,8")->findAll();
-			$this->assign('list',$old);
+			$this->assign('old',$old);
 			
 			$this->assign('range_time',$this->range_time());
 			$this->assign('class_tree',$this->_get_tree(2050));
@@ -46,8 +45,43 @@
 		 */
 		function ls() {
 			//活动列表页
+			if ($_REQUEST['id']) {
+				$_SESSION['typeid']=intval($_REQUEST['id']);
+			}
+			if ($_REQUEST['st']) {
+				$_SESSION['st']=intval($_REQUEST['st']);
+			}
+			if ($_REQUEST['et']) {
+				$_SESSION['et']=intval($_REQUEST['et']);
+			}
+			
 			$this->assign('range_time',$this->range_time());
 			$this->assign('class_tree',$this->_get_tree(2050));
+			
+			$time=time();
+			$dao=D("Archives");
+			$condition=array();
+			$condition['channel']='10';
+			$condition['ismake']='1';
+			if($_REQUEST['st'] && $_REQUEST['et']){
+				$condition['_string'] = "(`showstart`>='{$_SESSION['st']}' AND `showstart`<='{$_SESSION['et']}') OR (`showend`>='{$_SESSION['st']}' AND `showend`>='{$_SESSION['et']}')";
+			}
+			if($_SESSION['typeid']){
+				$condition['typeid']=$_SESSION['typeid'];
+			}
+			
+			$dao=D("Archives");
+			$count=$dao->where($condition)->order("showstart DESC")->count();
+			import("ORG.Util.Page");
+			$page=new Page($count,10);
+			$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+			$this->assign('showpage',$page->show());
+			$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+			$this->assign('showpage_bot',$page->show_img());
+			$limit=$page->firstRow.','.$page->listRows;
+			$data=$dao->where($condition)->order("showstart DESC")->limit($limit)->findAll();
+			$this->assign('data',$data);
+			
 			$this->display();
 		}//end ls
 

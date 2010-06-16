@@ -1,10 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>缤纷中国</title>
-    <link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
-    <link href="__PUBLIC__/default/css/events_list.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$page['title']}</title>
+<meta name="keywords" content="{$page['keywords']}" />
+<meta name="description" content="{$page['description']|clearh}" />
+<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/events_list.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <include file="Public:top"/>
@@ -13,17 +15,18 @@
         <div class="events_poular">
             <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> > 
         </div>
+<volist name="data" id="v">
         <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
+            <span><img src="{$v['picurl']}" alt="{$v['title']}" /></span>
             <ul>
                 <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
+                    {$v['title']}
                 </li>
                 <li>
-                    Time: 6 January 19-23:00 on Tuesday
+                    Time: {$v['showstart']|toDate=''} from 6:30pm to 10pm
                 </li>
                 <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
+                    Location: {$v['maps']}
                 </li>
                 <li>
                     Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
@@ -31,132 +34,8 @@
                 <span class="xiahhua">410 1383 people interested in</span>
             </ul>
         </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
-        <div class="events_neibiao">
-            <span><img src="images/pc/pic02.gif" alt="pic" /></span>
-            <ul>
-                <li class="biaop">
-                    Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
-                </li>
-                <li>
-                    Time: 6 January 19-23:00 on Tuesday
-                </li>
-                <li>
-                    Location: guangzhou yuexiu district, guangzhou avenue,
-                </li>
-                <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
-                </li>
-                <span class="xiahhua">410 1383 people interested in</span>
-            </ul>
-        </div>
+</volist>
+
         <div class="xuhao">
         </div>
     </div>
@@ -176,33 +55,18 @@
             <li class="di-yuan"></li>
         </ul>
         <ul>
-            <li class="bg-A">
-                City Guide
+            <li class="bg-h">
+                活动分类
             </li>
             <li>
-                <a href="#">Arts&Culture </a>
-                <a href="#"></a>
+                <a href="__URL__/ls/type/all">全部分类</a>
             </li>
+<volist name="class_tree" id="v">
             <li>
-                <a href="#">Eduction </a>
+                <a href="__URL__/ls/id/{$v['id']}" title="{$v['typename']}">{$v['typename']}</a>
             </li>
-            <li>
-                <a href="#">Helth </a>
-            </li>
-            <li>
-                <a href="#">Hotel</a>
-            </li>
-            <li>
-                <a href="#">Leisure </a>
-            </li>
-            <li>
-                <a href="#">Restaurant</a>
-            </li>
-            <li>
-                <a href="#">Shoping </a>
-            </li>
-            <li class="di-yuan">
-            </li>
+</volist>
+            <li class="di-yuan"></li>
         </ul>
     </div>
 </div>

@@ -972,8 +972,8 @@ class CpAction extends CommonAction{
 		//dump($vo);
 		if($vo){
 			$area=$this->_get_city('fair');
-			$vo['description']=String::msubstr($vo['my_content'],0,200);
-			$vo['my_content']=nl2br($vo['my_content']);
+			$vo['description']=String::msubstr(strip_tags($_POST['detail']),0,200);
+			$vo['my_content']=nl2br($vo['description']);
 			$t=explode('/',$vo['showstart']);
 			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
 			$t=explode('/',$vo['showend']);

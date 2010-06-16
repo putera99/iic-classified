@@ -94,7 +94,7 @@ class PublicAction extends CommonAction{
 				}else{
 					$this->error("ERROR:1!");
 				}
-		}
+		}*/
 
 	}// END check
 	
