@@ -71,86 +71,32 @@
             <div class="events_popula">
                 <img src="images/pc/a popular.gif" alt="dscv" />
             </div>
-            <div class="events_neirong">
-                <span><img src="images/pc/pic02.gif" alt="pic01" /></span>
-                <ul>
-                    <li class="zhuti">
-                        Shao scallop [play] singing AnZhouZhan @ tour singles(CD) [tickets accompanyin m g
-                    </li>
-                    <li>
-                        Time:6 January 19-23:00 on Tuesday
-                    </li>
-                    <li>
-                        Location: guangzhou yuexiu district, guangzhou avenue,
-                    </li>
-                    <li>
-                        Sponsors: middle 191 (metro line 5 five-goat estate stood A exp ort),shao xiaomao musicians
-                    </li>
-                    <span class="diz">410 1383 people interested in</span>
-                </ul>
+<if condition="$list">
+<volist name="list" id="v">
+	<if condition="$i eq 1">
+			<div class="events_neirong">
+                <span><img src="{$v['picurl']}" alt="{$v['title']}" /></span>
+                <div class="cool">
+                	<h2 class="zhuti">{$v['title']}</h2>
+                	<p>{$v['my_content']}</p>
+                	<span class="diz">410 1383 people interested in</span>
+                </div>
             </div>
             <div class="events_jingcai">
-                <dl>
+	<else/>
+				<dl>
                     <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
+                        <img src="{$v['picurl']}" alt="{$v['title']}" />
                     </dt>
                     <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
+                        <span>{$v['title']}</span>
+                        <p>{$v['my_content']}</p>
                     </dd>
                 </dl>
-                <dl>
-                    <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
-                    </dt>
-                    <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
-                    </dt>
-                    <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
-                    </dt>
-                    <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
-                    </dt>
-                    <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <img src="images/pc/pic03.gif" alt="pic02" />
-                    </dt>
-                    <dd>
-                        <span>Milano Daily Specials @Milano Italian Restaurant</span>
-                        June 1, 2010 from 6pm to 11pm – 1 Floor, Anhui building,Che Gong
-                        Miao, Futian
-                    </dd>
-                </dl>
+	</if>
+</volist>
             </div>
+</if>
             <div class="events_highlights">
                 <span>more</span>精彩回顾
             </div>
@@ -189,7 +135,7 @@
                 活动分类
             </li>
             <li>
-                <a href="#">全部分类</a>
+                <a href="__URL__/ls/type/all">全部分类</a>
             </li>
 <volist name="class_tree" id="v">
             <li>
