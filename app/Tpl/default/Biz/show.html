@@ -45,9 +45,9 @@ function load() {
     }
 </script>
 </if>
-    </head>
-    <body onload="load()" onunload="GUnload()">
-
+</head>
+<body onload="load()" onunload="GUnload()">
+<include file="Public:top"/>
 <div id="main">
     <div class="mian-right">
         <div class="guagngao">
@@ -55,7 +55,8 @@ function load() {
         </div>
         <div class="biz-content">
             <div class="biz-page">
-                Home > china biz column page
+                <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China biz</a> > 
+				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}">{$dh['typename']}</a></if>
             </div>
             <div class="biz-city">
 				<div class="hot">
@@ -78,7 +79,7 @@ function load() {
                 </div>
                 <div class="biz-title">
                     <h1>{$info['title']}</h1>
-                    <span>Time 1:　</span>{$info['showstart']|toDate='M d, Y'} - {$info['showend']|toDate='M d, Y'}({$info['bycity']|get_city='ctitle'})
+                    <span>Time:　</span>{$info['showstart']|toDate='M d, Y'} - {$info['showend']|toDate='M d, Y'}({$info['bycity']|get_city='ctitle'})
                 </div>
                 <table width="99%" border="1" align="center" cellpadding="0" cellspacing="0">
                     <tr align="center">

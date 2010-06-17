@@ -25,40 +25,35 @@
             <div class="conter-group">
                 <div class="fair-h">
                     <ul>
-                        <li>
-                            <a href="#">Biz</a>
+                        <li id="biz" class="bizshow">
+                            <a href="__APP__/Arc/ls/id/2003">Biz</a>
                         </li>
-                        <li>
-                            <a href="#">Fair</a>
+                        <li id="fair" class="bizshow">
+                            <a href="__APP__/Biz/index">Fair</a>
                         </li>
                     </ul>
                 </div>
-                <div class="hot-h">
-                    <h5>Looking for an American ...</h5>
-                    <p>
-                        <img src="__PUBLIC__/default/images/pic7.gif" alt="gb" />Tianyuan and Sushui 
-                        are a long-married 
-                        couple working ...
-                    </p>
+                <div class="hot-h" id="show_biz" style="display:none;">
                     <ul>
+<volist name="biz_news" id="v">
                         <li>
-                            • VP - global logistics
+                            <h5>• <a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']|String::msubstr=0,35}</a></h5>
                         </li>
+</volist>
+                    </ul>
+                </div>
+				<div class="hot-h" id="show_fair">
+                    <ul>
+<volist name="fair" id="v">
                         <li>
-                            • Seeking waitress for Futian bar
+                            <h5>• <a href="__APP__/Biz/show/aid/{$v['id']}">{$v['title']|String::msubstr=0,35}...</a></h5>
+		                    <p id="f_{$v['id']}" class="fair_p" style="display:none;">
+		                        <a href="__APP__/Biz/show/aid/{$v['id']}"><img src="{$v['picurl']}" width="68" alt="{$v['title']}" /></a>
+								{$v['my_content']}...
+                    		</p>
                         </li>
-                        <li>
-                            • Account Manager (Futian District) 
-                        </li>
-                        <li>
-                            • MANAGER OF ASIAN OPERATIONS
-                        </li>
-                        <li>
-                            • VP - global logistics
-                        </li>
-                        <li>
-                            • Seeking waitress for Futian bar
-                        </li>
+</volist>
+
                     </ul>
                 </div>
             </div>
@@ -176,93 +171,37 @@
                     <span><a href="__APP__/Event/index"> >>more </a></span><a href="__APP__/Event/index" title="Event">Event</a>
                 </div>
                 <div class="Backdrop-h">
+<volist name="event" id="v">
                     <div class="magazine-h">
                         <dl>
                             <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
+                                <a href="__APP__/Event/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a>
                             </dt>
                             <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
+                                <span><a href="__APP__/Event/show/aid/{$v['id']}">{$v['title']}</a></span>
+								{$v['my_content']|String::msubstr=0,90}...<br>
+								<a href="#">{$v['showstart']|toDate='M - d - Y'}</a>
                             </dd>
                         </dl>
                     </div>
-                    <div class="magazine-h">
-                        <dl>
-                            <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
-                            </dt>
-                            <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="magazine-h">
-                        <dl>
-                            <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
-                            </dt>
-                            <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="magazine-h">
-                        <dl>
-                            <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
-                            </dt>
-                            <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="magazine-h">
-                        <dl>
-                            <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
-                            </dt>
-                            <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="magazine-h">
-                        <dl>
-                            <dt>
-                                <img src="__PUBLIC__/default/images/pic-h04.gif" alt="dcv" />
-                            </dt>
-                            <dd>
-                                <span>Magician wanted in Beijing ...</span>Tianyuan and Sushui 
-                                are a long-married <a href="#">Friday, March 26</a>
-                            </dd>
-                        </dl>
-                    </div>
+</volist>
                 </div>
             </div>
             <div class="clear">
             </div>
             <div class="product-h">
                 <div class="event-h">
-                    <span>>>more </span>Do You Know?
+                    <span><a href="__APP__/Arc/ls/id/2004">>>more</a> </span>Do You Know?
                 </div>
                 <div class="backdrop-h">
                     <dl>
                         <dt>
-                            <img src="__PUBLIC__/default/images/pic-h.gif" alt=" picbg" />
+                            <a href="__APP__/Arc/show/aid/{$do['id']}"><img src="{$do['picurl']}" alt="{$do['title']}" />
                         </dt>
                         <dd>
-                            <span>Kung-fu and Dance Drama: Shaolin in Wind</span>
-                            Kung-fu and Dance Drama Shaolin in Wind tells 
-                            a legend of a Shaolin monk, a life-and-death  
-                            struggle between justice and villainy, 
-                            and a love tragedy with restrained Eastern  
-                            beauty. Tianyuan and Sushui are a long-married 
-                            couple working in a theatrical troupe.....
+                            <span><a href="__APP__/Arc/show/aid/{$do['id']}">{$do['title']}</a></span>
+							<br>
+                            {$do['my_content']}
                         </dd>
                     </dl>
                 </div>
@@ -327,6 +266,13 @@
         </div>
     </div>
 </div>
+<div class="clear"></div>
+<div align="center" style="margin-top:20px;">
+<div style="width: 435px; height: 90px; background-repeat: no-repeat; background-color: rgb(134, 136, 139);">
+<div style="height: 75px;" id="NetweatherContainer"><object width="435" height="74" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" name="netWxV2" id="netWxV2"><param value="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|CH006|SHENZHEN|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" name="movie"> <param value="transparent" name="wmode"> <param value="always" name="AllowScriptAccess"> <embed width="435" height="74" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent" name="netWxV2" src="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|CH006|GUANGZHOU|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" id="netWxV2"></object></div>
+<div style="text-align: center; font-family: arial,helvetica,verdana,sans-serif; font-size: 10px; line-height: 15px; color: rgb(255, 255, 255);"><a href="http://www.accuweather.com/world-index-forecast.asp?partner=netweather&amp;locCode=ASI|CN|CH006|GUANGZHOU|&amp;metric=1" style="color: rgb(255, 255, 255);">Forecast</a> | <a href="http://www.accuweather.com/maps-satellite.asp" style="color: rgb(255, 255, 255);">Maps</a> | <a href="http://www.accuweather.com/index-radar.asp?partner=accuweather&amp;traveler=0&amp;zipcode=ASI|CN|CH006|GUANGZHOU|" style="color: rgb(255, 255, 255);">Radar</a></div>
+</div>
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	var radio_url=URL+'/radio'
@@ -357,6 +303,13 @@ $(document).ready(function(){
 				}
 			}
 		);
+		
+	$(".bizshow").mouseover(function (){
+		var id=this.id;
+		id="#show_"+id;
+		$(".hot-h").hide();
+		$(id).show();
+	});
 });
 function PopModalWindow(url,width,height){
 	var result=window.showModalDialog(url,"win","dialogWidth:"+width+"px;dialogHeight:"+height+"px;center:yes;status:no;scroll:no;dialogHide:no;resizable:no;help:no;edge:sunken;");

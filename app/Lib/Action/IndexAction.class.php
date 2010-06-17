@@ -23,6 +23,10 @@ class IndexAction extends CommonAction{
     	$this->assign('pick',$this->_new_list(2001,'h','0,1'));
     	$this->assign('pick2',$this->_new_list(2001,'p','0,2'));
     	$this->assign('pick8',$this->_new_list(2001,'','2,8'));
+    	$this->assign('do',$this->_new_list(2004,'','0,1'));
+    	$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
+    	
+    	
     	
     	$this->assign('city_type',$this->_get_tree(1000));
     	$this->assign('classifieds_type',$this->_get_tree(1));
@@ -34,8 +38,14 @@ class IndexAction extends CommonAction{
     		$classifieds[$v['id']]['id']=$v['id'];
     		$classifieds[$v['id']]['_sub']=$this->_get_carc($v['id'],'0,10',$this->pcid);
     	}
-    	//dump($classifieds);
     	$this->assign('classifieds',$classifieds);
+    	
+    	$event=array();
+    	$event=$this->new_event();
+    	$this->assign('event',$event);
+    	$fair=array();
+    	$fair=$this->new_fair();
+    	$this->assign('fair',$fair);
     	
     	$page=array();
 		$page['title']='BeingfunChina';
@@ -77,6 +87,39 @@ class IndexAction extends CommonAction{
 		
     	$this->display();
     }
+    
+    /**
+     *获取最新活动
+     *@date 2010-6-17
+     *@time 上午09:51:38
+     */
+    protected function new_event() {
+    	//获取最新活动
+    	$time=time();
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']='10';
+		$condition['ismake']='1';
+		$condition['showstart']=array('lt',$time);
+		$condition['showend']=array('gt',$time);
+		$list=$dao->where($condition)->order("showstart DESC")->limit("0,6")->findAll();
+		return $list;
+    }//end new_event
+    
+    /**
+     *获取最新展会
+     *@date 2010-6-17
+     *@time 上午09:51:38
+     */
+    protected function new_fair() {
+    	//获取最新展会
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']='11';
+		$condition['ismake']='1';
+		$list=$dao->where($condition)->order("id DESC")->limit("0,10")->findAll();
+		return $list;
+    }//end new_fair
     
     /**
      *radio

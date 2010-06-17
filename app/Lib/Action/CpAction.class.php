@@ -520,6 +520,60 @@ class CpAction extends CommonAction{
 		$this->display("Cp:layout");
 	}//end my_stuff
 	
+////////////////////biz fair start/////////////////////
+	
+	/**
+	 *我发布的展会管理
+	 *@date 2010-6-17
+	 *@time 下午05:33:39
+	 */
+	function my_fair_post() {
+		//我发布的展会管理
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']="11";
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,20);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$fair=array();
+    	$fair=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+		$this->assign('fair',$fair);
+		
+		$page=array();
+		$page['title']='My Fair -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Fair';
+		$page['description']='My Fair';
+		$this->assign('page',$page);
+		$this->assign('content','Cp:my_fair_post');
+		$this->display("Cp:layout");
+	}//end my_fair_post
+	
+	/**
+	 *编辑展会
+	 *@date 2010-6-17
+	 *@time 下午05:45:03
+	 */
+	function my_edit_fair() {
+		//编辑展会
+		$info=$_REQUEST['info'];
+		$class_tree=$this->_get_tree(1232);
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('fair'));
+		$this->assign('ltd',$this->_get_ltd());
+		
+		$page=array();
+		$page['title']='Post Fair -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Fair';
+		$page['description']='Post Fair';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_post_fair');
+		$this->display("Cp:layout");
+	}//end my_edit_fair
+	
 	/**
 	 *发布一个展会信息
 	 *@date 2010-5-29
@@ -594,6 +648,8 @@ class CpAction extends CommonAction{
 			$this->error($dao->getError());
 		}
 	}//end add_fair
+	
+////////////////////biz fair end/////////////////////
 	
 ///////////////////////////////////////文章 start///////////////////////////
 	/**
