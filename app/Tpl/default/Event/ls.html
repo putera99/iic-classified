@@ -14,30 +14,29 @@
     <div class="mian-right">
         <div class="events_poular">
             <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> > 
+			<if condition="$dh"><a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > </if>
         </div>
 <volist name="data" id="v">
         <div class="events_neibiao">
-            <span><img src="{$v['picurl']}" alt="{$v['title']}" /></span>
+            <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a></span>
             <ul>
                 <li class="biaop">
-                    {$v['title']}
+                    <a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a>
                 </li>
                 <li>
-                    Time: {$v['showstart']|toDate=''} from 6:30pm to 10pm
+                    Time: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}
                 </li>
                 <li>
                     Location: {$v['maps']}
                 </li>
                 <li>
-                    Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
+                    {$v['my_content']|strip_tags|String::msubstr=0,180}...
                 </li>
-                <span class="xiahhua">410 1383 people interested in</span>
             </ul>
         </div>
 </volist>
 
-        <div class="xuhao">
-        </div>
+		<div class="fanye">{$showpage_bot}</div>
     </div>
     <div class="main-left">
 		<ul>

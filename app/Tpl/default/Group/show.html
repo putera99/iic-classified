@@ -190,12 +190,12 @@
                                 </li>
                             </ul>
                         </div>
-						
+						<div class="clear"></div>
 					<div class="grouptopics">
                             <span style="float:right; height:auto;"><a href="__URL__/topic/id/{$info['id']}">View All</a></span>Group Topics
                         </div>
 						<dl class="h350">
-			            	<dt class="w410">Subject</dt>
+			            	<dt class="w381">Subject</dt>
 							<dt class="w100">username</dt>
 							<dt class="w100">Review time</dt>
 							<dt class="w100">Post time</dt>
@@ -204,7 +204,7 @@
 <if condition="$thread">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w410"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
+								<span class="w381"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
 								<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
@@ -213,7 +213,7 @@
 </volist>
 <else/>
 <dd>
-	<span class="w410">暂无话题！</span>
+	<span class="w381">暂无话题！</span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
@@ -226,14 +226,14 @@
                             <span style="float:right; height:auto;"><a href="__URL__/collection/id/{$info['id']}">View All</a></span>Group Collection
                         </div>
 						<dl class="h350">
-			            	<dt class="w410">CollectionName</dt>
+			            	<dt class="w381">CollectionName</dt>
 							<dt class="w100">Sharer</dt>
 							<dt class="w100">Channel</dt>
 							<dt class="w100">Share time</dt>
 <if condition="$collection">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w410"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
+								<span class="w381"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['types']|get_type}</span>
 								<span class="w100 c">{$v['ctime']|toDate='Y-m-d'}</span>
