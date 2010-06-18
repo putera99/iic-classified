@@ -25,13 +25,6 @@
     padding: 0px;
 }
 
-.mian-right {
-    width: 749px;
-    padding: 0px;
-    float: right;
-    margin-left:10px;
-}
-
 .channel-left {
     width: 188px;
     margin: 0px;
@@ -178,15 +171,6 @@
     line-height: 14px;
 }
 
-.mian-center-n {
-    width: 504px;
-    padding: 0px;
-    background-color: #f3f3f3;
-    margin: 0px;
-    float: left;
-    color: #FFFFFF;
-}
-
 .title-h {
     display: block;
     font-size: 12px;
@@ -200,14 +184,6 @@
     padding: 0px;
 }
 
-.conter-right {
-    width: 225px;
-    padding: 0px;
-    float: right;
-    background-color: #eeeeee;
-    border: 1px solid #ccc;
-    margin: 0px;
-}
 
 .conter-group {
     margin: 0px;
@@ -227,13 +203,6 @@
 .xinwen-h li {
     margin: 0px;
     padding: 0px;
-}
-
-.exhibition {
-    margin: 0px;
-    background-color: #6f6c6c;
-    border: 1px solid #cacaca;
-    padding: 0 0 0 10px;
 }
 
 .zhanhui {

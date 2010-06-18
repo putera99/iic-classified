@@ -7,7 +7,7 @@
 .touxiang ul{list-style-type: none;margin: 0 0 0 10px;padding: 0px;line-height: 22px;}
 .touxiang span {width: 144px;margin: 0px 10px 0px 0px;padding: 0px;float: left;height:151px;}
 .touxiang li {margin: 0px;padding: 0px;}
-.anjian {width: 250px;height: 50px;margin:0 0 0 150px;}
+.anjian {width: 250px;height: 50px;margin:0 30px; float:right;}
 .anjian ul {list-style-type: none;font-weight: 500;color: #efefef;margin: 0px;padding: 0px;text-align: center;}
 .anjian li {width: 82px;height: 25px;background: url(../images/pc/button02.gif) no-repeat;float: left;padding: 0px;margin: 10px 10px 0 10px;}
 .anjian li a{color: #efefef;}
@@ -23,7 +23,7 @@
 .xiaoxin span {width: 100px;float: right;margin: 0px;padding: 0px;}
 
 
-.touxiang .h350{ height:350px;}
+.touxiang .h350{height:auto; min-height:300px; overflow:hidden;}
 .touxiang dl{list-style:none;}
 .touxiang dl dt{float:left;color: #993366;font-size: 12px;font-weight: bold; display:block; text-align:center; height:25px; line-height:25px; border-bottom:1px #ccc solid;}
 .touxiang dl dd{ border-bottom:1px #ccc dotted;}
@@ -33,6 +33,7 @@
 .touxiang dl .r{ text-align:right;}
 
 .touxiang dl .w410{width:410px;}
+.touxiang dl .w381{width:381px;}
 .touxiang dl .w320{width:320px;}
 .touxiang dl .w220{width:220px;}
 .touxiang dl .w100{width:100px;}
@@ -42,7 +43,7 @@
 
 /* CSS 右边 开始 */
 .next_lssue { margin:0px; padding: 0px;}
-.n-life{width:735px;padding:0px;margin: 0px;float: left;}
+.n-life{width:706px;padding:0px;margin: 0px;float: left;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .next-bg{height:22px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0;}
 .next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;height: 285px;}
@@ -50,7 +51,7 @@
 .chengyuan dl {margin: 0px;padding: 5px 0px 5px 20px;line-height: 14px;float: left;}
 .chengyuan dt {margin: 0px;padding: 0px;}
 .chengyuan dd {width: 60px;text-align: center;margin: 5px 0 0 0;}
-.right{padding:0px;float:right;margin: 0px;width: 200px;}
+.right{padding:0;float:right;margin:0;width:234px;}
 .class-xinxi h6 {font-size: 12px;color: #79214d;margin: 0px;padding: 5px 0 0 0; }
 .class-xinxi a {color: #353535;text-decoration: none;padding-left: 10px;}
 .next-n dl {clear: both;margin: 0px; padding: 10px 0 0 5px;line-height: 14px;}
