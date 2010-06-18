@@ -1,7 +1,7 @@
 /* CSS 中间 开始 */
-.n-life{width:735px;padding:0px;margin: 0px;float: left;}
 #main {width:950px;	padding: 0px;margin: 0px auto;}
-.main-left{ width:188px;margin:0px; padding:0px;}
+.n-life{width:706px;padding:0px;margin: 0px;float: left;}
+.main-left{width:188px;margin:0px; padding:0px;}
 .content-bg {font-weight: bold;color: #212121;font-family: Verdana, Arial, Helvetica, sans-serif;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-n {border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding: 5px 0 0 0;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
@@ -22,8 +22,8 @@
 
 
 /* CSS 右边 开始 */
-.right{padding:0px;float:right;margin: 0px;width: 200px;}
-.next lssue { margin:0px; padding: 0px;}
+.right{padding:0px;float:right;margin: 0px;width:234px;}
+.next_lssue { margin:0px; padding: 0px;}
 .next-bg{height:22px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0;}
 .next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0;}
 .next-n ul{padding:0px; padding-bottom:5px; list-style-type:none;margin: 0px 5px 0px 3px;}
@@ -35,8 +35,8 @@
 .thread,.reply,.reply .toreply{height:auto; min-height:50px;border-bottom:#aaa dotted 1px; display:block;overflow:hidden;}
 .reply{margin:0 10px 10px 73px;}
 .reply,.reply .toreply{border:#ccc dotted 1px; margin-bottom:10px;}
-.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:630px;}
-.thread .face,.reply .face{text-align:center; width:63px; overflow:hidden; float:left;}
+.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:600px;}
+.thread .face,.reply .face{text-align:center;vertical-align: middle;max-width:63px;max-height:63px;_height:expression(this.width > 63 ? this.height*(63/this.width) : auto);_width:expression(this.width > 63 ? 63px : auto);overflow:hidden; float:left;}
 .reply .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:560px;}
 .reply .toreply .message{height:auto; float:left; padding:0; word-wrap:break-word; text-align:left; width:490px;}
 

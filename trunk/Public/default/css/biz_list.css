@@ -5,17 +5,11 @@
 /* left开始*/
 #main {width:950px;padding: 0px;margin: 0px auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
-.main-left{width:188px;margin:0px; padding:0px;}
-.mian-right{width:749px;padding:0px;float:right;}
-.channel-left {width: 188px;margin: 0px;padding: 0px;color: #FFFFFF;}
-.dingt {height: 32px;background: url(../images/pc/bg04.gif) repeat-x;margin: 0px;padding: 0px;text-align: center;line-height: 32px;font-weight: bold;color: #992654;}
-.yuanjiao {height: 13px;background: url(../images/pc/yuanjiao.gif) no-repeat;margin: 0px;padding: 0px;}
 
 
 /*right开始*/
-.mian-right{width:749px;padding:0px;margin: 0px;float:right;}
-.guagngao{ margin:0px; padding:0px;}
-.biz-content{ margin:10px 0 0 0; padding:0px;}
+.guagngao{ margin:0 0 10px; padding:0px;}
+.biz-content{margin:0 0 10px; padding:0px;}
 .biz-page {height: 26px;background: url(../images/pc/bg.gif) repeat-x;border: 1px solid #bfbfbf;padding-left:10px;font-weight: bold;color: #353535;}
 .biz-city{border: 1px solid #bfbfbf;margin: 0px;background-color:#f7f7f7;padding: 0px;}
 .bycity {padding:0px;margin: 10px 5px 10px 5px;}

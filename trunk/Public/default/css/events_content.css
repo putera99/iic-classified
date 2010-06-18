@@ -14,9 +14,9 @@
 .events_neir ul {margin: 0px;list-style-type: none;padding: 0px;}
 .events_neir li {width: 60px;background-color: #e1e1e1;border: 1px solid #cacaca;text-align: center;padding-bottom: 0px;margin-bottom: 8px;}
 .left{width: 70px;margin: 0px;padding:0px;}
-.events_nei {width: 550px;height: 175px;margin: 0px 0px 7px 5px;padding: 0px 0px 0px 10px;}
+.events_nei {width: 550px;height:155px;margin: 0px 0px 7px 5px;padding: 0px 0px 0px 10px;}
 .pic{width: 135px;margin-right: 8px;padding:0px;float:left;}
-.events_nei ul{ margin:0px; padding:0px; list-style-type:none;}
+.events_nei ul{ margin:0px; padding:0px; list-style-type:none; float:left; width:400px; overflow:hidden; height:auto;}
 .events_nei li{ margin:0px; padding:0px;}
 .riqi {width: 180px;float: right;padding: 0px;color: #993366;margin: 0;}
 .qunbu {height: 70px;border-bottom: 1px dashed #b9b9b9;margin: 0px 7px 10px 7px;padding: 0 0 7px 0;}
@@ -57,5 +57,5 @@
 .events_xinx dt {margin: 0px;padding: 0px;float: left;}
 .events_xinx dd {width: 155px;margin: 0px;padding: 0px;line-height: 16px;float: right;}
 .events_xinx span {margin: 0px;padding: 0px;font-weight: bold;color: #993366;display: block;}
-.jianjie {margin: 0px 14px 0px 10px;padding: 0px;}
+.jianjie {margin:10px 10px;padding: 0px;}
 .jianjie span {color: #a61b5d;font-weight: bold;}
