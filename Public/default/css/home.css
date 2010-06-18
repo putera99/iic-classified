@@ -74,7 +74,7 @@
 .conter-right{width:225px;padding:0px;float: right;border: 1px solid #ccc;margin: 0px;}
 
 .conter-right{width:234px;padding:0px;float: right;margin: 0px;}
-.login-h{margin:0px;padding:0px;background: url(../images/bg03.gif) repeat-x;border: 1px solid #afc6cb;height: 186px;}
+.login-h{margin:0 0 10px 0;padding:0px;background: url(../images/bg03.gif) repeat-x;border: 1px solid #afc6cb;height: 170px;}
 .login-h form{color: #51b9d4;font-weight: bold;float:left;padding: 24px 0 0 0;margin: 0 0 0 5px;text-align: left;}
 .inputStyle{width:110px;border: 1px solid #d9d9d9;}
 .regsiter-h{color: #f08137;font-weight: bold;text-align: center;margin: 0px;}

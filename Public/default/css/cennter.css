@@ -20,6 +20,7 @@ a img{ border:none;}
 .top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 10px;}
 .top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
 .top-city h2 a:hover,.top-city h2 .on{width:96px; height:26px; line-height:26px;border:1px solid #FC7F2B; color:#FC7F2B;}
+.top-city h2 a:hover{border:1px solid #fff; color:#fff;}
 #header-h{ height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
 .bg-h{height: 8px;margin:0px;padding: 0px;background: url(../images/bg-huan.gif) repeat-x;}
 .main-left .bg-h{height:24px;font-size: 14px;font-weight: bold;color: #e25a02;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
