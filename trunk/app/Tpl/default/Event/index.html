@@ -36,7 +36,7 @@
                 <div class="events_zhuban">
                     <dl>
                         <dt>
-                            <img src="images/pc/pic03.gif" alt="pic" />
+                            <img src="__PUBLIC__/default/images/pc/pic03.gif" alt="pic" />
                         </dt>
                         <dd>
                             <span>Milano Daily Specials ...</span>middle 191 (metro line 5 five-
@@ -54,7 +54,7 @@
                 <div class="events_zhuban">
                     <dl>
                         <dt>
-                            <img src="images/pc/pic05.gif" alt="pic" />
+                            <img src="__PUBLIC__/default/images/pc/pic05.gif" alt="pic" />
                         </dt>
                         <dd>
                             <span>Milano Daily Specials ...</span>middle 191 (metro line 5 five-
@@ -69,28 +69,28 @@
                 <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> 
             </div>
             <div class="events_popula">
-                <img src="images/pc/a popular.gif" alt="dscv" />
+                <img src="__PUBLIC__/default/images/pc/a popular.gif" alt="dscv" />
             </div>
 <if condition="$list">
 <volist name="list" id="v">
 	<if condition="$i eq 1">
 			<div class="events_neirong">
-                <span><img src="{$v['picurl']}" alt="{$v['title']}" /></span>
+                <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a></span>
                 <div class="cool">
-                	<h2 class="zhuti">{$v['title']}</h2>
-                	<p>{$v['my_content']}</p>
-                	<span class="diz">410 1383 people interested in</span>
+                	<h2 class="zhuti"><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></h2>
+                	<p>{$v['my_content']|strip_tags|String::msubstr=0,180}...</p>
                 </div>
             </div>
             <div class="events_jingcai">
 	<else/>
 				<dl>
                     <dt>
-                        <img src="{$v['picurl']}" alt="{$v['title']}" />
+                        <a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a>
                     </dt>
                     <dd>
-                        <span>{$v['title']}</span>
-                        <p>{$v['my_content']}</p>
+                        <span><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></span>
+                        <p>Time: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}</p>
+						<p>{$v['my_content']|strip_tags|String::msubstr=0,180}...</p>
                     </dd>
                 </dl>
 	</if>
@@ -104,7 +104,7 @@
 <volist name="old" id="v">
                 <dl>
                     <dt>
-                        <img src="images/pc/pic06.gif" alt="pic" />
+                        <img src="__PUBLIC__/default/images/pc/pic06.gif" alt="pic" />
                     </dt>
                     <dd>
                         La Casa Crew

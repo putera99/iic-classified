@@ -982,11 +982,26 @@ class CpAction extends CommonAction{
 	 */
 	function event_attention() {
 		//我表态的活动
+		$condition=array();
+		$condition['types']=10;
+		$condition['uid']=$this->user['uid'];
+		//hot 1感兴趣 2关注 3不关心
+		$hot=intval($_REQUEST['hot']);
+		$condition['hot']=$hot;
 		
+		$dao=D("Thought");
+		$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$event=array();
+    	$event=$dao->where($condition)->order("mtime DESC")->limit("$limit")->findAll();
+    	
 		$page=array();
-		$page['title']='My Group -  My Control Panel -  BeingfunChina';
-		$page['keywords']='My Group';
-		$page['description']='My Group';
+		$page['title']='My Event -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Event';
+		$page['description']='My Event';
 		$this->assign('page',$page);
 		
 		$this->assign('content','Cp:event_attention');

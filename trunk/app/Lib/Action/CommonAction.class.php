@@ -22,6 +22,7 @@ class CommonAction extends Action{
         $this->assign('cid',$this->cid);
         $this->assign('now',date("l,F d Y",time()));
         import("ORG.Util.String");
+        import("ORG.Util.Input");
         load("extend");
         //$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
         //import('ORG.Util.Image');

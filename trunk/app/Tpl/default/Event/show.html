@@ -8,6 +8,91 @@
 <meta name="description" content="{$page['description']|clearh}" />
 <link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/default/css/events_content.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    var HOST = window.location.host;
+    var Per_host = "http://" + HOST;
+    var JS_PATH = "../Public/js/";
+    var IMG_PATH = "../Public/images/";
+    var URL = '__URL__';
+    var APP = '__APP__';
+    var PUBLIC = '../Public/';
+    var REQUEST_URI = '{$_SERVER.REQUEST_URI}';
+	$(document).ready(function () {
+		var tourl=APP+'Public/ajax_is_login';
+		$('a.add_post').click(function (e) {
+			e.preventDefault();
+			$.post(tourl,'',function(data){
+				if(data['status']==1){
+					$('#basic-modal-content').modal();
+				}else{
+					alert(data['info']);
+					$('#login').modal();
+				}
+			},'json');
+		});
+		$('li.thought').click(function (e) {
+			$.post(tourl,'',function(data){
+				if(data['status']==1){
+					thought(this.id);
+				}else{
+					alert(data['info']);
+					$('#login').modal();
+				}
+			},'json');
+		});
+		var option={dataType:'json',success:processJson};
+		var option_login={dataType:'json',success:login};
+	    $('#add_post').ajaxForm(option);
+	    $('#post_login').ajaxForm(option_login);
+		
+	});
+	function processJson(data){
+		if(data['status']==1){
+			alert(data['info']);
+			
+			var text='<dd><span class="w410"><a href="__URL__/thread/id/'+data['data']['id']+'">'+$("#title").val()+'</a></span>';
+				text+='<span class="w100 c">'+data['data']['username']+'</span>';
+				text+='<span class="w100 c">'+data['data']['lasttime']+'</span>';
+				text+='<span class="w100 c">'+data['data']['dateline']+'</span></dd>';
+			$("#post_ok").prepend(text);
+			$("#post_ok").show();
+			$.modal.close();
+		}else{
+			alert(data['data']);
+			if(data['data']=="login"){
+				$.modal.close();
+				$('#login').modal();
+			}else{
+				alert(data['info']);
+			}
+
+		} 
+	}
+	function login(data){
+		if(data['status']==1){
+			alert(data['info']);
+			$.modal.close();
+			//$('#basic-modal-content').modal();
+		}else{
+			alert(data['info']);
+
+		} 
+	}
+
+	function thought(id){
+		var tourl=URL+'/thought';
+		$.post(tourl,{id:id},function(data){
+			if(data['status']=='1'){
+				alert(data['info']);
+			}else if(data['data']=='login'){
+				alert(data['info']);
+				$('#login').modal();
+			}else{
+				alert(data['info']);
+			}
+		},'json');
+	}
+</script>
 </head>
 <body>
 <include file="Public:top"/>
@@ -40,106 +125,141 @@
     </div>
     <div class="mian-left">
         <div class="events_poular">
-            home > A popular
+            <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> > 
+			<if condition="$dh">
+				<a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > 
+			</if>
         </div>
         <div class="events_neit">
             <div class="events_neir">
                 <ul>
-                    <li>
+                    <li class="thought" id="{$info['channel']}_{$info['id']}_1">
                         感兴趣
                     </li>
-                    <li>
+                    <li class="thought" id="{$info['channel']}_{$info['id']}_2">
                         关注一下
                     </li>
-                    <li>
+                    <li class="thought" id="{$info['channel']}_{$info['id']}_3">
                         路过的
                     </li>
                 </ul>
             </div>
             <div class="events_nei">
-                <span class="pic"><img src="images/pc/pic008.gif" alt="pic" /></span>
+                <span class="pic"><img src="{$info['picurl']}" alt="{$info['title']}" /></span>
                 <ul>
                     <li class="biaoh">
-                        Shao scallop [play] singing AnZhouZhan @ tour singles (CD) [tickets accompanying
+                        {$info['title']}
                     </li>
                     <li>
-                        Time: 6 January 19-23:00 on Tuesday
+                        Valid for: {$info['showstart']|toDate='M d ,y'} -- {$info['showend']|toDate='M d ,y'}
                     </li>
                     <li>
-                        Location: guangzhou yuexiu district, guangzhou avenue,
+                        Location: {$info['maps']}
                     </li>
                     <li>
-                        Sponsors: middle 191 (metro line 5 five-goat estate stood A export),shao xiaomao musicians
+                       
                     </li>
-                    <li class="event-lian">
-                        410 1383 people interested in
-                    </li>
-                    <span class="ann">回复</span>
-                    <span class="ann">分享</span>
-                    <span class="ann">收藏</span>
-                    <span class="ann">举报</span>
+                    <li style="text-align:right;">
+                    	<span id="1_{$info['channel']}_{$info['id']}" class="user_repaly ann">回复</span>
+	                    <span id="1_{$info['channel']}_{$info['id']}" class="user_share ann">分享</span>
+	                    <span id="2_{$info['channel']}_{$info['id']}" class="user_collection ann">收藏</span>
+	                    <span id="3_{$info['channel']}_{$info['id']}" class="user_report ann">举报</span>
+					</li>
                 </ul>
             </div>
         </div>
         <div class="jianjie">
-            <span>Introduction：</span>
-            Time: 12 June 2010 at (Saturday)
-            <br/>
-            Location: the xinghai concert hall chamber music hall
-            <br/>
-            Price: $220 160 yuan 120 yuan
-            <br/>
-            Lord, undertaking: guangzhou heave array culture dissemination limited company
-            <br/>
-            Performance: "no period" band, master, HuFangFang peak
-            <br/>
-            Relevant link: http://www.concerthall.com.cn/homepages/100408b/index.html
-            <br/>
-            In total box office (guangzhou) hotline: free tickets 87353857/81911089
-            <br/>
-            The free tickets hotline 11185:
-            <br/>
-            Tickets online http://buy.ticket-easy.cn/showhall.php? : Sid = 2031
-            <br/>
-            Ticket agent: guangdong culture ticketing nets
-            <br/>
-            More ticket location and telephone:
-            <br/>
-            Guangzhou city and the big postal offices
-            87352222-886 87353869 xinghai concert hall
-            Citic plaza poly business (second) 38911021 opposite Watson
-            Guangzhou 38866479 acquisition centre
-            83859497 garden international travel agency
-            HuangHuaGang 38362199 theatre
-            Sun yat-sen memorial. (all)
+            <span>Detail：</span>
+            {$info['content']['detail']}
         </div>
         <div class="events_members">
             <span>more</span>感兴趣的成员
         </div>
         <div class="events_huiyuan">
+<volist name="thought" id="v">
             <dl>
                 <dt>
                     <img src="images/pc/pic05.gif" alt="pic" />
                 </dt>
                 <dd>
-                    goat estate
+                    {$v['username']}
                 </dd>
             </dl>
+</volist>
+
         </div>
         <div class="events_members">
-            <span>more</span>Event论坛
+            <span><a href="__URL__/topic/id/{$info['id']}">more</a></span>Event论坛
         </div>
         <div class="events_n">
-            <dl>
-                <dt>
-                    CNY12000 typical old apartment available at good location
-                </dt>
-                <dd>
-                    <span>Event</span>
-                    <span>31/05/2010</span>
-                </dd>
-            </dl>
+			<dl class="h350">
+            	<dt class="w410">Subject</dt>
+				<dt class="w100">username</dt>
+				<dt class="w100">Review time</dt>
+				<dt class="w100">Post time</dt>
+				<div id="post_ok" style="display:none;"></div>
+
+<if condition="$thread">
+<volist name="thread" id="v">
+            	<dd>
+					<span class="w410"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
+					<span class="w100 c">{$v['username']}</span>
+					<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
+					<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
+				</dd>
+		                    
+</volist>
+<else/>
+<dd>
+	<span class="w410">暂无话题！</span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+	<span class="w100 c"></span>
+</dd>
+</if>
+		            </dl>
         </div>
     </div>
+</div>
+
+<div id="basic-modal-content" style="display:none;">
+<form action="__URL__/add_post" method="post" id="add_post">
+	<input type="hidden" name="gid" value="{$info['id']}" />
+	<fieldset class="post">
+		<legend>ADD Thread</legend>
+		<p>
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" style="width:450px;" />
+		</p>
+		<p>
+			<label for="message">Content:</label>
+			<textarea name="message" id="message" cols="45" rows="8"></textarea>
+		</p>
+		<p style=" text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
+<span id="v_title"></span>
+<span id="v_message"></span>
+</div>
+<div id="login" style="display:none;">
+<form action="__APP__/Public/check" method="post" id="post_login">
+	<input type="hidden" name="is_ajax" value="1" />
+	<fieldset class="post">
+		<legend>Login</legend>
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" name="username" id="username" style="width:200px;" />
+		</p>
+		<p>
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" style="width:200px;"/>
+		</p>
+		<p style=" text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
 </div>
 <include file="Public:foot"/>
