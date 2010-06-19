@@ -1,5 +1,76 @@
 <?php
 
+function br2nl($text) {    
+	return preg_replace('/<br\\s*?\/??>/i', '', $text);   
+} 
+
+
+/**
+* 将数组用指定字符连接
+*
+* @param  $array 数组
+* @param  $split 分隔符
+* @return  string
+*/
+function array2string($array, $split = ','){
+    if(is_array($array)){
+    	$dot='';
+        foreach ($array as $data){
+            $string .= $dot.$data;
+            $dot = $split;
+        }
+        return empty($string) ? '' : $string;
+    }else{
+        return $array;
+    }
+}
+
+/**
+* 将指定数据转换成数组再对比，符合条件则返回checked
+*
+* @param  $sring 输入字符
+* @param  $param 条件
+* @param  $split 分隔符
+* @return  string
+*/
+function string2checked($sring ,$param, $split = ','){
+    $splitParam = explode($split, $param);
+    if (in_array($sring, $splitParam)) $result = ' checked=checked';
+    return $result;
+}
+
+
+/**
+*
+*  下拉框，单选按钮 自动选择
+* @param  $string 输入字符
+* @param  $param 条件
+* @param  $type 类型  selected checked
+* @return   string
+*/
+function selected($string, $param =1, $type = 'select'){
+    if ($string == $param) {
+        $returnString = $type == 'select' ? 'selected="selected"' : 'checked="checked"' ;
+    }
+    return $returnString;
+}
+
+/**
+* 状态选择
+* @param  $string 待对比字符
+* @param  $param 对比条件,二维数组
+* @return string 返回符合条件数据
+*/
+
+function status($string, $param = array('0'=>'NO', '1'=>'OK')){
+    foreach($param as $key => $data) {
+        if($string == $key){
+            $str = $data;
+        }
+    }
+    return $str;
+}
+
 /**
  *格式化时间
  *@date 2010-6-12
@@ -16,15 +87,17 @@ function ftime($oldtime) {
    *@date 2010-6-7
    *@time 下午09:50:09
    */
-function get_grade($id) {
+function get_grade($id,$arr=array()) {
 	//获取群组级别
-	$arr=array(
-		1=>'群主',
-		2=>'管理员',
-		3=>'VIP',
-		4=>'一般',
-		5=>'禁止',
-	);
+	if (empty($arr)) {
+		$arr=array(
+			1=>'群主',
+			2=>'管理员',
+			3=>'VIP',
+			4=>'一般',
+			5=>'禁止',
+		);
+	}
 	return $arr[$id];
 }//end get_grade
 

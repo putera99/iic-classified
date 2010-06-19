@@ -552,29 +552,6 @@ class CpAction extends CommonAction{
 	}//end my_fair_post
 	
 	/**
-	 *编辑展会
-	 *@date 2010-6-17
-	 *@time 下午05:45:03
-	 */
-	function my_edit_fair() {
-		//编辑展会
-		$info=$_REQUEST['info'];
-		$class_tree=$this->_get_tree(1232);
-		$this->assign("class_tree",$class_tree);
-		$this->assign('citylist',$this->_get_city('fair'));
-		$this->assign('ltd',$this->_get_ltd());
-		
-		$page=array();
-		$page['title']='Post Fair -  My Control Panel -  BeingfunChina';
-		$page['keywords']='Post Fair';
-		$page['description']='Post Fair';
-		$this->assign('page',$page);
-		
-		$this->assign('content','Cp:my_post_fair');
-		$this->display("Cp:layout");
-	}//end my_edit_fair
-	
-	/**
 	 *发布一个展会信息
 	 *@date 2010-5-29
 	 *@time 下午05:33:40
@@ -596,6 +573,41 @@ class CpAction extends CommonAction{
 	}//end my_post_fair
 	
 	/**
+	 *修改展会信息
+	 *@date 2010-6-19
+	 *@time 下午03:42:19
+	 */
+	function my_edit_fair() {
+		//修改展会信息
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$data=$dao->where($condition)->find();
+		if ($data['uid']==$this->user['uid']) {
+			$data['content']=$dao->relationGet("fair");
+			$this->assign('data',$data);
+		}else{
+			$this->error("权限不足");
+		}
+		
+		$class_tree=$this->_get_tree(1232);
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('fair'));
+		$this->assign('ltd',$this->_get_ltd());
+		$page=array();
+		$page['title']='Post Fair -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Fair';
+		$page['description']='Post Fair';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_post_fair');
+		$this->display("Cp:layout");
+	}//end my_edit_fair
+	
+	/**
 	 *增加展会信息
 	 *@date 2010-6-1
 	 *@time 上午10:13:56
@@ -603,7 +615,7 @@ class CpAction extends CommonAction{
 	function add_fair() {
 		//增加展会信息
 		$dao=D("Archives");
-		if(!empty($_FILES)) {
+		if(!empty($_FILES["picurl"]["name"])) {
 			$this->_upload();
 		}
 		$vo=$dao->create();
@@ -625,19 +637,33 @@ class CpAction extends CommonAction{
     				$keywords.=$vkw.',';
     			}
     		$vo['keywords']=trim($keywords,',');
-			$aid=$dao->add($vo);
+			$eid='';
+    		$xid=Input::getVar($_REQUEST['id']);
+    		if($xid){
+    			$aid=$xid;
+    			$eid=$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
 			if ($aid) {
 				$data=array();
 				$data['visitor']=nl2br($_REQUEST['visitor']);
 				$data['exhibitor']=nl2br($_REQUEST['exhibitor']);
 				$data['product']=$_REQUEST['product'];
 				$data['website']=$_REQUEST['website'];
-				$data['aid']=$aid;
-				$id=$dao->Table("iic_fair")->add($data);
+				if($xid){
+					$id=$dao->Table("iic_fair")->where("aid=$aid")->save($data);
+				}else{
+					$data['aid']=$aid;
+					$id=$dao->Table("iic_fair")->add($data);
+				}
 				if($id){
 					$this->success('发布成功!');
 				}else{
-					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					if(empty($xid)){
+						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					}
+					dump($dao->getLastSql());
 					$this->error("附属表写入失败!");
 				}
 			}else{
@@ -717,16 +743,29 @@ class CpAction extends CommonAction{
     				$keywords.=$vkw.',';
     			}
     		$vo['keywords']=trim($keywords,',');
-			$aid=$dao->add($vo);
+    		$eid='';
+    		$xid=Input::getVar($_REQUEST['id']);
+    		if($xid){
+    			$aid=Input::getVar($_REQUEST['id']);
+    			$eid=$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
 			if ($aid) {
 				$data=array();
 				$data['content']=nl2br($_REQUEST['content']);
-				$data['aid']=$aid;
-				$id=$dao->Table("iic_addon_arc")->add($data);
+				if($eid){
+					$id=$dao->Table("iic_addon_arc")->where("aid=$aid")->save($data);
+				}else{
+					$data['aid']=$aid;
+					$id=$dao->Table("iic_addon_arc")->add($data);
+				}
 				if($id){
 					$this->success('发布成功!');
 				}else{
-					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					if(empty($xid)){
+						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					}
 					$this->error("附属表写入失败!");
 				}
 			}else{
@@ -757,7 +796,7 @@ class CpAction extends CommonAction{
     	$classifieds=array();
     	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('classifieds',$classifieds);
-		
+		dump($dao->getLastSql());
 		$page=array();
 		$page['title']='Post Articles -  My Control Panel -  BeingfunChina';
 		$page['keywords']='Post Articles';
@@ -767,6 +806,41 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_art');
 		$this->display("Cp:layout");
 	}//end my_art
+	
+	/**
+	 *编辑信息
+	 *@date 2010-6-18
+	 *@time 下午06:29:13
+	 */
+	function my_edit_art() {
+		//编辑信息
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$data=$dao->where($condition)->find();
+		if ($data['uid']==$this->user['uid']) {
+			$data['content']=$dao->relationGet("arc");
+			$this->assign('data',$data);
+		}else{
+			$this->error("权限不足");
+		}
+		
+		$this->assign('flag',$this->_get_flag());
+		$class_tree=$this->_get_tree(2000);
+		$this->assign("class_tree",$class_tree);
+		$page=array();
+		$page['title']='Edit Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Edit Articles';
+		$page['description']='Edit Articles';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_edit_art');
+		$this->display("Cp:layout");
+	}//end my_edit_art
+	
 ///////////////////////////////////////文章 start///////////////////////////
 
 ////////////////////////////////群组——start///////////////////////////////////
