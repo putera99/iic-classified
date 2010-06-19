@@ -19,12 +19,12 @@ class CommonAction extends Action{
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
+        $this->cid=$_SESSION['cid'];
         $this->assign('cid',$this->cid);
         $this->assign('now',date("l,F d Y",time()));
         import("ORG.Util.String");
         import("ORG.Util.Input");
         load("extend");
-        //$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
         //import('ORG.Util.Image');
         
 

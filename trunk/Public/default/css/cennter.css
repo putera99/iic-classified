@@ -38,12 +38,14 @@ a img{ border:none;}
 .top-city{width:466px; margin:0px; padding:25px 20px 0 0;float:right;}
 .top-city a{ margin:0px; padding:0 0 0 8px;}
 .top-nav{margin: 0px;padding-left: 25px;width: 906px;}
-.nav{width:650px;height: 20px;margin:0px;padding:0px;}
+.nav{width:650px;height:20px;margin:0px;padding:0px;}
 .nav a{color: #fff;}
-.nav .annv {background: url(../images/button.png) no-repeat;}
-.annv a{color: #fff;}
-.nav ul{margin:0px;padding:0px;list-style-type:none;}
-.nav li{float:left;padding:0;margin-right:30px;}
+
+.nav .annv{background:url(../../img/l.gif) no-repeat;}
+.annv a{color: #fff;background:url(../../img/r.gif) no-repeat right top; height:20px; line-height:20px; display:block; padding-right:7px;}
+
+.nav ul{margin:0px;padding:2px 0 0 0;list-style-type:none;}
+.nav li{float:left;padding:0;margin-right:30px; height:20px; padding:0 0 0 6px;}
 .search{width:230px;float:right;margin: 0px;padding: 0px;}
 .bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
 

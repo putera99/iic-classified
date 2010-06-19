@@ -47,7 +47,7 @@ function zone(obj,id,name){
 </script>
 <div class="mulu">
 	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
-	<a href="__APP__/Cp/my_post_classifieds">Post Classifieds</a>
+	<a href="__APP__/Cp/my_fair_post">Fair</a>
 </div>
 <div class="right-neirong">
     <div class="clear">
@@ -58,30 +58,31 @@ function zone(obj,id,name){
         </div>
         <div class="list">
             <form action="__URL__/add_fair" method="post" enctype="multipart/form-data">
+            	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
 	            	<p>
-	            		<label for="title">Title:</label><input type="text" name="title" id="title" style="width:300px;">
+	            		<label for="title">Title:</label><input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
 					</p>
 					<p>
 						<label for="picurl">CoverImage:</label><input type="file" name="picurl" id="picurl" style="width:300px;">
 	            	</p>
 					<p><label for="showend_job">Valid for</label>
-						<input type="text" name="showstart" id="showend_job" class="showend_job" style="width:80px;">
-						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;">
+						<input type="text" name="showstart" id="showend_job" class="showend_job" value="{$data['showstart']|toDate='d/m/Y'}" style="width:80px;">
+						---> <input type="text" name="showend" id="showend_job" class="showend_job" value="{$data['showend']|toDate='d/m/Y'}" style="width:80px;">
 					</p>
 					<p>
 						<label for="position">Venue:</label>
 						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
 							<option value="0">--Select City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+								<option value="{$v['id']}"{$v['id']|selected=$data['city_id']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 						<select name="zone_id" class="zone_id" onchange="maps('maps[1]',this.)">
 							<option value="0">--Select Zone--</option>
 						</select>
-						<input type="text" name="position" id="position">
+						<input type="text" name="position" id="position" value="{$data['position']}" >
 						
 					</p>
 					<p>
@@ -89,7 +90,7 @@ function zone(obj,id,name){
 						<select name="bycity" id="bycity">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+								<option value="{$v['id']}"{$v['id']|selected=$data['bycity']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 					</p>
@@ -104,11 +105,11 @@ function zone(obj,id,name){
 								<if condition="$v['ispart'] eq 1">
 									<optgroup label="{$v['typename']}">
 										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}">{$vs['typename']}</option>
+											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
 										</volist>
 									</optgroup>
 								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}">{$v['typename']}</option>
+									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
 								</if>
 														
 							</volist>
@@ -122,7 +123,7 @@ function zone(obj,id,name){
 								<if condition="$v['ispart'] eq 1">
 									<optgroup label="{$v['typename']}">
 										<volist name="v['_son']" id="vs">
-											<option value="{$vs['id']}">{$vs['typename']}</option>
+											<option value="{$vs['id']}"{$vs['id']|string2checked=$data['typeid2']}>{$vs['typename']}</option>
 										</volist>
 									</optgroup>
 								<else/>
@@ -139,51 +140,51 @@ function zone(obj,id,name){
 						<select name="ltdid" id="ltdid">
 							<option value='0'>---Select Organizer---</option>
 							<volist name="ltd" id="l">
-								<option value="{$l['id']}">{$l['title']}</option>
+								<option value="{$l['id']}"{$l['id']|selected=$data['ltdid']}>{$l['title']}</option>
 							</volist>
 						</select> Or
 						<input type="text" name="ltdtitle" id="ltdtitle"><input type="button" id="add_ltd" value="Add Organizer">
 					</p>
 					<p><label for="contact">Address:</label>
-						<input type="text" name="contact" id="contact">
+						<input type="text" name="contact" id="contact" value="{$data['contact']}">
 					</p>
 					<p><label for="telephone">telephone:</label>
-						<input type="text" name="telephone" id="telephone">
+						<input type="text" name="telephone" id="telephone" value="{$data['telephone']}">
 					</p>
 					<p><label for="fax">fax:</label>
-						<input type="text" name="fax" id="fax">
+						<input type="text" name="fax" id="fax" value="{$data['fax']}">
 					</p>
 					<p><label for="mobphone">mobphone:</label>
-						<input type="text" name="mobphone" id="mobphone">
+						<input type="text" name="mobphone" id="mobphone" value="{$data['mobphone']}">
 					</p>
 					<p><label for="email">email:</label>
-						<input type="text" name="email" id="email">
+						<input type="text" name="email" id="email" value="{$data['email']}">
 					</p>
 					<p><label for="msn">msn:</label>
-						<input type="text" name="msn" id="msn">
+						<input type="text" name="msn" id="msn" value="{$data['msn']}">
 					</p>
 					<p><label for="oicq">QQ:</label>
-						<input type="text" name="oicq" id="oicq">
+						<input type="text" name="oicq" id="oicq" value="{$data['oicq']}">
 					</p>
 					<p><label for="linkman">Contact:</label>
-						<input type="text" name="linkman" id="linkman">
+						<input type="text" name="linkman" id="linkman" value="{$data['linkman']}">
 					</p>
 					<p><label for="visitor">Visitor's Profile:</label>
-						<textarea cols="50" rows="5" name="visitor" id="visitor"></textarea>
+						<textarea cols="50" rows="5" name="visitor" id="visitor">{$data['content']['visitor']|br2nl}</textarea>
 					</p>
 					<p><label for="my_content">Event Profile:</label>
-						<textarea cols="50" rows="5" name="my_content" id="my_content"></textarea>
+						<textarea cols="50" rows="5" name="my_content" id="my_content">{$data['my_content']|br2nl}</textarea>
 					</p>
 					<p><label for="exhibitor">Exhibitor's Profile:</label>
-						<textarea cols="50" rows="5" name="exhibitor" id="exhibitor"></textarea>
+						<textarea cols="50" rows="5" name="exhibitor" id="exhibitor">{$data['content']['exhibitor']|br2nl}</textarea>
 					</p>
 					<p>
 						<label for="product">Products:</label>
-						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" />
+						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" value="{$data['content']['product']}" />
 					</p>
 					<p>
 						<label for="website">website:</label>
-						<input type="text" name="website" id="website"/>
+						<input type="text" name="website" id="website" value="{$data['content']['website']}"/>
 					</p>
 				</fieldset>
 				<p>

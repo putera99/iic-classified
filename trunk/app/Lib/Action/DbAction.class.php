@@ -14,6 +14,25 @@
 class DbAction extends CommonAction{
 	
 	/**
+	 *index
+	 *@date 2010-6-19
+	 *@time 下午03:22:17
+	 */
+	function index() {
+		//index
+		$dao=D("Arctype");
+		$data=$dao->where("reid=1232")->findAll();
+		foreach ($data as $v){
+			echo "{$v['id']}->{$v['typename']}<br>";
+		}
+		echo "<br><br>";
+		$data=$dao->where("reid=1388")->findAll();
+		foreach ($data as $v){
+			echo "{$v['id']}->{$v['typename']}<br>";
+		}
+	}//end index
+	
+	/**
 	 *获取栏目列表
 	 *@date 2010-6-14
 	 *@time 上午09:29:47

@@ -26,25 +26,26 @@ $(document).ready(function(){
         </div>
         <div class="list">
             <form action="__URL__/add_art" method="post" enctype="multipart/form-data">
+            	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
 	            	<p>
-	            		<label for="title">Title:</label><input type="text" name="title" id="title" style="width:300px;">
+	            		<label for="title">Title:</label><input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
 					</p>
 	            	<p>
-	            		<label for="filename">Filename:</label><input type="text" name="filename" id="filename" />
+	            		<label for="filename">Filename:</label><input type="text" name="filename" id="filename" value="{$data['filename']}" />
 					</p>
 					<p>
 						<label for="picurl">CoverImage:</label><input type="file" name="picurl" id="picurl" style="width:300px;">
 	            	</p>
 					<p><label for="showend_job">Valid for</label>
-						<input type="text" name="showstart" id="showend_job" class="showend_job" style="width:80px;">
-						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;">
+						<input type="text" name="showstart" id="showend_job" class="showend_job" style="width:80px;" value="{$data['showstart']|toDate='d/m/Y'}">
+						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;" value="{$data['showend']|toDate='d/m/Y'}">
 					</p>
 					<p>
 						<label for="flag">Attribute</label>
 						<volist name="flag" id="v">
-							<input type="checkbox" name="flag[]">{$v['attname']}   
+							<input type="checkbox" value="{$v['att']}" name="flag[]">{$v['attname']}   
 						</volist>
 					</p>
 				</fieldset>
@@ -58,11 +59,11 @@ $(document).ready(function(){
 								<if condition="$v['ispart'] eq 1">
 									<optgroup label="{$v['typename']}">
 										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}">{$vs['typename']}</option>
+											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
 										</volist>
 									</optgroup>
 								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}">{$v['typename']}</option>
+									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
 								</if>
 														
 							</volist>
@@ -90,10 +91,10 @@ $(document).ready(function(){
 				<fieldset>
 					<legend>Articles info:</legend>
 					<p><label for="my_content">Summary:</label>
-						<textarea cols="50" rows="5" name="my_content" id="my_content"></textarea>
+						<textarea cols="50" rows="5" name="my_content" id="my_content">{$data['my_content']|br2nl}</textarea>
 					</p>
 					<p><label for="content">Content:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<textarea cols="50" rows="10" name="content" id="content">{$data['content']['content']|br2nl}</textarea>
 					</p>
 				</fieldset>
 				<p>
