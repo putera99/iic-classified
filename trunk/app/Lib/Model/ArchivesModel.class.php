@@ -23,6 +23,10 @@ class ArchivesModel extends RelationModel{
 		array('click','0',1),
 		array('ismake','1',1),
 	);
+	protected $_validate=array(
+		array('title','require','标题必须填写!'),
+		array('typeid','require','分类必须选择!'),
+	);
 	protected $_link = array(
 		'Jobs'=>array(//关联招聘
 				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY
@@ -90,6 +94,15 @@ class ArchivesModel extends RelationModel{
 				//'as_fields'=>'content',
 		        //'mapping_order'=>'ctime desc'
 			),
+		'Event'=>array(//关联活动
+				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY
+				'mapping_type'=>HAS_ONE,
+				'class_name'=>'Event',
+		        'foreign_key'=>'aid',
+		        'mapping_name'=>'event',
+				//'as_fields'=>'content',
+		        //'mapping_order'=>'ctime desc'
+			),
 		'Arc'=>array(//关联文章
 				//ONE_TO_ONE(HAS_ONE/BELONGS_TO)、ONE_TO_MANY(HAS_MANY/BELONGS_TO)、  MANY_TO_MANY
 				'mapping_type'=>HAS_ONE,
@@ -99,6 +112,7 @@ class ArchivesModel extends RelationModel{
 				//'as_fields'=>'content',
 		        //'mapping_order'=>'ctime desc'
 			),
+			
     );
     
 }//end ArchivesModel

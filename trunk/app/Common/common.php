@@ -33,9 +33,9 @@ function array2string($array, $split = ','){
 * @param  $split 分隔符
 * @return  string
 */
-function string2checked($sring ,$param, $split = ','){
+function string2checked($sring ,$param, $split = ',',$type='checked'){
     $splitParam = explode($split, $param);
-    if (in_array($sring, $splitParam)) $result = ' checked=checked';
+    if (in_array($sring, $splitParam)) $result = " $type=$type";
     return $result;
 }
 

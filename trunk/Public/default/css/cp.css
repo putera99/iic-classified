@@ -14,16 +14,24 @@
 .memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
 .memcp-groups-bg{margin:0px;padding-left:28px;background: url(../images/rentou.gif) no-repeat #6f6c6c;background-position: 5px; height:25px; line-height:25px;}
 .neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
+.neirong a{color: #99406c;}
+.neirong a:hover{color: #f00; text-decoration:underline;}
 
 /* right开始*/
 .memcp-right{width:750px;margin:0px;padding:0px;float:right;}
 .right-neirong {margin: 0px;padding: 0px;}
-.mulu {background: url(../images/bg-m.gif) repeat-x;border: 1px solid #bcbcbc;margin: 0px;padding: 0px;font-weight: bold;color: #4a4a4a;}
+.mulu {background: url(../images/bg-m.gif) repeat-x;border: 1px solid #bcbcbc;margin: 0px;padding:0 0 0 10px;font-weight: bold;color: #4a4a4a;}
+.mulu a{color: #4a4a4a;}
+.mulu a:hover{color: #f00; text-decoration:underline;}
+
 .right-neirong{margin:0px;padding:0px;border: 1px solid #bcbcbc;background-color:#f4f4f4;}
 .right-messages{width:725px;margin: 10px auto 0 auto;padding: 0 0 5px 0;}
 .right-title {margin:0px;padding:0;}
 .right-title span {float: right;}
-.yangshi {font-family:Verdana, Arial, Helvetica, sans-serif;font-weight: bold;color: #993366;margin:0px;}
+.yangshi {font-weight: bold;color: #993366;margin:0;}
+
+.list a{color:#4a4a4a;}
+.list a:hover{color: #f00; text-decoration:underline;}
 .list ul {padding: 0px;list-style-type: none;margin-top: 8px;margin-right: 0px;margin-bottom: 0px;margin-left: 0px;}
 .list li {margin: 0px;border-bottom: 1px dashed #9f9f9f;padding: 5px 0 7px 8px;}
 .list span {float: right;margin: 0px;padding: 0px;}
