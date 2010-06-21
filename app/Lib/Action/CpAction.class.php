@@ -12,6 +12,7 @@
  +------------------------------------------------------------------------------
  */
 class CpAction extends CommonAction{
+	
 	function _initialize() {
 		//预处理
 		if (!$this->_is_login()){
@@ -280,6 +281,8 @@ class CpAction extends CommonAction{
 		}
 	}//end add_photo
 	
+////////////////////classifieds start//////////////////////
+	
 	/**
 	 *发送分类信息
 	 *@date 2010-5-21
@@ -308,33 +311,62 @@ class CpAction extends CommonAction{
 	function add_classifieds() {
 		//增加分类信息
 		$dao=D("Archives");
-		if(!empty($_FILES)) {
+		if(!empty($_FILES["picurl"]["name"])) {
 			$this->_upload();
 		}
 		$vo=$dao->create();
 		if($vo){
-			$t=explode('/',$vo['showstart']);
-			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			$t=explode('/',$vo['showend']);
-			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			if($vo['showstart']){
+				$t=explode('/',$vo['showstart']);
+				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else {
+				$vo['showstart']=time();
+			}
+			if($vo['showend']){
+				$t=explode('/',$vo['showend']);
+				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else{
+				$vo['showend']=1280000000;
+			}
 			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
+			if (Input::getVar($_POST['typeid2'])){
+				$type2=array();
+				foreach ($_POST['typeid2'] as $v){
+					$t='';
+					$t=explode('_',$v);
+					if($vo['channel']!=$t['0']){
+						$this->error("channel 必须相同");
+					}
+					$type2[]=$t['1'];
+				}
+			}
+			$vo['typeid2']=array2string($type2,',');
 			$kw=str_word_count($vo['title'],1);
     			$keywords="";
     			foreach ($kw as $vkw){
     				$keywords.=$vkw.',';
     			}
     		$vo['keywords']=trim($keywords,',');
-			$vo['description']=msubstr(strip_tags($_POST['content']),0,400);
+			$vo['description']=msubstr(strip_tags($_POST['content']),0,200);
 			
-			$aid=$dao->add($vo);
+			$eid='';
+    		$xid=Input::getVar($_POST['id']);
+    		if($xid){
+    			$aid=$xid;
+    			$eid=$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
 			if ($aid) {
 				$data=array();
 				switch (true){
 					case $vo['channel']==4:
-						$data['joblocated']=$_POST['joblocated']['2'].','.$_POST['joblocated']['1'].','.$_POST['joblocated']['0'];
-						$data['joblocated']=$data['joblocated']==',0,0'?'':trim($data['joblocated'],',');
+						if($_POST['joblocated']['0']!='0' && !empty($_POST['joblocated']['2'])){
+							$data['joblocated']=$_POST['joblocated']['2'].','.$_POST['joblocated']['1'].','.$_POST['joblocated']['0'];
+							$data['joblocated']=$data['joblocated']==',0,0'?'':trim($data['joblocated'],',');
+						}
 						$data['experience']=$_POST['experience'];
 						$data['salary']=$_POST['salary'];
 						$table="iic_addon_jobs";
@@ -369,13 +401,26 @@ class CpAction extends CommonAction{
 						$this->error("栏目分类读取错误!");
 					break;
 				}
-				$data['content']=nl2br($_POST['content']);
-				$data['aid']=$aid;
-				$id=$dao->Table($table)->add($data);
-				if($id){
-					$this->success('发布成功!');
+				
+				if(empty($_POST['content'])){
+					$this->error("Description is null!");
+				}
+				$data['content']=Input::getVar($_POST['content']);
+				$data['content']=nl2br($data['content']);
+
+				if(isset($xid)){
+					$id=$dao->Table($table)->where("aid=$aid")->save($data);
 				}else{
-					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$data['aid']=$aid;
+					$id=$dao->Table($table)->add($data);
+				}
+				if($id || $id=='0'){
+					$this->success('发布成功!');
+					//echo '发布成功!';
+				}else{
+					if(empty($xid)){
+						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					}
 					$this->error("附属表写入失败!");
 				}
 			}else{
@@ -386,6 +431,68 @@ class CpAction extends CommonAction{
 		}
 	}//end add_classifieds
 	
+	/**
+	 *修改分类信息
+	 *@date 2010-6-21
+	 *@time 下午03:18:34
+	 */
+	function my_edit_classifieds() {
+		//修改分类信息
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$info=$dao->where($condition)->find();
+		if (empty($info)) {
+			$this->error("error: info is null!");
+		}
+		$city=$this->_get_city('localion');
+		switch (true) {
+			case $info['channel']==4://Jobs
+				$addon=$dao->relationGet("jobs");
+			break;
+			
+			case $info['channel']==5://realestate
+				$addon=$dao->relationGet("realestate");
+			break;
+			
+			case $info['channel']==6://commerce
+				$addon=$dao->relationGet("realestate");
+			break;
+			
+			case $info['channel']==7://agents
+				$addon=$dao->relationGet("agents");
+			break;
+			
+			case $info['channel']==8://personals
+				$addon=$dao->relationGet("personals");
+			break;
+			
+			case $info['channel']==9://services
+				$addon=$dao->relationGet("services");
+			break;
+		}
+		
+		$this->assign('data',$info);
+		$this->assign('addon',$addon);
+		$class_tree=$this->_get_tree(1);
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('city'));
+		$page=array();
+		$page['title']='Post Classifieds -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Classifieds';
+		$page['description']='Post Classifieds';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_post_classifieds');
+		$this->display("Cp:layout");
+	}//end my_edit_classifieds
+	
+////////////////////classifieds end//////////////////////
+
+//////////////////////cityguide start////////////////////////
 	/**
 	 *我发布的城市指南
 	 *@date 2010-5-25
@@ -462,18 +569,25 @@ class CpAction extends CommonAction{
 	function add_cityguide() {
 		//增加城市指南
 		$dao=D("Archives");
-		if(!empty($_FILES)) {
+		if(!empty($_FILES["picurl"]["name"])) {
 			$this->_upload();
 		}
 		$vo=$dao->create();
 		if($vo){
 			$vo['description']=String::msubstr($vo['my_content'],0,200);
 			$vo['my_content']=nl2br($vo['my_content']);
-			$t=explode('/',$vo['showstart']);
-			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			$t=explode('/',$vo['showend']);
-			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			$t=explode('_',$vo['typeid']);
+			if($vo['showstart']){
+				$t=explode('/',$vo['showstart']);
+				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else {
+				$vo['showstart']=time();
+			}
+			if($vo['showend']){
+				$t=explode('/',$vo['showend']);
+				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else{
+				$vo['showend']=1280000000;
+			}
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
 			$vo['maps']=$_POST['maps']['2'].','.$_POST['maps']['1'].','.$_POST['maps']['0'];
@@ -504,6 +618,9 @@ class CpAction extends CommonAction{
 		}
 	}//end add_cityguide
 	
+//////////////////////cityguide end////////////////////////
+	
+	
 	/**
 	 *我的收藏夹
 	 *@date 2010-5-29
@@ -519,6 +636,7 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_stuff');
 		$this->display("Cp:layout");
 	}//end my_stuff
+	
 	
 ////////////////////biz fair start/////////////////////
 	
@@ -618,16 +736,24 @@ class CpAction extends CommonAction{
 		if(!empty($_FILES["picurl"]["name"])) {
 			$this->_upload();
 		}
+		$_POST['typeid2']=array2string($_POST['typeid2'],',');
 		$vo=$dao->create();
 		if($vo){
 			$area=$this->_get_city('fair');
 			$vo['description']=String::msubstr($vo['my_content'],0,200);
 			$vo['my_content']=nl2br($vo['my_content']);
-			$t=explode('/',$vo['showstart']);
-			$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			$t=explode('/',$vo['showend']);
-			$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			$t=explode('_',$vo['typeid']);
+			if($vo['showstart']){
+				$t=explode('/',$vo['showstart']);
+				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else {
+				$vo['showstart']=time();
+			}
+			if($vo['showend']){
+				$t=explode('/',$vo['showend']);
+				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else{
+				$vo['showend']=1280000000;
+			}
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
 			$vo['maps']=$_POST['position'].','.$area[$_POST['city_id']]['_zone'][$_POST['zone_id']]['name'].','.$area[$_POST['city_id']]['ctitle'];
@@ -638,7 +764,7 @@ class CpAction extends CommonAction{
     			}
     		$vo['keywords']=trim($keywords,',');
 			$eid='';
-    		$xid=Input::getVar($_REQUEST['id']);
+    		$xid=Input::getVar($_POST['id']);
     		if($xid){
     			$aid=$xid;
     			$eid=$dao->where("id=$aid")->save($vo);
@@ -647,10 +773,10 @@ class CpAction extends CommonAction{
     		}
 			if ($aid) {
 				$data=array();
-				$data['visitor']=nl2br($_REQUEST['visitor']);
-				$data['exhibitor']=nl2br($_REQUEST['exhibitor']);
-				$data['product']=$_REQUEST['product'];
-				$data['website']=$_REQUEST['website'];
+				$data['visitor']=nl2br(Input::getVar($_POST['visitor']));
+				$data['exhibitor']=nl2br(Input::getVar($_POST['exhibitor']));
+				$data['product']=Input::getVar($_POST['product']);
+				$data['website']=Input::getVar($_POST['website']);
 				if($xid){
 					$id=$dao->Table("iic_fair")->where("aid=$aid")->save($data);
 				}else{
@@ -718,21 +844,26 @@ class CpAction extends CommonAction{
 		}else{
 			$_POST['flag']='';
 		}
+		$_POST['typeid2']=array2string($_POST['typeid2'],',');
+		$_POST['my_content']=Input::getVar($_POST['my_content']);
 		$vo=$dao->create();
 		if($vo){
+			if (empty($_POST['my_content'])) {
+				$this->error("Summary 必填");
+			}
 			$vo['description']=String::msubstr($vo['my_content'],0,200);
 			$vo['my_content']=nl2br($vo['my_content']);
 			if($vo['showstart']){
 				$t=explode('/',$vo['showstart']);
 				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
 			}else {
-				$vo['showstart']=0;
+				$vo['showstart']=time();
 			}
 			if($vo['showend']){
 				$t=explode('/',$vo['showend']);
 				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
 			}else{
-				$vo['showend']=0;
+				$vo['showend']=1280000000;
 			}
 			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];
@@ -751,8 +882,13 @@ class CpAction extends CommonAction{
     		}else{
 				$aid=$dao->add($vo);
     		}
+    		//dump($dao->getLastSql());
 			if ($aid) {
 				$data=array();
+				$_POST['content']=Input::getVar($_POST['content']);
+				if (empty($_POST['content'])) {
+					$this->error("Content 必填");
+				}
 				$data['content']=nl2br($_REQUEST['content']);
 				if($eid){
 					$id=$dao->Table("iic_addon_arc")->where("aid=$aid")->save($data);
@@ -760,7 +896,8 @@ class CpAction extends CommonAction{
 					$data['aid']=$aid;
 					$id=$dao->Table("iic_addon_arc")->add($data);
 				}
-				if($id){
+				if($id || $id=='0'){
+					//echo "发布成功!";
 					$this->success('发布成功!');
 				}else{
 					if(empty($xid)){
@@ -796,11 +933,11 @@ class CpAction extends CommonAction{
     	$classifieds=array();
     	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('classifieds',$classifieds);
-		dump($dao->getLastSql());
+		//dump($dao->getLastSql());
 		$page=array();
-		$page['title']='Post Articles -  My Control Panel -  BeingfunChina';
-		$page['keywords']='Post Articles';
-		$page['description']='Post Articles';
+		$page['title']='My Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Articles';
+		$page['description']='My Articles';
 		$this->assign('page',$page);
 		
 		$this->assign('content','Cp:my_art');
@@ -837,7 +974,7 @@ class CpAction extends CommonAction{
 		$page['description']='Edit Articles';
 		$this->assign('page',$page);
 		
-		$this->assign('content','Cp:my_edit_art');
+		$this->assign('content','Cp:post_art');
 		$this->display("Cp:layout");
 	}//end my_edit_art
 	

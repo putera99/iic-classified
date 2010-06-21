@@ -61,6 +61,7 @@ function zone(obj,id,name){
             	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
+					<div style="float:left;width:480px;overflow:hidden;">
 	            	<p>
 	            		<label for="title">Title:</label><input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
 					</p>
@@ -82,7 +83,7 @@ function zone(obj,id,name){
 						<select name="zone_id" class="zone_id" onchange="maps('maps[1]',this.)">
 							<option value="0">--Select Zone--</option>
 						</select>
-						<input type="text" name="position" id="position" value="{$data['position']}" >
+						<input type="text" name="position" id="position" value="{$data['position']}"/>
 						
 					</p>
 					<p>
@@ -94,6 +95,12 @@ function zone(obj,id,name){
 							</volist>
 						</select>
 					</p>
+					</div>
+					<div style="width:200px;float:left;overflow:hidden;">
+					<if condition="$data['picurl']">
+						<img src="{$data['picurl']}" id="picurl_img" width="120">	
+					</if>
+					</div>
 				</fieldset>
 				<fieldset>
 				<legend>Select Industries:</legend>
@@ -123,11 +130,11 @@ function zone(obj,id,name){
 								<if condition="$v['ispart'] eq 1">
 									<optgroup label="{$v['typename']}">
 										<volist name="v['_son']" id="vs">
-											<option value="{$vs['id']}"{$vs['id']|string2checked=$data['typeid2']}>{$vs['typename']}</option>
+											<option value="{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
 										</volist>
 									</optgroup>
 								<else/>
-									<option value="{$v['id']}">{$v['typename']}</option>
+									<option value="{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
 								</if>
 														
 							</volist>
@@ -138,7 +145,7 @@ function zone(obj,id,name){
 					<legend>Fair info:</legend>
 					<p><label for="ltdid">Organizer:</label>
 						<select name="ltdid" id="ltdid">
-							<option value='0'>---Select Organizer---</option>
+							<option>---Select Organizer---</option>
 							<volist name="ltd" id="l">
 								<option value="{$l['id']}"{$l['id']|selected=$data['ltdid']}>{$l['title']}</option>
 							</volist>

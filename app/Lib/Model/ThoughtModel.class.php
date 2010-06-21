@@ -16,6 +16,7 @@ class ThoughtModel extends Model{
 		array("ctime",'time',1,'function'),
 		array("mtime",'time',3,'function'),
 		array('uid',"get_uid",1,'function'),
+		array('username',"get_username",1,'function'),
 		array('click',"0",1),
 		array('ip','client_ip',1,'function'),
 	);

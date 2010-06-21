@@ -227,20 +227,7 @@
             </ul>
         </div>
         <div class="class_tree">
-            <ul>
-                <li class="bg-h">
-                <a href="__APP__/CityGuide/index">City Guide</a>
-	            </li>
-	            <volist name="city_type" id="v">
-	            	<dl id="cg_{$v['id']}" class="s_cg">
-	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
-						<volist name="v['_son']" id="vs">
-							<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
-						</volist>
-	                </dl>
-	            </volist>
-                <li class="di-yuan"></li>
-            </ul>
+            <include file="Public:cityguide"/>
         </div>
         <div class="voices-h">
             <div class="global-h">
@@ -312,7 +299,7 @@ $(document).ready(function(){
 	});
 });
 function PopModalWindow(url,width,height){
-	var result=window.showModalDialog(url,"win","dialogWidth:"+width+"px;dialogHeight:"+height+"px;center:yes;status:no;scroll:no;dialogHide:no;resizable:no;help:no;edge:sunken;");
+	var result=window.open(url,"win",'width='+width+',height='+height+',status=no,scroll=no,hide=no,resizable=no,help=no');
 	return result;
 }
 </script>

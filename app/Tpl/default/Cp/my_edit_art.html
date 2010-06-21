@@ -11,6 +11,9 @@ $(document).ready(function(){
 	if(typeid!=0){
 		ch_type(typeid);
 	}
+	$("#picurl").change(function(){
+		$("#picurl_img").attr("src",this.value);
+	});
 });
 </script>
 <div class="mulu">
@@ -29,6 +32,7 @@ $(document).ready(function(){
             	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
+					<div style="float:left; width:469px;">
 	            	<p>
 	            		<label for="title">Title:</label><input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
 					</p>
@@ -48,6 +52,11 @@ $(document).ready(function(){
 							<input type="checkbox" value="{$v['att']}" name="flag[]">{$v['attname']}   
 						</volist>
 					</p>
+					</div>
+					
+					<div style="width:200px; float:left;">
+						<img src="{$data['picurl']}" id="picurl_img">	
+					</div>
 				</fieldset>
 				<fieldset>
 				<legend>Select Industries:</legend>
