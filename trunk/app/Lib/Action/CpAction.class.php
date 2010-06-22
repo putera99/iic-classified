@@ -522,7 +522,7 @@ class CpAction extends CommonAction{
 	    		$condition['typeid']=$typeid;
 	    	}
     	}
-    	$condition['uid']=$this->user['uid'];
+    	//$condition['uid']=$this->user['uid'];
     	$count=$dao->where($condition)->count();
 		$page=new Page($count,25);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
@@ -530,7 +530,7 @@ class CpAction extends CommonAction{
 		$limit=$page->firstRow.','.$page->listRows;
     	$cityguide=array();
     	$cityguide=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
-    	dump($dao->getLastSql());
+    	//dump($dao->getLastSql());
 		$this->assign('cityguide',$cityguide);
 		
 		$page=array();
@@ -562,6 +562,39 @@ class CpAction extends CommonAction{
 	}//end my_cityguide_post
 	
 	/**
+	 *修改城市指南
+	 *@date 2010-5-25
+	 *@time 下午03:13:17
+	 */
+	function my_edit_cityguide() {
+		//修改城市指南
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$info=$dao->where($condition)->find();
+		//dump($dao->getLastSql());
+		if (empty($info)) {
+			$this->error("error: info is null!");
+		}
+		$addon=$dao->relationGet("article");
+		$this->assign('data',$info);
+		$this->assign('addon',$addon);
+		
+		$this->assign('class_tree',$class_tree=$this->_get_tree(1000));
+		$this->assign('citylist',$this->_get_city('city'));
+		$page=array();
+		$page['title']='Post CityGuide -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post CityGuide';
+		$page['description']='Post CityGuide';
+		$this->assign('page',$page);
+		$this->assign('content','Cp:my_post_cityguide');
+		$this->display("Cp:layout");
+	}//end my_edit_cityguide
+	
+	/**
 	 *增加城市指南
 	 *@date 2010-5-25
 	 *@time 下午03:14:18
@@ -588,25 +621,57 @@ class CpAction extends CommonAction{
 			}else{
 				$vo['showend']=1280000000;
 			}
+			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
-			$vo['maps']=$_POST['maps']['2'].','.$_POST['maps']['1'].','.$_POST['maps']['0'];
+			if (Input::getVar($_POST['typeid2'])){
+				$type2=array();
+				foreach ($_POST['typeid2'] as $v){
+					$t='';
+					$t=explode('_',$v);
+					if($vo['channel']!=$t['0']){
+						$this->error("channel 必须相同");
+					}
+					$type2[]=$t['1'];
+				}
+			}
+			$vo['typeid2']=array2string($type2,',');
+			unset($vo['maps']);
+			if(!empty($_POST['maps']['0']) || !empty($_POST['maps']['2'])){
+				$vo['maps']=array2string($_POST['maps'],',');
+			}
 			$kw=str_word_count($vo['title'],1);
     			$keywords="";
     			foreach ($kw as $vkw){
     				$keywords.=$vkw.',';
     			}
     		$vo['keywords']=trim($keywords,',');
-			$aid=$dao->add($vo);
+			$eid='';
+    		$xid=Input::getVar($_POST['id']);
+    		
+    		if($xid){
+    			$aid=$xid;
+    			$eid=$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
 			if ($aid) {
 				$data=array();
-				$data['content']=nl2br($_REQUEST['content']);
-				$data['aid']=$aid;
-				$id=$dao->Table("iic_addon_article")->add($data);
-				if($id){
-					$this->success('发布成功!');
+				$data['content']=Input::getVar($_POST['content']);
+				$data['content']=nl2br($data['content']);
+				if(isset($xid)){
+					$id=$dao->Table("iic_addon_article")->where("aid=$aid")->save($data);
 				}else{
-					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					$data['aid']=$aid;
+					$id=$dao->Table("iic_addon_article")->add($data);
+				}
+				if($id || $id=='0'){
+					$this->success('发布成功!');
+					//echo '发布成功!';
+				}else{
+					if(empty($xid)){
+						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					}
 					$this->error("附属表写入失败!");
 				}
 			}else{

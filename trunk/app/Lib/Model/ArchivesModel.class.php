@@ -17,6 +17,7 @@ class ArchivesModel extends RelationModel{
 		array('uid','get_uid',1,'function'),
 		array('senddate','time',1,'function'),
 		array('pubdate','time',1,'function'),
+		array('edittime','time',3,'function'),
 		array('uip','client_ip',1,'function'),
 		array('editpwd','time',1,'function'),
 		array('albumnum','0',1),
