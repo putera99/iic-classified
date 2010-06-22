@@ -21,7 +21,7 @@
 				<dt class="w100">Action</dt>
 <volist name="classifieds" id="v">
                 	<dd>
-						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a></span>
 						<span class="w100 c">{$v['channel']|get_type}</span>
 						<span class="w100 c">{$v['click']}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
