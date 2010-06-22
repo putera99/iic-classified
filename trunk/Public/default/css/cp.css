@@ -39,20 +39,21 @@
 .list {color: #3e3e3e;line-height: 22px;}
 .list label{width:80px; text-align:center; display:block; float:left;}
 
-.list .h350{ height:350px;}
+.list .h350{min-height:350px; height:auto; overflow:hidden;}
 .list dl{list-style:none;}
 .list dl dt{float:left;color: #993366;font-size: 12px;font-weight: bold; display:block; text-align:center; height:25px; line-height:25px; border-bottom:1px #ccc solid;}
 .list dl dd{ border-bottom:1px #ccc dotted;}
-.list dl dd,.list dl dd span{float:left; margin:0; padding:0; height:30px; line-height:30px;}
+.list dl dd,.list dl dd span{float:left; margin:0; padding:0; height:30px; line-height:30px; overflow:hidden;}
 .list dl .c{ text-align:center;}
 .list dl .l{ text-align:left;}
 .list dl .r{ text-align:right;}
-.list dl .w420{ width:420px;}
-.list dl .w320{ width:320px;}
-.list dl .w220{ width:220px;}
-.list dl .w100{ width:100px;}
-.list dl .w200{ width:200px;}
-.list dl .w50{ width:50px;}
+.list .w420{width:420px;}
+.list .w320{width:320px;}
+.list .w220{width:220px;}
+.list .w100{width:100px;}
+.list .w150{width:150px;}
+.list .w200{width:200px;}
+.list .w50{width:50px;}
 
 .list .album{padding: 0px;list-style-type: none; margin:0px;}
 .list .album li{margin:0 5px;border-bottom: 1px dashed #9f9f9f; padding:0px; width:140px; float:left; height:auto;}
