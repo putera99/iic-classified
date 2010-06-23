@@ -132,6 +132,17 @@ class CityGuideAction extends CommonAction{
 		$dao=D("Archives");
 		$info=$dao->where("id=$aid")->find();
 		$info['content']=$dao->relationGet("article");
+		if(empty($info['maps'])){
+			$city=$this->_get_city('localion');
+			$local='';
+			if($info['zone_id'] && $info['city_id']){
+				$local=$city[$info['city_id']]['_zone'][$info['zone_id']]['name'].','.$city[$info['city_id']]['cename'];
+			}elseif(empty($info['zone_id']) && $info['city_id']) {
+				$local=$city[$info['city_id']]['cename'];
+			}
+			$local=trim($info['position'].','.$local,',');
+			$info['maps']=$local;
+		}
 		$this->assign('info',$info);
 		$page=array();
 		$page['title']=$info['title'].'  -  BeingfunChina';

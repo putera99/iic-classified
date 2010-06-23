@@ -106,7 +106,7 @@ a img{ border:none;}
 .content-n .right p a{display:block; width:60px; height:18px;margin:5px auto;border: 1px solid #cfcfcf;background-color:#FFF;color:#15abd1;}
 .content-n .right p a:hover{background-color:#cfcfcf;color:#15abd1;}
 
-.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0; height:300px;}
+.Comments{padding:0px;color: #bf6291;margin: 15px 0 0 0;min-height:300px; height:auto; overflow:hidden;}
 .biaoti {margin:10px 8px;background-position: 1px bottom; height:35px; background:url(../images/xian.gif) repeat-x 0 35px;padding: 10px;}
 .biaoti img{margin:0px;padding: 0px;}
 
@@ -166,3 +166,20 @@ a img{ border:none;}
 .hui-bg {height: 15px;padding: 10px 0px 10px 10px;margin: 0px;}
 .hui-bg ul {margin: 0px;list-style-type: none;text-align:center;padding: 0px;color: #727272;}
 .hui-bg li {padding: 0px;background: url(../images/bg-h2.gif) no-repeat;float: left;margin: 0 5px;width: 108px;}
+
+.posts{padding:0;margin:0;}
+.posts dl{height:auto; min-height:77px;overflow:hidden; margin:0;padding:0;}
+.posts dl dt {float:left;overflow:hidden;margin:0;padding:0; text-align:center; width:70px; margin-left:10px;}
+.posts dl dt img{height:60px; width:60px;}
+.posts dl dd{height:auto; min-height:20px; color:#fff; overflow:hidden; margin:0;padding:0 0 0 20px; float:left; line-height:18px; width:570px;}
+.posts dl .h{background:url(../images/bg12.gif) no-repeat top left;}
+.posts dl .h p{background-color:#bfbfbf; padding:0 5px 0 5px}
+.posts dl .r{background:url(../images/bg12_r.gif) no-repeat top left;}
+.posts dl .r p{background-color:#c75f93; padding:0 5px 0 5px}
+
+
+
+
+
+
+

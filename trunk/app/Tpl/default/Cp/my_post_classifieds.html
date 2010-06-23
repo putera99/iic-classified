@@ -107,16 +107,29 @@ function zone(obj,id,name){
 						<select id="typeid" name="typeid">
 							<option>---Select Main Category---</option>
 							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
-										</volist>
-									</optgroup>
+								<if condition="$data['channel']">
+									<if condition="$data['channel'] eq $v['channeltype']">
+										<if condition="$v['ispart'] eq 1">
+											<optgroup label="{$v['typename']}">
+												<volist name="v['_son']" id="vs">
+													<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
+												</volist>
+											</optgroup>
+										<else/>
+											<option value="{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
+										</if>
+									</if>
 								<else/>
-									<option value="{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
+									<if condition="$v['ispart'] eq 1">
+										<optgroup label="{$v['typename']}">
+											<volist name="v['_son']" id="vs">
+												<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
+											</volist>
+										</optgroup>
+									<else/>
+										<option value="{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
+									</if>
 								</if>
-														
 							</volist>
 						</select>
 					</p>
@@ -125,16 +138,29 @@ function zone(obj,id,name){
 						<select id="typeid2" name="typeid2[]" size="5" >
 							<option>---Select Second Category---</option>
 							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
-										</volist>
-									</optgroup>
+								<if condition="$data['channel']">
+									<if condition="$data['channel'] eq $v['channeltype']">
+										<if condition="$v['ispart'] eq 1">
+											<optgroup label="{$v['typename']}">
+												<volist name="v['_son']" id="vs">
+													<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
+												</volist>
+											</optgroup>
+										<else/>
+											<option value="{$v['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
+										</if>
+									</if>
 								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
+									<if condition="$v['ispart'] eq 1">
+										<optgroup label="{$v['typename']}">
+											<volist name="v['_son']" id="vs">
+												<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
+											</volist>
+										</optgroup>
+									<else/>
+										<option value="{$v['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
+									</if>
 								</if>
-														
 							</volist>
 						</select>
 					</p>
@@ -288,39 +314,44 @@ function zone(obj,id,name){
 				<legend>Commerce:</legend>
 					<p>
 						<label for="itype">Condition:</label>
-						<input type="radio" id="itype" name="itype" value="0">All  
-						<input type="radio" name="itype" value="1">Offered 
-						<input type="radio" name="itype" value="1">Wanted 
+						<input type="radio" id="itype" name="itype" value="0"<php> echo selected('0',$data['itype'],'checked');</php>>All  
+						<input type="radio" name="itype" value="1"<php> echo selected('1',$data['itype'],'checked');</php>>Offered 
+						<input type="radio" name="itype" value="2"<php> echo selected('2',$data['itype'],'checked');</php>>Wanted 
 					</p>
 					<p>
 						<label for="category">Category:</label>
-							<input type="radio" id="category" name="category" value="0">Brand-new   
-							<input type="radio" name="category" value="1">Second-hand  
+							<input type="radio" id="category" name="category" value="0"<php> echo selected('0',$data['category'],'checked');</php>>Brand-new   
+							<input type="radio" name="category" value="1"<php> echo selected('1',$data['category'],'checked');</php>>Second-hand  
 					</p>
 					<p>
 						<label for="position">My Location:</label>
 						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+							<option value="{$v['id']}"{$v['id']|selected=$data['city_id']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 						<select name="zone_id" class="zone_id">
 							<option value="0">--Favorite Zone--</option>
+							<if condition="$data['city_id']">
+								<volist name="citylist[$data['city_id']]['_zone']" id="v">
+									<option value="{$v['id']}"{$v['id']|selected=$data['zone_id']}>{$v['name']}</option>
+								</volist>
+							</if>
 						</select>
-						<input type="text" name="position" id="position">
+						<input type="text" name="position" id="position" value="{$data['position']}">
 					</p>
 					<p>
 						<label for="quantity">Quantity:</label>
-						<input type="text" name="quantity" id="quantity">
+						<input type="text" name="quantity" id="quantity" value="{$addon['quantity']}">
 					</p>
 
 					<p><label for="salary">Price:</label>
-						<input type="text" name="salary" id="salary">
+						<input type="text" name="salary" id="salary" value="{$addon['salary']}">
 					</p>
 					<p>
 						<label for="content">Description:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<textarea cols="50" rows="10" name="content" id="content">{$addon['content']|br2nl}</textarea>
 					</p>
 				</fieldset>
 </div>
@@ -332,17 +363,22 @@ function zone(obj,id,name){
 						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+							<option value="{$v['id']}"{$v['id']|selected=$data['city_id']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 						<select name="zone_id" class="zone_id">
 							<option value="0">--Favorite Zone--</option>
+							<if condition="$data['city_id']">
+								<volist name="citylist[$data['city_id']]['_zone']" id="v">
+									<option value="{$v['id']}"{$v['id']|selected=$data['zone_id']}>{$v['name']}</option>
+								</volist>
+							</if>
 						</select>
-						<input type="text" name="position" id="position">
+						<input type="text" name="position" id="position" value="{$data['position']}">
 					</p>
 					<p>
 						<label for="content">Description:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<textarea cols="50" rows="10" name="content" id="content">{$addon['content']|br2nl}</textarea>
 					</p>
 				</fieldset>
 </div>
@@ -354,17 +390,22 @@ function zone(obj,id,name){
 						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+							<option value="{$v['id']}"{$v['id']|selected=$data['city_id']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 						<select name="zone_id" class="zone_id">
 							<option value="0">--Favorite Zone--</option>
+							<if condition="$data['city_id']">
+								<volist name="citylist[$data['city_id']]['_zone']" id="v">
+									<option value="{$v['id']}"{$v['id']|selected=$data['zone_id']}>{$v['name']}</option>
+								</volist>
+							</if>
 						</select>
-						<input type="text" name="position" id="position">
+						<input type="text" name="position" id="position" value="{$data['position']}">
 					</p>
 					<p>
 						<label for="content">Description:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<textarea cols="50" rows="10" name="content" id="content">{$addon['content']|br2nl}</textarea>
 					</p>
 				</fieldset>
 </div>
@@ -374,19 +415,19 @@ function zone(obj,id,name){
 					<p>
 						<label for="itype">Type:</label>
 						<select name="itype" id="itype">
-							<option value="1">All</option>
-							<option value="2">Offered</option>
-							<option value="3">Wanted</option>
+							<option value="1"<php> echo selected('1',$data['itype'],'checked');</php>>All</option>
+							<option value="2"<php> echo selected('2',$data['itype'],'checked');</php>>Offered</option>
+							<option value="3"<php> echo selected('3',$data['itype'],'checked');</php>>Wanted</option>
 						</select>
 					</p>
 					<p>
 						<label for="category">Category:</label>
 						<select name="category" id="category">
-							<option value="0">All</option>
-							<option value="1">Full time</option>
-							<option value="2">Part time</option>
-							<option value="3">Internship</option>
-							<option value="4">Voluntary</option>
+							<option value="0"<php> echo selected('0',$data['category'],'checked');</php>>All</option>
+							<option value="1"<php> echo selected('1',$data['category'],'checked');</php>>Full time</option>
+							<option value="2"<php> echo selected('2',$data['category'],'checked');</php>>Part time</option>
+							<option value="3"<php> echo selected('3',$data['category'],'checked');</php>>Internship</option>
+							<option value="4"<php> echo selected('4',$data['category'],'checked');</php>>Voluntary</option>
 						</select>
 					</p>
 					<p>
@@ -394,18 +435,23 @@ function zone(obj,id,name){
 						<select name="city_id" class="city_id" onchange="zone(this,'.zone_id',0)">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
-							<option value="{$v['id']}">{$v['ctitle']}</option>
+							<option value="{$v['id']}"{$v['id']|selected=$data['city_id']}>{$v['ctitle']}</option>
 							</volist>
 						</select>
 						<select name="zone_id" class="zone_id">
 							<option value="0">--Favorite Zone--</option>
+							<if condition="$data['city_id']">
+								<volist name="citylist[$data['city_id']]['_zone']" id="v">
+									<option value="{$v['id']}"{$v['id']|selected=$data['zone_id']}>{$v['name']}</option>
+								</volist>
+							</if>
 						</select>
 						<br>
-						<input type="text" name="position" id="position">
+						<input type="text" name="position" id="position" value="{$data['position']}">
 					</p>
 					<p>
 						<label for="content">Description:</label>
-						<textarea cols="50" rows="10" name="content" id="content"></textarea>
+						<textarea cols="50" rows="10" name="content" id="content">{$addon['content']|br2nl}</textarea>
 					</p>
 				</fieldset>
 </div>

@@ -637,8 +637,18 @@ class CpAction extends CommonAction{
 			}
 			$vo['typeid2']=array2string($type2,',');
 			unset($vo['maps']);
+			$local='';
+			$city=$this->_get_city('localion');
+			if($_POST['zone_id'] && $_POST['city_id']){
+				$local=$city[$info['city_id']]['_zone'][$info['zone_id']]['name'].','.$city[$info['city_id']]['cename'];
+			}elseif(empty($info['zone_id']) && $info['city_id']) {
+				$local=$city[$info['city_id']]['cename'];
+			}
+			$local=trim($_POST['position'].','.$local,',');
 			if(!empty($_POST['maps']['0']) || !empty($_POST['maps']['2'])){
 				$vo['maps']=array2string($_POST['maps'],',');
+			}else{
+				$vo['maps']=$local;
 			}
 			$kw=str_word_count($vo['title'],1);
     			$keywords="";

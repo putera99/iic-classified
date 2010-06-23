@@ -1,7 +1,7 @@
 /* CSS 中间 开始 */
 #main {width:950px;	padding: 0px;margin: 0px auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
-.n-life{width:735px;padding:0px;margin: 0px;float: left;}
+.n-life{width:706px;padding:0px;margin: 0px;float: left;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-n {border: 1px solid #CCCCCC;background-color:#f3f3f3;margin:0px;padding: 5px 0 0 0;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
@@ -18,7 +18,7 @@
 
 
 /* CSS 右边 开始 */
-.right{padding:0px;float:right;margin: 0px;width: 200px;}
+.right{padding:0px;float:right;margin: 0px;width: 234px;}
 .next_lssue { margin:0px; padding: 0px;}
 .next-bg{background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0px;padding: 0 0 0 10px;}
 .next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0;}

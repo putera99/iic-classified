@@ -19,7 +19,8 @@ a img{ border:none;}
 #top{color: #FFFFFF;width:950px;padding:0px;margin: 0px auto;}
 .top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 10px;}
 .top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
-.top-city h2 a:hover,.top-city h2 .on{width:96px; height:26px; line-height:26px;border:1px solid #503442; color:#bcbcbc;}
+.top-city h2 a:hover,.top-city h2 .on{width:96px; height:26px; line-height:26px;border:1px solid #FC7F2B; color:#FC7F2B;}
+.top-city h2 a:hover{border:1px solid #fff; color:#fff;}
 #header-h{ height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
 .bg-h{height: 8px;margin:0px;padding: 0px;background: url(../images/bg-huan.gif) repeat-x;}
 .main-left .bg-h{height:24px;font-size: 14px;font-weight: bold;color: #e25a02;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
@@ -33,16 +34,18 @@ a img{ border:none;}
 .clear{line-height:0px;clear: both;height: 0px;}
 .top-content{height: 125px;margin:0px;padding:0px;background:url(../images/bg2.gif) repeat-x;}
 .top-logo{height: 96px;margin:0px;padding:0px;}
-.top-logo h1{width:169px;float:left;margin: 0 0 0 60px; _margin: 0 0 0 30px;padding: 5px 0 0 0;}
-.top-city{ width:466px; margin:0px; padding:25px 0 0 0; float:right;}
+.top-logo h1{width:169px;float:left;margin: 0 0 0 25px; _margin: 0 0 0 13px;padding: 5px 0 0 0;}
+.top-city{width:466px; margin:0px; padding:25px 20px 0 0;float:right;}
 .top-city a{ margin:0px; padding:0 0 0 8px;}
 .top-nav{margin: 0px;padding-left: 25px;width: 906px;}
-.nav{width:650px;height: 20px;margin:0px;padding:0px;}
+.nav{width:650px;height:20px;margin:0px;padding:0px;}
 .nav a{color: #fff;}
-.nav .annv {background: url(../images/button.png) no-repeat;}
-.annv a{color: #fff;}
-.nav ul{margin:0px;padding:0px;list-style-type:none;}
-.nav li{float:left;padding:0;margin-right:30px;}
+
+.nav .annv{background:url(../../img/l.gif) no-repeat;}
+.annv a{color: #fff;background:url(../../img/r.gif) no-repeat right top; height:20px; line-height:20px; display:block; padding-right:7px;}
+
+.nav ul{margin:0px;padding:2px 0 0 0;list-style-type:none;}
+.nav li{float:left;padding:0;margin-right:30px; height:20px; padding:0 0 0 6px;}
 .search{width:230px;float:right;margin: 0px;padding: 0px;}
 .bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
 

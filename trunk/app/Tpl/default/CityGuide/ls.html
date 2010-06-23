@@ -52,21 +52,7 @@
     </div>
     <div class="main-left">
         <div class="class_tree">
-            <ul>
-                <li class="bg-h">
-                <a href="__APP__/Classifieds/index">Classifieds</a>
-	            </li>
-	            <volist name="classifieds_type" id="v">
-	                <dl id="cf_{$v['id']}" class="s_cf">
-	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
-						<volist name="v['_son']" id="vs">
-							<dd class="cf_{$v['id']} none"><a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
-						</volist>
-	                </dl>
-	            </volist>
-                <li class="di-yuan">
-                </li>
-            </ul>
+            <include file="Public:classifieds"/>
         </div>
         <div class="class_tree">
             <include file="Public:cityguide"/>

@@ -1,5 +1,13 @@
 <?php
 
+function picurl($url){
+	$arr=explode('/',$url);
+	if ($arr['0']=='article') {
+		$url='http://www.beingfunchina.com/upload_files/'.$url;
+	}
+	return $url;
+}
+
 function br2nl($text) {    
 	return preg_replace('/<br\\s*?\/??>/i', '', $text);   
 } 
