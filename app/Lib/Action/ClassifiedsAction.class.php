@@ -23,13 +23,7 @@ class ClassifiedsAction extends CommonAction{
 	function _initialize() {
 		//预处理
 		parent::_initialize();
-		if (intval($_GET['cid'])){
-			
-			$this->pcid=intval($_GET['cid']);
-		}else{
-			$this->_set_cid();
-			$this->pcid=$this->cid;
-		}
+		
 		$this->assign('city_type',$this->_get_tree(1000));
 	}//end _initialize()
 	
@@ -41,6 +35,8 @@ class ClassifiedsAction extends CommonAction{
 	   */
 	function index() {
 		//分类信息频道页
+		$this->chk_cid();
+		
 		$arctype=D("Arctype");
 		$data=$arctype->where("topid=1 AND ishidden=0")->order("id asc")->findAll();
 		$list=list_to_tree($data,'id','reid','_son',1);
@@ -64,6 +60,8 @@ class ClassifiedsAction extends CommonAction{
 	 */
 	function ls() {
 		//分类信息列表页面
+		$this->chk_cid();
+		
 		$typeid=intval($_GET['id']);
 		
 		$arctype=D("Arctype");
@@ -186,4 +184,19 @@ class ClassifiedsAction extends CommonAction{
 		$this->assign('dh',$this->_get_dh($info['typeid']));
 		$this->display();
 	}//end show
+	
+	/**
+	 *检查城市选项
+	 *@date 2010-6-23
+	 *@time 上午10:17:39
+	 */
+	protected function chk_cid() {
+		//检查城市选项
+		if (intval($_GET['cid'])){
+			$this->pcid=intval($_GET['cid']);
+		}else{
+			$this->_set_cid();
+			$this->pcid=$this->cid;
+		}
+	}//end chk_cid
 }//end ClassifiedsAction

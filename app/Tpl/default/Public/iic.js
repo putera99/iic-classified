@@ -75,6 +75,7 @@ $(document).ready(function(){
 					alert(data['info']);
 					get_comments(tid,types);
 					$("#comment_content").val('');
+					fleshVerify();
 					//document.form['post_comment'].reset();
 				}else{
 					alert(data['info']);

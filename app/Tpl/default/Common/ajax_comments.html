@@ -1,23 +1,26 @@
 <if condition="$comments">
 <volist name="comments" id="v">
-    <div class="Comments-b">
-        <div class="pic-right">
-            <ul>
-                <li>{$v['message']}</li>
-                <li class="ziti">
-                    <a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
-                </li>
-            </ul>
-        </div>
-        <div class="Comments-pic">
-            <img src="__PUBLIC__/default/images/pic5.gif" alt="pic3" />
-            <p>
-                {$v['username']}
-            </p>
-        </div>
-    </div>
+	<div class="posts">
+	<dl>
+		<dt>
+			<a href="#"><img src="__PUBLIC__/default/images/pic5.gif" alt="{$v['username']}" /></a>
+			<br>
+			<a href="#">{$v['username']}</a>
+		</dt>
+		<if condition="($i%2) eq 1">
+		<dd class="h">
+		<else/>
+		<dd class="r">
+		</if>
+			<p>{$v['message']}<br><br>
+			<a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
+			</p>
+		</dd>
+	</dl>
+</div>
 </volist>
-<div class="fanye">
+<div class="fanye" style="margin:10px auto;">
 	{$showpage_bot}
 </div>
+<div class="clear"></div>
 </if>

@@ -144,6 +144,7 @@ class GroupAction extends CommonAction{
 		}
 		$condition['l']='1';
 		$condition['topid']='0';
+		$condition['is_show']='1';
 		
 		$post=D("Post");
 		$count=$post->where($condition)->count();
@@ -233,9 +234,21 @@ class GroupAction extends CommonAction{
 	 *@date 2010-6-4
 	 *@time 下午04:02:01
 	 */
-	function members($gid,$limit="0,8") {
+	function members() {
 		//群内成员
-		
+		$gid=Input::getVar($_GET['gid']);
+		$dao=D("Tagspace");
+		$count=$dao->where("tagid=$gid")->count();
+		import("ORG.Util.Page");
+		$page=new Page($count,50);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage_bot',$page->show_img());
+		$limit=$page->firstRow.','.$page->listRows;
+		$member=$this->get_gmember($gid,'',$limit);
+		$this->assign('member',$member);
+		$this->display();
 	}//end members
 	
 	/**
@@ -266,6 +279,7 @@ class GroupAction extends CommonAction{
 			$condition['ctime']=time();
 			$id=$dao->add($condition);
 			if ($id) {
+				$this->edit_thread($gid,3);
 				$this->ajaxReturn($id,"成功加入！",'1');
 			}else{
 				$this->ajaxReturn('0',"加入不成功!",'0');
@@ -295,6 +309,7 @@ class GroupAction extends CommonAction{
 			$vo['requery']=$vo['requery']?$vo['requery']:"0";
 			$vo['qidstr']=$vo['qidstr']?$vo['qidstr']:"0";
 			$vo['message']=nl2br($vo['message']);
+			$vo['is_show']=1;
 			if($vo['topid']!='0' && $vo['requery']=='0'){
 				$top=$dao->where("topid={$vo['topid']}")->field('id,l,topid')->order("l DESC")->find();
 				$vo['l']=$top['l']+1;
@@ -307,6 +322,11 @@ class GroupAction extends CommonAction{
 				$data=$dao->where("id=$pid")->find();
 				$data['dateline']=toDate($data['dateline'],'Y-m-d');
 				$data['lasttime']=toDate($data['lasttime'],'Y-m-d');
+				if($data['l']=='1'){
+					$this->edit_thread($data['gid']);
+				}else{
+					$this->edit_thread($data['gid'],2);
+				}
 				$this->ajaxReturn($data,"发布成功！",'1');
 			}else{
 				$this->ajaxReturn('0',"发布不成功!",'0');
@@ -315,41 +335,6 @@ class GroupAction extends CommonAction{
 			$this->ajaxReturn('0',$dao->getDbError(),'0');
 		}
 	}//end add_group
-	
-	/**
-	 *增加群组
-	 *@date 2010-6-4
-	 *@time 下午04:36:53
-	 */
-	function add_group_check() {
-		//增加群组
-		
-	}//end add_group_check
-	
-
-	
-	
-	/**
-	*获取热点群组
-	*@date Sat Jun 05 16:48:56 CST 2010
-	*@time 16:48:56
-	*/
-	protected function _get_group($mode="",$limit="0,6"){
-		//获取热点群组
-		$dao=D("Group");
-		if ($mode=='hot') {
-			$str="threadnum>0 AND viewperm=0";
-			$order="postnum,lasttime DESC";
-		}elseif($mode=="new") {
-			$str="";
-			$order="ctime DESC";
-		}
-		$data=$dao->where($str)->order($order)->limit($limit)->findAll();
-		//dump($dao->getlastSql());
-		return $data;
-	}//end _get_hot
-	
-
 	
 	/**
      *获取当前栏目位置
@@ -366,6 +351,26 @@ class GroupAction extends CommonAction{
     	return $data;
     }//end _get_dh
     
+    /**
+     *修改主题数
+     *@date 2010-6-23
+     *@time 上午10:55:29
+     */
+    protected function edit_thread($gid,$type='1',$num='1') {
+    	//修改主题数
+    	if(!empty($gid)){
+	    	$dao=D("Group");
+	    	$info=$dao->where("id=$gid")->find();
+	    	if($type=='1'){
+	    		$info['threadnum']=$info['threadnum']+$num;
+	    	}elseif($type=='2'){
+	    		$info['postnum']=$info['postnum']+$num;
+	    	}elseif($type=='3'){
+	    		$info['membernum']=$info['membernum']+$num;
+	    	}
+	    	return $dao->save($info);
+    	}
+    }//end edit_thread
     
 }// END GroupAction
 

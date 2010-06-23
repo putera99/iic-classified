@@ -668,11 +668,11 @@ class CommonAction extends Action{
 		
 	}//end _get_catnum
 	
-		/**
-	   *等记群组关系
-	   *@date 2010-6-7
-	   *@time 下午09:15:29
-	   */
+	/**
+   *等记群组关系
+   *@date 2010-6-7
+   *@time 下午09:15:29
+   */
 	protected function _add_tagspace($gid,$grade,$uid='',$username='') {
 		//等记群组关系
 		$dao=new Model();
@@ -682,6 +682,43 @@ class CommonAction extends Action{
 		$sql="INSERT INTO `iic_tagspace` (`id`,`tagid`,`uid`,`username`,`grade`,`ctime`)VALUES (NULL , '$gid', '$uid', '$username', '$grade', '$ctime') ON DUPLICATE KEY UPDATE `grade`='$grade';";
 		return $dao->execute($sql);
 	}//end _add_tagspace
+	
+	/**
+	*获取群组
+	*@date Sat Jun 05 16:48:56 CST 2010
+	*@time 16:48:56
+	*/
+	protected function _get_group($mode="",$limit="0,6"){
+		//获取热点群组
+		$dao=D("Group");
+		if ($mode=='hot') {
+			$str="threadnum>0";
+			$order="postnum,lasttime DESC";
+		}elseif($mode=="new") {
+			$str="";
+			$order="ctime DESC";
+		}
+		$data=$dao->where($str)->order($order)->limit($limit)->findAll();
+		dump($dao->getlastSql());
+		return $data;
+	}//end _get_group
+	
+	/**
+	 *获取群组内的成员
+	 *@date 2010-6-23
+	 *@time 下午02:55:18
+	 */
+	protected function get_gmember($gid,$grade='',$limit='') {
+		//获取群组内的成员
+		$dao=D("Tagspace");
+		$condition=array();
+		$condition['tagid']=$gid;
+		if(!empty($grade)){
+			$condition['grade']='3';
+		}
+		return $dao->where($condition)->limit($limit)->findAll();
+		
+	}//end get_gmember
 	
 ///////////////////////////////群组的共用类————end//////////////////////////
 }//END CommonAction

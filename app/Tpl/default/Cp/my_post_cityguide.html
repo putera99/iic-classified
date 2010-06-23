@@ -111,19 +111,13 @@ function zone(obj,id,name){
 						<select id="typeid" name="typeid">
 							<option value="0">---Select Main Category---</option>
 							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
-										</volist>
-									</optgroup>
-								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
-									<volist name="v['_son']" id="vs">
-										<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
+								<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>+{$v['typename']}</option>
+								<volist name="v['_son']" id="vs">
+									<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>+---{$vs['typename']}</option>
+									<volist name="vs['_son']" id="vss">
+										<option value="{$v['channeltype']}_{$vss['id']}"{$vss['id']|string2checked=$data['typeid2'],',','selected'}>+---+---{$vss['typename']}</option>
 									</volist>
-								</if>
-														
+								</volist>
 							</volist>
 						</select>
 					</p>
@@ -132,19 +126,13 @@ function zone(obj,id,name){
 						<select id="typeid2" name="typeid2" size="5" >
 							<option value="0">---Select Second Category---</option>
 							<volist name="class_tree" id="v">
-								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
-										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
-										</volist>
-									</optgroup>
-								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
-									<volist name="v['_son']" id="vs">
-										<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
+								<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>+{$v['typename']}</option>
+								<volist name="v['_son']" id="vs">
+									<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>+---{$vs['typename']}</option>
+									<volist name="vs['_son']" id="vss">
+										<option value="{$v['channeltype']}_{$vss['id']}"{$vss['id']|string2checked=$data['typeid2'],',','selected'}>+---+---{$vss['typename']}</option>
 									</volist>
-								</if>
-														
+								</volist>
 							</volist>
 						</select>
 					</p>

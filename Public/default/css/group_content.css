@@ -45,8 +45,10 @@
 .next_lssue { margin:0px; padding: 0px;}
 .n-life{width:706px;padding:0px;margin: 0px;float: left;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
-.next-bg{height:22px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0;}
+.content-bg a{color: #212121;}
+.next-bg{height:22px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0; padding-left:10px;}
 .next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;height: 285px;}
+.next-n a{color: #595959;}
 .chengyuan {height: 300px;padding: 0px;background-color: #f3f3f3;margin: 0 0 10px 0;}
 .chengyuan dl {margin: 0px;padding: 5px 0px 5px 20px;line-height: 14px;float: left;}
 .chengyuan dt {margin: 0px;padding: 0px;}
