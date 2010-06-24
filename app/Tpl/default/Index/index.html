@@ -59,28 +59,19 @@
             </div>
             <div class="clear">
             </div>
-            <div class="main-group">
-                <div class="main-bg">
-                    Featured Groups 
-                </div>
-                <div class="main-n">
-                    <h5>will explore the "naked wedding...</h5>
+
+
+            <div class="conter-group">
+                <div class="group">Featured Groups </div>
+<volist name="group" id="g">
+                <div class="group-n">
+                    <h5><a href="__APP__/Group/show/id/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                     <p>
-                        <img src="__PUBLIC__/default/images/pic-h03.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
+                        <img src="__PUBLIC__/default/images/pic-h03.gif" alt="{$g['groupname']}" />{$v['membernum']}
                     </p>
                 </div>
-                <div class="main-n">
-                    <h5>will explore the "naked wedding...</h5>
-                    <p>
-                        <img src="__PUBLIC__/default/images/pic-h03.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                    </p>
-                </div>
-                <div class="main-n">
-                    <h5>will explore the "naked wedding...</h5>
-                    <p>
-                        <img src="__PUBLIC__/default/images/pic-h03.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                    </p>
-                </div>
+</volist>
+
             </div>
             <div class="advertisement">
                 <img src="__PUBLIC__/default/images/pic2.gif" alt="pic2" />
@@ -98,7 +89,7 @@
                         </dt>
                         <dd>
                             <span class="title-h">{$pick['title']}</span>
-                            {$pick['my_content']}<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
+                            {$pick['my_content']|String::msubstr=0,100}...<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
                         </dd>
                     </dl>
                 </div>
@@ -111,7 +102,7 @@
                         <p>
                             <span class="m"><a href="__APP__/Arc/show/aid/{$v['id']}">
                             	<img src="{$v['picurl']}" alt="{$v['title']}" width="100" /></a></span>
-							{$v['my_content']|String::msubstr=0,60}
+							{$v['my_content']|String::msubstr=0,60}...
                         </p>
                     </div>
 </volist>
@@ -210,21 +201,7 @@
     </div>
     <div class="main-left">
         <div class="class_tree">
-            <ul>
-                <li class="bg-h">
-                <a href="__APP__/Classifieds/index">Classifieds</a>
-	            </li>
-	            <volist name="classifieds_type" id="v">
-	                <dl id="cf_{$v['id']}" class="s_cf">
-	                    <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
-						<volist name="v['_son']" id="vs">
-							<dd class="cf_{$v['id']} none"><a href="__APP__/Classifieds/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
-						</volist>
-	                </dl>
-	            </volist>
-                <li class="di-yuan">
-                </li>
-            </ul>
+            <include file="Public:classifieds"/>
         </div>
         <div class="class_tree">
             <include file="Public:cityguide"/>

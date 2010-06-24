@@ -10,10 +10,10 @@
 .welcome-quan{height: 200px;margin: 0px 7px 10px 7px;padding: 0 0 0 10px;}
 .renshu {width: 200px;margin: 0px;padding: 0px;float: left;position: relative;padding: 0px;margin: 0px 5px 10px 0px;}
 .renshu h5{margin:0px;font-size: 12px;line-height: 16px;font-weight: normal;padding: 0 0 0 70px;}
-.renshu img {position: absolute;top: 0px;left: 0px;}
-.renshu p {margin: 0px;padding: 0 0 0 70px;color: #a32062;}
-.class-xinxi {margin: 0px 5px;padding: 0 0 0 10px;}
-.class-xinxi h3 {font-size: 12px;color: #79214d;margin: 0px;padding: 5px 0 0 0; }
+.renshu img {position:absolute;top:0;left:0;vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : auto);_width:expression(this.width > 60 ? 60px : auto);/*  IE6 */}
+.renshu p {margin: 0;padding: 0 0 0 70px;color: #a32062;}
+.class-xinxi {margin: 0 5px;padding: 0 0 0 10px;}
+.class-xinxi h3 {font-size: 12px;color: #79214d;margin: 0;padding: 5px 0 0 0; }
 .class-xinxi a {color: #353535;text-decoration: none;padding-left: 10px;}
 
 .qun-xinx li {margin: 0px;padding: 0px;}
