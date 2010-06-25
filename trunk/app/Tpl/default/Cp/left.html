@@ -122,4 +122,21 @@
                 <br/>
             </div>
         </div>
+<if condition="$_SESSION['username']=='iicc' || $_SESSION['username']=='bfcadmin'">
+		<div class="memcp-groups">
+            <div class="memcp-groups-bg">
+                Administrators
+            </div>
+            <div class="neirong">
+                <a href="__URL__/post_art">Settings</a>
+                <br/>
+                <a href="__URL__/post_art">Role</a>
+                <br/>
+                <a href="__URL__/my_art">User</a>
+                <br/>
+                <a href="__APP__/Mcp/stat">Statistics</a>
+                <br/>
+            </div>
+        </div>
+</if>
     </div>

@@ -1,0 +1,39 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Mcp/stat">Statistics</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3>Statistics</h3>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="list">
+            <dl class="h350">
+            	<dt class="w320">Subject</dt>
+				<dt class="w100">Type</dt>
+				<dt class="w100">View</dt>
+				<dt class="w100">Time</dt>
+				<dt class="w100">Action</dt>
+<volist name="classifieds" id="v">
+                	<dd>
+						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a></span>
+						<span class="w100 c">{$v['channel']|get_type}</span>
+						<span class="w100 c">{$v['click']}</span>
+						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
+						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a></span>
+					</dd>
+                    
+</volist>
+            </dl>
+        </div>
+    </div>
+    <div class="xuhao">
+    	{$showpage}
+    </div>
+</div>
+<div class="clear">
+</div>
