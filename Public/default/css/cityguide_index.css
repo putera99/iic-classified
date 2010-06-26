@@ -1,7 +1,7 @@
 .chengshi{margin:5px 0;color:#666666;clear: both;padding-top: 3px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;float: left;}
 .chengshi dl{clear: both;margin: 0 0 0 15px;padding: 5px;}
-.chengshi dt{margin:0px;padding:0px;clear: both;float:left;}
-.chengshi img{vertical-align: middle;}
+.chengshi dt{width:50px;height:51px;margin:0;padding:0;clear: both;float:left; background:url(../../img/cityguide/2010062518150855.gif) no-repeat;}
+.chengshi img{vertical-align: middle; margin-top:10px; margin-left:10px;}
 .chengshi dd{width: 345px;float:right;*padding:0px 15px 2px 7px; padding: 0px 15px 5px 15px; color: #1187a5;margin: 0px;}
 .chegn_ttitle{margin:0;padding-bottom:3px;display: block;font-weight: bold;color: #a82767;font-size: 14px;} 
 .chegn_ttitle a{font-weight: bold;color: #a82767;font-size: 14px;}

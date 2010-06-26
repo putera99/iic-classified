@@ -151,6 +151,9 @@ function get_type($type) {
 		case $type==12:
 			$ch='News';
 		break;
+		case $type=="group":
+			$ch='group';
+		break;
 	}
 	return $ch;
 }//end function_name
@@ -176,10 +179,16 @@ function get_ltd($ltd_id,$field){
 	}
 }
 
-function get_title($aid){
-	$dao=D("Archives");
-	$title=$dao->where("id=$aid")->field("title")->find();
-	unset($dao);
+function get_title($aid,$type='1'){
+	if($type!='group'){
+		$dao=D("Archives");
+		$title=$dao->where("id=$aid")->field("title")->find();
+		unset($dao);
+	}else{
+		$dao=D("Group");
+		$title=$dao->where("id=$aid")->field("groupname")->find();
+		unset($dao);
+	}
 	return $title['title'];
 }
 function get_city($cid,$field){
@@ -205,7 +214,7 @@ function getkey($arr,$k) {
  *@date 2010-5-20
  *@time 下午08:35:01
  */
-function toDate($time,$format='Y年m月d日 H:i:s'){
+function toDate($time,$format='Y-m-d H:i:s'){
 	if( empty($time)) {
 		return '';
 	}
@@ -215,6 +224,10 @@ function toDate($time,$format='Y年m月d日 H:i:s'){
 function get_username() {
 	return $_SESSION['username'];
 }// END get_username
+
+function get_day(){
+	return date("d");
+}
 
 function get_uid() {
 	return $_SESSION['uid'];

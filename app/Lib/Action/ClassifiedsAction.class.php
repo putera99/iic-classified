@@ -106,7 +106,7 @@ class ClassifiedsAction extends CommonAction{
 			$reinfo=$arctype->where("id={$info['reid']}")->find();
 			$this->assign('reinfo',$reinfo);
 		}
-		
+		$this->assign('classifieds_type',$this->_get_tree(1));
 		$this->assign('page',$page);
 		
 		$this->display();

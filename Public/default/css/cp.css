@@ -1,7 +1,7 @@
 /* left开始*/
 .mian{ margin:0px auto; padding:0px;}
-.memcp-left {width: 190px;margin: 0px;padding: 0px;color: #FFFFFF;
-}.welcome{margin:0px;padding:0px;border: 1px solid #cccccc;}
+.memcp-left {width: 190px;margin: 0px;padding: 0px;color: #FFFFFF;}
+.welcome{margin:0px;padding:0px;border: 1px solid #cccccc;}
 .welcome-bg{ margin:0px; padding-left:20px; background-color:#6f6c6c;}
 .material{margin:0px;padding-top:10px;text-align: center;color: #99406c;padding-bottom: 5px;font-weight: normal;background-color: #f3f3f3;}
 .material a{margin: 0px;padding: 0px;font-size: 12px;font-weight: bold;color: #8b2557;line-height: 20px;}
@@ -12,7 +12,8 @@
 .information{color:#258faa;text-align: center;margin: 3px 0 0 0;padding: 0px;}
 .information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
 .memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
-.memcp-groups-bg{margin:0px;padding-left:28px;background: url(../images/rentou.gif) no-repeat #6f6c6c;background-position: 5px; height:25px; line-height:25px;}
+.memcp-groups-bg{margin:0px;padding-left:10px;background-color:#6f6c6c;background-position: 5px; height:25px; line-height:25px;}
+.memcp-groups-bg img{vertical-align:-6px; margin-right:3px;}
 .neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
 .neirong a{color: #99406c;}
 .neirong a:hover{color: #f00; text-decoration:underline;}

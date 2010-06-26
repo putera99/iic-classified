@@ -16,6 +16,12 @@
 .list-h h5 a{color: #ff6600;}
 .list-h .m{height:80px; display:table;position: absolute;left: 5px;top: 5px;}
 .list-h .m a{display:table-cell; vertical-align:middle; }
+.list-h .m img{vertical-align: middle;
+	max-width:90px;   /* FF IE7 */
+	max-height:90px; /* FF IE7 */
+	_height:expression(this.width > 90 ? this.height*(90/this.width) : auto);/*  IE6 */
+	_width:expression(this.width > 90 ? 90px : auto);/*  IE6 */
+	}
 
 .neiR-h {width: 240px;position:relative;margin: 0px;float: left;padding: 5px 0 0 5px;}
 
@@ -24,17 +30,15 @@
 
 #main {width:950px;padding: 0px;margin: 0px auto; height:auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
-#main {width:950px;padding: 0px;margin: 0px auto; height:auto;}
-.main-left{ width:188px;margin:0px; padding:0px;}
 .main-left ul{ margin:0px; padding:0px; list-style-type:none;}
 .main-left li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
 .main-left .bg-A{height:24px;font-size: 14px;font-weight: bold;color: #993366;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
 .main-left .di-yuan{ background:url(../images/bg_yuan.gif) no-repeat;}
 
-.mian-center{width: 752px;padding:0;background-color: #f3f3f3;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-right-color: #CCCCCC;border-bottom-color: #CCCCCC;border-left-color: #CCCCCC;margin: 0px;float: left;}
-
+.mian-center{width:752px;padding:0;background-color: #f3f3f3;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-right-color: #CCCCCC;border-bottom-color: #CCCCCC;border-left-color: #CCCCCC;margin: 0px;float: left;}
+.xinwen-h{margin-top:5px;_margin-top:2px; height:auto; overflow:hidden;}
 .xinwen-h ul{ margin:0px; padding:5px 12px 0 12px; list-style-type:none; float:left; }
-.xinwen-h li{ margin:0px; padding:0px;}
+.xinwen-h li{ margin:0px; padding:0px; width:220px;}
 .xinwen-h li a{ color:#fff;}
 .banner{ margin:10px 0 0 0; padding:0px;}
 .property-h {padding: 0px;margin: 10px 0 0 0;}
