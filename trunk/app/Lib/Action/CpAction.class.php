@@ -359,6 +359,7 @@ class CpAction extends CommonAction{
     		}else{
 				$aid=$dao->add($vo);
     		}
+    		$actlog=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
 				switch (true){
@@ -415,6 +416,12 @@ class CpAction extends CommonAction{
 					$id=$dao->Table($table)->add($data);
 				}
 				if($id || $id=='0'){
+					$actlog.='<br>'.$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($aid,$vo['channel'],'add',$actlog);
+					}else{
+						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
+					}
 					$this->success('发布成功!');
 					//echo '发布成功!';
 				}else{
@@ -665,6 +672,7 @@ class CpAction extends CommonAction{
     		}else{
 				$aid=$dao->add($vo);
     		}
+    		$actlog=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
 				$data['content']=Input::getVar($_POST['content']);
@@ -676,6 +684,12 @@ class CpAction extends CommonAction{
 					$id=$dao->Table("iic_addon_article")->add($data);
 				}
 				if($id || $id=='0'){
+					$actlog.='<br>'.$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($aid,$vo['channel'],'add',$actlog);
+					}else{
+						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
+					}
 					$this->success('发布成功!');
 					//echo '发布成功!';
 				}else{
@@ -846,6 +860,7 @@ class CpAction extends CommonAction{
     		}else{
 				$aid=$dao->add($vo);
     		}
+    		$actlog.=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
 				$data['visitor']=nl2br(Input::getVar($_POST['visitor']));
@@ -859,6 +874,12 @@ class CpAction extends CommonAction{
 					$id=$dao->Table("iic_fair")->add($data);
 				}
 				if($id){
+					$actlog.='<br>'.$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($aid,$vo['channel'],'add',$actlog);
+					}else{
+						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
+					}
 					$this->success('发布成功!');
 				}else{
 					if(empty($xid)){
@@ -958,6 +979,7 @@ class CpAction extends CommonAction{
 				$aid=$dao->add($vo);
     		}
     		//dump($dao->getLastSql());
+    		$actlog=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
 				$_POST['content']=Input::getVar($_POST['content']);
@@ -972,6 +994,12 @@ class CpAction extends CommonAction{
 					$id=$dao->Table("iic_addon_arc")->add($data);
 				}
 				if($id || $id=='0'){
+					$actlog.='<br>'.$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($aid,$vo['channel'],'add',$actlog);
+					}else{
+						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
+					}
 					//echo "发布成功!";
 					$this->success('发布成功!');
 				}else{
@@ -1088,13 +1116,17 @@ class CpAction extends CommonAction{
 		}
 		$vo=$dao->create();
 		$vo['announcement']=nl2br($vo['announcement']);
-		/*dump($vo);
-		dump($dao->getDbError());*/
 		if($vo){
 			$gid=$dao->add($vo);
 			if ($gid){
 				$this->_add_tagspace($gid,1);
 				$this->assign('jumpUrl',__URL__.'/group_my');
+					$actlog=$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($gid,'group','add',$actlog);
+					}else{
+						$this->_act_log($gid,'group','edit',$actlog);
+					}
 				$this->success("Create Group Success!");
 			}else{
 				$this->error($dao->getDbError());
@@ -1347,7 +1379,7 @@ class CpAction extends CommonAction{
     			}
     		$vo['keywords']=trim($keywords,',');
 			$aid=$dao->add($vo);
-
+			$actlog=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
 				
@@ -1360,6 +1392,12 @@ class CpAction extends CommonAction{
 				$data['membernum']='0';
 				$id=$dao->Table("iic_event")->add($data);
 				if($id){
+					$actlog='<br>'.$dao->getLastSql();
+					if (empty($xid)) {
+						$this->_act_log($aid,$vo['channel'],'add',$actlog);
+					}else{
+						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
+					}
 					$this->success('发布成功!');
 				}else{
 					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();

@@ -26,7 +26,8 @@ class IndexAction extends CommonAction{
     	$this->assign('do',$this->_new_list(2004,'','0,1'));
     	$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
     	
-    	
+    	$group=$this->_get_group('hot');
+    	$this->assign('group',$group);
     	
     	$this->assign('city_type',$this->_get_tree(1000));
     	$this->assign('classifieds_type',$this->_get_tree(1));

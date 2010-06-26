@@ -90,7 +90,7 @@ class GroupAction extends CommonAction{
 	 */
 	function show() {
 		//群组页面
-		$id=intval($_REQUEST['id']);
+		$id=intval($_REQUEST['aid']);
 		if(empty($id)){
 			$this->error("参数错误！");
 		}

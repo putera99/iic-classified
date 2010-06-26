@@ -186,7 +186,7 @@ class CommonAction extends Action{
     	if($uid){
     		$condition['uid']=$uid;
     	}
-    	$info=$dao->where($condition)->limit($limit)->findAll();
+    	$info=$dao->where($condition)->order("pubdate DESC")->limit($limit)->findAll();
     	//dump($info);
     	return $info;
     }//end _get_cart
@@ -386,6 +386,34 @@ class CommonAction extends Action{
 		return $m->execute($sql);
 	}// END iicstart
 	
+	/**
+	 *时间日志
+	 *@date 2010-6-25
+	 *@time 上午11:31:28
+	 */
+	protected function _act_log($xid,$stype,$act,$sql) {
+		//时间日志
+		$dao=D("Action");
+		$data=array();
+		$data['mon']=mktime(0, 0, 0, date('n'), 1);
+		$data['xid']=$xid;
+		$data['stype']=$stype;
+		$data['act']=$act;
+		$data['sql']=$sql;
+		$vo=$dao->create($data);
+		if ($vo){
+			$id=$dao->add($vo);
+			if($id){
+				$return=true;
+			}else{
+				$return=false;
+			}
+		}else{
+			$return=false;
+		}
+		return $return;
+	}//end _act_log
+	
 	public function verify(){
 		//verify验证码
 		import('ORG.Util.Image');
@@ -470,7 +498,7 @@ class CommonAction extends Action{
     	return $data;
     }
     
-    
+/////////////////////////////////上传图片部分 start/////////////////////////////////
     protected function _upload($tid,$width='120',$height='140'){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
@@ -580,7 +608,8 @@ class CommonAction extends Action{
         
         return $uploadList;
 	}
-	
+/////////////////////////////////上传图片部分 end/////////////////////////////////
+
 	/**
 	 *发布评论
 	 *@date 2010-5-24
@@ -699,7 +728,7 @@ class CommonAction extends Action{
 			$order="ctime DESC";
 		}
 		$data=$dao->where($str)->order($order)->limit($limit)->findAll();
-		dump($dao->getlastSql());
+		//dump($dao->getlastSql());
 		return $data;
 	}//end _get_group
 	
