@@ -268,9 +268,57 @@ class CommonAction extends Action{
 		$limit=($limit==",")?'':$limit;//分页的大小
     	$data=$dao->where($condition)->limit($limit)->order('dateline DESC')->findAll();
     	$this->assign('comments',$data);
-    	//dump($dao->getLastSql());
 		$this->display("Common:ajax_comments");
     }//end ajax_comments
+    
+    /**
+     *分享到群组收藏夹
+     *@date 2010-6-28
+     *@time 下午03:04:23
+     */
+	public function ajax_share() {
+    	//分享到群组收藏夹
+		if (!$this->_is_login()){
+			$this->ajaxReturn(0,'no login!',0);
+		}else{
+			
+		}
+    }//end ajax_share
+    
+    /**
+     *显示我的群组
+     *@date 2010-6-28
+     *@time 下午03:38:35
+     */
+    public function ajax_group() {
+    	//显示我的群组
+    	if (!$this->_is_login()){
+			$this->error("no login");
+		}else{
+	    	$dao=D("Tagspace");
+	    	$condition=array();
+	    	$condition['uid']=$this->user['uid'];
+	    	$count=$dao->where($condition)->count();
+	    	if($count!='0'){
+		    	import("ORG.Util.Page");//引用分页类
+				import("@.Com.ajaxpage");//引用ajax分页类
+				$p= new ajaxpage($count,10);
+				$page=$p->ajaxshow();//显示分页
+				$this->assign("showpage_bot",$page);//显示分页
+				$limit=$p->firstRow.",".$p->listRows;//设定分面的大小
+				$limit=($limit==",")?'':$limit;//分页的大小
+		    	$data=$dao->where($condition)->order("ctime DESC")->limit($limit)->findAll();
+		    	$info=array();
+		    	foreach ($data as $v){
+		    		$info[$v['tagid']]=get_info($v['tagid']);
+		    	}
+		    	$this->assign("info",$info);
+		    	$this->display("Common:ajax_group");
+	    	}else{
+	    		echo "您还没有加入群组！";
+	    	}
+    	}
+    }//end my_group
     
     /**
      *获取当前栏目位置

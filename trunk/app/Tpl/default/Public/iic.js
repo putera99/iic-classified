@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var login=APP+'Public/ajax_is_login';
 	$("#remember").click(function(){
 		if($("#remember").attr('checked')){
 			for(var i=0;i<4;i++){
@@ -41,6 +42,7 @@ $(document).ready(function(){
 		}
 	});
 	
+	//用户私人收藏
 	$(".user_collection").click(function(){
 		//var id=$(".user_collection").attr('rel');
 		var id=this.id;
@@ -56,6 +58,23 @@ $(document).ready(function(){
 		},'json');
 	});
 	
+	//分享资源
+	$(".user_share").click(function(){
+		var id=this.id;
+		var types=id.substr(2,1);
+		var tid=id.substr(4);
+		$.post(login,'',function(data){
+			if(data['status']==1){
+				$('#group_content').load(URL+'/ajax_group');
+				//$('#group_content').modal();
+			}else{
+				alert(data['info']);
+				$('#login').modal();
+			}
+		},'json');
+	});
+	
+	//发送评论
 	$("#post_comment").click(function(){
 		var h=$("#comment_hidden").val();
 		var types=h.substr(0,1);
@@ -84,6 +103,7 @@ $(document).ready(function(){
 		}
 	});
 	
+	//滑星
 	$(".nx").mouseover(function(){
 		var x=this.id.substr(-1,1);
 		var t={1:'Sucks',2:'Bad',3:'Fine',4:'Good',5:'Awesome'};
@@ -102,14 +122,18 @@ $(document).ready(function(){
 	
 });
 
+//载入评论
 function get_comments(xid,types,page){
 	$("#comments").load(URL+'/ajax_comments',{xid:xid,types:types});
 }
+
+//ajax翻页
 function page(act,mod,xid,types,tags,page){
 	$(tags).load(URL+'/'+mod,{xid:xid,types:types,p:page});
 }
+
+//重载验证码
 function fleshVerify(){
-	//重载验证码
 	var timenow = new Date().getTime();
 	$('#verifyImg').attr('src',URL+'/verify/'+timenow);
 }
