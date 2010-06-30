@@ -18,7 +18,7 @@
                 <ul>
 <volist name="new" id="v">
                     <li>
-                        {$i}、<a href="__APP__/Group/show/id/{$v['id']}">{$v['groupname']}</a>
+                        {$i}、<a href="__APP__/Group/show/aid/{$v['id']}">{$v['groupname']}</a>
                     </li>
 </volist>
                 </ul>
@@ -37,9 +37,9 @@
                 <div class="welcome-quan">
 <volist name="hot" id="v">
                     <div class="renshu">
-                        <h5><a href="__APP__/Group/show/id/{$v['id']}">{$v['groupname']}</a></h5>
+                        <h5><a href="__APP__/Group/show/aid/{$v['id']}">{$v['groupname']}</a></h5>
                         <p>
-                            <img src="{$v['pic']}" alt="{$v['groupname']}" />({$v['membernum']})
+                            <a href="__APP__/Group/show/aid/{$v['id']}"><img src="{$v['pic']}" alt="{$v['groupname']}" /></a>({$v['membernum']})
                         </p>
                     </div>
 </volist>

@@ -17,19 +17,24 @@ class PublicAction extends CommonAction{
 	 *处理选择城市
 	 *@date 2010-5-4
 	 *@time 下午03:16:36
+	 *87221965
+	 *13138663720
 	 */
 	function index() {
 		//处理选择城市
 		$cid=$_GET['cid'];
 		if($cid){
 			$_SESSION['cid']=$cid;
-			cookie(null,'cid');
+			cookie('cid',null);
 			if ($_REQUEST['remember']) {
 				cookie('cid',$cid,array('expire'=>60*60*60*24*30));
-			}else{
-				cookie('cid',$cid,array('expire'=>60*60*60*24*1));
 			}
-			$this->redirect('/Index/index');
+			if(empty($_REQUEST['to'])){
+				$this->redirect('/Index/index');
+			}else{
+				$url=mydecode($_REQUEST['to']);
+				$this->redirect($url);
+			}
 		}else{
 			$this->display();
 		}
@@ -39,6 +44,9 @@ class PublicAction extends CommonAction{
 	function login() {//登录
 		if ($this->user) {
 			$this->error("is login");
+		}
+		if($_REQUEST['to']){
+			$this->assign('to',$_REQUEST['to']);
 		}
 		$this->display();
 	}// END login
@@ -59,7 +67,12 @@ class PublicAction extends CommonAction{
 		unset($_SESSION['uid']);
 		unset($_SESSION['username']);
 		$this->user='';
-		$this->redirect('/Index/index');
+		if(empty($_REQUEST['to'])){
+			$this->redirect('/Index/index');
+		}else{
+			$url=mydecode($_REQUEST['to']);
+			$this->redirect($url);
+		}
 	}// END login_out
 	
 	function check() {
@@ -79,7 +92,12 @@ class PublicAction extends CommonAction{
 				if ($_REQUEST['is_ajax']) {
 					$this->ajaxReturn("{$info['uid']}",'登录成功','1');
 				}else{
-					$this->redirect("/Cp/index");
+					if(empty($_REQUEST['to'])){
+						$this->redirect("/Cp/index");
+					}else{
+						$url=mydecode($_REQUEST['to']);
+						$this->redirect($url);
+					}
 				}
 			}else{
 				if ($_REQUEST['is_ajax']) {
@@ -130,7 +148,12 @@ class PublicAction extends CommonAction{
 			$_SESSION['uid']=$info['uid'];
 			$_SESSION['username']=$info['username'];
 			$_SESSION["info"]=$info;
-			$this->redirect("/Cp/index");
+			if(empty($_REQUEST['to'])){
+				$this->redirect("/Cp/index");
+			}else{
+				$url=mydecode($_REQUEST['to']);
+				$this->redirect($url);
+			}
 		}else{
 			$this->error("ERROR:2!");
 		}

@@ -45,8 +45,8 @@
             </div>
             <volist name="list" id="v">
                 <div class="center">
-                    <div class="content_top">
-                        <a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
+                    <div class="content_top top_y">
+                        <div class="span"><img src="__PUBLIC__/img/classifieds/{$v['id']}.gif"></div><a href="__APP__/Classifieds/ls/id/{$v['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$v['typename']}</a>
                     </div>
                     <div class="content_di">
                         <if condition="$v['_son']">
