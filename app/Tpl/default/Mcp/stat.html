@@ -12,23 +12,58 @@
         <div class="clear">
         </div>
         <div class="list">
-            <dl class="h350">
-            	<dt class="w320">Subject</dt>
-				<dt class="w100">Type</dt>
-				<dt class="w100">View</dt>
-				<dt class="w100">Time</dt>
-				<dt class="w100">Action</dt>
-<volist name="classifieds" id="v">
-                	<dd>
-						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a></span>
-						<span class="w100 c">{$v['channel']|get_type}</span>
-						<span class="w100 c">{$v['click']}</span>
-						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
-						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a></span>
-					</dd>
+        	<form action="__URL__/stat" method="POST">
+        	<table border="0" width="98%">
+        		<tr>
+        			<td>指定用户 uid<input type="text" name="uid"> 或者 username<input type="text" name="username"></td>
+        		</tr>
+        		<tr>
+        			<td>指定类别 
+						<select name="stype">
+	        				<option value="2">CityGuide</option>
+	        				<option value="4">Jobs</option>
+	        				<option value="5">Article</option>
+	        				<option value="6">Article</option>
+	        				<option value="7">Article</option>
+	        				<option value="8">Article</option>
+	        				<option value="9">Article</option>
+	        				<option value="10">Event</option>
+	        				<option value="11">Fair</option>
+	        				<option value="12">News</option>
+	        				<option value="group">Group</option>
+	        			</select>
+					</td>
+        		</tr>
+        		<tr>
+        			<td>指定时间  <input type="text" name="st">至<input type="text" name="et"></td>
+        		</tr>
+        		<tr>
+        			<td><input type="submit" value="Submit"></td>
+        		</tr>
+        	</table>
+			</form>
+			<hr>
+            <table border="1" bordercolor="#eeeeee" width="98%">
+            	<tr>
+            		<th width="45%">title</th>
+            		<th width="10%">user</th>
+            		<th width="10%">action</th>
+            		<th width="10%">type</th>
+            		<th width="10%">xid</th>
+            		<th width="15%">time</th>
+            	</tr>
+<volist name="alog" id="v">
+                	<tr>
+                		<td><a href="__APP__/{$v['stype']|get_type}/show/aid/{$v['xid']}">{$v['xid']|get_title=$v['stype']}</a></td>
+                		<td>{$v['username']}({$v['uid']})</td>
+                		<td>{$v['act']}</td>
+                		<td>{$v['stype']|get_type}</td>
+                		<td>{$v['xid']}</td>
+                		<td>{$v['ctime']|toDate}</td>
+					</tr>
                     
 </volist>
-            </dl>
+            </table>
         </div>
     </div>
     <div class="xuhao">

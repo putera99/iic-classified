@@ -1,16 +1,15 @@
 <div id="top">
-        <div id="header-h">
-            <div class="header-left">
-                <span>{$now} | 
-                <empty name="Think.SESSION.uid">
-                	<a href="__APP__/Public/login">Login</a> / <a href="__APP__/Public/register">Register</a>
-                <else/>
-					<a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
-            	</empty>
-			</span>
+    <div id="header-h">
+        <div class="header-left">
+            <span>{$now} | 
+			<empty name="Think.SESSION.uid">
+				<a href="__APP__/Public/login/to/{$tourl}">Login</a> / <a href="__APP__/Public/register/to/{$tourl}">Register</a></span>
+			<else/>
+				<a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
+			</empty>
         </div>
         <div class="colorz">
-            <ul>
+            <!--ul>
                 <li>Pick a Theme:</li>
                 <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
                 <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
@@ -18,41 +17,44 @@
                 <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
                 <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
                 <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
-            </ul>
+            </ul-->
         </div>
     </div>
     <div class="top-content">
         <div class="top-logo">
             <h1><img src="__PUBLIC__/default/images/logo.gif" alt="{&P_NAME}" /></h1>
             <div class="top-city">
-                <h2><a href="__APP__/Public/index/cid/2" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
-                <h2><a href="__APP__/Public/index/cid/3" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
-            <h2><a href="__APP__/Public/index/cid/1" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
-            <h2><a href="__APP__/Public/index/cid/4" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
-        <span style="float:right; margin-right:10px; font-size:10px;">
-		<input type="checkbox" value="1" name="remember" id="remember" />Remember my choice</span>
-    </div>
+                <h2><a href="__APP__/Public/index/cid/2/to/{$tourl}" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/Public/index/cid/3/to/{$tourl}" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/Public/index/cid/1/to/{$tourl}" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/Public/index/cid/4/to/{$tourl}" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+				<span style="float:right; margin-right:10px; font-size:10px;">
+					<input type="checkbox" value="1" name="remember" id="remember" <if condition="cookie('cid')"> checked="checked"</if>/>Remember my choice
+				</span>
+            </div>
+			
+        </div>
+        <div class="clear">
+        </div>
+        <div class="top-nav">
+            <div class="search">
+                <img src="__PUBLIC__/default/images/search.gif" alt="search" />
+            </div>
+            <div class="nav">
+                <ul>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/CityGuide/index">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/Classifieds/index">Classifieds</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/Biz/index">China Biz</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/Event/index">Event</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index">Magazine</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/Group/index">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bg-h">
+        </div>
     </div>
     <div class="clear">
     </div>
-    <div class="top-nav">
-        <div class="search">
-            <img src="__PUBLIC__/default/images/search.gif" alt="search" />
-        </div>
-        <div class="nav">
-            <ul>
-                <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/">Home</a></li>
-				<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/CityGuide/index">City Guide</a></li>
-                <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/Classifieds/index">Classifieds</a></li>
-                <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/Biz/index">China Biz</a></li>
-				<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/Event/index">Event</a></li>
-                <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index">Magazine</a></li>
-                <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/Group/index">Group</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="bg-h">
-    </div>
-</div>
-<div class="clear"></div>
 </div>

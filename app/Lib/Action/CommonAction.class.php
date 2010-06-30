@@ -7,14 +7,14 @@
  * @package  bi
  * @subpackage  Action
  * @author   朝闻道 <hydata@gmail.com>
- * @date 2010-4-14
+ * @date 2010-4-14 
  * @time  下午12:06:59
  +------------------------------------------------------------------------------
  */
 class CommonAction extends Action{
 	protected $user=array();//用户信息
 	protected $cid;//城市ID
-	
+
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
@@ -25,6 +25,11 @@ class CommonAction extends Action{
         import("ORG.Util.String");
         import("ORG.Util.Input");
         load("extend");
+        $arr=array('/cid/3','/cid/2','/cid/1','/cid/4','/index.php?s=','/Public/select_city');
+        $url=str_replace($arr,'',$_SERVER["REQUEST_URI"]);
+        $url=myencode($url);
+        $this->assign('tourl',$url);
+        
         //import('ORG.Util.Image');
         
 
@@ -358,6 +363,8 @@ class CommonAction extends Action{
     	return $data;
 	}//end _get_classifieds_type
     
+///////////////////////////////////////关键字操作 start/////////////////////////////////////////////
+	
     /**
      * 获取指定分类的关键字
      * @param unknown_type $cid
@@ -379,10 +386,16 @@ class CommonAction extends Action{
 		return $data;
     }// END cat_tags
     
-    public function tag() {
-		$tname=empty($_GET['name'])?$_POST['name']:$_GET['name'];
-		$pid=empty($_GET['pid'])?$_POST['pid']:$_GET['pid'];
-		$type=empty($_GET['type'])?$_POST['type']:$_GET['type'];
+    /**
+     *标签整理
+     *@date 2010-6-30
+     *@time 上午11:04:46
+     */
+    public function tag($tname,$pid,$type) {
+    	//标签整理
+		$tname=empty($tname)?$_REQUEST['name']:$tname;
+		$pid=empty($pid)?$_REQUEST['pid']:$pid;
+		$type=empty($type)?$_REQUEST['type']:$type;
 		if(!empty($pid) && !empty($type)){
 			$tagscat=M("TagsCat");
 			$catname=$tagscat->where("id=$pid")->find();
@@ -409,6 +422,65 @@ class CommonAction extends Action{
 		}
 	}// END tag
 	
+	/**
+	 *关键字整理
+	 *@date 2010-6-30
+	 *@time 上午11:54:11
+	 */
+	function tags_rehash() {
+		//关键字整理
+		$model=new Model();
+		$model->execute("TRUNCATE TABLE `iic_tags`");//清空标签信息表
+		$model->execute("TRUNCATE TABLE `iic_tags_link`");//清空标签链接
+		unset($model);
+		
+		$dao=D("Archives");
+		import("ORG.Util.Page");
+		$count=$dao->where("keywords<>''")->field("id,keywords")->count();
+		$page=new Page($count,100);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage_bot',$page->show_img());
+		$limit=$page->firstRow.','.$page->listRows;
+		$ktag=$dao->wherewhere("keywords<>''")->field("id,channel,keywords")->limit($limit)->findAll();
+		
+		$tags=D("Tags");
+		foreach ($ktag as $v){//循环读取关键字 作标签写入
+			$karr=array();
+			$karr=explode(',',$v['keywords']);
+			if(count($karr)>0){
+				foreach ($karr as $kv){
+					$tags_info=array();
+					$tags_info=$tags->where("tagsname={$kv}")->find();
+					if($tags_info){//标签已经存在
+						
+					}else{//标签没建立
+						$this->add_tags($kv,$v['channel']);
+					}
+				}
+			}//关键字不为空
+			
+		}
+	}//end tags_rehash
+	
+	/**
+	 *写入关键字
+	 *@date 2010-6-30
+	 *@time 上午11:54:52
+	 */
+	protected function add_tags($tagsname,$type,$tcatid=0) {
+		//写入关键字
+		$tags=new Model();
+		$t_field='type'.$type;
+		$now=time();
+		$sql="INSERT INTO `iic_tags` (`tagsname`, `$t_field`, `dateline`) VALUES ('$tagsname', '1', '$now') ON DUPLICATE KEY UPDATE `$t_field`=`$t_field`+1;";
+		return $tags->execute($sql);
+	}//end add_tags
+	
+	
+	
+///////////////////////////////////////关键字操作 end/////////////////////////////////////////////
 	
     /**
      * 检查用户是否登录并获取用户信息
@@ -798,5 +870,17 @@ class CommonAction extends Action{
 	}//end get_gmember
 	
 ///////////////////////////////群组的共用类————end//////////////////////////
+
+	/**
+	 *搜索
+	 *@date 2010-6-30
+	 *@time 上午11:32:17
+	 */
+	public function so() {
+		//搜索
+		$key=Input::getVar($_REQUEST['key']);
+		
+	}//end so
+	
 }//END CommonAction
 ?>

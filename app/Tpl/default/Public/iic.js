@@ -69,7 +69,7 @@ $(document).ready(function(){
 				//$('#group_content').modal();
 			}else{
 				alert(data['info']);
-				$('#login').modal();
+				//$('#login').modal();
 			}
 		},'json');
 	});

@@ -81,8 +81,8 @@ class ArcAction extends CommonAction{
 	function show() {
 		//文章内容页
 		$aid=intval($_GET['aid']);
-		//$ename=$_REQUEST['ename'];
-		if(empty($aid)){
+		$ename=$_REQUEST['ename'];
+		if(empty($aid) && empty($ename)){
 			$this->error("error: aid is null!");
 		}
 		$dao=D("Archives");

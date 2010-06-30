@@ -2,6 +2,9 @@
 <!--中间开始-->
 <div id="main">
 	<form action="__URL__/check" method="post">
+	<if condition="$to">
+		<input type="hidden" name="to" value="{$to}">
+	</if>
 	<table border="0" width="500">
 		<tr>
 			<th>UserName:</th>

@@ -19,7 +19,7 @@
 				<dt class="w200">Join Time</dt>
 <volist name="group" id="v">
                 	<dd>
-						<span class="w420"><a href="__APP__/Group/show/id/{$v['tagid']}">{$v['tagid']|get_info=groupname,Group}</a></span>
+						<span class="w420"><a href="__APP__/Group/show/aid/{$v['tagid']}">{$v['tagid']|get_info=groupname,Group}</a></span>
 						<span class="w100 c">{$v['grade']|get_grade}</span>
 						<span class="w200 c">{$v['ctime']|toDate='Y-m-d'}</span>
 					</dd>
