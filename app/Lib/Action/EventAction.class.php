@@ -48,6 +48,10 @@
 			if ($_REQUEST['id']) {
 				$_SESSION['typeid']=Input::getVar($_REQUEST['id']);
 			}
+			if ($_REQUEST['type']=='all') {
+				unset($_SESSION['typeid']);
+			}
+			
 			if ($_REQUEST['st']) {
 				$_SESSION['st']=Input::getVar($_REQUEST['st']);
 			}
@@ -63,8 +67,10 @@
 			$condition=array();
 			$condition['channel']='10';
 			$condition['ismake']='1';
-			if(Input::getVar($_REQUEST['st']) && Input::getVar($_REQUEST['et'])){
+			if($_SESSION['st']!='0' && $_SESSION['et']!='0'){
 				$condition['_string'] = "(`showstart`>='{$_SESSION['st']}' AND `showstart`<='{$_SESSION['et']}') OR (`showend`>='{$_SESSION['st']}' AND `showend`>='{$_SESSION['et']}')";
+			}else{
+				$condition['_string'] = "";
 			}
 			if($_SESSION['typeid']){
 				$condition['typeid']=$_SESSION['typeid'];
