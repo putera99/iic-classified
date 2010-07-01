@@ -27,6 +27,7 @@ class CommonAction extends Action{
         load("extend");
         $arr=array('/cid/3','/cid/2','/cid/1','/cid/4','/index.php?s=','/Public/select_city');
         $url=str_replace($arr,'',$_SERVER["REQUEST_URI"]);
+        $url=$url=='/'?'/Index/index':$url;
         $url=myencode($url);
         $this->assign('tourl',$url);
         
