@@ -44,6 +44,7 @@ class BizAction extends CommonAction{
 		$str=trim($str,',');
 		$condition['typeid']=array('IN',$str);
 		$condition['ismake']=1;
+		$condition['industry']=empty($_REQUEST['flang'])?'EN':$_REQUEST['flang'];
 		$dao=D("Archives");
 		$count=$dao->where($condition)->order("id DESC")->count();
 		import("ORG.Util.Page");
@@ -72,17 +73,22 @@ class BizAction extends CommonAction{
 	 */
 	function ls() {
 		//展会列表
-		if($_REQUEST['bycity']=='0'){
-			unset($_SESSION['bycity']);
-		}
 		if ($_REQUEST['year']) {
 			$_SESSION['year']=$_REQUEST['year'];
 		}
 		if ($_REQUEST['id']) {
-			$_SESSION['fair_id']=$_REQUEST['id'];
+			if($_REQUEST['id']=='all'){
+				unset($_SESSION['fair_id']);
+			}else{
+				$_SESSION['fair_id']=$_REQUEST['id'];
+			}
 		}
 		if ($_REQUEST['bycity']) {
-			$_SESSION['bycity']=$_REQUEST['bycity'];
+			if($_REQUEST['bycity']=='all'){
+				unset($_SESSION['bycity']);
+			}else{
+				$_SESSION['bycity']=$_REQUEST['bycity'];
+			}
 		}
 		
 		if ($_REQUEST['tn']) {
@@ -93,6 +99,10 @@ class BizAction extends CommonAction{
 		}else{
 			$_SESSION['order']='DESC';
 		}
+		if($_REQUEST['flang']){
+			$_SESSION['flang']=$_REQUEST['flang'];
+		}
+		
 		$condition=array();
 		$year=array();
 		$nowyear=date('Y');
@@ -137,9 +147,13 @@ class BizAction extends CommonAction{
 		if ($_SESSION['bycity']) {
 			$condition['bycity']=$_SESSION['bycity'];
 		}
+		if($_SESSION['flang']){
+			$condition['industry']=empty($_SESSION['flang'])?'EN':$_SESSION['flang'];
+		}
 		if ($_SESSION['ms'] || $_SESSION['me']) {
 			$condition['_string'] = "(`showstart`>='{$_SESSION['ms']}' AND `showstart`<='{$_SESSION['me']}') OR (`showend`>='{$_SESSION['ms']}' AND `showend`>='{$_SESSION['me']}')";
 		}
+		
 		$this->assign('industries',$this->_get_fair());
 		$this->assign("city",$this->_get_city('fair'));
 		$condition['ismake']=1;
@@ -160,7 +174,7 @@ class BizAction extends CommonAction{
 		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':'Fair  -  BeingfunChina';
+		$page['title']=empty($info['seotitle'])?$info['typename'].' - Fair -  BeingfunChina':$info['seotitle'].' - Fair  -  BeingfunChina';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		if($info['reid']!='1232'){
@@ -198,8 +212,14 @@ class BizAction extends CommonAction{
 		
 		
 		$dao=D("Archives");
+		$condition=array();
+		$condition['id']=$aid;
+		if(Input::getVar($_REQUEST['flang'])){
+			$condition['id']=$_REQUEST['flang'];
+		}
 		$info=$dao->where("id=$aid")->find();
 		$info['_fair']=$dao->relationGet("fair");
+		//dump($dao->getLastSql());
 		$this->assign('info',$info);
 		$page=array();
 		$page['title']=$info['title'].' China Biz  -  BeingfunChina';

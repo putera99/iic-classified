@@ -118,6 +118,7 @@ class IndexAction extends CommonAction{
 		$condition=array();
 		$condition['channel']='11';
 		$condition['ismake']='1';
+		$condition['industry']='EN';
 		$list=$dao->where($condition)->order("id DESC")->limit("0,10")->findAll();
 		return $list;
     }//end new_fair
