@@ -81,13 +81,13 @@ function load() {
                     <h1>{$info['title']}</h1>
                     <span>Time:　</span>{$info['showstart']|toDate='M d, Y'} - {$info['showend']|toDate='M d, Y'}({$info['bycity']|get_city='ctitle'})
                 </div>
-                <table width="99%" border="1" align="center" cellpadding="0" cellspacing="0">
+                <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="biz_info">
                     <tr align="center">
                         <td class="yans" width="14%">
                             Fair
                         </td>
                         <td class="yans" width="36%">
-                            Briefing
+                            Venue
                         </td>
                         <td class="yans" width="25%">
                             Industry
@@ -97,7 +97,7 @@ function load() {
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="yans">
                             <table width="82" align="center" cellpadding="0" cellspacing="2">
                                 <tr>
                                     <td width="80" align="left">
@@ -112,24 +112,13 @@ function load() {
                             </table>
                         </td>
                         <td class="yans" valign="middle">
-                            <table width="100%" align="center" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td align="center">
-                                        Venue: {$info['maps']}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        Telephone: {$info['telephone']}
-                                    </td>
-                                </tr>
-                            </table>
+                            {$info['maps']}
                         </td>
                         <td class="yans" align="center" bordercolor="#CCCCCC">
                             {$info['typeid']|get_arctype='typename'}
                         </td>
                         <td class="yans">
-                            {$info['ltdid']|get_ltd='title'}
+                            {$info['contact']}
                         </td>
                     </tr>
                 </table>
@@ -204,23 +193,13 @@ function load() {
                     <div class="biz-right">
                         <ul>
                             <li>
-                                <span> Event Profile:</span>{$info['my_content']}
+                                <span>Description:</span>{$info['_fair']['description']}
                             </li>
                             <li>
-                                <span>Visitor's Profile:</span>
-                                {$info['_fair']['visitor']}
+                                <span>Product:</span> 　{$info['_fair']['product']}
                             </li>
                             <li>
-                                <span>Exhibitor's Profile:</span>{$info['_fair']['exhibitor']}
-                            </li>
-                            <li>
-                                <span>E-mail:</span> 　{$info['email']}
-                            </li>
-                            <li>
-                                <span>Tel:</span> 　{$info['telephone']}
-                            </li>
-                            <li>
-                                <span>Fax:</span> 　{$info['fax']}
+                                <span>Source:</span> 　{$info['source']}
                             </li>
                         </ul>
                     </div>
@@ -234,12 +213,12 @@ function load() {
         <div class="national">
             <ul>
                 <li>
-                    <a href="#"><span>中文</span></a>
-                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="fbv" />
+                    <a href="__URL__/show/flang/{$lang['cn']}"><span>中文</span></a>
+                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="显示中文信息" />
                 </li>
                 <li>
-                    <a href="#"><span>Einglish</span></a>
-                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="fbv" />
+                    <a href="__URL__/show/flang/{$lang['en']}"><span>Einglish</span></a>
+                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="" />
                 </li>
             </ul>
         </div>
@@ -248,6 +227,9 @@ function load() {
         </div>
          <div class="menu">
             <ul>
+            	<li>
+                    <a href="__URL__/ls/id/all" <php>if($_SESSION['fair_id']=='')echo 'class="on"';</php>>All Industries</a>
+                </li>
 <volist name="industries" id="v">
                 <li>
                     <a href="__URL__/ls/id/{$v['id']}" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>

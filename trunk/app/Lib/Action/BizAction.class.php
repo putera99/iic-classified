@@ -193,9 +193,6 @@ class BizAction extends CommonAction{
 	function show() {
 		//展会信息
 		$aid=intval($_REQUEST['aid']);
-		if(empty($aid)){
-			$this->error("error: aid is null!");
-		}
 		$this->assign('industries',$this->_get_fair());
 		$this->assign("city",$this->_get_city('fair'));
 		$this->assign('date',$this->_get_time());
@@ -210,16 +207,27 @@ class BizAction extends CommonAction{
 		$year['ny']['me']=mktime(0,0,0,1,1,$nowyear+2)-1;
 		$this->assign('year',$year);
 		
-		
+		$flang=Input::getVar($_REQUEST['flang']);
 		$dao=D("Archives");
 		$condition=array();
-		$condition['id']=$aid;
-		if(Input::getVar($_REQUEST['flang'])){
-			$condition['id']=$_REQUEST['flang'];
+		if($flang){
+			$lan=explode('_',$flang);
+			if($lan['1']=='CN'){
+				$flang=$lan['0'].'_CN';
+			}else{
+				$flang=$lan['0'].'_EN';
+			}
+			$condition['writer']=$flang;
+			$condition['channel']=11;
+		}else{
+			$condition['id']=$aid;
 		}
-		$info=$dao->where("id=$aid")->find();
+		$info=$dao->where($condition)->find();
+		$lan=explode('_',$info['writer']);
+		$lang['cn']=$lan['0'].'_CN';
+		$lang['en']=$lan['0'].'_EN';
+		$this->assign('lang',$lang);
 		$info['_fair']=$dao->relationGet("fair");
-		//dump($dao->getLastSql());
 		$this->assign('info',$info);
 		$page=array();
 		$page['title']=$info['title'].' China Biz  -  BeingfunChina';
