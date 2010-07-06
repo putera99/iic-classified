@@ -50,6 +50,9 @@ class ExAction extends CommonAction{
 		$warr=0;
 		$img_arr=array();
 		for ($i = 3; $i <= 42; $i++) {
+			if(empty($data->sheets[0]['cells'][$i][1]) || empty($data->sheets[0]['cells'][$i][6])){
+				continue;
+			}
 			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
 			$arr[$i]['bycity']=$this->city($data->sheets[0]['cells'][$i][2]);
 			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
@@ -85,10 +88,11 @@ class ExAction extends CommonAction{
 				$arr[$i]['description']=strip_tags($arr[$i]['title'].$arr[$i]['fair']['product']);
 			}
 			
-			if($arr[$i]['albumnum']){
+			if($arr[$i]['albumnum'] || $arr[$i]['albumnum']=='0'){
 				$flist=$this->file_list($arr[$i]['dir']);
 				$img=count($flist);
-				if($arr[$i]['albumnum']!=$img){
+				$num=$arr[$i]['albumnum']=='0'?'1':$arr[$i]['albumnum'];
+				if($num!=$img){
 					$msg.=$data->sheets[0]['cells'][$i][4].'图片数量不正确实际图：'.$img.'填写图片:'.$arr[$i]['albumnum'].'<br>';
 					$errnum++;
 				}else{
@@ -174,7 +178,7 @@ class ExAction extends CommonAction{
 		}else{
 			echo '共有'.$errnum.'错误!<br>'.$warr.'警告!<br>';
 			echo $msg;
-			echo "<a href='".__URL__."/index/act/ok'>写入数据</a>";
+			echo "<a href='".__URL__."/index/act/ok/fname/".$filename."'>写入数据</a>";
 		}
 		//dump($arr);
 	}//end index
@@ -278,5 +282,72 @@ class ExAction extends CommonAction{
 			$dao->add($vo);
 		}
 	}
+	
+	
+	
+	/**
+	 *导入活动数据
+	 *@date 2010-7-6
+	 *@time 下午02:34:57
+	 */
+	function events() {
+		//导入活动数据
+		import("@.Com.OLERead");
+		import("@.Com.Spreadsheet_Excel_Reader");
+		import("ORG.Util.Image");
+		$filename=$_GET['fname'];
+		$path="Public/events/";
+		$file=$path.$filename.'.xls';
+		$arr=array();
+		$data = new Spreadsheet_Excel_Reader();
+		$data->setOutputEncoding('utf-8');
+		
+		$data->read($file);
+		
+		error_reporting(E_ALL ^ E_NOTICE);
+		
+		//echo $data->sheets[0]['numRows'];
+		//echo $data->sheets[0]['numCols'];
+		//echo $data->sheets[0]['cells'][3][8];
+		$act=$_GET['act'];
+		if($act=='ok'){
+			import("ORG.Io.Dir");
+			if(is_dir('Public/event/exl'.$filename)){
+        		Dir::del('Public/event/exl'.$filename);
+			}
+		}
+		$arr=array();
+		$msg='';
+		$errnum=0;
+		$warr=0;
+		$img_arr=array();
+		dump($data);
+		/*for ($i = 3; $i <= 170; $i++) {
+			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
+			$arr[$i]['cid']=$this->city($data->sheets[0]['cells'][$i][2]);
+			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
+			$arr[$i]['showstart']=$time['st'];
+			$arr[$i]['showend']=$time['et'];
+			$arr[$i]['channel']=10;
+			
+			$l=explode('_',$data->sheets[0]['cells'][$i][4]);
+			$arr[$i]['dir']=$path.$filename.'/'.$l['0'].'/';
+			$arr[$i]['writer']=$data->sheets[0]['cells'][$i][4];
+			
+			$arr[$i]['industry']=$l['1'];//id和语言
+			
+			$arr[$i]['albumnum']=$data->sheets[0]['cells'][$i][5];
+			$arr[$i]['typeid']=$data->sheets[0]['cells'][$i][6];
+			$arr[$i]['typeid2']=$data->sheets[0]['cells'][$i][7];
+			$arr[$i]['contact']=$this->br_or_b($data->sheets[0]['cells'][$i][9]);
+			$arr[$i]['maps']=$this->br_or_b($data->sheets[0]['cells'][$i][10]);
+			
+			$arr[$i]['fair']['product']=$this->br_or_b($data->sheets[0]['cells'][$i][8]);
+			$arr[$i]['fair']['description']=$this->br_or_b($data->sheets[0]['cells'][$i][11]);
+			$arr[$i]['fair']['website']=$data->sheets[0]['cells'][$i][12];
+			$arr[$i]['source']=$data->sheets[0]['cells'][$i][13];
+		}*/
+		
+	}//end events
 	
 }//end ExAction

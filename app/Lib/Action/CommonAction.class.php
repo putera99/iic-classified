@@ -585,7 +585,7 @@ class CommonAction extends Action{
 	
 	protected function _get_tree($topid) {
 		$dao=new Model();
-		$list=$dao->query("SELECT * FROM iic_arctype where topid=$topid AND ishidden=0");
+		$list=$dao->query("SELECT * FROM iic_arctype where topid=$topid AND ishidden=0 ORDER BY id ASC");
 		$news=list_to_tree($list,'id','reid','_son',$topid);
 		unset($dao);
 		return $news;

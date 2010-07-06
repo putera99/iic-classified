@@ -23,12 +23,14 @@ class DbAction extends CommonAction{
 		$dao=D("Arctype");
 		$data=$dao->where("reid=1232")->findAll();
 		foreach ($data as $v){
-			echo "{$v['id']}->{$v['typename']}<br>";
+			//echo "SELECT * FROM `iic_archives` WHERE `typeid`={$v['id']} and channel=2;<br>";
+			echo "DELETE FROM `iic_archives` WHERE `typeid`={$v['id']} and channel=2;<br>";
 		}
 		echo "<br><br>";
 		$data=$dao->where("reid=1388")->findAll();
 		foreach ($data as $v){
-			echo "{$v['id']}->{$v['typename']}<br>";
+			//echo "SELECT * FROM `iic_archives` WHERE `typeid`={$v['id']} and channel=2;<br>";
+			echo "DELETE FROM `iic_archives` WHERE `typeid`={$v['id']} and channel=2;<br>";
 		}
 	}//end index
 	

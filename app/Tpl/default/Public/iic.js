@@ -23,21 +23,27 @@ $(document).ready(function(){
 		$(id).show(); 
 	});
 	
+	//城市指南导航切换
 	$(".s_cf").click(function(){
 		if($("."+this.id).attr("rel")!='on'){
 			$("."+this.id).attr("rel",'on');
+			$("#"+this.id+' dt a').addClass('on');
 			$("."+this.id).show();
 		}else{
 			$("."+this.id).attr("rel",'non');
+			$("#"+this.id+' dt a').removeClass('on');
 			$("."+this.id).hide();
 		}
 	});
+	//分类信息导航切换
 	$(".s_cg").click(function(){
 		if($("."+this.id).attr("rel")!='on'){
 			$("."+this.id).attr("rel",'on');
+			$("#"+this.id+' dt a').addClass('on');
 			$("."+this.id).show();
 		}else{
 			$("."+this.id).attr("rel",'non');
+			$("#"+this.id+' dt a').removeClass('on');
 			$("."+this.id).hide();
 		}
 	});

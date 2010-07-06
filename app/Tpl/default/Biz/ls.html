@@ -86,19 +86,11 @@
                                 <span>Venue:</span>
                                 {$v['maps']}
                             </li>
-                            <li>
-                            	<span>Telephone:</span>
-                                {$v['telephone']}
-                            </li>
-                            <li>
-                                <span>Products:</span>
-                                ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
-                            </li>
                         </ul>
                         <ul class="w100 l">
                             <li>
                                 <span>Organizer:</span>
-                                {$v['ltdid']|get_ltd='title'}
+                                {$info['contact']}
                             </li>
                         </ul>
                         <ul class="w88 c">
@@ -119,12 +111,12 @@
         <div class="national">
             <ul>
                 <li>
-                    <a href="#"><span>中文</span></a>
-                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="fbv" />
+                    <a href="__URL__/ls/flang/CN"><span>中文</span></a>
+                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="显示中文信息" />
                 </li>
                 <li>
-                    <a href="#"><span>Einglish</span></a>
-                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="fbv" />
+                    <a href="__URL__/ls/flang/EN"><span>Einglish</span></a>
+                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="" />
                 </li>
             </ul>
         </div>
@@ -133,6 +125,9 @@
         </div>
         <div class="menu">
             <ul>
+            	<li>
+                    <a href="__URL__/ls/id/all" <php>if(empty($_SESSION['fair_id']))echo 'class="on"';</php>>All Industries</a>
+                </li>
 <volist name="industries" id="v">
                 <li>
                     <a href="__URL__/ls/id/{$v['id']}" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>

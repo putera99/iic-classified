@@ -107,7 +107,9 @@
 <volist name="data" id="v">
 					<div class="pingdaozs">
                         <ul class="w120 c">
-                            <li><img src="{$v['picurl']}" alt="{$v['title']}" /></li>
+                        	<if condition="$v['picurl']">
+                            	<li><img src="{$v['picurl']}" alt="{$v['title']}" /></li>
+							</if>
                             <li><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></li>
                             <li>[{$v['showstart']|toDate='d/m/Y'}]</li>
                             <li>({$v['bycity']|get_city='ctitle'})</li>
@@ -117,19 +119,11 @@
                                 <span>Venue:</span>
                                 {$v['maps']}
                             </li>
-                            <li>
-                            	<span>Telephone:</span>
-                                {$v['telephone']}
-                            </li>
-                            <li>
-                                <span>Products:</span>
-                                ComputerHardware & Software , Electrical Equipment & Supplies , Electronic 
-                            </li>
                         </ul>
                         <ul class="w100 l">
                             <li>
                                 <span>Organizer:</span>
-                                {$v['ltd_id']|get_ltd='title'}
+                                {$info['contact']}
                             </li>
                         </ul>
                         <ul class="w88 c">
@@ -141,19 +135,21 @@
 </volist>
                 </div>
             </div>
-
+			<div class="fanye">
+            	{$showpage_bot}
+            </div>
         </div>
     </div>
     <div class="channel-left">
         <div class="national">
             <ul>
                 <li>
-                    <a href="#"><span>中文</span></a>
-                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="fbv" />
+                    <a href="__URL__/index/flang/CN"><span>中文</span></a>
+                    <img src="__PUBLIC__/default/images/pc/chian.gif" alt="显示中文信息" />
                 </li>
                 <li>
-                    <a href="#"><span>Einglish</span></a>
-                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="fbv" />
+                    <a href="__URL__/index/flang/EN"><span>Einglish</span></a>
+                    <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="" />
                 </li>
             </ul>
         </div>
@@ -162,6 +158,9 @@
         </div>
         <div class="menu">
             <ul>
+            	<li>
+                    <a href="__URL__/ls/id/all" <php>if(empty($_SESSION['fair_id']))echo 'class="on"';</php>>All Industries</a>
+                </li>
 <volist name="industries" id="v">
                 <li>
                     <a href="__URL__/ls/id/{$v['id']}">{$v['typename']}</a>
