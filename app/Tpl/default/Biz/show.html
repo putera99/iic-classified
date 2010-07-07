@@ -33,12 +33,12 @@ function load() {
         map.addControl(new GSmallMapControl());
         geocoder.getLatLng(address, function(point) {
                 if (!point) {
-                  alert('Google Maps');
+                  //alert('Google Maps');
                 } else {
                   map.setCenter(point, 13);
                   var marker = new GMarker(point);
                   map.addOverlay(marker);
-                  marker.openInfoWindowHtml("{$info['maps']}");
+                  //marker.openInfoWindowHtml("{$info['maps']}");
                 }
           });
       }
@@ -55,7 +55,7 @@ function load() {
         </div>
         <div class="biz-content">
             <div class="biz-page">
-                <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China biz</a> > 
+                <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">Business</a> > 
 				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}">{$dh['typename']}</a></if>
             </div>
             <div class="biz-city">

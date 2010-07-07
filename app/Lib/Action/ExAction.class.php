@@ -88,11 +88,11 @@ class ExAction extends CommonAction{
 				$arr[$i]['description']=strip_tags($arr[$i]['title'].$arr[$i]['fair']['product']);
 			}
 			
-			if($arr[$i]['albumnum'] || $arr[$i]['albumnum']=='0'){
-				$flist=$this->file_list($arr[$i]['dir']);
+			if($arr[$i]['albumnum'] || $arr[$i]['albumnum']=='0'){//是否有图片
+				$flist=$this->file_list($arr[$i]['dir']);//获取文件列表
 				$img=count($flist);
 				$num=$arr[$i]['albumnum']=='0'?'1':$arr[$i]['albumnum'];
-				if($num!=$img){
+				if($num!=$img){//检查文件数量
 					$msg.=$data->sheets[0]['cells'][$i][4].'图片数量不正确实际图：'.$img.'填写图片:'.$arr[$i]['albumnum'].'<br>';
 					$errnum++;
 				}else{
@@ -186,16 +186,23 @@ class ExAction extends CommonAction{
 	
 	function get_time($t) {
 		//get_time
-		$t=explode("-",$t);
-		$st=explode('/',str_replace('.','/',$t['0']));
-		$st=mktime('0',0,0,$st['1'],$st['2'],$st['0']);
-		$et=explode('/',str_replace('.','/',$t['1']));
-		$et=mktime('0',0,0,$et['1'],$et['2'],$et['0']);
+		if(strpos($t,'_')){
+			$t=explode("-",$t);
+			$st=explode('/',str_replace('.','/',$t['0']));
+			$st=mktime('0',0,0,$st['1'],$st['2'],$st['0']);
+			$et=explode('/',str_replace('.','/',$t['1']));
+			$et=mktime('0',0,0,$et['1'],$et['2'],$et['0']);
+		}else{
+			$st=explode('/',str_replace('.','/',$t));
+			$st=mktime('0',0,0,$st['1'],$st['2'],$st['0']);
+			$et=mktime('0',0,0,date('m'),date('d'),date('Y')+1);
+		}
 		return array('st'=>$st,'et'=>$et);
 	}//end function_name
 	
 	
 	function br_or_b($str) {
+		$str=deletehtml($str);
 		return str_replace(array("[b]",'[/b]','||'),array("<b>",'</b>','<br>'),$str);
 	}//end br_or_b
 	
@@ -321,8 +328,12 @@ class ExAction extends CommonAction{
 		$errnum=0;
 		$warr=0;
 		$img_arr=array();
-		dump($data);
-		/*for ($i = 3; $i <= 170; $i++) {
+		//dump($data);
+		for ($i = 3; $i <= 170; $i++) {
+			if($data->sheets[0]['cells'][$i][16]=='1'){
+				continue;
+			}
+			//dump($data->sheets[0]['cells'][$i]);
 			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
 			$arr[$i]['cid']=$this->city($data->sheets[0]['cells'][$i][2]);
 			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
@@ -330,24 +341,97 @@ class ExAction extends CommonAction{
 			$arr[$i]['showend']=$time['et'];
 			$arr[$i]['channel']=10;
 			
-			$l=explode('_',$data->sheets[0]['cells'][$i][4]);
-			$arr[$i]['dir']=$path.$filename.'/'.$l['0'].'/';
+			$l=$data->sheets[0]['cells'][$i][4];
+			if(strpos($l,'_')){
+				$l=end(explode('_',$l));
+			}
+			$arr[$i]['dir']=$path.$filename.'/'.$l.'/';
+			
 			$arr[$i]['writer']=$data->sheets[0]['cells'][$i][4];
 			
-			$arr[$i]['industry']=$l['1'];//id和语言
-			
-			$arr[$i]['albumnum']=$data->sheets[0]['cells'][$i][5];
+			if(!empty($data->sheets[0]['cells'][$i][5]) || $data->sheets[0]['cells'][$i][5]=='0'){
+				$arr[$i]['albumnum']=$data->sheets[0]['cells'][$i][5];
+			}
 			$arr[$i]['typeid']=$data->sheets[0]['cells'][$i][6];
-			$arr[$i]['typeid2']=$data->sheets[0]['cells'][$i][7];
-			$arr[$i]['contact']=$this->br_or_b($data->sheets[0]['cells'][$i][9]);
-			$arr[$i]['maps']=$this->br_or_b($data->sheets[0]['cells'][$i][10]);
 			
-			$arr[$i]['fair']['product']=$this->br_or_b($data->sheets[0]['cells'][$i][8]);
-			$arr[$i]['fair']['description']=$this->br_or_b($data->sheets[0]['cells'][$i][11]);
-			$arr[$i]['fair']['website']=$data->sheets[0]['cells'][$i][12];
-			$arr[$i]['source']=$data->sheets[0]['cells'][$i][13];
-		}*/
-		
+			if(!empty($data->sheets[0]['cells'][$i][7])){
+				$arr[$i]['typeid2']=$data->sheets[0]['cells'][$i][7];
+			}
+			$arr[$i]['maps']=$this->br_or_b($data->sheets[0]['cells'][$i][9]);
+			$arr[$i]['event']['detail']=$this->br_or_b($data->sheets[0]['cells'][$i][8]);
+			
+			$kw=str_word_count($arr[$i]['title'],1);
+    		$keywords="";
+    		foreach ($kw as $vkw){
+    			$keywords.=$vkw.',';
+    		}
+			$arr[$i]['keywords']=trim($keywords,',');
+			$arr[$i]['my_content']=strip_tags($arr[$i]['event']['detail']);
+			$arr[$i]['description']=$arr[$i]['my_content'];
+			
+			if($arr[$i]['albumnum'] || $arr[$i]['albumnum']=='0'){
+					$flist=$this->file_list($arr[$i]['dir']);
+					$img=count($flist);
+					$num=$arr[$i]['albumnum']+1;
+					if($num!=$img){
+						$msg.=$data->sheets[0]['cells'][$i][4].'图片数量不正确实际图：'.$img.'填写图片:'.$arr[$i]['albumnum'].'<br>';
+						$errnum++;
+					}else{
+						$msg.=$data->sheets[0]['cells'][$i][4].'信息图片匹配<br>';
+						foreach ($flist as $v){
+							$type=Image::getImageInfo($v);
+							if($type['type']=='bmp'){
+								$msg.='<b>'.$v.'图片格式不能是bmp</b><br>';
+								$warr++;
+							}elseif($act=='ok'){//是否确认写入
+								$filelen=strpos($v,'.'); //获取文件名长度
+								$filename_name=substr($v, 0, $filelen); //截取文件名
+								$filename_name=end(explode("/", $filename_name));
+								$ext=strtolower(end(explode(".", $v)));
+								if($filename_name=='0'){
+									$width=array('120','514');
+									$height=array('140','600');
+									$pre=array('s_','m_');
+									
+									$fname='s_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
+									$dir=$l['0'].'/'.date("Y_m_d").'/';
+									$spath='Public/fair/exl'.$filename.'/'.$dir;
+									if(in_array($dir.$fname,$img_arr)){
+										$arr[$i]['picurl']=$spath.$fname;
+										$arr[$i]['pic'][]['filename']=$spath.'m_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
+									}else{
+										$img_arr[$i]=$dir.$fname;
+										$this->mvimg($v,$spath,md5_file(auto_charset($v,'utf-8','gbk')),$width,$height,$pre);
+										$arr[$i]['picurl']=$spath.$fname;
+										$arr[$i]['pic'][]['filename']=$spath.'m_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
+									}
+								}else{
+									$width=array('514');
+									$height=array('600');
+									$pre=array('m_');
+									$fname='m_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
+									$dir=$l['0'].'/'.date("Y_m_d").'/';
+									$spath='Public/fair/exl'.$filename.'/'.$dir;
+									if(in_array($dir.$fname,$img_arr)){
+										$arr[$i]['pic'][]['filename']=$spath.$fname;
+									}else{
+										$img_arr[$i]=$dir.$fname;
+										$this->mvimg($v,$spath,md5_file(auto_charset($v,'utf-8','gbk')),$width,$height,$pre);
+										$arr[$i]['pic'][]['filename']=$spath.$fname;
+									}
+								}
+							}//图片不是BMP格式
+						}
+						//dump($arr[$i]['picurl']);
+					}
+				}else{
+					$msg.='<b>'.$data->sheets[0]['cells'][$i][4].'信息无图片</b><br>';
+					$warr++;
+				}
+		}//end 循环读取数据
+		echo '共有'.$errnum.'错误!<br>'.$warr.'警告!<br>';
+		echo $msg;
+		echo "<a href='".__URL__."/index/act/ok/fname/".$filename."'>写入数据</a>";
 	}//end events
 	
 }//end ExAction
