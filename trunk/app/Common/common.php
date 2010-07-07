@@ -407,7 +407,19 @@ function delete_html($string) {
 	}
 	return nl2br($string);
 }
-             
+
+function deletehtml($str){
+	$str = trim($str);
+	$str=strip_tags($str,"");
+	$str=preg_replace("{\t}","",$str);
+	$str=preg_replace("{\r\n}","",$str);
+	$str=preg_replace("{\r}","",$str);
+	$str=preg_replace("{\n}","",$str);
+	$str=preg_replace("{   }"," ",$str);
+	$str=preg_replace("{  }"," ",$str);
+	return $str;
+}
+
 /**
  * 转换网址
  */

@@ -41,10 +41,13 @@ class BizAction extends CommonAction{
 		foreach ($small as $v){
 			$str.=$v['id'].',';
 		}
+		if($_REQUEST['flang']){
+			$_SESSION['flang']=$_REQUEST['flang'];
+		}
 		$str=trim($str,',');
 		$condition['typeid']=array('IN',$str);
 		$condition['ismake']=1;
-		$condition['industry']=empty($_REQUEST['flang'])?'EN':$_REQUEST['flang'];
+		$condition['industry']=empty($_SESSION['flang'])?'EN':$_SESSION['flang'];
 		$dao=D("Archives");
 		$count=$dao->where($condition)->order("id DESC")->count();
 		import("ORG.Util.Page");
@@ -54,7 +57,7 @@ class BizAction extends CommonAction{
 		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
-		$data=$dao->where($condition)->order("id DESC")->findAll();
+		$data=$dao->where($condition)->limit($limit)->order("id DESC")->findAll();
 		$this->assign('data',$data);
 		
 		$page=array();
@@ -147,9 +150,7 @@ class BizAction extends CommonAction{
 		if ($_SESSION['bycity']) {
 			$condition['bycity']=$_SESSION['bycity'];
 		}
-		if($_SESSION['flang']){
-			$condition['industry']=empty($_SESSION['flang'])?'EN':$_SESSION['flang'];
-		}
+		$condition['industry']=empty($_SESSION['flang'])?'EN':$_SESSION['flang'];
 		if ($_SESSION['ms'] || $_SESSION['me']) {
 			$condition['_string'] = "(`showstart`>='{$_SESSION['ms']}' AND `showstart`<='{$_SESSION['me']}') OR (`showend`>='{$_SESSION['ms']}' AND `showend`>='{$_SESSION['me']}')";
 		}
