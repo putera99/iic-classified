@@ -11,6 +11,7 @@
 .guagngao{ margin:0 0 10px; padding:0px;}
 .biz-content{margin:0 0 10px; padding:0px;}
 .biz-page {height: 26px;background: url(../images/pc/bg.gif) repeat-x;border: 1px solid #bfbfbf;padding-left:10px;font-weight: bold;color: #353535;}
+.biz-page a{color: #353535;}
 .biz-city{border: 1px solid #bfbfbf;margin: 0px;background-color:#f7f7f7;padding: 0px;}
 .bycity {padding:0px;margin: 10px 5px 10px 5px;}
 .bycity h5{ margin:0px; padding-bottom:5px; border-bottom: 1px solid #bfbfbf;}
@@ -20,7 +21,10 @@
 .biz-title {margin: 0px 5px 0px 5px;padding: 0 0 0 5px;line-height: 24px;}
 .biz-title h6 {font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #B12169;margin: 0px;padding: 0px;}
 .yans {color: #8a0e4c;}
-.biz-xinxi {height: 300px;padding: 0px;margin: 10px 5px 0px 5px;}
+.biz-xinxi {height:auto;padding: 0px;margin: 10px 5px 0px 5px; overflow:hidden; min-height:712px;}
+.biz-xinxi .ditu{float:left;}
+.biz-xinxi span{font-weight: bold;color: #8a0e4c;}
+
 .biz-right{width:390px;margin:0px;padding:0px;float:left;}
 .biz-right ul {margin: 0px;padding: 0px;list-style-type: none;}
 .biz-right span {font-weight: bold;color: #8a0e4c;}
@@ -28,4 +32,7 @@
 .biz-left dl{float: left;margin: 10px 0 0 0;padding: 0px;text-align: center;}
 .biz-left dt{ margin:0px; padding:0px;}
 .biz-left dd{width: 80px;margin:0px;padding:0px;text-align: center;line-height: 16px;}
+.biz_info .yans{ border:solid 1px #ccc}
+
+
 

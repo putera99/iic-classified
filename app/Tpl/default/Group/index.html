@@ -2,18 +2,24 @@
 <link href="__PUBLIC__/default/css/group_index.css" rel="stylesheet" type="text/css" />
 <div id="main">
     <div class="right">
-    	<div class="next_lssue">
+    	<!--div class="next_lssue">
     		<div class="next-bg">Search</div>
 			<div class="next-n">
 				<form id="so" action="__URL__/ls" method="post" style="padding:5px 10px;">
-				<label for="kw">Keyword:</label><input type="text" name="kw" id="kw" size="12"><br>
-				<input type="submit" name='mode' value="Group"> OR <input type="submit" name='mode' value="Thread">
+				<p><input type="text" name="kw" id="kw" size="12" value="Keyword">
+					<select name="mode">
+						<option value="Group">Groups</option>
+						<option value="Thread">Threads</option>
+					</select>
+				</p>
+				<p align="center">
+				<input type="submit" value="Submit">
+				</p>
 				</form>
 			</div>
-    	</div>
-        <img src="images/pic6.gif" alt="pci8" />
+    	</div-->
         <div class="next_lssue">
-            <div class="next-bg">New Group</div>
+            <div class="next-bg">Latest Created Groups</div>
             <div class="next-n">
                 <ul>
 <volist name="new" id="v">
@@ -28,11 +34,14 @@
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-               <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a>
+               <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a>
             </div>
             <div class="content-n">
                 <div class="welcome">
-                    <h1>Welcome ...</h1>
+					<span>
+				   	<a href="__APP__/Cp/group_create/">Create My Group</a>
+				   </span>
+                    <h1>Groups</h1>
                 </div>
                 <div class="welcome-quan">
 <volist name="hot" id="v">
@@ -45,8 +54,8 @@
 </volist>
 
                 </div>
-                <div class="welcome">
-                    <h2>Group Category</h2>
+                <!--div class="welcome">
+                    <h2>Groups Categories</h2>
                 </div>
                 <div class="class-xinxi">
 <volist name="cat" id="v">
@@ -55,7 +64,7 @@
                     <a href="__URL__/ls/id/{$vs['id']}">{$vs['title']}</a> | 
 	</volist>
 </volist>
-                </div>
+                </div-->
             </div>
         </div>
     </div>

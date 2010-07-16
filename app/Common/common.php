@@ -12,6 +12,15 @@ function br2nl($text) {
 	return preg_replace('/<br\\s*?\/??>/i', '', $text);   
 } 
 
+function arrayischk($arr,$value='-100'){
+	$re='';
+	if($value=='-100'){
+		$re=empty($arr)?'': 'checked="checked"';
+	}else{
+		$re=($arr==$value)? 'checked="checked"':'';
+	}
+	return $re;
+}
 
 /**
 * 将数组用指定字符连接
@@ -117,13 +126,13 @@ function get_grade($id,$arr=array()) {
 function get_info($gid,$field='groupname',$table="Group") {
 	//获取群组名称
 	$dao=D($table);
-	$info=$dao->where("id=$gid")->find();
-	if($field){
+	$info=$dao->where("id=$gid")->field($field)->find();
+	if($field!='*' || empty($field)){
 		return $info[$field];
 	}else{
 		return $info;
 	}
-}//end function_name
+}//end get_info
 
 /**
  *给出类名

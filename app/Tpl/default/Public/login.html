@@ -1,7 +1,21 @@
 <include file="Public:head" />
 <!--中间开始-->
-<div id="main">
-	<form action="__URL__/check" method="post">
+<style type="text/css">
+.login{width:256px; height:auto; overflow:hidden; float:right; margin-right:100px; margin-top:50px;}
+.login .top{height:7px; background:url('/Public/img/bg/top_yuan.gif') no-repeat;}
+.login dl{ height:auto; overflow:hidden; min-height:200px; background:url(/Public/img/bg/heng.gif); margin:0; padding:10px;}
+.login dl dt{border-bottom:1px dotted #ccc; margin:0;font-weight:bold;}
+.login dl dd{margin:0; padding:0;}
+.login dl dd a{color:#717171;}
+.login dl dd a:hover{color:#000000; text-decoration:underline;}
+.login dl dd .lan{ border:1px solid #82afce;}
+.login dl dd span{ margin:10px; border:1px solid #F6B22B; background-color:#FBE26E; color:#000000; display:block; text-align:center; font-size:14px; font-weight:bold; padding:6px 0;}
+.login dl dd span a{color:#000000; text-decoration:none;}
+.login dl dd span a:hover{color:#000000; text-decoration:underline;}
+.login .bot{height:7px; background:url('/Public/img/bg/di_yuan.gif') no-repeat;}
+</style>
+<div id="main" style="background:url('/Public/img/bg/{$rand}.jpg') no-repeat; height:800px;">
+	<!--form action="__URL__/check" method="post">
 	<if condition="$to">
 		<input type="hidden" name="to" value="{$to}">
 	</if>
@@ -18,6 +32,36 @@
 			<td colspan="2" align="center"><input type="submit" value="Submit"></td>
 		</tr>
 	</table>
-	</form>
+	</form-->
+	<div class="login">
+		<div class="top"></div>
+		<dl>
+			<dt>Welcome to BeingFunChina!</dt>
+			<dd>
+				<h4>Login BeingFunChina!</h4>
+				<form action="__URL__/check" method="post">
+				<p>
+					<label for="username">UserName:</label><br />
+					<input type="text" name="username" id="username" class="lan">
+				</p>
+				<p>
+					<label for="username">UserName:</label><br />
+					<input type="password" name="password" id="password" class="lan">
+				</p>
+				<p>
+					<input type="submit" value="Login">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="remember" />Remember Me
+				</p>
+				<p>
+					<a href="__APP__/Public/">Forgotten your password?</a>
+				</p>
+				</form>
+			</dd>
+			<dt>Don't have a BeingFunChina Account</dt>
+			<dd>
+				<span><a href="__APP__/Public/register/">Create New Account</a></span>
+			</dd>
+		</dl>
+		<div class="bot"></div>
+	</div>
 </div>
 <include file="Public:foot" />

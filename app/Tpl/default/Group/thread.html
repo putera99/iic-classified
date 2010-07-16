@@ -161,7 +161,7 @@
         <div class="n-life">
             <div class="classifieds content">
                 <div class="content-bg">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a> > 
                 <if condition="$dh">
                     <if condition="$dh[_pid]">
                         <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
@@ -180,7 +180,7 @@
 							{$info['message']}
 							<span class="time">
 								<a href="#" id="renew_{$info['id']}" class="add_post">[ Reply ]</a>   
-								<a href="#">[ Report ]</a>
+								<!--a href="#">[ Report ]</a-->
 							</span>
 							<span class="time"><a href="#thread_{$info['l']}">#{$info['l']}</a> {$info['dateline']|toDate='m-d-Y H:m:s'}</span>
 						</div>
@@ -197,7 +197,7 @@
 							<span class="time">
 								<a href="#" id="reply_{$v['id']}" class="add_post">[ Reply ]</a>   
 									<a href="#" id="quote_{$v['id']}" class="add_post">[ Quote ]</a>   
-									<a href="#">[ Report ]</a>
+									<!--a href="#">[ Report ]</a-->
 							</span>
 							<span class="time">
 								<a href="#thread_{$v['l']}">#{$v['l']}</a> {$v['dateline']|toDate='m-d-Y H:m:s'}

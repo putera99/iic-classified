@@ -11,11 +11,9 @@
 .qun-xinx dd {margin: 0px;padding: 0 0 0 60px;}
 .riqi {width: 180px;float: right;padding: 0px;color: #993366;margin: 0;}
 .qun-xinx span {font-weight: bold;color: #993366;display: block;margin: 0 5px 5px 0;float: left;}
-.qunbu {height: 70px;border-bottom: 1px dashed #b9b9b9;margin: 0px 7px 10px 7px;padding: 0 0 7px 0;}
-.guang {padding: 0px;margin: 0px;}
+.qunbu {height: 70px;border-bottom: 1px dashed #b9b9b9;margin: 0 7px 10px 7px;padding: 0 0 7px 0;}
+.guang {padding: 0;margin: 0;}
 .qun-xinx ul {margin: 0px;padding: 0px;list-style-type: none;float: left;}
-
-
 
 /* CSS 右边 开始 */
 .right{padding:0px;float:right;margin: 0px;width: 234px;}
@@ -37,11 +35,11 @@
 .thread,.reply,.reply .toreply{height:auto; min-height:50px;border-bottom:#aaa dotted 1px; display:block;overflow:hidden;}
 .reply{margin:0 10px 10px 73px;}
 .reply,.reply .toreply{border:#ccc dotted 1px; margin-bottom:10px;}
-.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:630px;}
+.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:600px;}
 .thread .face,.reply .face{text-align:center; width:63px; overflow:hidden; float:left;}
 .thread .face img,.reply .face img{vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : auto);_width:expression(this.width > 60 ? 60px : auto);}
-.reply .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:560px;}
-.reply .toreply .message{height:auto; float:left; padding:0; word-wrap:break-word; text-align:left; width:490px;}
+.reply .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:530px;}
+.reply .toreply .message{height:auto; float:left; padding:0; word-wrap:break-word; text-align:left; width:460px;}
 
 .thread .time,.reply .time{ text-align:right; padding-right:10px; width:100%; display:block;}
 .thread h1{font-size:14px; font-weight:bold; line-height:21px; height:21px;color: #993366;}

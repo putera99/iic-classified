@@ -194,10 +194,23 @@ class EventAction extends CommonAction{
 		return $list;
 	}//end function_name
 	
+		/**
+	 *检查城市选项
+	 *@date 2010-6-23
+	 *@time 上午10:17:39
+	 */
 	protected function chk_cid() {
 		//检查城市选项
 		if (intval($_GET['cid'])){
-			$this->pcid=intval($_GET['cid']);
+			if($_SESSION['cid']){
+				$this->pcid=intval($_GET['cid']);
+			}else{
+				$_SESSION['cid']=intval($_GET['cid']);
+				cookie('cid',null);
+				if ($_REQUEST['remember']) {
+					cookie('cid',$cid,array('expire'=>60*60*60*24*30));
+				}
+			}
 		}else{
 			$this->_set_cid();
 			$this->pcid=$this->cid;

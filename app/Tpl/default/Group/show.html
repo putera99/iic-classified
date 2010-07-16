@@ -149,7 +149,7 @@
         <div class="n-life">
             <div class="classifieds_content">
                 <div class="content-bg">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Group</a> > 
+                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a> > 
 					<if condition="$dh">
 	                    <if condition="$dh[_pid]">
 	                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
@@ -165,39 +165,39 @@
 						</span>
                         <ul>
                             <li>
-                                群主: {$info['username']} 创建于 {$info['ctime']|toDate=m/d/Y}
+                                Group Administrators:{$info['username']} Created On {$info['ctime']|toDate=m/d/Y}
                             </li>
                             <li>
-                               共有 用户 {$info['membernum']} ／ 主题 {$info['threadnum']} ／ 回复 {$info['postnum']}
+                               Total Members:{$info['membernum']} / Topics:{$info['threadnum']} / Replies:{$info['postnum']}
                             </li>
                             <li>
-                                最后活跃时间: {$info['lasttime']|toDate}
+                                Latest Update:{$info['lasttime']|toDate}
                             </li>
                             <li>
-                                关键词: {$info['tags']}
+                                Key Words:{$info['tags']}
                             </li>
 							<li>
-                                简介: {$info['announcement']}
+                                Brief Introduction:{$info['announcement']}
                             </li>
                         </ul>
                         <div class="anjian">
                             <ul>
                                 <li>
-                                    <a href="#group_{$info['id']}" id="group_{$info['id']}" class="join_group">Join group</a>
+                                    <a href="#group_{$info['id']}" id="group_{$info['id']}" class="join_group">Join in</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="add_post">发起新话题</a>
+                                    <a href="#" class="add_post">Post new topic</a>
                                 </li>
                             </ul>
                         </div>
 						<div class="clear"></div>
 					<div class="grouptopics">
-                            <span style="float:right; height:auto;"><a href="__URL__/topic/id/{$info['id']}">View All</a></span>Group Topics
+                            <span style="float:right; height:auto;"><a href="__URL__/topic/id/{$info['id']}">View all</a></span>Group topics
                         </div>
 						<dl class="h350">
-			            	<dt class="w381">Subject</dt>
-							<dt class="w100">username</dt>
-							<dt class="w100">Review time</dt>
+			            	<dt class="w381">Topic</dt>
+							<dt class="w100">User name</dt>
+							<dt class="w100">Reply time</dt>
 							<dt class="w100">Post time</dt>
 							<div id="post_ok" style="display:none;"></div>
 
@@ -213,7 +213,7 @@
 </volist>
 <else/>
 <dd>
-	<span class="w381">暂无话题！</span>
+	<span class="w381">No topic now</span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
@@ -223,11 +223,11 @@
 					
 					<div class="clear"></div>
                         <div class="grouptopics">
-                            <span style="float:right; height:auto;"><a href="__URL__/collection/id/{$info['id']}">View All</a></span>Group Collection
+                            <span style="float:right; height:auto;"><a href="__URL__/collection/id/{$info['id']}">View all</a></span>Group favorite
                         </div>
 						<dl class="h350">
-			            	<dt class="w381">CollectionName</dt>
-							<dt class="w100">Sharer</dt>
+			            	<dt class="w381">Collection</dt>
+							<dt class="w100">Shared by</dt>
 							<dt class="w100">Channel</dt>
 							<dt class="w100">Share time</dt>
 <if condition="$collection">
@@ -242,7 +242,7 @@
 </volist>
 <else/>
 <dd>
-	<span class="w381">暂无小组收藏！</span>
+	<span class="w381">No group favorite now</span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
 	<span class="w100 c"></span>
@@ -262,7 +262,7 @@
 <form action="__URL__/add_post" method="post" id="add_post">
 	<input type="hidden" name="gid" value="{$info['id']}" />
 	<fieldset class="post">
-		<legend>ADD Thread</legend>
+		<legend>Post new topic</legend>
 		<p>
 			<label for="title">Title:</label>
 			<input type="text" name="title" id="title" style="width:450px;" />
@@ -271,7 +271,7 @@
 			<label for="message">Content:</label>
 			<textarea name="message" id="message" cols="45" rows="8"></textarea>
 		</p>
-		<p style=" text-align:right; padding-right:50px;">
+		<p style="text-align:right; padding-right:50px;">
 			<input type="submit" value="Submit" />
 		</p>
 	</fieldset>

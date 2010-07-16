@@ -46,6 +46,7 @@ class CpAction extends CommonAction{
 	 */
 	function my_classifieds_post() {
 		//我发布的分类信息
+		
 		$dao=D("Archives");
 		$condition=array();
 		$condition['channel']=array('in','4,5,6,7,8,9');
@@ -577,9 +578,12 @@ class CpAction extends CommonAction{
 		//修改城市指南
 		$info=Input::getVar($_REQUEST['info']);
 		$info=explode('_',$info);
+		if($info['0']!='2'){
+			$this->error("error");
+		}
 		$dao=D("Archives");
 		$condition=array();
-		$condition['channel']=$info['0'];
+		//$condition['channel']=$info['0'];
 		$condition['id']=$info['1'];
 		$info=$dao->where($condition)->find();
 		//dump($dao->getLastSql());
@@ -1413,5 +1417,9 @@ class CpAction extends CommonAction{
 	}//end event_add
 	
 ///////////////////////////////////////////活动部分结束//////////////////////////////////////////////
+	
+	
+	
+	
 	
 }//end CpAction

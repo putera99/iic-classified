@@ -23,13 +23,6 @@ class CityGuideAction extends CommonAction{
 	function _initialize() {
 		//预处理
 		parent::_initialize();
-		if (intval($_GET['cid'])){
-			
-			$this->pcid=intval($_GET['cid']);
-		}else{
-			$this->_set_cid();
-			$this->pcid=$this->cid;
-		}
 	}//end _initialize()
 	
 	/**
@@ -39,6 +32,7 @@ class CityGuideAction extends CommonAction{
 	 */
 	function index() {
 		//城市指南频道首页
+		$this->chk_cid();
 		$arctype=D("Arctype");
 		$data=$arctype->where("id>1000 AND topid=1000")->order("id asc")->findAll();
 		$list=list_to_tree($data,'id','reid','_son',1000);
@@ -62,6 +56,7 @@ class CityGuideAction extends CommonAction{
 	 */
 	function ls() {
 		//分类信息列表页面
+		$this->chk_cid();
 		$typeid=intval($_GET['id']);
 		
 		$arctype=D("Arctype");
@@ -132,17 +127,18 @@ class CityGuideAction extends CommonAction{
 		$dao=D("Archives");
 		$info=$dao->where("id=$aid")->find();
 		$info['content']=$dao->relationGet("article");
-		if(empty($info['maps'])){
+		$cname=array('bj'=>'Beijing','sh'=>'Shanghai','gz'=>'Guangzhou','sz'=>'Shenzhen');
+		//if(empty($info['maps'])){
 			$city=$this->_get_city('localion');
 			$local='';
 			if($info['zone_id'] && $info['city_id']){
-				$local=$city[$info['city_id']]['_zone'][$info['zone_id']]['name'].','.$city[$info['city_id']]['cename'];
+				$local=$cname[$city[$info['city_id']]['cename']].' '.$city[$info['city_id']]['_zone'][$info['zone_id']]['name'].' District';
 			}elseif(empty($info['zone_id']) && $info['city_id']) {
 				$local=$city[$info['city_id']]['cename'];
 			}
 			$local=trim($info['position'].','.$local,',');
-			$info['maps']=$local;
-		}
+			$info['maps']=$info['contact'];
+		//}
 		$this->assign('info',$info);
 		$page=array();
 		$page['title']=$info['title'].'  -  BeingfunChina';
@@ -154,4 +150,27 @@ class CityGuideAction extends CommonAction{
 		
 		$this->display();
 	}//end show
+	
+		/**
+	 *检查城市选项
+	 *@date 2010-6-23
+	 *@time 上午10:17:39
+	 */
+	protected function chk_cid() {
+		//检查城市选项
+		if (intval($_GET['cid'])){
+			if($_SESSION['cid']){
+				$this->pcid=intval($_GET['cid']);
+			}else{
+				$_SESSION['cid']=intval($_GET['cid']);
+				cookie('cid',null);
+				if ($_REQUEST['remember']) {
+					cookie('cid',$cid,array('expire'=>60*60*60*24*30));
+				}
+			}
+		}else{
+			$this->_set_cid();
+			$this->pcid=$this->cid;
+		}
+	}//end chk_cid
 }//end CityGuideAction

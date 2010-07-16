@@ -146,7 +146,7 @@ class ClassifiedsAction extends CommonAction{
 				$cat=array('Brand-new','Second-hand');
 				$info['itype']=$types[$info['type']];
 				$info['category']=$cat[$info['category']];
-				$info['_commerce']=$dao->relationGet("realestate");
+				$info['_commerce']=$dao->relationGet("commerce");
 			break;
 			
 			case $info['channel']==7://agents
@@ -169,6 +169,7 @@ class ClassifiedsAction extends CommonAction{
 			$local=$city[$info['city_id']]['cename'];
 		}
 		$info['position']=trim($info['position'].','.$local,',');
+
 		$this->assign('info',$info);
 		
 		//$this->assign('comments',$this->_get_comments($info['id'],$info['channel']));
@@ -193,7 +194,15 @@ class ClassifiedsAction extends CommonAction{
 	protected function chk_cid() {
 		//检查城市选项
 		if (intval($_GET['cid'])){
-			$this->pcid=intval($_GET['cid']);
+			if($_SESSION['cid']){
+				$this->pcid=intval($_GET['cid']);
+			}else{
+				$_SESSION['cid']=intval($_GET['cid']);
+				cookie('cid',null);
+				if ($_REQUEST['remember']) {
+					cookie('cid',$cid,array('expire'=>60*60*60*24*30));
+				}
+			}
 		}else{
 			$this->_set_cid();
 			$this->pcid=$this->cid;

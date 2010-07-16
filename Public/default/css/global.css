@@ -11,59 +11,64 @@ a img{ border:none;}
 }
 .none{display:none;}
 .class_tree ul,.class_tree ul dl,.class_tree ul dl dt{ margin:0px; padding:0px; list-style-type:none;}
-.class_tree ul dl dt{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
-.class_tree ul dl dt{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.class_tree ul dl a {color:#fff;}
+.class_tree ul dl dt{height:24px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.class_tree ul dl dt a:hover,.class_tree ul dl dt .on{height:24px;text-align: center; background-color:#666; color:#fff; font-weight:bold; text-decoration:none;}
 .class_tree ul dl dd{height:24px;margin:0px;padding:0px; background-color:#aaa; border-bottom:#ccc solid 1px; text-align: center;}
 
 /* CSS top 开始 */
 #top{color: #FFFFFF;width:950px;padding:0px;margin: 0px auto;}
-.top-city h2{font-size:14px; width:96px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 10px;}
+.top-city h2{font-size:14px; width:96px;_width:86px; height:26px;line-height:26px; font-weight:normal;background-color:#262626; float:left; margin:0 10px; _margin:0 5px;}
 .top-city h2 a{width:96px; height:26px; line-height:26px; color:#828282; background-color:#262626; text-align:center; display:block;}
-.top-city h2 a:hover,.top-city h2 .on{width:96px; height:26px; line-height:26px;border:1px solid #FC7F2B; color:#FC7F2B;}
+.top-city h2 a:hover,.top-city h2 .on{border:1px solid #FC7F2B; color:#FC7F2B;}
 .top-city h2 a:hover{border:1px solid #fff; color:#fff;}
-#header-h{ height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
-.bg-h{height: 8px;margin:0px;padding: 0px;background: url(../images/bg-huan.gif) repeat-x;}
+#header-h{height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
+.top-content .bgh{height:8px;margin:0;padding:0;background:url(../images/bg-huan.gif) repeat-x;}
 .main-left .bg-h{height:24px;font-size: 14px;font-weight: bold;color: #e25a02;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
 #header{color: #FFFFFF;height:26px; margin:0px; padding:0px; background-color:#993366;}
-.header-left{width:334px;margin:0px;padding:0px;float: left;}
-.header-left span{ font-family:arial, helvetica, sans-serif; font-size:12px;color:#fff; margin:0px 0px 0px 10px; padding:0px;}
+.header-left{width:334px;margin:0px;padding:0px;float: left; line-height:26px; font-weight:bold;}
+.header-left span{font-size:12px;color:#fff; margin:0px 0px 0px 10px;_margin:0px 0px 0px 5px;  padding:0px;}
 .header-left span a{color:#fff;}
 .colorz{width:240px;margin:0px;padding:0px;float: right;}
-.colorz ul{margin:3px 0 0 0; padding:0px;list-style-type:none;}
+.colorz ul{margin:3px 0 0 0;_margin:1px 0 0 0; padding:0px;list-style-type:none;}
 .colorz li{float: left;margin:0px;padding: 0px 0px 0px 8px;}
 .clear{line-height:0px;clear: both;height: 0px;}
-.top-content{height: 125px;margin:0px;padding:0px;background:url(../images/bg2.gif) repeat-x;}
+.top-content{height: 125px;margin:0px;padding:0px;background:url(../images/bg2.gif) repeat-x; overflow:hidden;}
 .top-logo{height: 96px;margin:0px;padding:0px;}
-.top-logo h1{width:169px;float:left;margin: 0 0 0 25px; _margin: 0 0 0 13px;padding: 5px 0 0 0;}
+.top-logo h1{width:169px;float:left;margin: 0 0 0 25px; _margin: 0 0 0 12px;padding: 5px 0 0 0;}
 .top-city{width:466px; margin:0px; padding:25px 20px 0 0;float:right;}
 .top-city a{ margin:0px; padding:0 0 0 8px;}
 .top-nav{margin: 0px;padding-left: 25px;width: 906px;}
 .nav{width:650px;height:20px;margin:0px;padding:0px;}
 .nav a{color: #fff;}
 
-.nav .annv{background:url(../../img/l.gif) no-repeat;}
-.annv a{color: #fff;background:url(../../img/r.gif) no-repeat right top; height:20px; line-height:20px; display:block; padding-right:7px;}
+.nav .annv{background:url(../../img/l.gif) no-repeat;_width:70px;}
+.annv a{color:#fff;background:url(../../img/r.gif) no-repeat right top; height:20px; line-height:20px;display:block;padding-right:7px;text-align:center;}
 
-.nav ul{margin:0px;padding:2px 0 0 0;list-style-type:none;}
-.nav li{float:left;padding:0;margin-right:30px; height:20px; padding:0 0 0 6px;}
-.search{width:230px;float:right;margin: 0px;padding: 0px;}
+.nav ul{margin:0;padding:2px 0 0 0;_padding:0;list-style-type:none; height:auto; overflow:hidden;}
+.nav li{float:left;margin-right:30px;_margin-right:15px;height:20px;_height:18px; padding:0 0 0 6px;}
+.search{width:230px;float:right;margin:0;padding:0; height:20px; overflow:hidden;}
 .bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
 
 /* CSS底部开始*/
-#bottom{width:950px;height: 109px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:20px auto;;padding: 0; color:#fff;}
+#bottom{width:950px;height:109px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:10px auto;_margin:5px auto;padding:0; color:#fff;}
 .title-h {display: block;font-size: 12px;font-weight: bold;color: #ef5f01;}
+.title-h a{color: #ef5f01;}
+#bottom p a{color:#fff;}
 
-.star{height:18px; margin:0 10px;}
+
+.star{height:18px; margin:0 10px;_margin:0 5px;}
 .star .nx{background:url(../../img/nst.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
 .star .x{background:url(../../img/sth.gif) no-repeat 0 3px;width:15px; height:18px; float:left; margin:0;}
-.star .t{float:left; margin-top:3px; margin-left:3px; height:20px; width:65px;padding:0; }
+.star .t{float:left; margin-top:3px; margin-left:3px;_margin-top:1px;_margin-left:1px; height:20px; width:65px;padding:0; }
 
-.fanye{width:400px;;margin:15px auto; float:right; height:25px;}
-.fanye span{margin:0 5px; width:24px; height:17px; float:left;}
+.fanye{width:400px;margin:15px auto;_margin:7px auto; float:right; height:25px;}
+.fanye span{margin:0 5px;_margin:0 2px; width:24px; height:17px; float:left;}
 .fanye span a{text-align:center; display:block;width:24px; height:17px; background:url(../images/huibg.gif) no-repeat 0 0; color:#000; line-height:17px;}
 .fanye span a:hover,.fanye .on{text-align:center;display:block;width:24px; height:17px; background:url(../images/hongbg.gif) no-repeat 0 0; color:#fff; line-height:17px;}
 
 /*发布评论的输入框*/
 .post{background-color:#eee;}
 .post label{width:50px; text-align:center; display:block; float:left;}
+
 

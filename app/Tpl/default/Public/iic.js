@@ -1,18 +1,23 @@
 $(document).ready(function(){
 	var login=APP+'Public/ajax_is_login';
 	$("#remember").click(function(){
-		if($("#remember").attr('checked')){
+
+		if($("#remember").attr('class')=='remember_0'){
 			for(var i=0;i<4;i++){
 				var x=$(".top-city>h2:eq("+i+")>a");
 				var r=x.attr('href')+'/remember/1'
 				x.attr("href",r);
 			}
+			$("#remember").attr('src','/Public/img/es2.gif');
+			$("#remember").attr('class','remember_1')
 		}else{
 			for(var i=0;i<4;i++){
 				var x=$(".top-city>h2:eq("+i+")>a");
 				var r=x.attr('href').replace('/remember/1','');
 				x.attr("href",r);
 			}
+			$("#remember").attr('src','/Public/img/es.gif');
+			$("#remember").attr('class','remember_0');
 		}
 	});
 	$(".ch").mouseover(function(){
@@ -89,7 +94,7 @@ $(document).ready(function(){
 		var star=$("#click_6").val();
 		var verify=$("#verify").val();
 		if($.trim(text)==''){
-			alert("内容不能为空");
+			alert("Lake of comment!");
 		}else{
 			var tourl=URL+'/post_comment';
 			var ken=$("input[name='IIC_CN']").val();
