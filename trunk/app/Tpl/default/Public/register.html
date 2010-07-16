@@ -1,27 +1,69 @@
 <include file="Public:head" />
-<div id="main">
+<style type="text/css">
+.reg{border:none; text-align:center;}
+.reg .title{ font-size:131%; color:#333333;}
+.reg .form{ width:500px; margin:0 auto;}
+.reg .form label{ width:100px; text-align:right; display:inline-block;}
+.reg .form br{clear:both;}
+.reg .form .right{ display:inline-block; text-align:left;}
+.reg .form .w200{width:370px;}
+.reg .form .right .w88{width:10.5em; float:left;}
+
+</style>
+<div id="main" style="background-color:#ffffff;" class="reg">
 	<form action="__URL__/reg_add" method="post">
-	<table border="0" width="500" align="center">
-		<tr>
-			<th>UserName:</th>
-			<td><input type="text" name="username"></td>
-		</tr>
-		<tr>
-			<th>PassWord:</th>
-			<td><input type="password" name="password"></td>
-		</tr>
-		<tr>
-			<th>Re PassWord:</th>
-			<td><input type="password" name="repassword"></td>
-		</tr>
-		<tr>
-			<th>Email:</th>
-			<td><input type="text" name="email"></td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center"><input type="submit" value="Submit"></td>
-		</tr>
-	</table>
+	<p class="title">Register with Beingfunchina to get yourself connected now! If you are already a member,please log in directly.</p>
+
+	<fieldset class="form">
+		<legend>Select an Username and password</legend>
+		<br />
+			<label for="username">Username:</label>
+			<div  class="right w200">
+			<input type="text" name="username" id="username" />
+			</div>
+		<br />
+			<label for="password">Password:</label>
+			<div  class="right w200">
+			<input type="password" name="password" id="password" />
+			</div>
+		<br />
+			<label for="repassword">Retype Password:</label>
+			<div  class="right w200">
+			<input type="password" name="repassword" id="repassword" />
+			</div>
+		<br />
+			<label for="email">E-mail:</label>
+			<div  class="right w200">
+			<input type="text" name="email" id="email" />
+			</div>
+		<br />
+	</fieldset>
+	<fieldset class="form">
+		<legend>Just one step to share more about yourself with your friends on Beingfunchina</legend>
+		<br />
+			<label for="first_name">Name:</label>
+			<div  class="right w200">
+			<input type="text" name="first_name" id="first_name" value="First name" class="w88"/>
+			<input type="text" name="last_name" id="last_name" value="Last name" class="w88" />
+			</div>
+		<br />
+			<label for="password">Password:</label>
+			<div  class="right w200">
+			<input type="password" name="password" id="password" />
+			</div>
+		<br />
+			<label for="repassword">Retype Password:</label>
+			<div  class="right w200">
+			<input type="password" name="repassword" id="repassword" />
+			</div>
+		<br />
+			<label for="email">E-mail:</label>
+			<div  class="right w200">
+			<input type="text" name="email" id="email" />
+			</div>
+		<br />
+	</fieldset>
+	
 	</form>
 </div>
 <include file="Public:foot" />

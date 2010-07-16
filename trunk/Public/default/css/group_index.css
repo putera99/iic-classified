@@ -7,6 +7,9 @@
 
 .welcome {margin: 5px 7px 5px 7px;padding: 0 0 8px 0;}
 .welcome h1,.welcome h2{border-bottom: 1px solid #b5b5b5; height:30px; line-height:30px; font-size:14px; font-weight:bold; margin:0; padding:0;}
+.welcome span{float:right; margin-bottom:2px;}
+.welcome span a{display:block; padding:0px 5px; border:1px #cccccc solid; color:#333333;}
+.welcome span a:hover{color:#fff; background-color:#706c6d;}
 .welcome-quan{height: 200px;margin: 0px 7px 10px 7px;padding: 0 0 0 10px;}
 .renshu {width: 200px;margin: 0px;padding: 0px;float: left;position: relative;padding: 0px;margin: 0px 5px 10px 0px;}
 .renshu h5{margin:0px;font-size: 12px;line-height: 16px;font-weight: normal;padding: 0 0 0 70px;}

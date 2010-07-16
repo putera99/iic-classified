@@ -1,12 +1,27 @@
+<include file="Public:head" />
+<div id="main" style="height:auto; min-height:500px; overflow:auto; background-color:#ffffff;">
+<h1>Select Group</h1>
+
+<form action="__URL__/share" method="post">
+<fieldset>
+<legend>My Group</legend>
 <if condition="$info">
 <volist name="info" id="v">
-<form action="">
-	
-	
-</form>
+	<div style="width:150px; height:150px; overflow:hidden; float:left;">
+	<img src="http://tel.beingfunchina.com{$v['pic']}" alt="{$v['groupname']}" /><br />
+	<input type="checkbox" name="gid[]" value="{$i}" id="gid_{$i}" /><label for="gid_{$i}">{$v['groupname']}</label>
+	</div>
 </volist>
-<div class="fanye" style="margin:10px auto;">
-	{$showpage_bot}
-</div>
-<div class="clear"></div>
 </if>
+</fieldset>
+<p align="center">
+	<input type="hidden" name="xid" value="{$xid}" />
+	<input type="hidden" name="xtype" value="{$xtype}" />
+	<input type="hidden" name="act" value="share" />
+	<input type="submit" value="Submit" />
+</p>
+</form>
+<div class="clear"></div>
+
+</div>
+<include file="Public:foot" />

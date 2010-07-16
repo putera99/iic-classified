@@ -24,6 +24,19 @@ class ExAction extends CommonAction{
 		import("@.Com.Spreadsheet_Excel_Reader");
 		import("ORG.Util.Image");
 		$filename=$_GET['fname'];
+		if(empty($filename)){
+			echo '<a href='.__URL__."/index/fname/1_20/>1_20</a><br>";
+			echo '<a href='.__URL__."/index/fname/21_40/>21_40</a><br>";
+			echo '<a href='.__URL__."/index/fname/41_60/>41_60</a><br>";
+			echo '<a href='.__URL__."/index/fname/61_80/>61_80</a><br>";
+			echo '<a href='.__URL__."/index/fname/81_100/>81_100</a><br>";
+			echo '<a href='.__URL__."/index/fname/101_120/>101_120</a><br>";
+			echo '<a href='.__URL__."/index/fname/121_140/>121_140</a><br>";
+			echo '<a href='.__URL__."/index/fname/141_160/>141_160</a><br>";
+			echo '<a href='.__URL__."/index/fname/161_180/>161_180</a><br>";
+			echo '<a href='.__URL__."/index/fname/181_200/>181_200</a><br>";
+			exit();
+		}
 		$path="Public/excel/";
 		$file=$path.$filename.'.xls';
 		$arr=array();
@@ -31,7 +44,7 @@ class ExAction extends CommonAction{
 		$data->setOutputEncoding('utf-8');
 		
 		$data->read($file);
-		
+		//dump($data);
 		error_reporting(E_ALL ^ E_NOTICE);
 		
 		//echo $data->sheets[0]['numRows'];
@@ -49,10 +62,13 @@ class ExAction extends CommonAction{
 		$errnum=0;
 		$warr=0;
 		$img_arr=array();
+		//dump($data->sheets[0]);
 		for ($i = 3; $i <= 42; $i++) {
+			
 			if(empty($data->sheets[0]['cells'][$i][1]) || empty($data->sheets[0]['cells'][$i][6])){
 				continue;
 			}
+			
 			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
 			$arr[$i]['bycity']=$this->city($data->sheets[0]['cells'][$i][2]);
 			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
@@ -149,7 +165,7 @@ class ExAction extends CommonAction{
 			}
 			
 		}//foreach end
-		
+		//dump($arr);
 		if($act=='ok'){
 			$return='';
 			$arc=D("Archives");
@@ -163,7 +179,10 @@ class ExAction extends CommonAction{
 						$fair_vo=$fair->create($d['fair']);
 						$fair_vo['aid']=$aid;
 						$fid=$fair->add($fair_vo);
-						$this->add_photo($aid,$d['pic'],$filename);
+						//dump($d['pic']);
+						if(!empty($d['pic'])){
+							$this->add_photo($aid,$d['pic'],$d['writer'],'11');
+						}
 						$return.=$d['writer'].'写入成功！<br>';
 					}else{
 						$return.=$d['writer'].'主档写入失败！<br>';
@@ -207,7 +226,8 @@ class ExAction extends CommonAction{
 	}//end br_or_b
 	
 	function city($str){
-		$str=strtolower($str);
+		$str=strtolower(trim($str));
+		$str=str_replace(' ','',$str);
 		switch ($str) {
 			case 'beijing':
 				$str='2';
@@ -220,6 +240,43 @@ class ExAction extends CommonAction{
 			break;
 			case 'shenzhen':
 				$str='4';
+			break;
+			case 'dongguan':
+				$str='6';
+			break;
+			case 'qingdao':
+				$str='7';
+			break;
+			case 'yiwu':
+				$str='8';
+			break;
+			case 'hongkong':
+				$str='9';
+			break;
+			case 'macao':
+				$str='10';
+			break;
+			case 'chengdu':
+				$str='11';
+			break;
+			case 'nanning':
+				$str='12';
+			break;
+			case 'tianjin':
+				$str='13';
+			break;
+			case 'chongqing':
+				$str='14';
+			break;
+			case "xi'an":
+				$str='15';
+			break;
+			case "qingyuan":
+				$str='16';
+			break;
+			default:
+				dump($str);
+				$this->error('城市名称不匹配');
 			break;
 		}
 		return $str;
@@ -242,7 +299,8 @@ class ExAction extends CommonAction{
 			if($type['type']!='bmp'){
 				$info=Image::thumb($file,$thumbname,'',$thumbWidth[$i],$thumbHeight[$i],true);
 				if($info!=$thumbname){
-					return false;
+					$this->error($thumbname);
+					//return false;
 				}
 			}
 		}
@@ -267,27 +325,29 @@ class ExAction extends CommonAction{
 		//dump($list);
 	}
 	
-	function add_photo($aid,$filename,$title){
+	function add_photo($aid,$filename,$title,$xtype){
 		$dao=D("Pic");
-		if(is_array($filename)){
+		//if(is_array($filename)){
 			foreach ($filename as $v){
 				$data=array();
-				$data['aid']=$aid;
-				$data['filename']=$v;
+				$data['xid']=$aid;
+				$data['filename']=$v['filename'];
 				$data['title']=$title;
+				$data['xtype']=$xtype;
 				$vo=array();
 				$vo=$dao->create($data);
 				$dao->add($vo);
 			}
-		}else{
+		/*}else{
 			$data=array();
-			$data['aid']=$aid;
-			$data['filename']=$aid;
+			$data['xid']=$aid;
+			$data['filename']=$filename;
 			$data['title']=$title;
+			$data['xtype']=$xtype;
 			$vo=array();
 			$vo=$dao->create($data);
 			$dao->add($vo);
-		}
+		}*/
 	}
 	
 	
@@ -303,6 +363,17 @@ class ExAction extends CommonAction{
 		import("@.Com.Spreadsheet_Excel_Reader");
 		import("ORG.Util.Image");
 		$filename=$_GET['fname'];
+		if(empty($filename)){
+			echo '<a href='.__URL__."/events/fname/bj1_100/>bj1_100</a><br>";
+			echo '<a href='.__URL__."/events/fname/bj100_210/>bj100_210</a><br>";
+			echo '<a href='.__URL__."/events/fname/gz1_39/>gz1_39</a><br>";
+			echo '<a href='.__URL__."/events/fname/sh1_168/>sh1_168</a><br>";
+			echo '<a href='.__URL__."/events/fname/sh100_168/>sh100_168</a><br>";
+			echo '<a href='.__URL__."/events/fname/sh169_230/>sh169_230</a><br>";
+			echo '<a href='.__URL__."/events/fname/sz1_31/>sz1_31</a><br>";
+			exit();
+		}
+		
 		$path="Public/events/";
 		$file=$path.$filename.'.xls';
 		$arr=array();
@@ -311,7 +382,7 @@ class ExAction extends CommonAction{
 		
 		$data->read($file);
 		
-		error_reporting(E_ALL ^ E_NOTICE);
+		//error_reporting(E_ALL ^ E_NOTICE);
 		
 		//echo $data->sheets[0]['numRows'];
 		//echo $data->sheets[0]['numCols'];
@@ -328,23 +399,26 @@ class ExAction extends CommonAction{
 		$errnum=0;
 		$warr=0;
 		$img_arr=array();
-		//dump($data);
-		for ($i = 3; $i <= 170; $i++) {
-			if($data->sheets[0]['cells'][$i][16]=='1'){
+		//dump($data->sheets[0]);
+		for ($i=2; $i <= 220; $i++) {
+			if($data->sheets[0]['cells'][$i][16]=='1' || empty($data->sheets[0]['cells'][$i][1])){
 				continue;
 			}
+			$l=$data->sheets[0]['cells'][$i][4];
+			if(strpos($l,'_')){
+				$l=end(explode('_',$l));
+			}
+
 			//dump($data->sheets[0]['cells'][$i]);
 			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
 			$arr[$i]['cid']=$this->city($data->sheets[0]['cells'][$i][2]);
+			$msg.='CID '.$arr[$i]['cid'].'___';
 			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
 			$arr[$i]['showstart']=$time['st'];
 			$arr[$i]['showend']=$time['et'];
 			$arr[$i]['channel']=10;
 			
-			$l=$data->sheets[0]['cells'][$i][4];
-			if(strpos($l,'_')){
-				$l=end(explode('_',$l));
-			}
+			
 			$arr[$i]['dir']=$path.$filename.'/'.$l.'/';
 			
 			$arr[$i]['writer']=$data->sheets[0]['cells'][$i][4];
@@ -352,8 +426,8 @@ class ExAction extends CommonAction{
 			if(!empty($data->sheets[0]['cells'][$i][5]) || $data->sheets[0]['cells'][$i][5]=='0'){
 				$arr[$i]['albumnum']=$data->sheets[0]['cells'][$i][5];
 			}
-			$arr[$i]['typeid']=$data->sheets[0]['cells'][$i][6];
-			
+			$arr[$i]['typeid']=$this->get_etype($data->sheets[0]['cells'][$i][6]);
+			$msg.='typeid '.$arr[$i]['typeid'].'___';
 			if(!empty($data->sheets[0]['cells'][$i][7])){
 				$arr[$i]['typeid2']=$data->sheets[0]['cells'][$i][7];
 			}
@@ -374,16 +448,16 @@ class ExAction extends CommonAction{
 					$img=count($flist);
 					$num=$arr[$i]['albumnum']+1;
 					if($num!=$img){
-						$msg.=$data->sheets[0]['cells'][$i][4].'图片数量不正确实际图：'.$img.'填写图片:'.$arr[$i]['albumnum'].'<br>';
+						$msg.=$data->sheets[0]['cells'][$i][4].'图片数量不正确实际图：'.$img.'填写图片:'.$arr[$i]['albumnum']."<br>\n";
 						$errnum++;
 					}else{
-						$msg.=$data->sheets[0]['cells'][$i][4].'信息图片匹配<br>';
+						$msg.=$data->sheets[0]['cells'][$i][4]."信息图片匹配<br>\n";
 						foreach ($flist as $v){
 							$type=Image::getImageInfo($v);
 							if($type['type']=='bmp'){
 								$msg.='<b>'.$v.'图片格式不能是bmp</b><br>';
 								$warr++;
-							}elseif($act=='ok'){//是否确认写入
+							}elseif($act=='ok' || $act=='fdb'){//是否确认写入
 								$filelen=strpos($v,'.'); //获取文件名长度
 								$filename_name=substr($v, 0, $filelen); //截取文件名
 								$filename_name=end(explode("/", $filename_name));
@@ -425,13 +499,90 @@ class ExAction extends CommonAction{
 						//dump($arr[$i]['picurl']);
 					}
 				}else{
-					$msg.='<b>'.$data->sheets[0]['cells'][$i][4].'信息无图片</b><br>';
+					$msg.='<b>'.$data->sheets[0]['cells'][$i][4]."信息无图片</b><br>\n";
 					$warr++;
 				}
 		}//end 循环读取数据
-		echo '共有'.$errnum.'错误!<br>'.$warr.'警告!<br>';
-		echo $msg;
-		echo "<a href='".__URL__."/index/act/ok/fname/".$filename."'>写入数据</a>";
+		
+		if($act=='ok'){
+			$return='';
+			$arc=D("Archives");
+			$event=D("Event");
+			$arr=S('hebing');
+			foreach ($arr as $d){
+				if(!empty($d['title']) && !empty($d['typeid'])){
+					$acr_vo='';
+					$arc_vo=$arc->create($d);
+					$aid=$arc->add($arc_vo);
+					if($aid){
+						$event_vo=$event->create($d['event']);
+						$event_vo['aid']=$aid;
+						$eid=$event->add($event_vo);
+						$this->add_photo($aid,$d['pic'],$d['writer'],11);
+						$return.=$d['writer']."写入成功！<br>\n";
+					}else{
+						$return.=$d['writer']."主档写入失败！<br>\n";
+					}
+				}else{
+					$return.=$d['writer']."标题或分类为空写入失败！<br>\n";
+				}
+			}
+			echo $return;
+		}elseif($act=='fdb'){
+			S($filename,$arr,6000);
+		}elseif($act=='hebing'){
+			$newarr=array();
+			$arr1=S('bj1_210');
+			$arr2=S('gz1_39');
+			$arr3=S('sh1_168');
+			$arr4=S('sh169_230');
+			$arr5=S('sz1_31');
+			$newarr=array_merge($arr1,$arr2,$arr3,$arr4,$arr5);
+			shuffle($newarr);
+			S('hebing',$newarr,6000);
+		}else{			
+			echo '共有'.$errnum.'错误!<br>'.$warr."警告!<br>\n";
+			echo $msg;
+			
+			echo "<a href='".__URL__."/events/act/fdb/fname/".$filename."'>写入缓存</a>";
+			echo "<a href='".__URL__."/events/act/ok/fname/".$filename."'>写入数据</a>";
+		}
+		
+		
 	}//end events
 	
+	/**
+	   *查出活动类别
+	   *@date 2010-7-16
+	   *@time 上午11:53:57
+	   */
+	function get_etype($name) {
+		//查出活动类别
+		$arr=array();
+		$arr=S("etype");
+		if(empty($arr)){
+			$dao=D("Arctype");
+			$arr=$dao->where("channeltype=10")->field('id,typename')->findAll();
+			S('etype',$arr,60000);
+		}
+		$typeid='';
+		$name=strtolower(trim($name));
+		$name=str_replace(' ','',$name);
+		foreach ($arr as $v){
+			$v['typename']=strtolower(trim($v['typename']));
+			$v['typename']=str_replace(' ','',$v['typename']);
+			if($v['typename']==$name){
+				$typeid=$v['id'];
+			}else{
+				continue;
+			}
+		}
+		if($typeid){
+			return $typeid;
+		}else{
+			return "{$v['typename']}:$name";
+		}
+		
+		
+	}//end get_etype
 }//end ExAction

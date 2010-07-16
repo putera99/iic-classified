@@ -24,7 +24,7 @@ class IndexAction extends CommonAction{
     	$this->assign('pick2',$this->_new_list(2001,'p','0,2'));
     	$this->assign('pick8',$this->_new_list(2001,'','2,8'));
     	$this->assign('do',$this->_new_list(2004,'','0,1'));
-    	$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
+    	//$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
     	
     	$group=$this->_get_group('hot');
     	$this->assign('group',$group);
@@ -55,16 +55,16 @@ class IndexAction extends CommonAction{
 		$this->assign('page',$page);
 		
 		$chau_list=array();
-		$chau_list['0']['id']='1';
+		/*$chau_list['0']['id']='1';
 		$chau_list['0']['name']='Asia';
-		$chau_list['0']['ename']='asia';
+		$chau_list['0']['ename']='asia';*/
 		
 		$chau_list['1']['id']='2';
 		$chau_list['1']['name']='Europe';
 		$chau_list['1']['ename']='europe';
 		$chau_list['1']['url']='http://www.listenlive.eu';
 		
-		$chau_list['2']['id']='3';
+		/*$chau_list['2']['id']='3';
 		$chau_list['2']['name']='Africa';
 		$chau_list['2']['ename']='africa';
 		
@@ -82,10 +82,12 @@ class IndexAction extends CommonAction{
 		
 		$chau_list['6']['id']='7';
 		$chau_list['6']['name']='Antarctica';
-		$chau_list['6']['ename']='antarctica';
+		$chau_list['6']['ename']='antarctica';*/
 		
 		$this->assign('chau',$chau_list);
 		
+		$cityname=array(1=>array('GUANGZHOU','CH006'),2=>array('BEIJING','CH002'),3=>array('SHANGHAI','CH024'),4=>array('SHENZHEN','CH006'));
+		$this->assign('cityname',$cityname[$this->pcid]);
     	$this->display();
     }
     

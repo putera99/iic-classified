@@ -139,7 +139,7 @@ class CommonAction extends Action{
 	    	$condition['types']=$types;
 	    	$info=$dao->where($condition)->findAll();
 	    	if ($info) {
-	    		$this->ajaxReturn(0,'资源已经收藏!',0);
+	    		$this->ajaxReturn(0,'You’ve already collected as your favorite.',0);
 	    	}else{
 	    		$data=array();
 	    		$data['uid']=$this->user['uid'];
@@ -151,9 +151,9 @@ class CommonAction extends Action{
 	    		$data['is_show']=0;
 	    		$id=$dao->add($data);
 	    		if ($id) {
-	    			$this->ajaxReturn($id,'收藏成功！',1);
+	    			$this->ajaxReturn($id,'You’ve collected it as your favorite successfully.',1);
 	    		}else{
-	    			$this->ajaxReturn(0,'收藏失败！',0);
+	    			$this->ajaxReturn(0,'You’ve failed to collect it as your favorite.',0);
 	    		}
 	    	}
 		}
@@ -204,6 +204,7 @@ class CommonAction extends Action{
      */
    protected function _set_cid() {
     	//设置城市
+    	//$this->cid=1;
     	$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
     	$this->cid=empty($this->cid)?cookie('cid'):$this->cid;
     	if(empty($this->cid)){
@@ -282,14 +283,40 @@ class CommonAction extends Action{
      *@date 2010-6-28
      *@time 下午03:04:23
      */
-	public function ajax_share() {
+	public function share() {
     	//分享到群组收藏夹
 		if (!$this->_is_login()){
-			$this->ajaxReturn(0,'no login!',0);
+			$this->ajaxReturn(0,'Log in please.',0);
 		}else{
-			
+			$act=Input::getVar($_POST['act']);
+			if($act!="share"){
+				$this->ajax_group();
+			}else{
+				$gid=Input::getVar($_POST['gid']);
+				$xid=Input::getVar($_POST['xid']);
+				$types=Input::getVar($_POST['xtype']);
+				$dao=D("MtagCollection");
+				foreach ($gid as $g){
+					$data=array();
+					$return='';
+					$msg='';
+					$data['gid']=$g;
+					$data['xid']=$xid;
+					$data['types']=$types;
+					$data['listid ']=0;
+					$data=$dao->create($data);
+					$return=$dao->add($data);
+					
+					if(empty($return)){
+						$msg.='"'.get_info($g).'"  Your sharing is failed.<br>';
+					}else{
+						$msg.='"'.get_info($g).'"  You’ve shared successfully.<br>';
+					}
+				}
+				$this->success($msg);
+			}
 		}
-    }//end ajax_share
+    }//end share
     
     /**
      *显示我的群组
@@ -299,8 +326,12 @@ class CommonAction extends Action{
     public function ajax_group() {
     	//显示我的群组
     	if (!$this->_is_login()){
-			$this->error("no login");
+			$this->error("Log On Please");
 		}else{
+			$xid=$_REQUEST['xid'];
+			$xtype=$_REQUEST['xtype'];
+			$this->assign('xid',$xid);
+			$this->assign('xtype',$xtype);
 	    	$dao=D("Tagspace");
 	    	$condition=array();
 	    	$condition['uid']=$this->user['uid'];
@@ -316,12 +347,13 @@ class CommonAction extends Action{
 		    	$data=$dao->where($condition)->order("ctime DESC")->limit($limit)->findAll();
 		    	$info=array();
 		    	foreach ($data as $v){
-		    		$info[$v['tagid']]=get_info($v['tagid']);
+		    		$info[$v['tagid']]=get_info($v['tagid'],'*');
 		    	}
+		    	//dump($info);
 		    	$this->assign("info",$info);
 		    	$this->display("Common:ajax_group");
 	    	}else{
-	    		echo "您还没有加入群组！";
+	    		$this->error("You need to join a group first.");
 	    	}
     	}
     }//end my_group
@@ -739,10 +771,10 @@ class CommonAction extends Action{
 	public function post_comment() {
 		//发布评论
 		if (empty($this->user['uid'])) {
-			$this->ajaxReturn(0,'no login',0);
+			$this->ajaxReturn(0,'Log On Please!',0);
 		}
 		if (empty($_REQUEST['verify']) || md5($_REQUEST['verify'])!=$_SESSION['verify']){
-			$this->ajaxReturn(0,'verify!',0);
+			$this->ajaxReturn(0,'Code Error!',0);
 		}
 		$dao=D("Comment");
 		$vo=$dao->create($_REQUEST);
@@ -751,10 +783,10 @@ class CommonAction extends Action{
 			$id=$dao->add($vo);
 			if ($id) {
 				unset($_SESSION['verify']);
-				$this->ajaxReturn($id,'评论成功',1);
+				$this->ajaxReturn($id,'Comment released.',1);
 				
 			}else{
-				$this->ajaxReturn(0,'评论失败',0);
+				$this->ajaxReturn(0,'Comment failed.',0);
 			}
 		}else{
 			//dump($dao->getError());
@@ -838,7 +870,7 @@ class CommonAction extends Action{
 	*@date Sat Jun 05 16:48:56 CST 2010
 	*@time 16:48:56
 	*/
-	protected function _get_group($mode="",$limit="0,6"){
+	protected function _get_group($mode="",$limit="0,10"){
 		//获取热点群组
 		$dao=D("Group");
 		if ($mode=='hot') {
@@ -883,5 +915,18 @@ class CommonAction extends Action{
 		
 	}//end so
 	
+///////////////////////////校验权限/////////////////////////
+	/**
+   *检查权限
+   *@date 2010-7-16
+   *@time 下午03:47:54
+   */
+	function _get_role() {
+		//检查权限
+		$uid=$_SESSION['uid'];
+		$dao=new Model();
+		$sql="SELECT r.id,r.name,r.remark FROM iic_role_user as ru LEFT JOIN iic_role as r ON ru.role_id=r.id WHERE ru.user_id={$uid};";
+		return $dao->query($sql);
+	}//end _r
 }//END CommonAction
 ?>

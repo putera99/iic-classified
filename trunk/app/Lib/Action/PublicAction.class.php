@@ -17,8 +17,6 @@ class PublicAction extends CommonAction{
 	 *处理选择城市
 	 *@date 2010-5-4
 	 *@time 下午03:16:36
-	 *87221965
-	 *13138663720
 	 */
 	function index() {
 		//处理选择城市
@@ -29,10 +27,13 @@ class PublicAction extends CommonAction{
 			if ($_REQUEST['remember']) {
 				cookie('cid',$cid,array('expire'=>60*60*60*24*30));
 			}
+			
 			if(empty($_REQUEST['to'])){
 				$this->redirect('/Index/index');
 			}else{
 				$url=mydecode($_REQUEST['to']);
+				//echo $url;
+				//dump($_SESSION);
 				$this->redirect($url);
 			}
 		}else{
@@ -48,6 +49,9 @@ class PublicAction extends CommonAction{
 		if($_REQUEST['to']){
 			$this->assign('to',$_REQUEST['to']);
 		}
+		srand((double)microtime()*1000000);
+		$rand=rand(1,8);
+		$this->assign('rand',$rand);
 		$this->display();
 	}// END login
 	
@@ -78,7 +82,7 @@ class PublicAction extends CommonAction{
 	function check() {
 		//登录校验
 		$username=trim($_POST['username']);
-		$password=md5($_POST['password']);
+		$password=md5(trim($_POST['password']));
 		/*$_SESSION['uid']='3594';
 		$_SESSION['username']=$username;
 		$this->ajaxReturn("3594",'登录成功','1');*/
@@ -90,7 +94,7 @@ class PublicAction extends CommonAction{
 				$_SESSION['username']=$info['username'];
 				$_SESSION["info"]=$info;
 				if ($_REQUEST['is_ajax']) {
-					$this->ajaxReturn("{$info['uid']}",'登录成功','1');
+					$this->ajaxReturn("{$info['uid']}",'You’ve already logged in','1');
 				}else{
 					if(empty($_REQUEST['to'])){
 						$this->redirect("/Cp/index");
@@ -101,16 +105,17 @@ class PublicAction extends CommonAction{
 				}
 			}else{
 				if ($_REQUEST['is_ajax']) {
-					$this->ajaxReturn("0",'密码错误','0');
+					$this->ajaxReturn("0",'Wrong password!','0');
 				}else{
-					$this->error("ERROR:2!");
+					echo $password;
+					$this->error("Wrong password!!");
 				}
 			}
 		}else{
 			if ($_REQUEST['is_ajax']) {
-					$this->ajaxReturn("0",'用户名错误','0');
+					$this->ajaxReturn("0",'Wrong user’s name!','0');
 				}else{
-					$this->error("ERROR:1!");
+					$this->error("Wrong user’s name!!");
 				}
 		}
 
@@ -125,9 +130,9 @@ class PublicAction extends CommonAction{
 		//ajax检查是否登录
 		$user=$this->_is_login();
 		if ($user){
-			$this->ajaxReturn($user,'已经登录','1');
+			$this->ajaxReturn($user,'You’ve already logged in!','1');
 		}else {
-			$this->ajaxReturn("0",'请先登录','0');
+			$this->ajaxReturn("0",'Log in please.','0');
 		}
 		
 	}//end ajax_is_login
@@ -138,7 +143,7 @@ class PublicAction extends CommonAction{
 		$data['email']=$_POST['email'];
 		$data['groupid']=10;
 		if ($data['password']!=$_POST['repassword'] || empty($data['password'])||empty($data['email'])||empty($data['username'])) {
-			$this->error("ERROR:1!");
+			$this->error("Wrong parameter!");
 		}
 		$data['password']=md5($data['password']);
 		$dao=new Model();
@@ -155,7 +160,7 @@ class PublicAction extends CommonAction{
 				$this->redirect($url);
 			}
 		}else{
-			$this->error("ERROR:2!");
+			$this->error("Wrong parameter!!");
 		}
 	}// END login
 	

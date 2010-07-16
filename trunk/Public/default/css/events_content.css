@@ -1,7 +1,8 @@
 /* left开始*/
-#main {width:950px;padding: 0px;margin: 0px auto;}
+#main {width:950px;padding:0;margin:0 auto;}
 .mian-left{width:706px;margin: 0px;padding:0px;background-color: #f3f3f3;}
-.events_poular{height:23px;margin: 0px 0px 10px 0px;padding: 0px 0px 0px 10px;background: url(../images/pc/bg02.gif) repeat-x;border: 1px solid #bababa;font-weight: bold;color: #3a3a3a;}
+.events_poular{height:23px;margin:0 0 10px 0;_margin:0 0 5px 0;padding: 0px 0px 0px 10px;background: url(../images/pc/bg02.gif) repeat-x;border: 1px solid #bababa;font-weight: bold;color: #3a3a3a;}
+.events_poular a{color: #3a3a3a;}
 .events_neibiao{height: 117px;margin: 0px 5px 10px 5px;padding: 0px 0px 0px 10px;border-bottom: 1px dashed #434343;}
 .events_neibiao ul{ margin:0px; padding:0px; list-style-type:none;}
 .events_neibiao ul{ margin:0px; padding:0px;}
@@ -10,7 +11,7 @@
 .xiahhua {margin: 0px;padding: 0px;text-decoration: underline;color: #0f7892;}
 .events_neit{ margin:0px; padding:0px;}
 .events_n {padding: 0px;margin: 0px 8px 10px 0px;}
-.events_neir {width: 100px;margin: 0px;padding: 0px;float: right;}
+.events_neir {width:100px;margin: 0px;padding: 0px;float: right;}
 .events_neir ul {margin: 0px;list-style-type: none;padding: 0px;}
 .events_neir li {width: 60px;background-color: #e1e1e1;border: 1px solid #cacaca;text-align: center;padding-bottom: 0px;margin-bottom: 8px;}
 .left{width: 70px;margin: 0px;padding:0px;}
@@ -26,8 +27,9 @@
 .cuti {color: #993366;font-weight: bold;}
 .events_nei .biaoh {font-weight: bold;color: #993366;}
 .events_members span {font-weight: bold;color: #df6009;float: right;margin-right: 10px;}
-.events_members {margin: 0px 5px 10px 5px;padding: 0px 0px 8px 10px;border-bottom: 1px solid #b7b7b7;font-size: 12px;font-weight: bold;color: #993366;}
-.events_huiyuan {height: 80px;margin: 0px 5px 10px 5px;padding: 0px;line-height: 16px;color: #993366;}
+.events_members {margin: 0px 5px 10px 5px;_margin: 0px 2px 5px 2px;padding:0 0 8px 10px;border-bottom: 1px solid #b7b7b7;font-size: 12px;font-weight: bold;color: #993366;}
+.events_members span a{color: #df6009;}
+.events_huiyuan {height: 80px;margin: 0px 5px 10px 5px;_margin: 0px 2px 5px 2px;padding:0;line-height: 16px;color:#993366;}
 .events_huiyuan dl {margin: 0px 0px 10px 0px;padding: 0px 0px 0px 20px;float: left;}
 .events_huiyuan dt {margin: 0px;padding: 0px;}
 .events_huiyuan dd {width: 65px;margin: 0px;padding: 0px;}

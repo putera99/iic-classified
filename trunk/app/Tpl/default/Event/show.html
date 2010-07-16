@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>缤纷中国</title>
 <title>{$page['title']}</title>
 <meta name="keywords" content="{$page['keywords']}" />
 <meta name="description" content="{$page['description']|clearh}" />
@@ -99,7 +98,7 @@
 <div id="main">
     <div class="main-right">
         <div class="events_bg">
-            Event群组最新话题
+            New topics
         </div>
         <div class="events_xinx">
             <ul>
@@ -109,7 +108,7 @@
             </ul>
         </div>
         <div class="events_bg">
-            感兴趣的成员常去的群组
+            Are You Interested? 
         </div>
         <div class="events_xinx">
             <dl>
@@ -134,13 +133,13 @@
             <div class="events_neir">
                 <ul>
                     <li class="thought" id="{$info['channel']}_{$info['id']}_1">
-                        感兴趣
+                        Show Interest
                     </li>
                     <li class="thought" id="{$info['channel']}_{$info['id']}_2">
-                        关注一下
+                        Show Attention
                     </li>
                     <li class="thought" id="{$info['channel']}_{$info['id']}_3">
-                        路过的
+                        Just Look Around
                     </li>
                 </ul>
             </div>
@@ -160,10 +159,10 @@
                        
                     </li>
                     <li style="text-align:right;">
-                    	<span id="1_{$info['channel']}_{$info['id']}" class="user_repaly ann">回复</span>
-	                    <span id="1_{$info['channel']}_{$info['id']}" class="user_share ann">分享</span>
-	                    <span id="2_{$info['channel']}_{$info['id']}" class="user_collection ann">收藏</span>
-	                    <span id="3_{$info['channel']}_{$info['id']}" class="user_report ann">举报</span>
+                    	<span id="1_{$info['channel']}_{$info['id']}" class="user_repaly ann">Repaly</span>
+	                    <span id="1_{$info['channel']}_{$info['id']}" class="user_share ann">Share</span>
+	                    <span id="2_{$info['channel']}_{$info['id']}" class="user_collection ann">Favorite</span>
+	                    <!--span id="3_{$info['channel']}_{$info['id']}" class="user_report ann">举报</span-->
 					</li>
                 </ul>
             </div>
@@ -173,7 +172,7 @@
             {$info['content']['detail']}
         </div>
         <div class="events_members">
-            <span>more</span>感兴趣的成员
+            <span>more</span>Members Showing Interest
         </div>
         <div class="events_huiyuan">
 <volist name="thought" id="v">
@@ -189,7 +188,7 @@
 
         </div>
         <div class="events_members">
-            <span><a href="__URL__/topic/id/{$info['id']}">more</a></span>Event论坛
+            <span><a href="__URL__/topic/id/{$info['id']}">more</a></span>Event forum
         </div>
         <div class="events_n">
 			<dl class="h350">

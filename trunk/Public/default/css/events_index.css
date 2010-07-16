@@ -21,17 +21,20 @@
 .information span {display: block;color: #992654;margin-top: 5px;text-decoration: underline;}
 .memcp-groups{padding:0px;border: 1px solid #cccccc;margin: 10px 0 0 0;}
 .memcp-groups-bg{margin:0px;padding-left:28px;background-color:#6f6c6c;background-position: 5px;background: url(../images/pc/rentou.gif) no-repeat;}
-.neirong{margin:0px;padding:10px 0  5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
+.neirong{margin:0px;padding:10px 0 5px 18px;font-weight: normal;background-color: #f3f3f3;color: #99406c;line-height: 24px;}
 
 
 
 /* 中间开始*/
 .mian-center-n{width: 507px;padding:0px;margin:0px;float: left;background-color: #f3f3f3;}
-.jianbian{height:25px;background: url(../images/bg02.gif) no-repeat;margin: 0px 0px 8px 0px;padding: 0 0 0 16px;color: #393838;font-weight: bold;}
+.jianbian{height:25px;background: url(../images/bg02.gif) no-repeat;margin: 0 0 8px 0;_margin: 0 0 4px 0;padding: 0 0 0 16px;color: #393838;font-weight: bold;}
+.jianbian a{color: #393838;}
 .title-h {display: block;font-size: 12px;font-weight: bold;color: #b3216c;}
 .center-h {width: 482px; margin: 0px;padding: 0px;}
 .jianbian-h{height:25px;margin:0px;padding: 0 0 0 16px; font-family: Verdana, Arial, Helvetica, sans-serif;color:#fff;font-weight: bold;background-color:#888888;}
 .events_popula {border-bottom: 1px solid #b9b9b9;margin: 0px 5px 8px 5px;padding: 0px 0px 5px 0px;}
+.events_popula h2{ font-size:14px; font-weight:bold; margin:0; padding:0; color:#3D3D3D; padding-left:10px;_padding-left:5px;}
+
 .events_neirong{height:auto; overflow:hidden; padding:0px;border-bottom: 1px dashed #5996a4;color: #656565;margin: 0px 5px 10px 5px;}
 .events_neirong ul{line-height: 16px;list-style-type:none;margin: 0px 0px 5px 0px;padding: 0px;}
 .events_neirong li{margin: 0 3px 0 0;padding:0px;}

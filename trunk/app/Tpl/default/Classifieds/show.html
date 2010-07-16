@@ -1,70 +1,37 @@
 <include file="Public:head" />
 <div id="main">
     <div class="right">
-        <img src="__PUBLIC__/default/images/pic6.gif" alt="pci8" />
         <div class="next_lssue">
             <div class="next-bg">
-                Like Link
+                Relevant Posts
             </div>
             <div class="next-n">
                 <ul>
+<if condition="posts">
+	<volist name="posts" id="v">
                     <li>
                         1、Philosophy of the people, 
                         has become the  professional  ...
                     </li>
-                    <li>
-                        2、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        3、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        4、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        5、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
+	</volist>
+</if>
                 </ul>
             </div>
         </div>
         <div class="main-group">
             <div class="main-bg">
-                Main group
+                Relevant Groups
             </div>
+<if condition="$group">
+	<volist name="group" id="v">
             <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
                 </p>
             </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
+	</volist>
+</if>
         </div>
     </div>
     <div class="n-life">
@@ -154,10 +121,10 @@
                             </div>
 		                    <ul>
 		                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
-		                            Share
+		                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
 		                        </li>
 		                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
-		                            Save as favorite
+		                            <a href="#2_{$info['channel']}_{$info['id']}">Save as favorite</a>
 		                        </li>
 		                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
 		                            Report corrections
@@ -182,12 +149,12 @@
                     <div class="liuyan">
                     	<form name="post_comment" action="__URL__/post_comment" method="post">
                     		<p style="text-align:left;" class="star">
-								<span class="nx" id="star_1"></span>
+								<!--span class="nx" id="star_1"></span>
 								<span class="nx" id="star_2"></span>
 								<span class="nx" id="star_3"></span>
 								<span class="nx" id="star_4"></span>
 								<span class="nx" id="star_5"></span>
-								<span id="star_text" class="t"></span>
+								<span id="star_text" class="t"></span-->
 							<span style="text-align:left;">
 							Verification code:<input type="text" size="4" name="verify" id="verify">
                     			<a href="javascript:fleshVerify();">
