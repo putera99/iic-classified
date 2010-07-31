@@ -18,6 +18,7 @@
                     Are You Interested?
                 </div>
                 <div class="events_zhuban">
+<if condition="$interested">
                     <dl>
                         <dt>
                             <img src="images/pc/pic05.gif" alt="pic" />
@@ -27,6 +28,7 @@
                             goat estate stood A ...
                         </dd>
                     </dl>
+</if>
                 </div>
             </div>
             <div class="events_xin">
@@ -34,6 +36,7 @@
                     New Activities
                 </div>
                 <div class="events_zhuban">
+<if condition="$activities">
                     <dl>
                         <dt>
                             <img src="__PUBLIC__/default/images/pc/pic03.gif" alt="pic" />
@@ -43,6 +46,7 @@
                             goat estate stood A ...
                         </dd>
                     </dl>
+</if>
                 </div>
             </div>
             <div class="clear">
@@ -52,6 +56,7 @@
                     New Groups
                 </div>
                 <div class="events_zhuban">
+<if condition="$new_groups">
                     <dl>
                         <dt>
                             <img src="__PUBLIC__/default/images/pc/pic05.gif" alt="pic" />
@@ -61,12 +66,13 @@
                             goat estate stood A ...
                         </dd>
                     </dl>
+</if>
                 </div>
             </div>
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
-                <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> 
+                <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Events</a> 
             </div>
             <div class="events_popula">
                 <h2>Weekly Hot Spot</h2>
@@ -75,7 +81,7 @@
 <volist name="list" id="v">
 	<if condition="$i eq 1">
 			<div class="events_neirong">
-                <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a></span>
+                <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
                 <div class="cool">
                 	<h2 class="zhuti"><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></h2>
                 	<p>{$v['my_content']|strip_tags|String::msubstr=0,180}...</p>
@@ -85,7 +91,7 @@
 	<else/>
 				<dl>
                     <dt>
-                        <a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a>
+                        <a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                     </dt>
                     <dd>
                         <span><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></span>

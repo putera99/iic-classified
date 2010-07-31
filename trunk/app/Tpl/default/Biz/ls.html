@@ -7,6 +7,7 @@
                 Featured Fairs
             </div>
 			
+<if condition="$featured">
             <div class="zhanhui">
                 <dl>
                     <dt>
@@ -20,6 +21,7 @@
                 </dl>
             </div>
             <div class="clear"></div>
+</if>
         </div>
         <div class="mian-center-n">
             <div class="chenshi">
@@ -51,32 +53,27 @@
                     {$showpage}
                 </div>
                 <div class="sdf">
+				<table width="98%" border="0" class="iic_table">
 <volist name="data" id="v">
-					<div class="pingdaozs">
-                        <ul class="w120 c">
-                            <li><img src="{$v['picurl']}" alt="{$v['title']}" /></li>
-                            <li><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></li>
-                            <li>[{$v['showstart']|toDate='d/m/Y'}]</li>
-                            <li>({$v['bycity']|get_city='ctitle'})</li>
-                        </ul>
-                        <ul class="w180 l">
-                            <li>
-                                <span>Venue:</span>
-                                {$v['maps']}
-                            </li>
-                        </ul>
-                        <ul class="w100 l">
-                            <li>
-                                {$v['contact']}
-                            </li>
-                        </ul>
-                        <ul class="w88 c">
-                            <li>
-                                {$v['typeid']|get_arctype='typename'}
-                            </li>
-                        </ul>
-                    </div>
+					<tr class="pingdaozs">
+					 	<td class="w120 c">
+                            <img src="{$v['picurl']|toImg=biz}" />
+                            <br />
+							<a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a><br />
+                            [{$v['showstart']|toDate='d/m/Y'}]<br />
+                            ({$v['bycity']|get_city='ctitle'})<br />
+						</td>
+						<td class="w100 l">
+							<span>Venue:</span>
+                            {$v['maps']}
+						</td>
+						<td class="w180 l">
+							{$v['contact']}
+						</td>
+						<td class="w88 c">{$v['typeid']|get_arctype='typename'}</td>
+					</tr>
 </volist>
+				</table>
                 </div>
             </div>
             <div class="fanye">

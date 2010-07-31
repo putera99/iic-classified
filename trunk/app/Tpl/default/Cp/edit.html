@@ -1,0 +1,162 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/edit">Edit Profile</a>
+</div>
+<style type="text/css">
+.iic label{ float:left;width:150px; text-align:right; display:block;}
+.reg{border:none; text-align:center;}
+.reg .title{ font-size:131%; color:#333333; margin:0; font-weight:bold;}
+.reg .form{ width:500px; margin:0 auto;}
+.reg .form label{ width:100px; text-align:right; display:inline-block;}
+.reg .form br{clear:both;}
+.reg .form .right{ display:inline-block; text-align:left;}
+.reg .form .w200{width:370px;}
+.reg .form .right .w88{width:10.5em; float:left;}
+</style>
+<div class="right-neirong">
+    <div class="right-messages reg">
+        <div class="right-title">
+            Edit Profile
+        </div>
+        <form action="__URL__/edit" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="act" value="edit">
+			<input type="hidden" name="old_avatar" value="{$info['avatar']}">
+
+        	<fieldset class="iic form">
+				<legend>Edit Profile</legend>
+				<label for="avatar">Avatar</label>
+				<div  class="right w200">
+					<input type="file" name="avatar" id="avatar"><br>
+					<if condition="$info['avatar']">
+						<img src="{$info['avatar']|avatar}">
+					</if>
+				</div><br>
+				
+				<br />
+				<label for="first_name">Name:</label>
+				<div  class="right w200">
+				<input type="text" name="fname" id="first_name" value="{$info['fname']}" class="w88"/>
+				<input type="text" name="lname" id="last_name" value="{$info['lname']}" class="w88" />
+				</div>
+			<br /><br />
+				<label for="gender">Gender:</label>
+				<div  class="right w200">
+				<select id="gender" name="gender">
+					<option value="0" {$info['gender']|selected=0}>hidden</option>
+					<option value="1" {$info['gender']|selected=1}>Male</option>
+					<option value="2" {$info['gender']|selected=2}>Female</option>
+				</select>
+				</div>
+			<br /><br />
+				<label for="birthyear">Birthday:</label>
+				<div  class="right w200">
+				  <select onchange="showbirthday();" name="bdayyear" id="birthyear">
+					<option value="0000">Year</option>
+					<php>
+					for($i=2010;$i>1900;$i--){
+					echo '<option value="'.$i.'"'.selected($i,$info['bdayyear']).'>'.$i.'</option>';
+					}
+					</php>
+				  </select>
+				  <select onchange="showbirthday();" name="birthmonth" id="birthmonth">
+					<option value="00">Month</option>
+					<php>
+					for($i=1;$i<13;$i++){
+					echo '<option value="'.$i.'"'.selected($i,$info['birthmonth']).'>'.$i.'</option>';
+					}
+					</php>
+				  </select>
+				  <select name="birthday" id="birthday">
+					<option value="00">Day</option>
+					<php>
+					for($i=1;$i<32;$i++){
+					echo '<option value="'.$i.'"'.selected($i,$info['birthday']).'>'.$i.'</option>';
+					}
+					</php>
+				  </select>
+				</div>
+			<br /><br />
+				<label for="nationality">Nationality:</label>
+				<div  class="right w200">
+				<input type="text" name="nationality" id="nationality" value="{$info['nationality']}" />
+				</div>
+			<br /><br />
+				<label for="address">Address:</label>
+				<div  class="right w200">
+				<select name="address" id="address" />
+					<option value="0">Other</option>
+					<option value="Beijing"{$info['address']|selected='Beijing'}>Beijing</option>
+					<option value="Shanghai"{$info['address']|selected='Shanghai'}>Shanghai</option>
+					<option value="Guangzhou"{$info['address']|selected='Guangzhou'}>Guangzhou</option>
+					<option value="Shenzhen"{$info['address']|selected='Shenzhen'}>Shenzhen</option>
+				</select>
+				<input name="address2" type="text" id="address2" 
+				<php>
+				$city=array('Beijing','Shanghai','Guangzhou','Shenzhen');
+				if(in_array($info['address'],$city)){
+				echo 'style="display:none;"';
+				}else{
+				echo "value='".$info['address']."'";
+				}
+				</php>
+				 />
+				Address at present
+				</div>
+				<p><input type="submit" value="Submit"></p>
+			</fieldset>
+        </form>
+    </div>
+</div>
+<script language="javascript">
+	function showbirthday(){
+	var el = byid('birthday');
+	var birthday = el.value;
+	el.length=0;
+	el.options.add(new Option('Day', ''));
+	for(var i=0;i<28;i++){
+		el.options.add(new Option(i+1, i+1));
+	}
+	if(byid('birthmonth').value!="2"){
+		el.options.add(new Option(29, 29));
+		el.options.add(new Option(30, 30));
+		switch($('birthmonth').value){
+			case "1":
+			case "3":
+			case "5":
+			case "7":
+			case "8":
+			case "10":
+			case "12":{
+				el.options.add(new Option(31, 31));
+			}
+		}
+	} else if(byid('birthyear').value!="") {
+		var nbirthyear=$('birthyear').value;
+		if(nbirthyear%400==0 || (nbirthyear%4==0 && nbirthyear%100!=0)) el.options.add(new Option(29, 29));
+	}
+	el.value = birthday;
+}
+$(function(){
+	$('#address').focus(function(){
+		var v=$('#address').val();
+		if(v=='0'){
+			$("#address2").show();
+		}else{
+			$("#address2").hide();
+		}
+	});
+	$('#address').change(function(){
+		var v=$('#address').val();
+		if(v=='0'){
+			$("#address2").show();
+		}else{
+			$("#address2").hide();
+		}
+	});
+});
+
+function byid(obj){
+	return document.getElementById(obj);
+}
+</script>
+<div class="clear"></div>

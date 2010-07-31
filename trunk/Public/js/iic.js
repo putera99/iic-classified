@@ -88,8 +88,10 @@ $(document).ready(function(){
 	//发送评论
 	$("#post_comment").click(function(){
 		var h=$("#comment_hidden").val();
-		var types=h.substr(0,1);
-		var tid=h.substr(2);
+		var arr= new Array();  
+		arr=h.split('_');
+		var types=arr[0];//h.substr(0,1);
+		var tid=arr[1];//h.substr(2);
 		var text=$("#comment_content").val();
 		var star=$("#click_6").val();
 		var verify=$("#verify").val();

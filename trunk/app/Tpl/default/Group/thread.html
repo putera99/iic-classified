@@ -32,11 +32,21 @@
 			$('a.add_post').click(function(e){
 				id = this.id.substr(6);
 				act = this.id.substr(0, 5);
+				if(act == "renew"){
+					$("#requery").val(0);
+					$("#qid").val(0);
+				}
 				if (act == "quote") {
 					$("#requery").val(id);
+					$("#qid").val(0);
 				}
+				if(act == "reply"){
+					$("#requery").val(0);
+					$("#qid").val(id);
+				}
+				
 				e.preventDefault();
-				var tourl = APP + 'Public/ajax_is_login';
+				var tourl = APP + '/Public/ajax_is_login';
 				$.post(tourl, '', function(data){
 					if (data['status'] == 1) {
 						$('#basic-modal-content').modal();
@@ -71,12 +81,12 @@
 			if(act=="reply"){
 				id="#new_reply_"+id;
 				var text='<div class="toreply"><h2>'+$("#title").val()+'</h2><div class="face">';
-					text+='<img src="" /><br>'+data['data']['username']+'</div><div class="message">'+$("#message").val()+'<span class="time"></span><span class="time">';
+					text+='<img src="{@info.avatar}" /><br>'+data['data']['username']+'</div><div class="message">'+$("#message").val()+'<span class="time"></span><span class="time">';
 					text+=data['data']['dateline']+'</span></div></div>';
 			}else{
 				id="#new_post";
 				var text='<div class="reply" id="thread_'+data['data']['id']+'"><h2>'+$("#title").val()+'</h2>';
-					text+='<div class="face"><img src="" /><br>'+data['data']['username']+'</div>';
+					text+='<div class="face"><img src="{@info.avatar}" /><br>'+data['data']['username']+'</div>';
 					text+='<div class="message">'+$("#message").val()+'<span class="time"><a href="#" id="reply_'+data['data']['id']+'" class="add_post">[ Reply ]</a>   <a href="#" id="quote_'+data['data']['id']+'" class="add_post">[ Quote ]</a>   <a href="#">[ Report ]</a>';
 					text+='</span><span class="time"><a href="#thread_'+data['data']['l']+'">#'+data['data']['l']+'</a> '+data['data']['dateline']+'</span><div id="new_reply_'+data['data']['id']+'" style="display:none;"></div>';
 			}
@@ -114,19 +124,21 @@
         <div class="right">
             <div class="next_lssue">
                 <div class="next-bg">
-                    群组内的新话题
+                    New topics
                 </div>
                 <div class="next-n">
                     <ul>
+<if condition="$new_topics">
                         <li>
                             1、Philosophy of the people, 
                             has become the  professional  ...
                         </li>
+</if>
                     </ul>
                 </div>
-                <div class="next_lssue">
+                <!--div class="next_lssue">
                     <div class="next-bg">
-                        Next lssue
+                        Group frequented
                     </div>
                     <div class="qunzhu-n">
                         <dl>
@@ -154,9 +166,11 @@
                         </li>
 
                     </ul>
-                </div>
+                </div-->
             </div>
-            <div class="guang"><img src="__PUBLIC__/default/images/pc/pic6.gif" alt="dsc" /></div>
+            <div class="guang">
+			
+			</div>
         </div>
         <div class="n-life">
             <div class="classifieds content">
@@ -168,13 +182,13 @@
                     </if>
                     <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
                 </if>
-                	<a href="__APP__/Group/show/id/{$ginfo['id']}">{$ginfo['groupname']}</a>
+                	<a href="__APP__/Group/show/aid/{$ginfo['id']}">{$ginfo['groupname']}</a>
                 </div>
                 <div class="content-n">
                 	<div class="thread">
 						<h1>{$info['title']}</h1>
 						<div class="face">
-							<img src="__PUBLIC__/default/images/pc/pic05.gif" alt="xd" /><br>{$info['username']}
+							<img src="{$info['uid']|get_avatar}" alt="xd" /><br>{$info['username']}
 						</div>
 						<div class="message">
 							{$info['message']}
@@ -188,9 +202,9 @@
 					<div id="new_post" style="display:none;"></div>
 <volist name="thread" id="v">
 					<div class="reply" id="thread_{$v['l']}">
-						<h2>{$info['title']}</h2>
+						<!--h2>{$v['title']}</h2-->
 						<div class="face">
-							<img src="__PUBLIC__/default/images/pc/pic05.gif" alt="{$v['username']}" /><br>{$v['username']}
+							<img src="{$v['uid']|get_avatar}" alt="{$v['username']}" /><br>{$v['username']}
 						</div>
 						<div class="message">
 							{$v['message']}
@@ -205,12 +219,12 @@
 							<div id="new_reply_{$v['id']}" style="display:none;"></div>
 	<volist name="v['_rarr']" id="rv">
 							<div class="toreply">
-								<h2>{$rv['title']}</h2>
+								<!--h2>{$rv['title']}</h2-->
 								<div class="face">
-									<img src="__PUBLIC__/default/images/pc/pic05.gif" alt="{$rv['username']}" /><br>{$rv['username']}
+									<img src="{$rv['uid']|get_avatar}" alt="{$rv['username']}" /><br>{$rv['username']}
 								</div>
 								<div class="message">
-									{$v['message']}
+									{$rv['message']}
 									<span class="time"></span>
 									<span class="time">
 										{$rv['dateline']|toDate='m-d-Y H:m:s'}
@@ -234,12 +248,13 @@
 	<input type="hidden" name="topid" value="{$info['id']}" />
 	<input type="hidden" name="gid" value="{$info['gid']}" />
 	<input type="hidden" id="requery" name="requery" value="0" />
+	<input type="hidden" id="qid" name="qid" value="0" />
 	<fieldset class="post">
 		<legend>Reply</legend>
-		<p>
+		<!--p>
 			<label for="title">Title:</label>
 			<input type="text" name="title" id="title" style="width:450px;" />
-		</p>
+		</p-->
 		<p>
 			<label for="message">Content:</label>
 			<textarea name="message" id="message" cols="45" rows="8"></textarea>

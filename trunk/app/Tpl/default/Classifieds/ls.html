@@ -47,7 +47,10 @@
 <volist name="list" id="v">
             <div class="personals-a">
                 <div class="list-a">
-                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}"}">{$v['title']}</a></h6>
+					<if condition="$v['picurl']">
+						<span style="float:right;"><img src="__PUBLIC__/img/img.jpg" /></span>
+					</if>
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></h6>
                     <p>
                         {$v['description']|strip_tags}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
                     </p>

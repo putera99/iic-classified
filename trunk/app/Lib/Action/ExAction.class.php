@@ -212,6 +212,7 @@ class ExAction extends CommonAction{
 			$et=explode('/',str_replace('.','/',$t['1']));
 			$et=mktime('0',0,0,$et['1'],$et['2'],$et['0']);
 		}else{
+			$t=$this->excel_time($t);
 			$st=explode('/',str_replace('.','/',$t));
 			$st=mktime('0',0,0,$st['1'],$st['2'],$st['0']);
 			$et=mktime('0',0,0,date('m'),date('d'),date('Y')+1);
@@ -275,8 +276,9 @@ class ExAction extends CommonAction{
 				$str='16';
 			break;
 			default:
-				dump($str);
-				$this->error('城市名称不匹配');
+				//dump($str);
+				//$this->error('城市名称不匹配');
+				$str='0';
 			break;
 		}
 		return $str;
@@ -363,17 +365,35 @@ class ExAction extends CommonAction{
 		import("@.Com.Spreadsheet_Excel_Reader");
 		import("ORG.Util.Image");
 		$filename=$_GET['fname'];
-		if(empty($filename)){
+		$act=$_GET['act'];
+		if(empty($filename) && $act!='hebing'){
 			echo '<a href='.__URL__."/events/fname/bj1_100/>bj1_100</a><br>";
-			echo '<a href='.__URL__."/events/fname/bj100_210/>bj100_210</a><br>";
 			echo '<a href='.__URL__."/events/fname/gz1_39/>gz1_39</a><br>";
 			echo '<a href='.__URL__."/events/fname/sh1_168/>sh1_168</a><br>";
-			echo '<a href='.__URL__."/events/fname/sh100_168/>sh100_168</a><br>";
 			echo '<a href='.__URL__."/events/fname/sh169_230/>sh169_230</a><br>";
 			echo '<a href='.__URL__."/events/fname/sz1_31/>sz1_31</a><br>";
+			echo '<a href='.__URL__."/events/act/hebing/>合并数据</a><br>";
 			exit();
 		}
-		
+		if($act=='hebing'){
+			$newarr=array();
+			$arr1=S('bj1_100');
+			$arr2=S('gz1_39');
+			$arr3=S('sh1_168');
+			$arr4=S('sh169_230');
+			$arr5=S('sz1_31');
+			$newarr=array_merge($arr1,$arr2,$arr3,$arr4,$arr5);
+			shuffle($newarr);
+			S('hebing',$newarr,6000);
+			if(S('hebing')){
+				echo "<a href='".__URL__."/events/'>返回</a><br>";
+				echo '写入成功';
+				
+			}else{
+				echo '写入bu成功';
+			}
+			exit();
+		}
 		$path="Public/events/";
 		$file=$path.$filename.'.xls';
 		$arr=array();
@@ -387,8 +407,8 @@ class ExAction extends CommonAction{
 		//echo $data->sheets[0]['numRows'];
 		//echo $data->sheets[0]['numCols'];
 		//echo $data->sheets[0]['cells'][3][8];
-		$act=$_GET['act'];
-		if($act=='ok'){
+		
+		if(($act=='ok' || $act=='fdb')&& !empty($filename)){
 			import("ORG.Io.Dir");
 			if(is_dir('Public/event/exl'.$filename)){
         		Dir::del('Public/event/exl'.$filename);
@@ -399,7 +419,10 @@ class ExAction extends CommonAction{
 		$errnum=0;
 		$warr=0;
 		$img_arr=array();
-		//dump($data->sheets[0]);
+		if(empty($data->sheets[0])){
+			//dump($data->formatRecords);
+			$this->error("0");
+		}
 		for ($i=2; $i <= 220; $i++) {
 			if($data->sheets[0]['cells'][$i][16]=='1' || empty($data->sheets[0]['cells'][$i][1])){
 				continue;
@@ -412,6 +435,9 @@ class ExAction extends CommonAction{
 			//dump($data->sheets[0]['cells'][$i]);
 			$arr[$i]['title']=$data->sheets[0]['cells'][$i][1];
 			$arr[$i]['cid']=$this->city($data->sheets[0]['cells'][$i][2]);
+			if($arr[$i]['cid']=='0'){
+				continue;
+			}
 			$msg.='CID '.$arr[$i]['cid'].'___';
 			$time=$this->get_time($data->sheets[0]['cells'][$i][3]);
 			$arr[$i]['showstart']=$time['st'];
@@ -425,6 +451,9 @@ class ExAction extends CommonAction{
 			
 			if(!empty($data->sheets[0]['cells'][$i][5]) || $data->sheets[0]['cells'][$i][5]=='0'){
 				$arr[$i]['albumnum']=$data->sheets[0]['cells'][$i][5];
+			}
+			if(empty($data->sheets[0]['cells'][$i][6])){
+				continue;
 			}
 			$arr[$i]['typeid']=$this->get_etype($data->sheets[0]['cells'][$i][6]);
 			$msg.='typeid '.$arr[$i]['typeid'].'___';
@@ -457,7 +486,7 @@ class ExAction extends CommonAction{
 							if($type['type']=='bmp'){
 								$msg.='<b>'.$v.'图片格式不能是bmp</b><br>';
 								$warr++;
-							}elseif($act=='ok' || $act=='fdb'){//是否确认写入
+							}elseif(($act=='ok' || $act=='fdb')&& !empty($filename)){//是否确认写入
 								$filelen=strpos($v,'.'); //获取文件名长度
 								$filename_name=substr($v, 0, $filelen); //截取文件名
 								$filename_name=end(explode("/", $filename_name));
@@ -469,7 +498,7 @@ class ExAction extends CommonAction{
 									
 									$fname='s_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
 									$dir=$l['0'].'/'.date("Y_m_d").'/';
-									$spath='Public/fair/exl'.$filename.'/'.$dir;
+									$spath='Public/event/exl'.$filename.'/'.$dir;
 									if(in_array($dir.$fname,$img_arr)){
 										$arr[$i]['picurl']=$spath.$fname;
 										$arr[$i]['pic'][]['filename']=$spath.'m_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
@@ -485,7 +514,7 @@ class ExAction extends CommonAction{
 									$pre=array('m_');
 									$fname='m_'.md5_file(auto_charset($v,'utf-8','gbk')).'.'.$ext;
 									$dir=$l['0'].'/'.date("Y_m_d").'/';
-									$spath='Public/fair/exl'.$filename.'/'.$dir;
+									$spath='Public/event/exl'.$filename.'/'.$dir;
 									if(in_array($dir.$fname,$img_arr)){
 										$arr[$i]['pic'][]['filename']=$spath.$fname;
 									}else{
@@ -530,26 +559,71 @@ class ExAction extends CommonAction{
 			echo $return;
 		}elseif($act=='fdb'){
 			S($filename,$arr,6000);
-		}elseif($act=='hebing'){
-			$newarr=array();
-			$arr1=S('bj1_210');
-			$arr2=S('gz1_39');
-			$arr3=S('sh1_168');
-			$arr4=S('sh169_230');
-			$arr5=S('sz1_31');
-			$newarr=array_merge($arr1,$arr2,$arr3,$arr4,$arr5);
-			shuffle($newarr);
-			S('hebing',$newarr,6000);
+			if(S($filename)){
+				echo "<a href='".__URL__."/events/'>返回</a><br>";
+				echo '写入成功';
+				
+			}else{
+				echo '写入bu成功';
+			}
 		}else{			
 			echo '共有'.$errnum.'错误!<br>'.$warr."警告!<br>\n";
 			echo $msg;
 			
-			echo "<a href='".__URL__."/events/act/fdb/fname/".$filename."'>写入缓存</a>";
+			echo "<a href='".__URL__."/events/act/fdb/fname/".$filename."'>写入缓存</a><br>";
 			echo "<a href='".__URL__."/events/act/ok/fname/".$filename."'>写入数据</a>";
 		}
 		
 		
 	}//end events
+	
+	/**
+	   *写入
+	   *@date 2010-7-22
+	   *@time 下午02:48:47
+	   */
+	function event_add() {
+		//写入
+		$return='';
+		$arc=D("Archives");
+		$event=D("Event");
+		$arr=S('hebing');
+		foreach ($arr as $d){
+			if(!empty($d['title']) && !empty($d['typeid'])){
+				$acr_vo='';
+				$arc_vo=$arc->create($d);
+				$aid=$arc->add($arc_vo);
+				if($aid){
+					$event_vo=$event->create($d['event']);
+					$event_vo['aid']=$aid;
+					$eid=$event->add($event_vo);
+					$this->add_photo($aid,$d['pic'],$d['writer'],11);
+					$return.=$d['writer']."写入成功！<br>\n";
+				}else{
+					$return.=$d['writer']."主档写入失败！<br>\n";
+				}
+			}else{
+				$return.=$d['writer']."标题或分类为空写入失败！<br>\n";
+			}
+		}
+		echo $return;
+	}//end event_add
+	
+	/**
+	   *sm
+	   *@date 2010-7-22
+	   *@time 下午03:18:51
+	   */
+	function test_arr() {
+		//sm
+		
+		$arr1=S('bj1_100');
+		$arr2=S('gz1_39');
+		$arr3=S('sh1_168');
+		$arr4=S('sh169_230');
+		$arr5=S('sz1_31');
+		dump(S('hebing'));
+	}//end test_arr
 	
 	/**
 	   *查出活动类别
@@ -568,6 +642,7 @@ class ExAction extends CommonAction{
 		$typeid='';
 		$name=strtolower(trim($name));
 		$name=str_replace(' ','',$name);
+		$name=$name=='festival'?'festivals':$name;
 		foreach ($arr as $v){
 			$v['typename']=strtolower(trim($v['typename']));
 			$v['typename']=str_replace(' ','',$v['typename']);
@@ -580,9 +655,77 @@ class ExAction extends CommonAction{
 		if($typeid){
 			return $typeid;
 		}else{
-			return "{$v['typename']}:$name";
+			return $name;
 		}
-		
-		
 	}//end get_etype
+	
+	
+	/**
+	   *导入用户头像
+	   *@date 2010-7-20
+	   *@time 下午02:14:37
+	   */
+	function ex_avatar() {
+		//导入用户头像
+		$dao=new Model();
+		$count=$dao->Table("cdb_memberfields")->count();
+		import("ORG.Util.Page");//引用分页类
+		$p= new page($count,200);
+		$page=$p->show();//显示分页
+		$this->assign("showpage_bot",$page);//显示分页
+		$limit=$p->firstRow.",".$p->listRows;//设定分面的大小
+		$limit=($limit==",")?'':$limit;//分页的大小
+    	$data=$dao->Table("cdb_memberfields")->limit($limit)->findAll();
+    	$member=D("Members");
+    	echo $page;
+    	foreach ($data as $v){
+    		//dump($v['avatar']);
+    		if($v['avatar']){
+	    		$info=array();
+	    		$info['id']=$v['uid'];
+	    		$info['avatar']=$v['avatar'];
+	    		$member->save($info);
+	    		dump($member->getLastSql());
+    		}else{
+    			continue;
+    		}
+    	}
+    	echo $page;
+	}//end ex_avatar
+	
+	/**
+	   *@date 2010-7-22
+	   *@time 上午10:45:39
+	   */
+	function excel_time($days='40368') {
+		//function 
+		if(is_numeric($days)){
+			$jd=gregoriantojd(1,1,1970);
+			$gregorian = JDToGregorian($jd+intval($days)-25569);
+			 $myDate = explode('/',$gregorian);
+			$myDateStr = str_pad($myDate[2],4,'0', STR_PAD_LEFT)
+			."-".str_pad($myDate[0],2,'0', STR_PAD_LEFT)
+			."-".str_pad($myDate[1],2,'0', STR_PAD_LEFT)
+			.($time?" 00:00:00":'');
+			return $myDateStr;
+		}else{
+			return $days;
+		}
+	}//end excel_time
+	
+	/**
+	   *ex_user_mail
+	   *@date 2010-7-24
+	   *@time 下午02:41:49
+	   */
+	function ex_user_mail() {
+		//ex_user_mail
+		$dao=D("Members");
+		$info=$dao->where("groupid=10")->findAll();
+		foreach($info as $v){
+			if($v['email']){
+				echo $v['username'].'<br>'.$v['email'].'<br><br>';
+			}
+		}
+	}//end ex_user_mail
 }//end ExAction

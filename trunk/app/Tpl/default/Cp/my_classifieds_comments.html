@@ -13,16 +13,14 @@
         </div>
         <div class="list">
             <dl class="h350">
-            	<dt class="w320">Subject</dt>
+            	<dt class="w420">Subject</dt>
 				<dt class="w100">Type</dt>
-				<dt class="w100">Hot</dt>
 				<dt class="w100">Time</dt>
 				<dt class="w100">Action</dt>
 <volist name="list" id="v">
                 <dd>
-                	<span class="w320"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['xid']}">{$v['xid']|get_title}</a></span>
+                	<span class="w420"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['xid']}">{$v['xid']|get_title}</a></span>
 					<span class="w100 c">{$v['types']|get_type}</span>
-					<span class="w100 c">{$v['hot']}</span>
 					<span class="w100 c">{$v['dateline']|toDate='d/m/Y'}</span>
 					<span class="w100 c"><a href="__URL__/comment_delete/xid/{$v['xid']}/types/{$v['types']}">Delete</a></span>
                 </dd>

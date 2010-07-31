@@ -11,16 +11,24 @@
         </div>
         <div class="list">
             <form action="__URL__/add_group" method="post" enctype="multipart/form-data">
+				<if condition="$info['id']">
+					<input type="hidden" name="id" value="{$info['id']}" />
+				</if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
 	            	<p>
-	            		<label for="groupname">Group Name:</label><input type="text" name="groupname" id="groupname" style="width:300px;">
+	            		<label for="groupname">Group Name:</label><input type="text" name="groupname" id="groupname" style="width:300px;" value="{$info['groupname']}">
 					</p>
 					<p>
-						<label for="pic">CoverImage:</label><input type="file" name="pic" id="pic" style="width:300px;">
+						<label for="pic">CoverImage:</label><input type="file" name="pic" id="pic" style="width:300px;"><br />
+						<if condition="$info['pic']">
+							<img src="{$info['pic']}" />
+						</if>
 	            	</p>
-					
-					<p>
+					<p><label for="announcement">announcement:</label>
+						<textarea cols="50" rows="5" name="announcement" id="announcement">{$info['announcement']}</textarea>
+					</p>
+					<!--p>
 						<label for="cat_id">Category:</label>
 						<select id="cat_id" name="cat_id">
 							<option value="0">---Select Main Category---</option>
@@ -55,21 +63,17 @@
 														
 							</volist>
 						</select>
-					</p>
-<if condition="$edit eq 1">
-					<p><label for="close">close</label>
+					</p-->
+					<!--p><label for="close">close:</label>
 						<input type="radio" name="close" id="close" value="0" <eq name="info['close']" value="0">checked="checked"</eq>>open
 						<input type="radio" name="close" id="close" value="1" <eq name="info['close']" value="1">checked="checked"</eq>>close
-					</p>
-</if>
+					</p-->
 				</fieldset>
-				<fieldset>
+				<!--fieldset>
 					<legend>Group info:</legend>
 					
-					<p><label for="announcement">announcement:</label>
-						<textarea cols="50" rows="5" name="announcement" id="announcement"></textarea>
-					</p>
-				</fieldset>
+					
+				</fieldset-->
 				<p>
 					<input type="submit" value="Submit">            
 					<input type="reset" value="Reset">            

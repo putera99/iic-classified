@@ -1,13 +1,48 @@
 <?php
 
+
+
 function picurl($url){
 	$arr=explode('/',$url);
 	if ($arr['0']=='article') {
 		$url='http://www.beingfunchina.com/upload_files/'.$url;
+	}elseif($arr['0']=='customavatars'){
+		$url='http://www.beingfunchina.com/Forum/'.$url;
+	}elseif($arr['0']=='Public'){
+		$url='/'.$url;
 	}
 	return $url;
 }
 
+/**
+   *用户头像
+   *@date 2010-7-20
+   *@time 下午02:50:52
+   */
+function avatar($url) {
+	//用户头像
+	if(empty($url)){
+		$url='/Public/img/default-avatar.jpg';
+	}else{
+		$url=picurl($url);
+	}
+	return $url;
+}//end avatar
+
+/**
+   *获取用户头像
+   *@date 2010-7-21
+   *@time 上午11:18:53
+   */
+function get_avatar($uid) {
+	//获取用户头像
+	$dao=D("Members");
+	$condition=array("id"=>$uid);
+	$avatar=$dao->where($condition)->field("avatar")->find();
+	//dump($dao->getLastSql());
+	$avatar=avatar($avatar['avatar']);
+	return $avatar;
+}//end function_name
 function br2nl($text) {    
 	return preg_replace('/<br\\s*?\/??>/i', '', $text);   
 } 
@@ -126,12 +161,13 @@ function get_grade($id,$arr=array()) {
 function get_info($gid,$field='groupname',$table="Group") {
 	//获取群组名称
 	$dao=D($table);
-	$info=$dao->where("id=$gid")->field($field)->find();
-	if($field!='*' || empty($field)){
-		return $info[$field];
-	}else{
-		return $info;
+	$condition=array();
+	$condition['id']=$gid;
+	$info=$dao->where($condition)->field($field)->find();
+	if($field!='*' && !empty($field)){
+		$info=$info[$field];
 	}
+	return $info;
 }//end get_info
 
 /**
@@ -231,7 +267,7 @@ function toDate($time,$format='Y-m-d H:i:s'){
 	return date(auto_charset($format),$time);
 }
 function get_username() {
-	return $_SESSION['username'];
+	return empty($_SESSION['username'])?'0':$_SESSION['username'];
 }// END get_username
 
 function get_day(){
@@ -239,7 +275,7 @@ function get_day(){
 }
 
 function get_uid() {
-	return $_SESSION['uid'];
+	return empty($_SESSION['uid'])?'0':$_SESSION['uid'];
 }// END get_uid
 
 //返回格林威治标准时间
@@ -330,9 +366,19 @@ function GetDateMk($mktime){
 }
 
 
-function toImg($img){
-	//return '<img src="/'.$img.'" width="88" height="31" />';
-	return '<a href="/'.$img.'" target="_blank">查看图片</a>';
+function toImg($img,$type){
+	if($type=='event'){
+		$img=empty($img)?__PUBLIC__.'/img/bz.gif':$img;
+	}elseif($type=='biz'){
+		$img=empty($img)?__PUBLIC__.'/img/bz2.gif':$img;
+	}elseif($type=='group'){
+		$img=empty($img)?__PUBLIC__.'/img/bz3.gif':$img;
+	}elseif($type=='classifieds'){
+		$img=empty($img)?__PUBLIC__.'/img/bz5.gif':$img;
+	}elseif($type=='cityguide'){
+		$img=empty($img)?__PUBLIC__.'/img/bz4.gif':$img;
+	}
+	return picurl($img);
 }
 function ru($url,$p=array(),$h=true,$r=false) {
 	return U($url,$p,$r,$h);
@@ -466,22 +512,17 @@ function checkisbn($isbn) {
  * 
  * @param Int $size 文件尺寸单位（B）
  */
-function RealSize($size)
-{
-	if ($size < 1024)
-	{
+function RealSize($size){
+	if ($size < 1024){
 		return $size.' Byte';
 	}
-	if ($size < 1048576)
-	{
+	if ($size < 1048576){
 		return round($size / 1024, 2).' KB';
 	}
-	if ($size < 1073741824)
-	{
+	if ($size < 1073741824){
 		return round($size / 1048576, 2).' MB';
 	}
-	if ($size < 1099511627776)
-	{
+	if ($size < 1099511627776){
 		return round($size / 1073741824, 2).' GB';
 	}
 }

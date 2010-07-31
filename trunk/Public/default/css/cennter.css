@@ -1,9 +1,7 @@
-
-/* CSS中间开始*/
 #main {width:950px;padding: 0px;margin: 0px auto; height:auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
-.main-left ul{ margin:0px; padding:0px; list-style-type:none;}
-.main-left li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
+.main-left .ul{ margin:0px; padding:0px; list-style-type:none;}
+.main-left .li{height:24px;margin:0px;padding:0px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
 .main-left .bg-a{height:24px;font-size: 14px;font-weight: bold;color: #993366;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
 .main-left .di-yuan{ background:url(../images/bg_yuan.gif) no-repeat;}
 
@@ -27,14 +25,47 @@
 .conter-right{width:234px;padding:0px;float: right;background-color: #eee;border: 1px solid #ccc;margin:0 0 10px 0;_margin:0 0 5px 0; overflow:hidden; height:auto;}
 .conter-group{width:234px;padding:0px;color: #3a3838;margin:0 0 10px 0;_margin:0 0 5px 0; overflow:hidden; height:auto;}
 
+.center-h {width:482px; margin:0;padding:0; height:130px;}
+.neirong-h{ margin-bottom:10px; _margin-bottom:5px; padding:0;background-color: #363636;clear: both;}
+.center-h dl{margin:0px;padding: 5px 10px 0px 10px;}
+.center-h dt{ margin:0px; padding:0px; float:left;}
+.center-h .m{ height:125px; display:table; text-align:center; width:120px;}
+.center-h .m a{display:table-cell; vertical-align:middle;}
+.center-h .m a img{margin-top:14px;max-width:120px;max-height:100px;
+	_height:expression(this.width > 100 ? this.height*(120/this.width) : "auto");
+	_width:expression(this.width > 120 ? "120px" : "auto");
+	}
+.center-h dd{width:320px;margin:0px;padding-top: 0px 5px 0px 0px;float:right;color:#dadada;display: block;}
+.center-h dd a{color:#dadada;}
+.xiantiao{width:500px;background: url(../images/zhixian.gif) repeat-x;margin:8px auto 0 auto;_margin:4px auto 0 auto;padding-bottom: 5px;}
+
+
+
 .group{height:25px;background-color:#6f6c6c;font-weight: bold;padding-left:10px;line-height:25px; color:#fff;}
 .group a{color:#fff;}
 .group-n{margin:5px 0 0 0;_margin:2px 0 0 0;padding:0px;position: relative;float:left;}
 .group-n h5{margin:0;font-weight: bold;color: #993366;font-size: 12px;line-height: 22px;padding: 0 0 0 70px;}
 .group-n h5 a{color:#993366;}
-.group-n img{margin:0px;left:5px;position: absolute;top:3px;max-width:60px;	max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : auto);_width:expression(this.width > 60 ? 60px : auto);}
+.group-n img{margin:0px;left:5px;position: absolute;top:3px;max-width:60px;	max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : "auto");_width:expression(this.width > 60 ? "60px" : "auto");}
 .group-n p{margin:0;color:#5c5b5b;padding: 0 0 0 70px;line-height: 14px; height:30px;}
 .advertisement{margin: 10px 0 0 0;_margin: 5px 0 0 0; padding:0px;}
+
+.group-x{margin:0 0 5px 0; padding:0; list-style:none;float:left;}
+.group-x dt{width:70px; height:70px; overflow:hidden; text-align:center;float:left; display:table;}
+.group-x dt a{display:table-cell; vertical-align:middle;}
+.group-x dt a img{margin:0;
+	max-width:60px;
+	max-height:60px;
+	_height:expression(this.width>60?this.height*(60/this.width):"auto");
+	_width:expression(this.width>60?"60px":"auto");
+	vertical-align:-6px;
+}
+.group-x dd{float:left; margin:0;}
+.group-x dd h5{color:#993366;margin:0;font-weight: bold;font-size: 12px;line-height: 22px; width:155px;}
+.group-x dd h5 a{color:#993366;}
+.group-x dd p{margin:0;color:#5c5b5b;line-height: 14px; height:30px;}
+
+
 
 .n-life{width:706px;padding:0px;margin: 0px;}
 .classifieds_content{ margin:0px; padding:0px;}
@@ -71,6 +102,8 @@
 .next-n{margin:0px;padding:0px; border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px; padding-bottom:5px;}
 .next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;_margin: 0 2px 0 1px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #535353;padding-bottom:5px;}
+.next-n li a{color: #595959;}
+.next-n li a:hover{color: #595959; text-decoration:underline;}
 .main-group {padding: 0px;border: 1px solid #aaaaaa;margin:0 0 10px 0;_margin:0 0 5px 0;height: auto; overflow:hidden;}
 .main-bg{ color:#E4E4E4; height:22px;padding-left:10px;background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;margin:0;}
 .main-n{margin:0px;padding-top:5px;position: relative;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;float: right}

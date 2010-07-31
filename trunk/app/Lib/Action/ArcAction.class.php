@@ -85,10 +85,22 @@ class ArcAction extends CommonAction{
 		if(empty($aid) && empty($ename)){
 			$this->error("error: aid is null!");
 		}
+		$condition=array();
+		if(!empty($ename)){
+			$condition['filename']=$ename;
+		}
+		if(!empty($aid)){
+			$condition['id']=$aid;
+		}
+		
 		$dao=D("Archives");
-		$info=$dao->where("id=$aid")->find();
-		$info['content']=$dao->relationGet("arc");
+		$info=$dao->where($condition)->find();
 		//dump($dao->getLastSql());
+		if(empty($info)){
+			$this->error("is null!");
+		}
+		$info['content']=$dao->relationGet("arc");
+		
 		$this->assign('info',$info);
 		$page=array();
 		$page['title']=$info['title'].'  -  BeingfunChina';

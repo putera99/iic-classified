@@ -1,0 +1,85 @@
+<include file="Public:head" />
+<style type="text/css">
+.reg{border:none; text-align:center;}
+.reg .title{font-size:131%; color:#333333; margin:0;font-weight:bold; text-align:left; padding:0 50px;}
+.reg .title a{color:#333333;}
+.reg .title p{font-size:12px; font-weight:normal;}
+.reg .form{margin:0 auto;}
+.reg .form label{width:100px;text-align:right; display:inline-block;}
+.reg .form br{clear:both;}
+.reg .form p{clear:both; margin:20px 10px 0 150px;_margin:10px 5px 0 75px; text-align:left; font-weight:bold;}
+.reg .form .right{display:inline-block; text-align:left;}
+.reg .form .left{display:inline-block; text-align:left;}
+.reg .form .w200{width:470px;}
+.reg .form .left .w88{width:10.5em;float:left;}
+.reg .form .send{width:105px;height:29px; background:url(/Public/img/submit2.gif) no-repeat; padding:0; border:none;}
+.reg .form .send:hover{background:url(/Public/img/submit.gif) no-repeat;color:#000000;}
+</style>
+<div id="main" style="background-color:#ffffff;" class="reg"><br />
+	<div class="title">
+		<a href="/">Home</a>  >>  <a href="__APP__/Common/report">Report Abuse</a><hr /><br />
+<p style="margin:0;">Thanks for reporting correcitons or service abuse! Beingfunchina is committed to creating an website that is free of offensive and illegal content. All the reports are taken seriously!</p>
+	</div>
+	<form action="__URL__/report_add" method="post" class="form">
+		<br>
+		<p>1.What is your name and BeingFunChina ID?</p>
+			<label for="name">Name:</label>
+			<div  class="left w200">
+			<input type="text" name="name" id="name" />
+			</div>
+			<br><br>
+			<label for="id">I D:</label>
+			<div  class="left w200">
+			<input type="text" name="id" id="id" />
+			</div>
+		<p>2.What is your email address?</p>
+			<label for="email">Email:</label>
+			<div  class="left w200">
+			<input type="text" name="email" id="email" />
+			</div>
+		<p>3.Who are you reporting?</p>
+			<label for="reid">ID:</label>
+			<div  class="left w200">
+			<input type="text" name="reid" id="reid" />
+			</div>
+		<p>4.What kinds of abuse are you reporting?</p>
+			<label for="Subject">Subject:</label>
+			<div  class="left w200">
+			<select id="Subject" name="subject">
+				<option value="User Spam">User Spam</option>
+				<option value="Racism or discrimination">Racism or discrimination</option>
+				<option value="Offensive Language">Offensive Language</option>
+				<option value="Offensive Imagery">Offensive Imagery</option>
+				<option content="" illegal="" value="Illegal Content"></option>
+				<option value="Defamation">Defamation</option>
+				<option value="Privacy">Privacy</option>
+				<option value="Fraud">Fraud/option&gt;
+				</option><option value="Hacking">Hacking</option>
+				<option value="Copyright violation">Copyright violation</option>
+				<option value="Others ">Others </option>
+			</select>
+			</div>	
+		<p>5.Paste the web page address that the abuse could be found on: </p>
+		<div  class="left w200">
+			<textarea style="width:400px;" rows="8" cols="70" id="url" name="reason"></textarea>
+		</div>
+		<p>6.Send the form to us. </p>
+		<p>Enter the code shown. </p>
+		<label for="verifyImg">Verification code:</label>
+		<div  class="left w200">
+			<input type="text" id="verify" name="verify" size="4">
+			<a href="javascript:fleshVerify();">
+            <img style="vertical-align: -6px;" id="verifyImg" src="__URL__/verify">
+			</a>
+		</div>
+		<p style="padding-left:100px;">
+			<input type="submit" value="Send" class="send" />
+		</p>
+		<br />
+		<br />
+		<br />
+		<br />
+	</form>
+
+</div>
+<include file="Public:foot" />

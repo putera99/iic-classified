@@ -3,122 +3,59 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Beingfunchina - city select</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <script src="/Public/js/jquery-1.3.2.min.js"></script>
 <meta name="keywords" content="BeingfunChina" />
 <meta name="description" content="BeingfunChina" />
 <style type="text/css">
-body{ margin:0 auto; width:1003px; height:auto; overflow:hidden; background-color:#000000; font:Arial, Helvetica, sans-serif 12px }
+body{margin:0 auto; width:1003px; height:auto; overflow:hidden; background-color:#000000; font-family:Arial, Helvetica, sans-serif;font-size:12px;}
 a img{border:none;}
-a{outline:none}
-.head{height:auto; overflow:hidden; margin:10px auto 0 auto;_margin:5px auto 0 auto; width:1003px;}
-.head h1{width:173px; height:139px; float:left; overflow:hidden; margin:0 0 0 30px;_margin:0 0 0 15px; padding:0;}
-.head h1 a{background:url("/Public/img/logo03.jpg"); text-indent:-9999px; display:block;width:173px; height:139px;}
-.main{text-align:center; height:438px; padding:0; overflow:hidden;}
-.main .bg{background:url(/Public/img/yun06.jpg) no-repeat; width:737px; height:438px; text-align:center; margin:0 auto; padding:0; overflow:hidden;}
-.main .bg dl{width:300px; height:400px; margin:0 auto;}
-.main .bg dl dt{padding-left:10px; float:left; width:100px; height:400px; overflow:hidden; padding-top:20px;}
-.main .bg dl dt h2{margin:0; padding:0;}
-.main .bg dl dt h2 a,.main .bg dl dt h2 a:hover{text-decoration:none;border:none;}
-.main .bg dl .bj,.main .bg dl .bj1{width:93px; height:72px;position:relative; top:5px;}
-.main .bg dl .bj a{background:url(/Public/img/bj0.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
-.main .bg dl .bj a:hover,.main .bg dl .bj1 a{background:url(/Public/img/bj1.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
+a{outline:none; color:#fff;}
+.main{text-align:center; height:auto; padding:0; overflow:hidden;}
+.main .bg{width:737px; height:auto; text-align:center; margin:0 auto; padding:0; overflow:hidden;}
+.main .bg .dl{width:737px; height:600px; margin:0 auto; text-align:center;}
 
-.main .bg dl .sh,.main .bg dl .sh1{width:93px; height:72px;position:relative; top:15px;}
-.main .bg dl .sh a{background:url(/Public/img/sh0.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
-.main .bg dl .sh a:hover,.main .bg dl .sh1 a{background:url(/Public/img/sh1.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
+.main .bg .dl .logo{width:388px; height:241px; margin:10% auto 0 auto;}
+.main .bg .dl .logo h1{width:388px; height:241px; float:left; overflow:hidden; margin:0; padding:0;}
+.main .bg .dl .logo h1 a{background:url("/Public/img/logo.gif"); text-indent:-9999px; display:block;width:388px; height:241px;}
 
-.main .bg dl .gz,.main .bg dl .gz1{width:93px; height:72px;position:relative; top:25px;}
-.main .bg dl .gz a{background:url(/Public/img/gz0.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
-.main .bg dl .gz a:hover,.main .bg dl .gz1 a{background:url(/Public/img/gz1.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
+.main .bg .dl .dt{padding-left:10px;height:auto;overflow:hidden; padding-top:20px;width:684px; margin:0 auto;}
+.main .bg .dl .dt .sol{ background:url(/Public/img/xiant.jpg) no-repeat; height:3px; float:left; width:684px; margin:0 auto;}
+.main .bg .dl .dt h2{margin:0 20px;_margin:0 10px; padding:0; float:left;}
+.main .bg .dl .dt h2 a,.main .bg .dl .dt h2 a:hover{text-decoration:none;border:none;}
+.main .bg .dl .bj,.main .bg .dl .bj1{width:131px; height:109px;}
+.main .bg .dl .bj a{background:url(/Public/img/bj0.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+.main .bg .dl .bj a:hover,.main .bg .dl .bj1 a{background:url(/Public/img/bj1.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
 
-.main .bg dl .sz,.main .bg dl .sz1{width:93px; height:72px;position:relative; top:35px;}
-.main .bg dl .sz a{background:url(/Public/img/sz0.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
-.main .bg dl .sz a:hover,.main .bg dl .sz1 a{background:url(/Public/img/sz1.gif); text-indent:-9999px; display:block;width:93px; height:72px;}
+.main .bg .dl .sh,.main .bg .dl .sh1{width:131px; height:109px;}
+.main .bg .dl .sh a{background:url(/Public/img/sh0.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+.main .bg .dl .sh a:hover,.main .bg .dl .sh1 a{background:url(/Public/img/sh1.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
 
-.main .bg dl dd{float:right; color:#ffffff; width:130px; padding-top:40px; height:auto; overflow:hidden;}
-.main .bg dl dd div{height:auto; overflow:hidden;}
-.main .bg dl dd div h3{font-size:12px; font-weight:normal; margin:0; padding:0;}
-.main .bg dl dd a,.main .bg dl dd div h3 a{color:#cccccc; text-decoration:none;}
-.main .bg dl dd a:hover,.main .bg dl dd div h3 a:hover{color:#ffffff; text-decoration:underline;}
-.main .bg dl dd .re{font-size:10px;}
+.main .bg .dl .gz,.main .bg dl .gz1{width:131px; height:109px;}
+.main .bg .dl .gz a{background:url(/Public/img/gz0.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+.main .bg .dl .gz a:hover,.main .bg .dl .gz1 a{background:url(/Public/img/gz1.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+
+.main .bg .dl .sz,.main .bg .dl .sz1{width:131px; height:109px;}
+.main .bg .dl .sz a{background:url(/Public/img/sz0.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+.main .bg .dl .sz a:hover,.main .bg .dl .sz1 a{background:url(/Public/img/sz1.gif); text-indent:-9999px; display:block;width:131px; height:109px;}
+
+.main .bg .dl .dd{float:left;color:#ffffff; width:684px;height:auto; overflow:hidden; text-align:center;}
+.main .bg .dl .dd .div{height:auto; overflow:hidden; padding-left:50px; margin-top:30px;_ margin-top:15px;}
+.main .bg .dl .dd .div h3{font-size:12px; font-weight:bold; margin:0 23px;_ margin:0 11px; padding:0; float:left; font-family:Arial, Helvetica, sans-serif;}
+.main .bg .dl .dd a,.main .bg .dl .dd .div h3 a{color:#cccccc; text-decoration:none;}
+.main .bg .dl .dd a:hover,.main .bg .dl .dd .div h3 a:hover{color:#ffffff; text-decoration:underline;}
+.main .bg .dl .dd .re{font-size:12px; float:right; padding-top:40px; color:#666666;}
 </style>
 </head>
 
 <body>
-<div class="head">
-	<h1><a href="__APP__/Index/index">BeingFunChina</a></h1>
-</div>
 <div class="main">
 	<div class="bg">
-		<dl>
-			<dd>
-				<div id="bj">
-					<h3><a href="__APP__/CityGuide/index/cid/2/">City Guide</a></h3><br />
-					<br />
-					<h3><a href="__APP__/Classifieds/index/cid/2/">Classifieds</a></h3><br />
-					<br />
-					<h3><a href="__APP__/Biz/index/cid/2/">China Fairs</a></h3><br />
-					<br />
-					<h3><a href="__APP__/Events/index/cid/2/">Events</a></h3><br />
-					<br />
-					<h3><a href="__APP__/Magazines/index/cid/2/">Magazines</a></h3><br />
-					<br />
-					<h3><a href="__APP__/Group/index/">Groups</a></h3>
-				</div>
-				<div id="sh" style="display:none;">
-				<h3><a href="__APP__/CityGuide/index/cid/3/">City Guide</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Classifieds/index/cid/3/">Classifieds</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Biz/index/cid/3/">China Fairs</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Events/index/cid/3/">Events</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Magazines/index/cid/3/">Magazines</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Group/index/">Groups</a></h3>
+		<div class="dl">
+			<div class="logo">
+				<h1><a href="__APP__/Index/index">BeingFunChina</a></h1>
 			</div>
-			
-			<div id="gz" style="display:none;">
-				<h3><a href="__APP__/CityGuide/index/cid/1/">City Guide</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Classifieds/index/cid/1/">Classifieds</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Biz/index/cid/1/">China Fairs</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Events/index/cid/1/">Events</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Magazines/index/cid/1/">Magazines</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Group/index/">Groups</a></h3>
-			</div>
-			
-			<div id="sz" style="display:none;">
-				<h3><a href="__APP__/CityGuide/index/cid/4/">City Guide</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Classifieds/index/cid/4/">Classifieds</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Biz/index/cid/4/">China Fairs</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Events/index/cid/4/">Events</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Magazines/index/cid/4/">Magazines</a></h3><br />
-				<br />
-				<h3><a href="__APP__/Group/index/">Groups</a></h3>
-			</div>
-				<br />
-				<br />
-				<a href="#" title="Remember my choice" class="re" id="remember">
-				<if condition="cookie('cid')">
-				<img src="__PUBLIC__/img/es2.gif" class="remember_1" alt="Remember my choice" />
-				<else/>
-					<img src="__PUBLIC__/img/es.gif" class="remember_0" alt="Remember my choice" />
-				</if>
-				Remember my choice
-				</a>
-			</dd>
-
-			<dt id="city">
+			<div class="dt" id="city">
 				<h2 class="bj" onmouseover="ch(this.className);">
 				<a href="__APP__/Public/index/cid/2/" title="BeingFunChina in BeiHing">BeingFunChina in BeiHing</a></h2>
 				<h2 class="sh" onmouseover="ch(this.className);">
@@ -127,8 +64,54 @@ a{outline:none}
 				<a href="__APP__/Public/index/cid/1/" title="BeingFunChina in GuangZhou">BeingFunChina in GuangZhou</a></h2>
 				<h2 class="sz" onmouseover="ch(this.className);">
 				<a href="__APP__/Public/index/cid/4/" title="BeingFunChina in ShenZhen">BeingFunChina in ShenZhen</a></h2>
-			</dt>
-		</dl>
+				<div class="sol"></div>
+			</div>
+			
+			<div class="dd">
+				<div id="bj" class="div">
+					<h3><a href="__APP__/CityGuide/index/cid/2/">City Guide</a></h3>
+					<h3><a href="__APP__/Classifieds/index/cid/2/">Classifieds</a></h3>
+					<h3><a href="__APP__/Biz/index/cid/2/">China Fairs</a></h3>
+					<h3><a href="__APP__/Event/index/cid/2/">Events</a></h3>
+					<h3><a href="__APP__/Magazine/index/cid/2/">Magazines</a></h3>
+					<h3><a href="__APP__/Group/index/">Groups</a></h3>
+				</div>
+				<div id="sh" style="display:none;" class="div">
+				<h3><a href="__APP__/CityGuide/index/cid/3/">City Guide</a></h3>
+				<h3><a href="__APP__/Classifieds/index/cid/3/">Classifieds</a></h3>
+				<h3><a href="__APP__/Biz/index/cid/3/">China Fairs</a></h3>
+				<h3><a href="__APP__/Event/index/cid/3/">Events</a></h3>
+				<h3><a href="__APP__/Magazine/index/cid/3/">Magazines</a></h3>
+				<h3><a href="__APP__/Group/index/">Groups</a></h3>
+			</div>
+			
+			<div id="gz" style="display:none;" class="div">
+				<h3><a href="__APP__/CityGuide/index/cid/1/">City Guide</a></h3>
+				<h3><a href="__APP__/Classifieds/index/cid/1/">Classifieds</a></h3>
+				<h3><a href="__APP__/Biz/index/cid/1/">China Fairs</a></h3>
+				<h3><a href="__APP__/Event/index/cid/1/">Events</a></h3>
+				<h3><a href="__APP__/Magazine/index/cid/1/">Magazines</a></h3>
+				<h3><a href="__APP__/Group/index/">Groups</a></h3>
+			</div>
+			
+			<div id="sz" style="display:none;" class="div">
+				<h3><a href="__APP__/CityGuide/index/cid/4/">City Guide</a></h3>
+				<h3><a href="__APP__/Classifieds/index/cid/4/">Classifieds</a></h3>
+				<h3><a href="__APP__/Biz/index/cid/4/">China Fairs</a></h3>
+				<h3><a href="__APP__/Event/index/cid/4/">Events</a></h3>
+				<h3><a href="__APP__/Magazine/index/cid/4/">Magazines</a></h3>
+				<h3><a href="__APP__/Group/index/">Groups</a></h3>
+			</div>
+				<a href="#" title="Remember my choice" class="re" id="remember">
+				<if condition="cookie('cid')">
+				<img src="__PUBLIC__/img/es2.gif" class="remember_1" alt="Remember my choice" />
+				<else/>
+					<img src="__PUBLIC__/img/es.gif" class="remember_0" alt="Remember my choice" />
+				</if>
+				Remember my choice
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -180,9 +163,9 @@ function ch(cname){
 }
 
 function show(id){
-	var dnum=$("dd>div").size();
+	var dnum=$(".dd>.div").size();
 	for(var i=0;i<dnum;i++){
-		var x=$("dd>div:eq("+i+")");
+		var x=$(".dd>.div:eq("+i+")");
 		if(x.attr('id')!=id){
 			x.hide();
 		}else{

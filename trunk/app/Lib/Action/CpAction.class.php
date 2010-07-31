@@ -18,6 +18,7 @@ class CpAction extends CommonAction{
 		if (!$this->_is_login()){
 			$this->redirect("/Public/login");
 		}
+		$role=$this->_get_role();
 		import("ORG.Util.Page");
 		parent::_initialize();
 	}//end _initialize()
@@ -46,7 +47,7 @@ class CpAction extends CommonAction{
 	 */
 	function my_classifieds_post() {
 		//我发布的分类信息
-		
+		$this->is_act(1,2);
 		$dao=D("Archives");
 		$condition=array();
 		$condition['channel']=array('in','4,5,6,7,8,9');
@@ -113,6 +114,7 @@ class CpAction extends CommonAction{
 	 */
 	function my_comments() {
 		//分类信息发布的评论
+		$this->is_act(1,2);
 		$dao=D("Comment");
 		$condition=array();
 		$condition['uid']=$this->user['uid'];
@@ -150,6 +152,7 @@ class CpAction extends CommonAction{
 	 */
 	function comment_delete() {
 		//删除留言
+		$this->is_act(1,2);
 		$xid=$_REQUEST['xid'];
 		$dao=D("Comment");
 		$info=$dao->where("xid=$xid")->find();
@@ -173,6 +176,7 @@ class CpAction extends CommonAction{
 	 */
 	function photo() {
 		//添加相关的图片
+		$pic=D("Pic");
 		if($_REQUEST['info']){
 			$condition=array();
 			$info=explode('_',$_REQUEST['info']);
@@ -187,18 +191,32 @@ class CpAction extends CommonAction{
 			dump($arc->getLastSql());
 			$this->error('archives is null!');
 		}
-		if($arc_info['uid']!=$this->user['uid']){
+		/*if($arc_info['uid']!=$this->user['uid']){
 			$this->error("Insufficient privileges!");
+		}*/
+		if($_REQUEST['act']='del'){
+			$pid=Input::getVar($_GET['pid']);
+			$pinfo=$pic->where("id=$pid")->find();
+			$pdata=array('id'=>$pid,'is_show'=>0);
+			if($arc_info['uid']==$this->user['uid']||$pinfo['uid']==$this->user['uid']){
+				$pic->save($pdata);
+			}else{
+				$this->error("Insufficient privileges!");
+			}
 		}
+		
 		$this->assign('arc_info',$arc_info);
 		
-		$album=D("Album");
+		/*$album=D("Album");
 		$album_info=$album->where("uid={$this->user['uid']}")->findAll();
-		$this->assign('album',$album_info);
+		$this->assign('album',$album_info);*/
 		
-		$pic=D("Pic");
-		$pic_info=$pic->where("xid={$condition['id']}")->findAll();
-		dump($pic_info);
+		
+		$condition=array();
+		$condition['xtype']=$info['0'];
+		$condition['xid']=$info['1'];
+		$pic_info=$pic->where($condition)->findAll();
+		//dump($pic_info);
 		$this->assign('pic',$pic_info);
 		
 		$page=array();
@@ -226,61 +244,39 @@ class CpAction extends CommonAction{
 		}else{
 			$this->error('info is null!');
 		}
-		$arc=D("Archives");
-		if($_REQUEST['type']=='album'){
-			$album=D("Album");
-			$vo=$album->create();
-			
-			if($vo){
-				$album_id=$album->add($vo);
-				
-				if($album_id){
-					
-					$arc->where($condition)->setField("albumid",$album_id);
-					$pic=$this->_photo($album_id);
-					$pic=$pic['0']["savepath"].$pic['0']['savename'];
-					$album->where("id=$album_id")->setField('pic',$pic);
-					$this->redirect('/Cp/photo/info/'.$_REQUEST['info']);
-				}else{
-					$this->error($album->getError());
-				}
-			}else{
-				$this->error($album->getError());
-			}
-		}else{
-			$pic=$this->_photo($_REQUEST['album_id']);
-			//dump($pic);
-			$list='';
-			$list=count($_FILES['filename']);
-			//dump($list);
-			$dao=D("Pic");
-			//dump($_FILES['filename']['name']);
-			$num=0;
-			for($i=0;$i<$list;$i++){
-				
-				if($_FILES['filename']['name'][$i]){
-					$data=array();
-					$data['title']=$_REQUEST['title'][$i];
-					$data['album_id']=$_REQUEST['album_id'];
-					$data['msg']=nl2br($_REQUEST['msg'][$i]);
-					$data['filepath']=$pic[$i]['savepath'];
-					$data['filename']=$pic[$i]['filename'];
-					$data['type']=$pic[$i]['type'];
-					$data['remote']=0;
-					$data['xid']=$condition['id'];
-					$data=$dao->create($data);
-					$id=$dao->add($data);
-					if($id){
-						$num+=1;
-					}
-					//$pic->add($data);
+		$pic=$this->_photo($condition['id']);
+		//dump($pic);
+		$list='';
+		$list=count($_FILES['filename']['name']);
+		$dao=D("Pic");
+		$num=0;
+		for($i=0;$i<$list;$i++){
+			if($_FILES['filename']['name'][$i]){
+				$data=array();
+				$data['title']=$_REQUEST['title'][$i];
+				$data['msg']=$_REQUEST['msg'][$i];
+				$data['filepath']=$pic[$i]['savepath'];
+				$data['filename']=$pic[$i]['savename'];
+				$data['type']=$pic[$i]['type'];
+				$data['size']=$pic[$i]['size'];
+				$data['thumb']='m_';
+				$data['remote']=0;
+				$data['xid']=$condition['id'];
+				$data['xtype']=$condition['channel'];
+				$data=$dao->create($data);
+				$id=$dao->add($data);
+				if($id){
+					$num+=1;
 				}
 			}
-			$arc->where($condition)->setField("albumnum",$num);
-			$this->redirect('/Cp/photo/info/'.$_REQUEST['info']);
-			//dump($data);
 		}
+		$count=$dao->where("xid={$condition['id']} AND xtype={$condition['channel']}")->count();
+		$arc=D("Archives");
+		$arc->where($condition)->setField("albumnum",$count);
+		$this->redirect('/Cp/photo/info/'.$_REQUEST['info']);
+		//dump($data);
 	}//end add_photo
+	
 	
 ////////////////////classifieds start//////////////////////
 	
@@ -497,6 +493,32 @@ class CpAction extends CommonAction{
 		$this->assign('content','Cp:my_post_classifieds');
 		$this->display("Cp:layout");
 	}//end my_edit_classifieds
+	
+	/**
+	   *删除信息
+	   *@date 2010-7-21
+	   *@time 下午05:29:19
+	   */
+	function del_arc() {
+		//删除信息
+		$dao=D("Archives");
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$info=$dao->where($condition)->find();
+		if (empty($info)) {
+			$this->error("error: info is null!");
+		}
+		if($info['uid']==$this->user['uid']){
+			$condition['ismake']='0';
+			$dao->save($condition);
+		}
+		$to=$_GET['to'];
+		$this->redirect("/Cp/".$to);
+	}//end del_arc
 	
 ////////////////////classifieds end//////////////////////
 
@@ -722,9 +744,9 @@ class CpAction extends CommonAction{
 	function my_stuff() {
 		//我的收藏夹
 		$page=array();
-		$page['title']='My Stuff -  My Control Panel -  BeingfunChina';
-		$page['keywords']='My Stuff';
-		$page['description']='My Stuff';
+		$page['title']='My Favorite -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Favorite';
+		$page['description']='My Favorite';
 		$this->assign('page',$page);
 		$this->assign('content','Cp:my_stuff');
 		$this->display("Cp:layout");
@@ -801,7 +823,7 @@ class CpAction extends CommonAction{
 			$data['content']=$dao->relationGet("fair");
 			$this->assign('data',$data);
 		}else{
-			$this->error("权限不足");
+			$this->error("Insufficient privilege.");
 		}
 		
 		$class_tree=$this->_get_tree(1232);
@@ -914,6 +936,7 @@ class CpAction extends CommonAction{
 		$this->assign('flag',$this->_get_flag());
 		$class_tree=$this->_get_tree(2000);
 		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('city'));
 		$page=array();
 		$page['title']='Post Articles -  My Control Panel -  BeingfunChina';
 		$page['keywords']='Post Articles';
@@ -949,7 +972,7 @@ class CpAction extends CommonAction{
 		$vo=$dao->create();
 		if($vo){
 			if (empty($_POST['my_content'])) {
-				$this->error("Summary 必填");
+				$this->error("You must fill in the field of 'Summary'");
 			}
 			$vo['description']=String::msubstr($vo['my_content'],0,200);
 			$vo['my_content']=nl2br($vo['my_content']);
@@ -988,7 +1011,7 @@ class CpAction extends CommonAction{
 				$data=array();
 				$_POST['content']=Input::getVar($_POST['content']);
 				if (empty($_POST['content'])) {
-					$this->error("Content 必填");
+					$this->error("You must fill in the field of 'Content'");
 				}
 				$data['content']=nl2br($_REQUEST['content']);
 				if($eid){
@@ -1005,15 +1028,15 @@ class CpAction extends CommonAction{
 						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
 					}
 					//echo "发布成功!";
-					$this->success('发布成功!');
+					$this->success('Successful release.');
 				}else{
 					if(empty($xid)){
 						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
 					}
-					$this->error("附属表写入失败!");
+					$this->error("Failed to write in subsidiary table. ");
 				}
 			}else{
-				$this->error('主档案表更新失败!');
+				$this->error('Failed to update the main profile table. ');
 			}
 			//dump($vo);
 		}else{
@@ -1069,12 +1092,13 @@ class CpAction extends CommonAction{
 			$data['content']=$dao->relationGet("arc");
 			$this->assign('data',$data);
 		}else{
-			$this->error("权限不足");
+			$this->error("Insufficient privilege.");
 		}
 		
 		$this->assign('flag',$this->_get_flag());
 		$class_tree=$this->_get_tree(2000);
 		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('city'));
 		$page=array();
 		$page['title']='Edit Articles -  My Control Panel -  BeingfunChina';
 		$page['keywords']='Edit Articles';
@@ -1309,9 +1333,18 @@ class CpAction extends CommonAction{
 		$condition['uid']=$this->user['uid'];
 		//hot 1感兴趣 2关注 3不关心
 		$hot=intval($_REQUEST['hot']);
+		$act=Input::getVar($_GET['act']);
+		$id=Input::getVar($_GET['id']);
+		$this->assign('hot',$hot);
 		$condition['hot']=$hot;
 		
 		$dao=D("Thought");
+		if($act=='del' && !empty($id)){
+			$info=$dao->where("id=$id")->find();
+			if($info['uid']==$this->user['uid']){
+				$dao->where("id=$id")->delete();	
+			}
+		}
 		$count=$dao->where($condition)->count();
 		$page=new Page($count,25);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
@@ -1319,6 +1352,7 @@ class CpAction extends CommonAction{
 		$limit=$page->firstRow.','.$page->listRows;
     	$event=array();
     	$event=$dao->where($condition)->order("mtime DESC")->limit("$limit")->findAll();
+    	$this->assign('event',$event);
     	
 		$page=array();
 		$page['title']='My Event -  My Control Panel -  BeingfunChina';
@@ -1402,13 +1436,13 @@ class CpAction extends CommonAction{
 					}else{
 						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
 					}
-					$this->success('发布成功!');
+					$this->success('Successful release. ');
 				}else{
 					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
-					$this->error("附属表写入失败!");
+					$this->error("Failed to write in subsidiary table. ");
 				}
 			}else{
-				$this->error('主档案表更新失败!');
+				$this->error('Failed to update the main profile table. ');
 			}
 			//dump($vo);
 		}else{
@@ -1418,8 +1452,109 @@ class CpAction extends CommonAction{
 	
 ///////////////////////////////////////////活动部分结束//////////////////////////////////////////////
 	
+	function is_act($ch,$num) {
+		if($this->role[$ch]){
+			$role=$this->role[$ch];
+		}else{
+			$role=$ch.'_2';
+		}
+		$num_end=end(explode('_',$num));
+		$role_end=end(explode('_',$role));
+		if($role_end>=$num_end){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+//////////////////////////////修改密码 编辑资料//////////////////////////////////////////////////////
+	/**
+	   *修改密码
+	   *@date 2010-7-19
+	   *@time 上午11:35:31
+	   */
+	function ch_password() {
+		//修改密码
+		if($_POST){
+			$old=Input::getVar($_POST['oldpassword']);
+			$new=Input::getVar($_POST['password']);
+			$renew=Input::getVar($_POST['repassword']);
+			if ($new!=$renew){
+				$this->error("The two passwords you input are inconsistent.");
+			}
+			if (empty($old)) {
+				$this->error("Please enter your current password. ");
+			}
+			$dao=D("Member");
+			$data=array();
+			$data['uid']=$this->user['uid'];
+			$info=$dao->where($data)->find();
+			if ($info['password']!=md5($old)){
+				$this->error("Wrong password!");
+			}else{
+				$data['password']=md5($new);
+				$dao->save($data);
+				$this->assign('jumpUrl',__URL__.'/index');
+				$this->success('Password changed successfully. ');
+			}
+		}
+		$page=array();
+		$page['title']='Modify Password -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Modify Password';
+		$page['description']='Modify Password';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:ch_password');
+		$this->display("Cp:layout");
+	}//end ch_password
 	
-	
-	
-	
+	/**
+	   *修改用户资料
+	   *@date 2010-7-20
+	   *@time 上午11:23:52
+	   */
+	function edit() {
+		//修改用户资料
+		$dao=D("Members");
+		if($_POST['act']=='edit'){
+			$data=array();
+			$data=$dao->create();
+			if(empty($_FILES['avatar']['name'])){
+				$data['avatar']=$_POST['old_avatar'];
+			}else{
+				$finfo=$this->_avatar();
+				$data['avatar']='/Public/avatar/s_'.$finfo[0]['savename'];
+			}
+			$data['bday']=Input::getVar($_POST['bdayyear']).'-'.Input::getVar($_POST['birthmonth']).'-'.Input::getVar($_POST['birthday']);
+			$address=Input::getVar($_POST['address']);
+			$data['address']=empty($address)?Input::getVar($_POST['address2']):$address;
+			$data['id']=$this->user['uid'];
+			$re=$dao->save($data);
+			if($re){
+				$info=$dao->where(array('id'=>$this->user['uid']))->find();
+				$info['avatar']=avatar($info['avatar']);
+				unset($_SESSION["info"]);
+				$_SESSION["info"]=$info;
+				$this->redirect("/Cp/edit");
+			}else{
+				//$this->redirect("/Cp/edit",array(),5,'','Failed to update the Profile.');
+				$this->assign('jumpUrl',__APP__."/Cp/edit");
+				$this->error('Failed to update the Profile.');
+			}
+		}else{
+			$info=$dao->where(array('id'=>$this->user['uid']))->find();
+			$bday=explode('-',$info['bday']);
+			$info['bdayyear']=$bday['0'];
+			$info['birthmonth']=$bday['1'];
+			$info['birthday']=$bday['2'];
+			$this->assign('info',$info);
+		}
+		$page=array();
+		$page['title']='Edit Profile -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Edit Profile';
+		$page['description']='Edit Profile';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:edit');
+		$this->display("Cp:layout");
+	}//end edit
 }//end CpAction

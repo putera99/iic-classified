@@ -103,7 +103,9 @@ class GroupAction extends CommonAction{
 		$post=D("Post");
 		$condition=array();
 		$condition['gid']=$info['id'];
-		$condition['l']='1';
+		$condition['l']='0';
+		$condition['topid']='0';
+		$condition['is_show']='1';
 		
 		$count=$post->where($condition)->count();
 		import("ORG.Util.Page");
@@ -169,16 +171,17 @@ class GroupAction extends CommonAction{
 	 */
 	function thread(){
 		//话题页面
-		$gid=empty($_REQUEST['id'])?0:intval($_REQUEST['id']);
+		$tid=empty($_REQUEST['id'])?0:intval($_REQUEST['id']);
 		$lou=empty($_REQUEST['lou'])?0:intval($_REQUEST['lou']);
 		$condition=array();
-		if($gid){
-			$condition['topid']=$gid;
+		if($tid){
+			$condition['topid']=$tid;
 		}
 		if(empty($condition)){
 			$this->error('参数错误！');
 		}
 		$condition['requery']='0';
+		$condition['qid']='0';
 		$pn=10;
 		$post=D("Post");
 		$count=$post->where($condition)->count();
@@ -194,25 +197,25 @@ class GroupAction extends CommonAction{
 			$limit=$ls.','.$page->listRows;
 		}
 		$thread=$post->where($condition)->order("dateline DESC")->limit($limit)->findAll();
-		$info=$post->where("id=$gid")->find();
+		$info=$post->where("id=$tid")->find();
 		$arr=array();
 		foreach ($thread as $t){//获取回复
 			$arr[$t['id']]=$t;
 			$condition['requery']=$t['id'];
-			$arr[$t['id']]['_rarr']=$post->where($condition)->order("dateline DESC")->findAll();
+			$arr[$t['id']]['_rarr']=$post->where("requery={$t['id']} or qid={$t['id']}")->order("dateline DESC")->findAll();
 			//dump($post->getLastSql());
 		}
 		$this->assign('thread',$arr);
 		
 		$this->assign('info',$info);
 		
-		$ginfo=get_info($info['gid'],'');
+		$ginfo=get_info($info['gid'],'*');
 		$this->assign('ginfo',$ginfo);
 		$dh=$this->_get_pinfo($ginfo['cat_id']);
 		$this->assign('dh',$dh);
 		
 		$page=array();
-		$page['title']=empty($info['title'])?$info['title'].'  -  BeingfunChina':'Group Thread  -  BeingfunChina';
+		$page['title']=empty($info['title'])?'Group Thread  -  BeingfunChina':$info['title'].'  -  BeingfunChina';
 		$page['keywords']=empty($info['tags'])?"Group,Thread":$info['tags'];
 		$page['description']=empty($info['title'])?"Groups in BeingfunChina":$info['title'];
 		$this->assign('page',$page);
@@ -302,6 +305,10 @@ class GroupAction extends CommonAction{
 		$dao=D("Post");
 		$vo=$dao->create();
 		if($vo){
+			if(empty($vo['message'])){
+				$this->ajaxReturn('0','You must fill in the field of "Content".','0');
+			}
+			$vo['title']=$vo['title']?$vo['title']:"";
 			$vo['aid']=$vo['aid']?$vo['aid']:"0";
 			$vo['qid']=$vo['qid']?$vo['qid']:"0";
 			$vo['l']=$vo['l']?$vo['l']:"1";
@@ -310,11 +317,14 @@ class GroupAction extends CommonAction{
 			$vo['qidstr']=$vo['qidstr']?$vo['qidstr']:"0";
 			$vo['message']=nl2br($vo['message']);
 			$vo['is_show']=1;
-			if($vo['topid']!='0' && $vo['requery']=='0'){
+			if($vo['topid']!='0' && $vo['qid']=='0'){//主题的回复
 				$top=$dao->where("topid={$vo['topid']}")->field('id,l,topid')->order("l DESC")->find();
 				$vo['l']=$top['l']+1;
-			}elseif($vo['topid']!='0' && $vo['requery']!='0'){
+			}elseif($vo['topid']=='0' && $vo['qid']=='0'){//主题
 				$vo['l']='0';
+			}elseif($vo['topid']!='0' && $vo['qid']!='0'){//主题回复的回复
+				$top=$dao->where("qid={$vo['qid']}")->field('id,l,topid')->order("l DESC")->find();
+				$vo['l']=$top['l']+1;
 			}
 			//dump($vo);
 			$pid=$dao->add($vo);
@@ -322,7 +332,7 @@ class GroupAction extends CommonAction{
 				$data=$dao->where("id=$pid")->find();
 				$data['dateline']=toDate($data['dateline'],'Y-m-d');
 				$data['lasttime']=toDate($data['lasttime'],'Y-m-d');
-				if($data['l']=='1'){
+				if($data['l']=='0'){
 					$this->edit_thread($data['gid']);
 				}else{
 					$this->edit_thread($data['gid'],2);

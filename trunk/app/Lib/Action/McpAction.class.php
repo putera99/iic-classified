@@ -92,19 +92,20 @@ class McpAction extends CpAction{
 				$qxarr[$type]=empty($_POST['qx'][$type])?$type.'_2':$_POST['qx'][$type];
 			}
 			$txt=serialize($qxarr);
-			
-			$data=array("name"=>$name,'status'=>'1','remark'=>$txt);
+			$data=array("name"=>$name,'status'=>'1','remark'=>$txt,'about'=>$_POST['about'],'ctime'=>time());
 			$id=$dao->add($data);
 			if ($id) {
-				$this->success('添加成功');
+				$this->redirect('/Mcp/role');
+//				$this->assign('jumpUrl',__URL__.'/role');
+//				$this->success('添加成功',0);
 			}else{
-				$this->error('添加失败');
+				$this->error('添加失败',0);
 			}
 		}elseif($_POST['act']=='edit'){
 			$name=trim($_POST['name']);
 			$roid=$_POST['roid'];
 			if(empty($name)){
-				$this->error('角色名不能为空');
+				$this->error('角色名不能为空',0);
 			}
 			$qxarr=array();
 			foreach ($_POST['xtype'] as $type){
@@ -115,18 +116,22 @@ class McpAction extends CpAction{
 			$data=array("id"=>$roid,"name"=>$name,'status'=>'1','remark'=>$txt);
 			$id=$dao->save($data);
 			if ($id) {
-				$this->success('成功');
+				$this->redirect('/Mcp/role');
+//				$this->assign('jumpUrl',__URL__.'/role',0);
+//				$this->success('成功');
 			}else{
-				$this->error('失败');
+				$this->error('失败',0);
 			}
 		}elseif($_GET['act']=='del'){
-			$id=trim($_GET['roid']);
-			$data=array("id"=>$id,'status'=>'0');
-			$id=$dao->save($data);
+			$id=trim($_GET['id']);
+			//$data=array("id"=>$id,'status'=>'0');
+			$id=$dao->where("id=$id")->delete();
 			if ($id) {
-				$this->success('成功');
+				$this->redirect('/Mcp/role');
+//				$this->assign('jumpUrl',__URL__.'/role');
+//				$this->success('成功',0);
 			}else{
-				$this->error('失败');
+				$this->error('失败',0);
 			}
 		}
 		if(!empty($_GET['roleid'])){
@@ -153,13 +158,60 @@ class McpAction extends CpAction{
 	 */
 	function user() {
 		//用户管理
+		$id=Input::getVar($_REQUEST['id']);
+		$dao=D("RoleUser");
+		if($id){
+			$this->assign('roid',$id);
+			$data['role_id']=$id;
+			$info=$dao->where($data)->findAll();
+		}else{
+			$this->assign('jumpUrl',__URL__."/role/");
+			$this->error('请先选择角色组');
+		}
+		$this->assign('info',$info);
+		
+		$act=Input::getVar($_REQUEST['act']);
+		if($act=='add'){
+			$member=D("Member");
+			$uinfo=$member->where("username='{$_POST['username']}' AND uid='{$_POST['uid']}'")->find();
+			dump($member->getLastSql());
+			if($uinfo){
+				$vo=$dao->create();
+				if(empty($vo['role_id'])){
+					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
+					$this->error('设置失败');
+				}
+				if(empty($vo['user_id'])){
+					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
+					$this->error('设置失败');
+				}
+				
+				$id=$dao->add($vo);
+				if($id){
+					$this->redirect("/Mcp/user/id/{$id}");
+				}else{
+					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
+					$this->error('设置失败');
+				}
+			}else{
+				//$this->assign('jumpUrl',__URL__."/user/id/{$id}");
+				$this->error('用户信息不匹配');
+			}
+			
+		}elseif($act=='del'){
+			$ruid=Input::getVar($_REQUEST['ruid']);
+			if ($ruid){
+				$dao->where("id=$ruid")->delete();
+				$this->redirect("/Mcp/user/id/{$id}");
+			}
+		}
 		$page=array();
-		$page['title']='Statistics -  My Control Panel -  BeingfunChina';
-		$page['keywords']='Statistics';
-		$page['description']='Statistics';
+		$page['title']='Role_user -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Role_user';
+		$page['description']='Role_user';
 		$this->assign('page',$page);
 		
-		$this->assign('content','Mcp:stat');
+		$this->assign('content','Mcp:user');
 		$this->display("Cp:layout");
 	}//end user
 }//end McpAction

@@ -20,10 +20,10 @@ class IndexAction extends CommonAction{
 	
 	
     public function index(){
-    	$this->assign('pick',$this->_new_list(2001,'h','0,1'));
-    	$this->assign('pick2',$this->_new_list(2001,'p','0,2'));
-    	$this->assign('pick8',$this->_new_list(2001,'','2,8'));
-    	$this->assign('do',$this->_new_list(2004,'','0,1'));
+    	$this->assign('pick',$this->_new_list(2001,'h','0,1',$this->pcid));
+    	$this->assign('pick2',$this->_new_list(2001,'p','0,2',$this->pcid));
+    	$this->assign('pick8',$this->_new_list(2001,'','2,8',$this->pcid));
+    	$this->assign('do',$this->_new_list(2004,'','0,1',$this->pcid));
     	//$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
     	
     	$group=$this->_get_group('hot');
@@ -105,6 +105,7 @@ class IndexAction extends CommonAction{
 		$condition['ismake']='1';
 		$condition['showstart']=array('lt',$time);
 		$condition['showend']=array('gt',$time);
+		$condition['cid']=$this->pcid;
 		$list=$dao->where($condition)->order("showstart DESC")->limit("0,6")->findAll();
 		return $list;
     }//end new_event
@@ -121,7 +122,7 @@ class IndexAction extends CommonAction{
 		$condition['channel']='11';
 		$condition['ismake']='1';
 		$condition['industry']='EN';
-		$list=$dao->where($condition)->order("id DESC")->limit("0,10")->findAll();
+		$list=$dao->where($condition)->order("id DESC")->limit("0,5")->findAll();
 		return $list;
     }//end new_fair
     

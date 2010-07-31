@@ -3,25 +3,6 @@
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
-            <!--<div class="login-h">
-            	<form action="__APP__/Public/check" method="post" name="login">
-                <div class="dengli">
-                    <label>Username:<input class="inputStyle" type="text" name="username" /></label>
-                    <label>Password:<input class="inputStyle" name="password" type="password" /></label>
-					<input class="loginBtn" type="image" src="__PUBLIC__/default/images/login.gif" />
-                </div>
-                <div class="regsiter-h">
-                    <a href="__APP__/Public/login/cid/{$cid}">Advance Login Mode</a>
-                </div>
-                <div class="lg-item">
-                    <a href="__APP__/Public/getpassword" target="_blank">Forgotten your password? </a>
-					<input type="checkbox" name="remember" /><a class="zhuce">Remember Me </a>
-                </div>
-                <div class="item-h">
-                    Register is easy.<a href="__APP__/Public/register/cid/{$cid}">Register Now!</a>
-                </div>
-				</form>
-            </div>-->
             <div class="conter-group">
                 <!--div class="fair-h">
                     <ul>
@@ -36,25 +17,20 @@
 				<div class="group"><a href="__APP__/Biz/index">Latest Fairs</a></div>
                 <!--div class="hot-h" id="show_biz" style="display:none;">
                     <ul>
-<volist name="biz_news" id="v">
+< volist name="biz_news" id="v">
                         <li>
-                            <h5>• <a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']|String::msubstr=0,35}</a></h5>
+                            <h5>• <a href="__APP__/Arc/show/aid/{ $ v['id']}">{ $ v['title'] | String::msubstr=0,35}</a></h5>
                         </li>
-</volist>
+</ volist >
                     </ul>
                 </div-->
 				<div class="hot-h" id="show_fair">
                     <ul>
 <volist name="fair" id="v">
                         <li>
-                            <h5>• <a href="__APP__/Biz/show/aid/{$v['id']}">{$v['title']|String::msubstr=0,30}...</a></h5>
-		                    <p id="f_{$v['id']}" class="fair_p" style="display:none;">
-		                        <a href="__APP__/Biz/show/aid/{$v['id']}"><img src="{$v['picurl']}" width="68" alt="{$v['title']}" /></a>
-								{$v['my_content']}...
-                    		</p>
+                            <h5>• <a href="__APP__/Biz/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']|String::msubstr=0,60}...</a></h5>
                         </li>
 </volist>
-
                     </ul>
                 </div>
             </div>
@@ -62,15 +38,17 @@
 
 
             <div class="conter-group">
-                <div class="group">Featured Groups </div>
+                <div class="group"><a href="__APP__/Group/index">Featured Groups</a></div>
 <volist name="group" id="g">
-                <div class="group-n">
-                    <h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
-                    <p>
-                        <a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']}" alt="{$g['groupname']}" /></a>Member:{$g['membernum']}<br>Thread:{$g['threadnum']}
-                    </p>
-                </div>
+               <dl class="group-x">
+				<dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+				<dd>
+					<h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+					<p>Member:{$g['membernum']}<br>Topic:{$g['threadnum']}</p>
+				</dd>
+			</dl>
 </volist>
+			
             </div>
 			
 			<div class="clear"></div>
@@ -160,17 +138,17 @@
             </div>
             <div class="product-h">
                 <div class="event-h">
-                    <span><a href="__APP__/Event/index"> >>more </a></span><a href="__APP__/Event/index" title="Event">Events</a>
+                    <span><a href="__APP__/Event/index"> >>more </a></span><a href="__APP__/Event/index" title="Events">Events</a>
                 </div>
                 <div class="magazine-h">
 <volist name="event" id="v">
                     <div class="magazine">
                         <dl>
                             <dt>
-                                <a href="__APP__/Event/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a>
+                                <a href="__APP__/Event/show/aid/{$v['id']}"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                             </dt>
                             <dd>
-                                <span><a href="__APP__/Event/show/aid/{$v['id']}">{$v['title']}</a></span>
+                                <span><a href="__APP__/Event/show/aid/{$v['id']}">{$v['title']|String::msubstr=0,60}</a></span>
 								{$v['showstart']|toDate='M-d'} / {$v['showend']|toDate='M-d'}
                             </dd>
                         </dl>
@@ -231,8 +209,8 @@
     </div>
 </div>
 <div class="clear"></div>
-<div align="center" style="margin-top:20px;">
-<div style="width: 499px; height: 104px;background-repeat: no-repeat; background:url(/Public/img/bg.gif) no-repeat;">
+<div align="center" style="margin-top:20px; margin-bottom:20px;">
+<div style="margin-right:10px;padding-right:40px;width: 499px; height: 104px;background-repeat: no-repeat; background:url(/Public/img/bg.gif) no-repeat;">
 <div style="height: 75px;" id="NetweatherContainer"><object width="435" height="74" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" name="netWxV2" id="netWxV2"><param value="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" name="movie"> <param value="transparent" name="wmode"> <param value="always" name="AllowScriptAccess"> <embed width="435" height="74" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent" name="netWxV2" src="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" id="netWxV2"></object></div>
 <div style="text-align: center; font-family: arial,helvetica,verdana,sans-serif; font-size: 10px; line-height: 15px; color: rgb(255, 255, 255);"><a href="http://www.accuweather.com/world-index-forecast.asp?partner=netweather&amp;locCode=ASI|CN|CH006|{$cityname}|&amp;metric=1" style="color: rgb(255, 255, 255);">Forecast</a> | <a href="http://www.accuweather.com/maps-satellite.asp" style="color: rgb(255, 255, 255);">Maps</a> | <a href="http://www.accuweather.com/index-radar.asp?partner=accuweather&amp;traveler=0&amp;zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|" style="color: rgb(255, 255, 255);">Radar</a></div>
 </div>

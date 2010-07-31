@@ -22,7 +22,7 @@
 		var PUBLIC		='../Public/';
 		var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
 		</script>
-		<script src="../Public/iic.js"></script>
+		<script src="__PUBLIC__/js/iic.js"></script>
 <if condition="$info['maps']">
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;hl=en&amp;key={&GOOGLE_MAP_API}" type="text/javascript"></script>
 <script type="text/javascript">
@@ -51,9 +51,9 @@ function load() {
 <include file="Public:top"/>
 <div id="main">
     <div class="mian-right">
-        <div class="guagngao">
+        <!--div class="guagngao">
             <img src="__PUBLIC__/default/images/pc/banner02.gif" alt="pic" width="748" height="90" />
-        </div>
+        </div-->
         <div class="biz-content">
             <div class="biz-page">
                 <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">Business</a> > 
@@ -103,7 +103,7 @@ function load() {
                             <table width="82" align="center" cellpadding="0" cellspacing="2">
                                 <tr>
                                     <td width="80" align="left">
-                                        <img src="{$info['picurl']}" alt="{$info['title']}" width="79" />
+                                        <img src="{$info['picurl']|toImg=biz}" alt="{$info['title']}" width="79" />
                                     </td>
                                 </tr>
                                 <tr>

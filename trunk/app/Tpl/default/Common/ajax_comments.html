@@ -3,7 +3,7 @@
 	<div class="posts">
 	<dl>
 		<dt>
-			<a href="#"><img src="__PUBLIC__/default/images/pic5.gif" alt="{$v['username']}" /></a>
+			<a href="#"><img src="{$v['uid']||get_avatar}" alt="{$v['username']}" /></a>
 			<br>
 			<a href="#">{$v['username']}</a>
 		</dt>
@@ -12,8 +12,7 @@
 		<else/>
 		<dd class="r">
 		</if>
-			<p>{$v['message']}<br><br>
-			<a href="#">[ Reply ]</a>   <a href="#">[ quote ]</a>   <a href="#">[ report ]</a>
+			<p>{$v['message']}<br>
 			</p>
 		</dd>
 	</dl>

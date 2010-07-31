@@ -2,77 +2,39 @@
 
 <div id="main">
     <div class="right">
-        <img src="__PUBLIC__/default/images/pic6.gif" alt="pci8" />
         <div class="next lssue">
             <div class="next-bg">
-                Next lssue
+                News
             </div>
             <div class="next-n">
                 <ul>
+<if condition="$group">
                     <li>
                         1、Philosophy of the people, 
                         has become the  professional  ...
                     </li>
-                    <li>
-                        2、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        3、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        4、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
-                    <li>
-                        5、Philosophy of the people, 
-                        has become the  professional  ...
-                    </li>
+</if>
                 </ul>
             </div>
         </div>
         <div class="main-group">
             <div class="main-bg">
-                Main group
+                Latest group
             </div>
+<if condition="$group">
             <div class="main-n">
                 <h5>will explore the "naked wedding...</h5>
                 <p>
                     <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
                 </p>
             </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
+</if>
         </div>
     </div>
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                <a href="/">Home</a> > <a href="__APP__/Arc/ls/id/2000">News</a> > 
-				<a href="__APP__/Arc/ls/id/{$dh['id']}">{$dh['typename']}</a>
+                <a href="/">Home</a> > {$info['title']}
             </div>
             <div class="content-n">
             	 <h1>{$info['title']}</h1>
@@ -80,18 +42,62 @@
 					<div class="con">
                         {$info['content']['content']}
                     </div>
+<if condition="$info['typeid']!='2002'">
                     <ul>
-                        <li id="1_{$v['channel']}_{$v['id']}" class="user_share">
+                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
                             Share
                         </li>
-                        <li id="2_{$v['channel']}_{$v['id']}" class="user_collection">
+                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
                             Save as favorite
                         </li>
-                        <li id="3_{$v['channel']}_{$v['id']}" class="user_report">
+                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
                             Report corrections
                         </li>
                     </ul>
+</if>
                 </div>
+<if condition="$info['typeid']!='2002'">
+				<div class="Comments">
+                    <div class="biaoti">
+                        <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
+                    </div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							var xid={$info['id']};
+							var types={$info['channel']};
+							$("#comments").load(URL+'/ajax_comments',{xid:xid,types:types});
+						});
+					</script>
+					<div id="comments"></div>
+
+                    <div class="liuyan">
+                    	<form name="post_comment" action="__URL__/post_comment" method="post">
+                    		<p style="text-align:left;" class="star">
+								<!--span class="nx" id="star_1"></span>
+								<span class="nx" id="star_2"></span>
+								<span class="nx" id="star_3"></span>
+								<span class="nx" id="star_4"></span>
+								<span class="nx" id="star_5"></span>
+								<span id="star_text" class="t"></span-->
+							<span style="text-align:left;">
+							Verification code:<input type="text" size="4" name="verify" id="verify">
+                    			<a href="javascript:fleshVerify();">
+                    				<img src="__URL__/verify" id="verifyImg" style="vertical-align:-6px;" />
+								</a>
+							</span>
+							</p>
+                    		<p><textarea name="content" id="comment_content" class="content"></textarea></p>
+							<input type="hidden" value="{$info['channel']}_{$info['id']}" id="comment_hidden" name="hidden" >
+							<input type="hidden" value="0" id="click_6" name="click_6" >
+							<P>
+								
+								<input type="button" id="post_comment" class="submit" style="border:none;padding:0;" value="Submit" >
+							</P>
+                    	</form>
+						
+                    </div>
+                </div>
+</if>
             </div>
         </div>
     </div>

@@ -13,12 +13,12 @@
 <div id="main">
     <div class="mian-right">
         <div class="events_poular">
-            <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Event</a> > 
+            <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Events</a> > 
 			<if condition="$dh"><a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > </if>
         </div>
 <volist name="data" id="v">
         <div class="events_neibiao">
-            <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']}" alt="{$v['title']}" /></a></span>
+            <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
             <ul>
                 <li class="biaop">
                     <a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a>

@@ -169,7 +169,7 @@ class ClassifiedsAction extends CommonAction{
 			$local=$city[$info['city_id']]['cename'];
 		}
 		$info['position']=trim($info['position'].','.$local,',');
-
+		$info['picurl']=str_replace('../Public/Uploads','/Public/Uploads',$info['picurl']);
 		$this->assign('info',$info);
 		
 		//$this->assign('comments',$this->_get_comments($info['id'],$info['channel']));
@@ -193,11 +193,13 @@ class ClassifiedsAction extends CommonAction{
 	 */
 	protected function chk_cid() {
 		//检查城市选项
-		if (intval($_GET['cid'])){
+		$cid=Input::getVar($_GET['cid']);
+		if ($cid){
 			if($_SESSION['cid']){
-				$this->pcid=intval($_GET['cid']);
+				$this->pcid=$cid;
 			}else{
-				$_SESSION['cid']=intval($_GET['cid']);
+				$_SESSION['cid']=$cid;
+				$this->pcid=$cid;
 				cookie('cid',null);
 				if ($_REQUEST['remember']) {
 					cookie('cid',$cid,array('expire'=>60*60*60*24*30));

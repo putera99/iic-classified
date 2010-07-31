@@ -25,13 +25,15 @@
 /* right开始*/
 .mian-right{width:752px;padding:0px;float:right;background-color: #f3f3f3;margin: 0px 0px 0px 10px;}
 .events_poular{height:23px;margin: 0 0 10px 0;padding: 0px 0px 0px 10px;background: url(../images/pc/bg02.gif) repeat-x;border: 1px solid #bababa;font-weight: bold;color: #3a3a3a;}
+.events_poular a{color: #3a3a3a;}
 .events_neibiao{ overflow:hidden; height:auto;margin: 0 5px 10px 5px;padding: 0px 0px 0px 10px;border-bottom: 1px dashed #434343;}
 .events_neibiao ul{ margin:0px; padding:0px; list-style-type:none;}
 .events_neibiao ul{ margin:0px; padding:0px;}
 .events_neibiao span {margin:0px;float: left;padding: 0px 7px 0px 0px;}
 .events_neibiao span a{padding:2px; border:#f3f3f3 solid 1px;}
-.events_neibiao span img{ vertical-align:middle;max-width:96px;max-height:96px;_height:expression(this.width > 96 ? this.height*(96/this.width) : auto);_width:expression(this.width > 96 ? 96px : auto);}
+.events_neibiao span img{ vertical-align:middle;max-width:96px;max-height:96px;_height:expression(this.width > 96 ? this.height*(96/this.width) : "auto");_width:expression(this.width > 96 ? "96px" : "auto");}
 .events_neibiao .biaop {font-weight: bold;color: #993366;}
+.events_neibiao .biaop a{ color:#993366;}
 .xiahhua {margin: 0px;padding: 0px;text-decoration: underline;color: #0f7892;}
 	
 
