@@ -1,6 +1,6 @@
 <div class="mulu">
     <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
-	<a href="__APP__/Mcp/role">role</a>
+	<a href="__APP__/Mcp/user">role_user</a>
 </div>
 <div class="right-neirong">
     <div class="clear">
@@ -13,15 +13,17 @@
         </div>
          <table border="1" bordercolor="#eeeeee" width="98%">
             	<tr>
-            		<th width="45%">名称</th>
-            		<th width="45%" style="overflow:hidden;">权限</th>
+            		<th width="25%">用户</th>
+            		<th width="45%" style="overflow:hidden;">角色</th>
+            		<th width="20%" style="overflow:hidden;">时间</th>
             		<th width="10%">操作</th>
             	</tr>
-<volist name="alog" id="v">
+<volist name="info" id="v">
                 	<tr>
-                		<td>{$v['name']}</a></td>
-                		<td>{$v['remark']}</td>
-                		<td><a href="__URL__/role/roleid/{$v['id']}">Edit</a> / <a href="__URL__/role/roid/{$v['id']}/act/del">Del</a></td>
+                		<td>{$v['user_id']|get_info=username,Members}({$v['user_id']})</a></td>
+                		<td>{$v['role_id']|get_info=name,Role}({$v['role_id']})</td>
+                		<td>{$v['ctime']|toDate}</td>
+                		<td><a href="__URL__/user/ruid/{$v['id']}/act/del/id/{$roid}">Del</a></td>
 					</tr>
                     
 </volist>
@@ -29,116 +31,14 @@
         <fieldset>
         	<legend>编辑/添加</legend>
         <div class="list">
-        	<form action="__URL__/role" method="POST">
-        	<if condition="$info">
-        		<input type="hidden" name="roid" value="{$info['id']}">
-        	<else/>
-        		<input type="hidden" name="act" value="add">
-        	</if>
+        	<form action="__URL__/user/id/{$roid}" method="POST">
+        	<input type="hidden" name="act" value="add">
+        	<input type="hidden" name="roid" value="{$roid}">
         	<table border="0" width="98%">
         		<tr>
-        			<td>角色名：<input type="text" name="name" value="{$info['name']}"></td>
+        			<td>用户名：<input type="text" name="username" value="{$info['name']}"></td>
         		</tr>
-        		<tr>
-        			<td>指定权限
-        					<p>
-	        				<input type="checkbox" name="xtype[]" value="2" {$info['remark']['2']|arrayischk}>CityGuide 
-	        				<fieldset>
-	        					<legend>CityGuide</legend>
-	        					<input type="radio" name="qx[2]" value="2_5" {$info['remark']['2']|arrayischk='2_5'}>所有权限  
-	        					<input type="radio" name="qx[2]" value="2_4" {$info['remark']['2']|arrayischk='2_4'}>编辑所有  
-	        					<input type="radio" name="qx[2]" value="2_3" {$info['remark']['2']|arrayischk='2_3'}>编辑自己  
-	        					<input type="radio" name="qx[2]" value="2_2" {$info['remark']['2']|arrayischk='2_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="4" {$info['remark']['4']|arrayischk}>Jobs 
-	        				<fieldset>
-	        					<legend>Jobs</legend>
-	        					<input type="radio" name="qx[4]" value="4_5" {$info['remark']['4']|arrayischk='4_5'}>所有权限  
-	        					<input type="radio" name="qx[4]" value="4_4" {$info['remark']['4']|arrayischk='4_4'}>编辑所有  
-	        					<input type="radio" name="qx[4]" value="4_3" {$info['remark']['4']|arrayischk='4_3'}>编辑自己  
-	        					<input type="radio" name="qx[4]" value="4_2" {$info['remark']['4']|arrayischk='4_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="5" {$info['remark']['5']|arrayischk}>Real_Estate 
-	        				<fieldset>
-	        					<legend>Real_Estate</legend>
-	        					<input type="radio" name="qx[5]" value="5_5" {$info['remark']['5']|arrayischk='5_5'}>所有权限  
-	        					<input type="radio" name="qx[5]" value="5_4" {$info['remark']['5']|arrayischk='5_4'}>编辑所有  
-	        					<input type="radio" name="qx[5]" value="5_3" {$info['remark']['5']|arrayischk='5_3'}>编辑自己  
-	        					<input type="radio" name="qx[5]" value="5_2" {$info['remark']['5']|arrayischk='5_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="6" {$info['remark']['6']|arrayischk}>Sell_Buy 
-	        				<fieldset>
-	        					<legend>Sell_Buy</legend>
-	        					<input type="radio" name="qx[6]" value="6_5" {$info['remark']['6']|arrayischk='6_5'}>所有权限  
-	        					<input type="radio" name="qx[6]" value="6_4" {$info['remark']['6']|arrayischk='6_4'}>编辑所有  
-	        					<input type="radio" name="qx[6]" value="6_3" {$info['remark']['6']|arrayischk='6_3'}>编辑自己  
-	        					<input type="radio" name="qx[6]" value="6_2" {$info['remark']['6']|arrayischk='6_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="7" {$info['remark']['7']|arrayischk}>Biz_Opportunities 
-	        				<fieldset>
-	        					<legend>Biz_Opportunities</legend>
-	        					<input type="radio" name="qx[7]" value="7_5" {$info['remark']['7']|arrayischk='7_5'}>所有权限  
-	        					<input type="radio" name="qx[7]" value="7_4" {$info['remark']['7']|arrayischk='7_4'}>编辑所有  
-	        					<input type="radio" name="qx[7]" value="7_3" {$info['remark']['7']|arrayischk='7_3'}>编辑自己  
-	        					<input type="radio" name="qx[7]" value="7_2" {$info['remark']['7']|arrayischk='7_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="8" {$info['remark']['8']|arrayischk}>Personals 
-	        				<fieldset>
-	        					<legend>Personals</legend>
-	        					<input type="radio" name="qx[8]" value="8_5" {$info['remark']['8']|arrayischk='8_5'}>所有权限  
-	        					<input type="radio" name="qx[8]" value="8_4" {$info['remark']['8']|arrayischk='8_4'}>编辑所有  
-	        					<input type="radio" name="qx[8]" value="8_3" {$info['remark']['8']|arrayischk='8_3'}>编辑自己  
-	        					<input type="radio" name="qx[8]" value="8_2" {$info['remark']['8']|arrayischk='8_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="9" {$info['remark']['9']|arrayischk}>Services 
-	        				<fieldset>
-	        					<legend>Services</legend>
-	        					<input type="radio" name="qx[9]" value="9_5" {$info['remark']['9']|arrayischk='9_5'}>所有权限  
-	        					<input type="radio" name="qx[9]" value="9_4" {$info['remark']['9']|arrayischk='9_4'}>编辑所有  
-	        					<input type="radio" name="qx[9]" value="9_3" {$info['remark']['9']|arrayischk='9_3'}>编辑自己  
-	        					<input type="radio" name="qx[9]" value="9_2" {$info['remark']['9']|arrayischk='9_2'}>一般权限  
-	        				</fieldset>
-	        				</p><p>
-	        				<input type="checkbox" name="xtype[]" value="10" {$info['remark']['10']|arrayischk}>Events
-	        				<fieldset>
-	        					<legend>Event</legend>
-	        					<input type="radio" name="qx[10]" value="10_5" {$info['remark']['10']|arrayischk='10_5'}>所有权限  
-	        					<input type="radio" name="qx[10]" value="10_4" {$info['remark']['10']|arrayischk='10_4'}>编辑所有  
-	        					<input type="radio" name="qx[10]" value="10_3" {$info['remark']['10']|arrayischk='10_3'}>编辑自己  
-	        					<input type="radio" name="qx[10]" value="10_2" {$info['remark']['10']|arrayischk='10_2'}>一般权限  
-	        				</fieldset> </p><p>
-	        				<input type="checkbox" name="xtype[]" value="11" {$info['remark']['11']|arrayischk}>Fairs
-	        				<fieldset>
-	        					<legend>Fairs</legend>
-	        					<input type="radio" name="qx[11]" value="11_5" {$info['remark']['11']|arrayischk='11_5'}>所有权限  
-	        					<input type="radio" name="qx[11]" value="11_4" {$info['remark']['11']|arrayischk='11_4'}>编辑所有  
-	        					<input type="radio" name="qx[11]" value="11_3" {$info['remark']['11']|arrayischk='11_3'}>编辑自己  
-	        					<input type="radio" name="qx[11]" value="11_2" {$info['remark']['11']|arrayischk='11_2'}>一般权限  
-	        				</fieldset> </p><p>
-	        				<input type="checkbox" name="xtype[]" value="12" {$info['remark']['12']|arrayischk}>News
-	        				<fieldset>
-	        					<legend>News</legend>
-	        					<input type="radio" name="qx[12]" value="12_5" {$info['remark']['12']|arrayischk='12_5'}>所有权限  
-	        					<input type="radio" name="qx[12]" value="12_4" {$info['remark']['12']|arrayischk='12_4'}>编辑所有  
-	        					<input type="radio" name="qx[12]" value="12_3" {$info['remark']['12']|arrayischk='12_3'}>编辑自己  
-	        					<input type="radio" name="qx[12]" value="12_2" {$info['remark']['12']|arrayischk='12_2'}>一般权限  
-	        				</fieldset> </p><p>
-	        				<input type="checkbox" name="xtype[]" value="13" {$info['remark']['13']|arrayischk}>Groups
-	        				<fieldset>
-	        					<legend>Groups</legend>
-	        					<input type="radio" name="qx[13]" value="13_5" {$info['remark']['13']|arrayischk='13_5'}>所有权限  
-	        					<input type="radio" name="qx[13]" value="13_4" {$info['remark']['13']|arrayischk='13_4'}>编辑所有  
-	        					<input type="radio" name="qx[13]" value="13_3" {$info['remark']['13']|arrayischk='13_3'}>编辑自己  
-	        					<input type="radio" name="qx[13]" value="13_2" {$info['remark']['13']|arrayischk='13_2'}>一般权限  
-	        				</fieldset> 
-	        				</p>
-					</td>
+        		<tr>用户ID:<input type="text" name="uid" value="{$info['name']}"></td>
         		</tr>
         		<tr>
         			<td><input type="submit" value="Submit"></td>

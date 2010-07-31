@@ -13,32 +13,47 @@
         </div>
          <table border="1" bordercolor="#eeeeee" width="98%">
             	<tr>
-            		<th width="45%">名称</th>
-            		<th width="45%" style="overflow:hidden;">权限</th>
-            		<th width="10%">操作</th>
+            		<th width="5%">id</th>
+            		<th width="15%">名称</th>
+            		<th width="60%" style="overflow:hidden;">备　注</th>
+            		<th width="20%">操作</th>
             	</tr>
 <volist name="alog" id="v">
                 	<tr>
-                		<td>{$v['name']}</a></td>
-                		<td>{$v['remark']}</td>
-                		<td><a href="__URL__/role/roleid/{$v['id']}">Edit</a> / <a href="__URL__/role/roid/{$v['id']}/act/del">Del</a></td>
+                		
+                		<td>{$v['id']}</td>
+                		<td>{$v['name']}</td>
+                		<td>{$v['about']}</td>
+                		<td>
+                			<a href="__URL__/role/roleid/{$v['id']}/ajax/0">Edit</a> / 
+                			<a href="__URL__/role/id/{$v['id']}/act/del/ajax/0">Del</a> / 
+                			<a href="__URL__/user/id/{$v['id']}/act/view">该组用户</a>
+                		</td>
 					</tr>
                     
 </volist>
             </table>
+            <div class="xuhao">
+		    	{$showpage}
+		    </div>
+            <hr>
         <fieldset>
         	<legend>编辑/添加</legend>
         <div class="list">
         	<form action="__URL__/role" method="POST">
         	<if condition="$info">
-        		<input type="hidden" name="roid" value="{$info['id']}">
+        		<input type="hidden" name="roid" value="{$info['id']}" />
         	<else/>
-        		<input type="hidden" name="act" value="add">
+        		<input type="hidden" name="act" value="add" />
         	</if>
         	<table border="0" width="98%">
         		<tr>
         			<td>角色名：<input type="text" name="name" value="{$info['name']}"></td>
         		</tr>
+        		<tr>
+        			<td>备　注：<textarea rows="3" cols="20" name="about">{$info['about']}</textarea> </td>
+        		</tr>
+        		
         		<tr>
         			<td>指定权限
         					<p>
@@ -50,7 +65,18 @@
 	        					<input type="radio" name="qx[2]" value="2_3" {$info['remark']['2']|arrayischk='2_3'}>编辑自己  
 	        					<input type="radio" name="qx[2]" value="2_2" {$info['remark']['2']|arrayischk='2_2'}>一般权限  
 	        				</fieldset>
-	        				</p><p>
+	        				</p>
+	        				<p>
+	        				<input type="checkbox" name="xtype[]" value="1" {$info['remark']['1']|arrayischk}>Classifieds 
+	        				<fieldset>
+	        					<legend>CityGuide</legend>
+	        					<input type="radio" name="qx[1]" value="1_5" {$info['remark']['1']|arrayischk='1_5'}>所有权限  
+	        					<input type="radio" name="qx[1]" value="1_4" {$info['remark']['1']|arrayischk='1_4'}>编辑所有  
+	        					<input type="radio" name="qx[1]" value="1_3" {$info['remark']['1']|arrayischk='1_3'}>编辑自己  
+	        					<input type="radio" name="qx[1]" value="1_2" {$info['remark']['1']|arrayischk='1_2'}>一般权限  
+	        				</fieldset>
+	        				</p>
+	        				<!--p>
 	        				<input type="checkbox" name="xtype[]" value="4" {$info['remark']['4']|arrayischk}>Jobs 
 	        				<fieldset>
 	        					<legend>Jobs</legend>
@@ -104,7 +130,7 @@
 	        					<input type="radio" name="qx[9]" value="9_3" {$info['remark']['9']|arrayischk='9_3'}>编辑自己  
 	        					<input type="radio" name="qx[9]" value="9_2" {$info['remark']['9']|arrayischk='9_2'}>一般权限  
 	        				</fieldset>
-	        				</p><p>
+	        				</p--><p>
 	        				<input type="checkbox" name="xtype[]" value="10" {$info['remark']['10']|arrayischk}>Events
 	        				<fieldset>
 	        					<legend>Event</legend>
@@ -148,9 +174,7 @@
         </div>
         </fieldset>
     </div>
-    <div class="xuhao">
-    	{$showpage}
-    </div>
+
 </div>
 <div class="clear">
 </div>

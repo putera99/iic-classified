@@ -37,7 +37,7 @@ class PublicAction extends CommonAction{
 				$this->redirect($url);
 			}
 		}else{
-			$this->display();
+			$this->select_city();
 		}
 	}//end index
 	
@@ -63,13 +63,10 @@ class PublicAction extends CommonAction{
 		$this->display();
 	}// END getpassword
 	
-	function mpass() {//修改密码
-		$this->display();
-	}// END mpass
-	
 	function logout() {//退出
 		unset($_SESSION['uid']);
 		unset($_SESSION['username']);
+		unset($_SESSION['info']);
 		$this->user='';
 		if(empty($_REQUEST['to'])){
 			$this->redirect('/Index/index');
@@ -86,12 +83,14 @@ class PublicAction extends CommonAction{
 		/*$_SESSION['uid']='3594';
 		$_SESSION['username']=$username;
 		$this->ajaxReturn("3594",'登录成功','1');*/
-		$dao=new Model();
-		$info=$dao->Table("cdb_members")->where("username='$username'")->find();
-		if ($info) {
+		$dao=D("Members");
+		$info=$dao->where("username='$username'")->find();
+		//dump($dao->getLastSql());
+		if ($info){
 			if($password==$info['password']) {
-				$_SESSION['uid']=$info['uid'];
+				$_SESSION['uid']=$info['id'];
 				$_SESSION['username']=$info['username'];
+				$info['avatar']=avatar($info['avatar']);
 				$_SESSION["info"]=$info;
 				if ($_REQUEST['is_ajax']) {
 					$this->ajaxReturn("{$info['uid']}",'You’ve already logged in','1');
@@ -107,7 +106,6 @@ class PublicAction extends CommonAction{
 				if ($_REQUEST['is_ajax']) {
 					$this->ajaxReturn("0",'Wrong password!','0');
 				}else{
-					echo $password;
 					$this->error("Wrong password!!");
 				}
 			}
@@ -115,7 +113,7 @@ class PublicAction extends CommonAction{
 			if ($_REQUEST['is_ajax']) {
 					$this->ajaxReturn("0",'Wrong user’s name!','0');
 				}else{
-					$this->error("Wrong user’s name!!");
+					$this->error("Wrong user’s name!");
 				}
 		}
 
@@ -138,20 +136,34 @@ class PublicAction extends CommonAction{
 	}//end ajax_is_login
 	
 	function reg_add() {//注册写入
-		$data['username']=$_POST['username'];
-		$data['password']=$_POST['password'];
-		$data['email']=$_POST['email'];
+		if($_POST['policy']!='1'){
+			$this->error("必须同意注册条款");
+		}
+		$data=array();
+		$data['username']=Input::getVar($_POST['username']);
+		$data['password']=Input::getVar($_POST['password']);
+		$data['email']=Input::getVar($_POST['email']);
 		$data['groupid']=10;
 		if ($data['password']!=$_POST['repassword'] || empty($data['password'])||empty($data['email'])||empty($data['username'])) {
 			$this->error("Wrong parameter!");
 		}
 		$data['password']=md5($data['password']);
-		$dao=new Model();
-		$uid=$dao->Table("cdb_members")->add($data);
+		$data['bday']=Input::getVar($_POST['bdayyear']).'-'.Input::getVar($_POST['birthmonth']).'-'.Input::getVar($_POST['birthday']);
+		$data['nationality']=Input::getVar($_POST['nationality']);
+		$address=Input::getVar($_POST['address']);
+		$data['address']=empty($address)?Input::getVar($_POST['address2']):$address;
+		$data['nationality']=Input::getVar($_POST['nationality']);
+		$data['gender']=Input::getVar($_POST['gender']);
+		$data['fname']=Input::getVar($_POST['first_name']);
+		$data['lname']=Input::getVar($_POST['last_name']);
+		$dao=D("Members");
+		$uid=$dao->add($data);
+		dump($dao->getLastSql());
 		if ($uid) {
-			$info=$dao->Table("cdb_members")->where("uid='$uid'")->find();
-			$_SESSION['uid']=$info['uid'];
+			$info=$dao->where("id='$uid'")->find();
+			$_SESSION['uid']=$info['id'];
 			$_SESSION['username']=$info['username'];
+			$info['avatar']=avatar($info['avatar']);
 			$_SESSION["info"]=$info;
 			if(empty($_REQUEST['to'])){
 				$this->redirect("/Cp/index");

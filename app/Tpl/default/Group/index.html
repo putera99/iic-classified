@@ -38,17 +38,16 @@
             </div>
             <div class="content-n">
                 <div class="welcome">
-					<span>
+                    <h1><span>
 				   	<a href="__APP__/Cp/group_create/">Create My Group</a>
-				   </span>
-                    <h1>Groups</h1>
+				   </span>Groups</h1>
                 </div>
                 <div class="welcome-quan">
 <volist name="hot" id="v">
                     <div class="renshu">
                         <h5><a href="__APP__/Group/show/aid/{$v['id']}">{$v['groupname']}</a></h5>
                         <p>
-                            <a href="__APP__/Group/show/aid/{$v['id']}"><img src="{$v['pic']}" alt="{$v['groupname']}" /></a>({$v['membernum']})
+                            <a href="__APP__/Group/show/aid/{$v['id']}"><img src="{$v['pic']}" alt="{$v['groupname']}" /></a>Members:({$v['membernum']})
                         </p>
                     </div>
 </volist>

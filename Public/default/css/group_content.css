@@ -1,11 +1,12 @@
 /* CSS 中间 开始 */
 #main {width:950px;	padding: 0px;margin: 0px auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
-.content-n {border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding: 5px 0 0 0;}
+.content-n{border: 1px solid #CCCCCC;background-color: #f3f3f3;margin: 0px;padding: 5px 0 0 0;}
+.content-n h1{ padding-left:20px;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
 .touxiang {padding: 0px;margin: 0px 7px;}
 .touxiang ul{list-style-type: none;margin: 0 0 0 10px;padding: 0px;line-height: 22px;}
-.touxiang span {width: 144px;margin: 0px 10px 0px 0px;padding: 0px;float: left;height:151px;}
+.touxiang span {width: 144px;margin: 0px 10px 0px 0px;padding: 0px;float: left;height:151px; text-align:center;}
 .touxiang li {margin: 0px;padding: 0px;}
 .anjian {width: 250px;height: 50px;margin:0 30px; float:right;}
 .anjian ul {list-style-type: none;font-weight: 500;color: #efefef;margin: 0px;padding: 0px;text-align: center;}
@@ -23,26 +24,28 @@
 .xiaoxin span {width: 100px;float: right;margin: 0px;padding: 0px;}
 
 
-.touxiang .h350{height:auto; min-height:300px; overflow:hidden;}
+.touxiang .h350{height:auto;min-height:300px;_height:300px;overflow:hidden;_overflow:auto;}
+.touxiang .h350 a{color:#993366;}
+.touxiang .h350 a:hover{color: #993366; text-decoration:underline;}
 .touxiang dl{list-style:none;}
 .touxiang dl dt{float:left;color: #993366;font-size: 12px;font-weight: bold; display:block; text-align:center; height:25px; line-height:25px; border-bottom:1px #ccc solid;}
-.touxiang dl dd{ border-bottom:1px #ccc dotted;}
+.touxiang dl dd{border-bottom:1px #ccc dotted;}
 .touxiang dl dd,.touxiang dl dd span{float:left; margin:0; padding:0; height:30px; line-height:30px;}
 .touxiang dl .c{ text-align:center;}
 .touxiang dl .l{ text-align:left;}
 .touxiang dl .r{ text-align:right;}
 
-.touxiang dl .w410{width:410px;}
-.touxiang dl .w381{width:381px;}
-.touxiang dl .w320{width:320px;}
-.touxiang dl .w220{width:220px;}
-.touxiang dl .w100{width:100px;}
-.touxiang dl .w50{width:50px;}
+.touxiang dl .w410{width:410px; overflow:hidden;}
+.touxiang dl .w381{width:381px; overflow:hidden;}
+.touxiang dl .w320{width:320px; overflow:hidden;}
+.touxiang dl .w220{width:220px; overflow:hidden;}
+.touxiang dl .w100{width:100px; overflow:hidden;}
+.touxiang dl .w50{width:50px; overflow:hidden;}
 
 
 
 /* CSS 右边 开始 */
-.next_lssue { margin:0px; padding: 0px;}
+.next_lssue{margin:0; padding: 0px;}
 .n-life{width:706px;padding:0px;margin: 0px;float: left;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-bg a{color: #212121;}

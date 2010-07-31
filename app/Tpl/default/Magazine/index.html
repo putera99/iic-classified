@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$page['title']}</title>
+<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/default/css/ezine.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="Public:top"/>
+<div id="main">
+  <div class="main-right">
+    <div class="e_xiaqi">
+      <div class="e_yugao">Next Issue</div>
+<if condition="$next">
+      <div class="e_neir">
+        <dl>
+          <dt><img src="images/pc/pic04.gif" alt="sc" /></dt>
+          <dd>about the struggle workplace experiences, their stories Bidulala </dd>
+        </dl>
+        <p>Let me give you some advice</p>
+      </div>
+</if>
+    </div>
+    <div class="e_xiaqi">
+      <div class="e_yugao">Subscription</div>
+      <div class="e_neir">
+          <label>
+          <input type="text" name="text1" id="text1" />
+          </label>
+          <span class="textfieldRequiredMsg"></span>
+        <div class="e_an">Subscribe Now</div>
+      </div>
+    </div>
+    <div class="e_xiaqi">
+      <div class="e_yugao">Contribute</div>
+      <div class="e_neir">
+        <div class="an">Contribute</div>
+
+      </div>
+    </div>
+    <div class="e_xiaqi">
+      <div class="e_yugao">Back Issue</div>
+      <div class="e_neir">
+<if condition="$back">
+        <dl>
+          <dt><img src="images/pc/pic09.gif" alt=" sc" /></dt>
+          <dd>with the oppositesex, will explore<span>[read]</span><span>[subscription]</span></dd>
+        </dl>
+</if>
+      </div>
+    </div>
+  </div>
+  <div class="mian-left">
+    <div class="events_poular">
+	<a href="/">Home</a> > 
+	<a href="__APP__/Magazine/index">Magazines</a></div>
+    <div class="e_ping">
+      <div class="e_pic"><img src="__PUBLIC__/zine/zz.jpg" alt="DateCity" /></div>
+      <div class="e_neirong">
+        <p class="biaoti">DateCity first issue</p>
+        <p><strong>Release date:</strong>2010-08</p>
+        <p><strong>The publishers:</strong>Beingfunchina</p>
+        <p><strong>Introduction:</strong>Date City vol.1 
+Introduction:　August “DateCity” will feature on Christianity in China, with the theme of “Different Land, Same Pray”. DateCity will brief you on the development history of Christianity in China while focus on introducing some local Christianity churches with detailed worship time, activities and transportation guidance, etc. As the Expo is well on its way, we’ll also show you some fantastic scenic sports around Shanghai like Wuzhen and Zhouzhuang, so as to make your China trip more fulfilling. In “Talk”, three young foreigners will tell us about their life in China and their Chinese friends. They will share funny stories and funny people. You can also expect some breathtaking photos in “Vision”, which always aims to offer you a visual feast and a special feeling. 
+</p>
+        <ul>
+          <li onclick="alert('coming soon!')">Read online </li>
+          <li onclick="alert('coming soon!')">Download</li>
+        </ul>
+      </div>
+    </div>
+    <div class="e_quanzhu">
+      <h5>Issue Pick</h5>
+<if condition="$pick">
+        <dl>
+          <dt><img src="images/pc/pic05.gif" alt="pic" /></dt>
+          <dd>will explore the naked wedding will explore the </dd>
+        </dl>
+</if>
+    </div>
+    <div class="e_zuixin">
+      <h5>Latest Review</h5>
+<if condition="$review">
+      <div class="e_huati">
+        <div class="e_leftp"><img src="images/pc/pic05.gif" alt="pic" /></div>
+        <div class="e_rightx">
+          <div class="e_top"><span># 9 House 10-04-01 23:18</span> piglethyuk：</div>
+          <div class="e_center">Will also within other relevant information?Will also within other relevant information?Will also within other rel
+            evant information?Will also within other relevant information? </div>
+          <div class="e_dibu"><span>[ Reply ]</span><span>[ quote ]</span><span>[ report ]</span></div>
+        </div>
+      </div>
+</if>
+      <div class="xuhao"></div>
+    </div>
+    <div class="liuyan"><span id="sprytextarea1"> <span class="textareaRequiredMsg"></span></span>
+      <textarea name="textarea1" id="textarea1" cols="45" rows="5"></textarea>
+    </div>
+    <div class="Submit">Submit</div>
+  </div>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<include file="Public:foot" /> 

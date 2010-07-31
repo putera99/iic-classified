@@ -2,34 +2,53 @@
 <link href="__PUBLIC__/js/datePicker.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
-	$("#typeid").change(function(){
-		var id=this.value;
-		ch_type(id);
+	$(".add_table").click(function(){
+		var id=this.id;
+		id=id.split('_');
+		var ojb=id['2'];
+		var newid=parseInt(ojb)+1;
+		var idname=id['0']+'_'+id['1']+'_'+newid;
+		addimg(ojb,idname);
 	});
-	$('.showend_job').datePicker({clickInput:true});
-	var typeid=$("#typeid").val();
-	if(typeid!=0){
-		ch_type(typeid);
-	}
+	$("#submit").click(function(){
+		var id=$(".add_table").attr('id');
+		id=id.split('_');
+		var obj=id['2'];
+		var num=0;
+		for(var i=1; i<parseInt(obj); i++){
+			var title_id="#title_"+i;
+			var val=$(title_id).val();
+			if(val==''){
+				alert("You must fill in the field of 'Title'.");
+				$("#form").submit(function () {
+					return false;
+				});
+				num=parseInt(num)+1;
+			}
+		}
+		if(num==0){
+			$("#form").submit(function(){
+				alert('0000');
+				return true;
+			});
+		}
+	});
+
 });
-function ch_type(id){
-	id=id.split('_');
-	var cache=$("#cache").html();
-	id="#channel_"+id['0'];
-	if(id!=cache){
-		$("#channel").html($(id).html());
-		$("#cache").html(id);
-	}
+function addimg(id,idname){
+	var text='<div id="potho_'+id+'" class=""><p><label for="title_'+id+'">title'+id+':</label><input type="text" name="title[]" id="title_'+id+'">';	
+		text+='</p><p><label for="filename_'+id+'">Photo'+id+':</label><input type="file" name="filename[]" id="filename_'+id+'" style="width:300px;" class="file">';
+		text+='</p><p><label for="msg_'+id+'">msg'+id+':</label><textarea name="msg[]" id="msg_'+id+'"></textarea></p><br><br></div>';
+		$("#potho_form").append(text);
+		$(".add_table").attr("id",idname);
+		
 }
-function zone(obj,id,name){
-	if(name==0){
-		var cid=obj.options[obj.options.selectedIndex].value;
-	}else{
-		var cid=obj.options[obj.options.selectedIndex].className;
-	}
-	$(id).load(URL+'/ajax_zone',{cid:cid,types:'localion',name:name});
-}
+
 </script>
+<style type="text/css">
+	#potho_form label{ width:80px; text-align:right; float:left;}
+	.list dl dd a img{ margin-top:10px;_margin-top:5px;}
+</style>
 <div class="mulu">
 	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
 	<a href="__APP__/Cp/add_photo">My Photos</a>
@@ -44,69 +63,46 @@ function zone(obj,id,name){
         <div class="list">
         	
 			<dl>
-				<dt class="w420">Title</dt>
+				<dt class="w320">Title</dt>
 				<dt class="w100">username</dt>
 				<dt class="w100">size</dt>
 				<dt class="w100">Time</dt>
+				<dt class="w100">Action</dt>
 <volist name="pic" id="v">
                 <dd>
-                	<span class="w420"><a href="{$v['filepath']}{$v['filename']}">{$v['title']}</a></span>
+                	<span class="w320">
+						<a href="{$v['filepath']}{$v['filename']}" target="_blank">{$v['title']}</a>  
+						<a href="{$v['filepath']}m_{$v['filename']}" target="_blank">[ M ]</a>
+					</span>
 					<span class="w100 c">{$v['username']}</span>
 					<span class="w100 c">{$v['size']}</span>
 					<span class="w100 c">{$v['dateline']|toDate='d/m/Y'}</span>
+					<span class="w100 c"><a href="__APP__/Cp/photo/info/{$arc_info['channel']}_{$arc_info['id']}/act/del/pid/{$v['id']}"><img src="__PUBLIC__/img/icon_remove.png" /></a></span>
                 </dd>
 </volist>
 			</dl>
 			<div class="clear"></div>
-            <form action="__URL__/add_photo" method="post" enctype="multipart/form-data">
-            	<fieldset>
-            		<legend>Add Album</legend>
-					<p>
-						<label for="albumname">AlbumName:</label>
-						<input type="text" name="albumname" id="albumname">
-					</p>
-					<p>
-						<label for="pic">CoverImage::</label>
-						<input type="file" name="pic" id="pic">
-					</p>
-					<input type="hidden" name="type" value="album">
-					<input type="hidden" name="info" value="{$arc_info['channel']}_{$arc_info['id']}">
-					<input type="submit" value="Submit">
-				</fieldset>
-            </form>
-            <form action="__URL__/add_photo" method="post" enctype="multipart/form-data">
-            	<fieldset>
+            <form action="__URL__/add_photo" method="post" enctype="multipart/form-data" id="form">
+            	<fieldset id="potho_form">
 				<legend>Photo:</legend>
-	            	<p>
-	            		<label for="album_id">Album:</label>
-						<select name="album_id" id="album_id">
-							<option value="0" >---Select Album---</option>	
-						<volist name="album" id="v">
-							<option value="{$v['id']}" <if condition="$arc_info['albumid'] == $v['id']">selected="selected"</if>>{$v['albumname']}</option>							
-						</volist>
-						</select>
-						<br><br>
-					</p>
-<php>
-	for($i=0;$i<5;$i++){
-</php>
-					<p>
-						<label for="title[{$i}]">title:</label><input type="text" name="title[{$i}]" id="title[{$i}]">
-					</p><p>
-						<label for="filename[{$i}]">Photo:</label><input type="file" name="filename[{$i}]" id="filename[{$i}]" style="width:300px;">
-					</p><p>
-						<label for="msg[{$i}]">msg:</label><textarea name="msg[{$i}]" id="msg[{$i}]"></textarea>
-	            	</p>
-					<p><br></p>
-<php>
-	}
-</php>
 					
+					<div id="potho_1">
+					
+					<p>
+						<label for="title_1">title:</label><input type="text" name="title[]" id="title_1"><br />
+<br />
+
+						<label for="filename_1">Photo:</label><input type="file" name="filename[]" id="filename_1" style="width:300px;" class="file"><br />
+<br />
+
+						<label for="msg_1">msg:</label><textarea name="msg[]" id="msg_1"></textarea>
+	            	</p>
+					</div>
+					<input type="button" id="add_table_2" class="add_table" value="Add image" />
 				</fieldset>
 				<p>
-					<input type="hidden" name="type" value="photo">
 					<input type="hidden" name="info" value="{$arc_info['channel']}_{$arc_info['id']}">
-					<input type="submit" value="Submit">            
+					<input type="submit" value="Submit" id="submit">            
 					<input type="reset" value="Reset">            
 				</p>
             </form>

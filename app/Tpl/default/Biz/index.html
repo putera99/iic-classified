@@ -6,6 +6,7 @@
             <div class="main-bg">
                 Featured Fairs
             </div>
+<if condition="$featured">
             <div class="zhanhui">
                 <dl>
                     <dt>
@@ -19,34 +20,13 @@
                 </dl>
             </div>
             <div class="clear"></div>
-            <div class="zhanhui">
-                <dl>
-                    <dt>
-                        <img src="__PUBLIC__/default/images/pc/pic04.gif" alt="c vv" />
-                    </dt>
-                    <dd>
-                        <a href="#"><span>Kung-fu and Dance Drama: Shaolin in Wind</span></a>November 11 - 13, 2009 Shenzhen
-                    </dd>
-                </dl>
-            </div>
-            <div class="clear"></div>
-            <div class="zhanhui">
-                <dl>
-                    <dt>
-                        <img src="__PUBLIC__/default/images/pc/pic04.gif" alt="c vv" />
-                    </dt>
-                    <dd>
-                        <a href="#"><span>Kung-fu and Dance Drama: Shaolin in Wind</span></a>November 11 - 13, 2009 <span>Shenzhen</span>
-                    </dd>
-                </dl>
-            </div>
-            <div class="clear"></div>
-            <div class="clear"></div>
+</if>
         </div>
         <div class="mian-center-n">
-            <!--div class="jianbian-h">Biz Focus</div>
+            <div class="jianbian-h">Biz Focus</div>
             <div class="neirong-h">
-                <div class="center-h">
+	
+				<div class="center-h">
                     <dl>
                         <dt class="m">
                             <a href="__APP__/Arc/show/aid/{$pick['id']}">
@@ -54,7 +34,7 @@
 							</a>
                         </dt>
                         <dd>
-                            <span class="title-h">{$pick['title']}</span>
+                           <span class="title-h">{$pick['title']}</span>
                             {$pick['my_content']|String::msubstr=0,120}<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
                         </dd>
                     </dl>
@@ -62,7 +42,7 @@
                 <div class="clear"></div>
                 <div class="xiantiao"></div>
 
-                <div class="xinwen-h">
+                <!--<div class="xinwen-h">
                     <ul>
 <volist name="pick8" id="v">
                         <li>
@@ -74,9 +54,9 @@
 	</if>
 </volist>
                     </ul>
-                </div>
+                </div>-->
                 <div class="clear"></div>
-            </div-->
+            </div>
              <div class="chenshi">
                 <div class="diban">
                     <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China Fairs</a>
@@ -104,34 +84,27 @@
                     {$showpage}
                 </div>
                 <div class="sdf">
+				<table width="98%" border="0" class="iic_table">
 <volist name="data" id="v">
-					<div class="pingdaozs">
-                        <ul class="w120 c">
-                        	<if condition="$v['picurl']">
-                            	<li><img src="{$v['picurl']}" alt="{$v['title']}" /></li>
-							</if>
-                            <li><a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a></li>
-                            <li>[{$v['showstart']|toDate='d/m/Y'}]</li>
-                            <li>({$v['bycity']|get_city='ctitle'})</li>
-                        </ul>
-                        <ul class="w180 l">
-                            <li>
-                                <span>Venue:</span>
-                                {$v['maps']}
-                            </li>
-                        </ul>
-                        <ul class="w100 l">
-                            <li>
-                                {$v['contact']}
-                            </li>
-                        </ul>
-                        <ul class="w88 c">
-                            <li>
-                                {$v['typeid']|get_arctype='typename'}
-                            </li>
-                        </ul>
-                    </div>
+					<tr class="pingdaozs">
+					 	<td class="w120 c">
+                            <img src="{$v['picurl']|toImg=biz}" />
+                            <br />
+							<a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a><br />
+                            [{$v['showstart']|toDate='d/m/Y'}]<br />
+                            ({$v['bycity']|get_city='ctitle'})<br />
+						</td>
+						<td class="w100 l">
+							<span>Venue:</span>
+                            {$v['maps']}
+						</td>
+						<td class="w180 l">
+							{$v['contact']}
+						</td>
+						<td class="w88 c">{$v['typeid']|get_arctype='typename'}</td>
+					</tr>
 </volist>
+				</table>
                 </div>
             </div>
 			<div class="fanye">

@@ -79,7 +79,7 @@ function zone(obj,id,name){
 						</select>
 						<input type="text" name="position" id="position" value="{$data['position']}">
 					</p>
-					<p><label for="maps">Maps</label>
+					<!--p><label for="maps">Maps</label>
 						<select name="maps[2]" onchange="zone(this,'.maps_zone_id',1)">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
@@ -90,7 +90,7 @@ function zone(obj,id,name){
 							<option value="0">--Favorite Zone--</option>
 						</select>
 						<input type="text" name="maps[0]" id="maps">
-					</p>
+					</p-->
 					<if condition="$data['maps']">
 					<p>
 						<label for="maps">Maps:</label>{$data['maps']}<br>
@@ -121,21 +121,7 @@ function zone(obj,id,name){
 							</volist>
 						</select>
 					</p>
-					<p>
-						<label for="typeid2">Second<br>Category:</label>
-						<select id="typeid2" name="typeid2" size="5" >
-							<option value="0">---Select Second Category---</option>
-							<volist name="class_tree" id="v">
-								<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>+{$v['typename']}</option>
-								<volist name="v['_son']" id="vs">
-									<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>+---{$vs['typename']}</option>
-									<volist name="vs['_son']" id="vss">
-										<option value="{$v['channeltype']}_{$vss['id']}"{$vss['id']|string2checked=$data['typeid2'],',','selected'}>+---+---{$vss['typename']}</option>
-									</volist>
-								</volist>
-							</volist>
-						</select>
-					</p>
+
 				</fieldset>
 				<fieldset>
 				<legend>About</legend>

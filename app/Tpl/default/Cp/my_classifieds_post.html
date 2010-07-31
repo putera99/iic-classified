@@ -16,16 +16,20 @@
             <dl class="h350">
             	<dt class="w320">Subject</dt>
 				<dt class="w100">Type</dt>
-				<dt class="w100">View</dt>
+				<dt class="w50">Photo</dt>
 				<dt class="w100">Time</dt>
-				<dt class="w100">Action</dt>
+				<dt class="w150">Action</dt>
 <volist name="classifieds" id="v">
                 	<dd>
 						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a></span>
 						<span class="w100 c">{$v['channel']|get_type}</span>
-						<span class="w100 c">{$v['click']}</span>
+						<span class="w50 c">{$v['albumnum']}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
-						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a></span>
+						<span class="w150 c">
+							<a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Photos</a>\\
+							<a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a>\\
+							<a href="__URL__/del_arc/info/{$arc_info['channel']}_{$arc_info['id']}/to/my_classifieds_post">remove</a>
+						</span>
 					</dd>
                     
 </volist>

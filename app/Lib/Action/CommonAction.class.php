@@ -32,8 +32,6 @@ class CommonAction extends Action{
         $this->assign('tourl',$url);
         
         //import('ORG.Util.Image');
-        
-
     }
     
     /**
@@ -145,6 +143,9 @@ class CommonAction extends Action{
 	    		$data['uid']=$this->user['uid'];
 	    		$data['tid']=$tid;
 	    		$data['types']=$types;
+	    		if(!intval($data['types'])||empty($data['tid'])){
+	    			$this->ajaxReturn(0,'You’ve failed to collect it as your favorite.',0);
+	    		}
 	    		$data['listid']=$listid;
 	    		$data['username']=get_username();
 	    		$data['ctime']=time();
@@ -255,6 +256,21 @@ class CommonAction extends Action{
     }//end ajax_user_collection
     
     /**
+       *删除用户评论
+       *@date 2010-7-20
+       *@time 上午11:02:32
+       */
+    public function ajax_user_collection_remove($id='') {
+    	//删除用户评论
+    	$id=empty($id)?Input::getVar($_REQUEST['id']):$id;
+    	$dao=D("UserCollection");
+    	$condition=array();
+    	$condition['id']=$id;
+    	$dao->where($condition)->delete();
+    	$this->success("Remove is success");
+    }//end function_name
+    
+    /**
      *ajax调用评论
      *@date 2010-5-24
      *@time 下午05:51:07
@@ -359,6 +375,96 @@ class CommonAction extends Action{
     }//end my_group
     
     /**
+       *用户举报
+       *@date 2010-7-24
+       *@time 下午03:28:15
+       */
+    function report() {
+    	//用户举报
+    	$ajax=Input::getVar($_REQUEST['ajax']);
+    	if($ajax=='1'){
+    		$dao=D("Report");
+    		$data=array();    		
+    		$data['tid']=Input::getVar($_REQUEST['tid']);
+    		$data['itype']=Input::getVar($_REQUEST['itype']);
+    		$data['reason']=Input::getVar($_REQUEST['reason']);
+    		$vo=$dao->create($data);
+    		$reid=$dao->add($vo);
+    		if($reid){
+    			$this->ajaxReturn($reid,"You’ve sent successfully.",1);
+    		}else{
+    			$this->ajaxReturn(0,"Failure! Try it again!",0);
+    		}
+    	}else{
+    		$this->display();
+    	}
+    }//end report
+    
+    /**
+       *接收整站举报信息
+       *@date 2010-7-24
+       *@time 下午03:46:14
+       */
+    function report_add() {
+    	//接收整站举报信息
+    	if (empty($_REQUEST['verify']) || md5($_REQUEST['verify'])!=$_SESSION['verify']){
+			$this->error('Code Error!');
+		}
+    	$dao=D("Report");
+    	$data=array();
+    	$data['subject']=Input::getVar($_REQUEST['subject']);
+    	$name='What is your name and BeingFunChina ID?'.Input::getVar($_REQUEST['name']).'<br>';
+    	$id=$name.Input::getVar($_REQUEST['id']).'<br>';
+    	$reid='Who are you reporting?'.Input::getVar($_REQUEST['reid']).'<br>';
+    	$email='What is your email address?'.Input::getVar($_REQUEST['email']).'<br>';
+    	$data['reason']=Input::getVar($_REQUEST['reason']);
+    	$data['reason']=$id.$email.$reid.nl2br($data['reason']);
+    	$vo=$dao->create($data);
+    	$rid=$dao->add($vo);
+    	$this->assign("jumpUrl",'/Common/report');
+    	if($rid){
+    		$this->success("You’ve sent successfully.");
+    	}else{
+    		$this->error("Failure! Try it again!");
+    	}
+    }//end report_add
+    
+    /**
+       *发布留言
+       *@date 2010-7-24
+       *@time 下午05:00:07
+       */
+    function feedback() {
+    	//发布留言
+    	$this->display();
+    }//end feedback
+    
+    /**
+       *添加留言
+       *@date 2010-7-24
+       *@time 下午05:00:28
+       */
+    function feedback_add() {
+    	//添加留言
+    	if (empty($_REQUEST['verify']) || md5($_REQUEST['verify'])!=$_SESSION['verify']){
+			$this->error('Code Error!');
+		}
+    	$dao=D("Feedback");
+    	$vo=$dao->create();
+    	if($vo){
+    		$feedid=$dao->add($vo);
+    		$this->assign("jumpUrl",'/Common/feedback');
+    		if($feedid){
+    			$this->success("You’ve sent successfully.");
+    		}else{
+    			$this->error("Failure! Try it again!");
+    		}
+    	}else{
+    		$this->error("Failure! Try it again!");
+    	}
+    }//end feedback_add
+    
+    /**
      *获取当前栏目位置
      *@date 2010-5-10
      *@time 上午09:47:29
@@ -451,7 +557,7 @@ class CommonAction extends Action{
 			$this->iicstat($pid,'tags_cat');
 			$this->display("Public:tag");
 		}else{
-			echo "参数错误";
+			echo "Wrong parameter!";
 		}
 	}// END tag
 	
@@ -520,7 +626,7 @@ class CommonAction extends Action{
      */
     protected function _is_login() {
     	if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
-    		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['usercid']);
+    		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['cid']);
     	}else $user=false;
     	return $user;
     }// END _is_login
@@ -628,7 +734,7 @@ class CommonAction extends Action{
 		return $dao->findAll();
 	}
 	
-	protected function _new_list($typeid,$flag='',$limit="0,10"){
+	protected function _new_list($typeid,$flag='',$limit="0,10",$cid='0'){
     	$dao=D("Archives");
     	$condition=array();
     	$condition['typeid']=$typeid;
@@ -641,6 +747,9 @@ class CommonAction extends Action{
     				$condition['_string'].="FIND_IN_SET('$v',`flag`) > 0";
     			}
     		}
+    	}
+    	if($cid!='0'){
+    		$condition['cid']=$cid;
     	}
     	if($limit=='0,1'||$limit=='1'){
     		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->find();
@@ -734,7 +843,6 @@ class CommonAction extends Action{
         //设置上传文件类型
         $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
         //设置附件上传目录
-        $tid=empty($tid)?$_REQUEST['typeid']:$tid;
         $path=$tid.'/'.date('Y-m').'/';
         $upload->savePath =  './Public/album/'.$path;
         mk_dir($upload->savePath);
@@ -742,15 +850,50 @@ class CommonAction extends Action{
 	    //设置需要生成缩略图，仅对图像文件有效
        $upload->thumb =  true;
        //设置需要生成缩略图的文件后缀
-	    $upload->thumbPrefix   =  'm_,s_';  //生产2张缩略图
+	    $upload->thumbPrefix   =  'm_';  //生产1张缩略图
        //设置缩略图最大宽度
-		$upload->thumbMaxWidth =  '800,200';
+		$upload->thumbMaxWidth =  '800';
        //设置缩略图最大高度
-		$upload->thumbMaxHeight = '600,150';
+		$upload->thumbMaxHeight = '600';
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
 	   $upload->thumbRemoveOrigin = false;
+        if(!$upload->upload()) {
+            //捕获上传异常
+            $this->error($upload->getErrorMsg());
+        }else {
+            //取得成功上传的文件信息
+            $uploadList = $upload->getUploadFileInfo();
+        }
+        
+        return $uploadList;
+	}
+	
+    protected function _avatar($uid=''){
+
+        import("ORG.Net.UploadFile");
+        $upload = new UploadFile();
+        //设置上传文件大小
+        $upload->maxSize  = 3292200 ;
+        //设置上传文件类型
+        $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
+        //设置附件上传目录
+        $name=empty($uid)?$this->user['uid']:$uid;
+        $upload->savePath =  './Public/avatar/';
+        mk_dir($upload->savePath);
+	    //设置需要生成缩略图，仅对图像文件有效
+       $upload->thumb =  true;
+       $upload->thumbPrefix =  's_';
+
+       //设置缩略图最大宽度
+		$upload->thumbMaxWidth =  '120';
+       //设置缩略图最大高度
+		$upload->thumbMaxHeight = '105';
+	   //设置上传文件规则
+	   $upload->saveRule ='get_uid';
+	   //删除原图
+	   $upload->thumbRemoveOrigin = true;
         if(!$upload->upload()) {
             //捕获上传异常
             $this->error($upload->getErrorMsg());
@@ -923,10 +1066,11 @@ class CommonAction extends Action{
    */
 	function _get_role() {
 		//检查权限
-		$uid=$_SESSION['uid'];
+		$uid=$this->user['uid'];
 		$dao=new Model();
 		$sql="SELECT r.id,r.name,r.remark FROM iic_role_user as ru LEFT JOIN iic_role as r ON ru.role_id=r.id WHERE ru.user_id={$uid};";
 		return $dao->query($sql);
+		//dump($dao->query($sql));
 	}//end _r
 }//END CommonAction
 ?>

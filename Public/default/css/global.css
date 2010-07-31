@@ -1,20 +1,22 @@
 body{ width:1003px; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight: normal;margin:0px auto; padding:0px;line-height: 20px;color: #717171; background-color:#dfdfdf;}
 a{text-decoration: none;}
-a img{ border:none;}
+a:hover{ text-decoration:underline;}
+a img{border:none;}
 #think_page_trace{color:#000;}
 .iic_img{
 	vertical-align: middle;
 	max-width:100px;   /* FF IE7 */
 	max-height:120px; /* FF IE7 */
-	_height:expression(this.width > 100 ? this.height*(100/this.width) : auto);/*  IE6 */
-	_width:expression(this.width > 100 ? 100px : auto);/*  IE6 */
+	_height:expression(this.width > 100 ? this.height*(100/this.width) : "auto");/*  IE6 */
+	_width:expression(this.width > 100 ? "100px" : "auto");/*  IE6 */
 }
 .none{display:none;}
-.class_tree ul,.class_tree ul dl,.class_tree ul dl dt{ margin:0px; padding:0px; list-style-type:none;}
-.class_tree ul dl a {color:#fff;}
-.class_tree ul dl dt{height:24px;background: url(../images/bg5.gif) repeat-x;text-align: center;}
-.class_tree ul dl dt a:hover,.class_tree ul dl dt .on{height:24px;text-align: center; background-color:#666; color:#fff; font-weight:bold; text-decoration:none;}
-.class_tree ul dl dd{height:24px;margin:0px;padding:0px; background-color:#aaa; border-bottom:#ccc solid 1px; text-align: center;}
+.class_tree{height:auto; overflow:hidden;}
+.class_tree .ul,.class_tree .ul dl,.class_tree .ul dl dt{margin:0; padding:0; list-style-type:none;height:auto; overflow:hidden;}
+.class_tree .ul dl a {color:#fff;}
+.class_tree .ul dl dt{height:24px;background: url(../images/bg5.gif) repeat-x;text-align: center;color:#fff; font-weight:normal;}
+.class_tree .ul dl dt a:hover,.class_tree .ul dl dt .on{height:24px;text-align: center; background-color:#666; color:#fff; font-weight:bold; text-decoration:none;}
+.class_tree .ul dl dd{height:24px;margin:0px;padding:0px; background-color:#aaa; border-bottom:#ccc solid 1px; text-align: center;color:#fff;}
 
 /* CSS top 开始 */
 #top{color: #FFFFFF;width:950px;padding:0px;margin: 0px auto;}
@@ -26,7 +28,7 @@ a img{ border:none;}
 .top-content .bgh{height:8px;margin:0;padding:0;background:url(../images/bg-huan.gif) repeat-x;}
 .main-left .bg-h{height:24px;font-size: 14px;font-weight: bold;color: #e25a02;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
 #header{color: #FFFFFF;height:26px; margin:0px; padding:0px; background-color:#993366;}
-.header-left{width:334px;margin:0px;padding:0px;float: left; line-height:26px; font-weight:bold;}
+.header-left{width:434px;margin:0px;padding:0px;float: left; line-height:26px; font-weight:bold;}
 .header-left span{font-size:12px;color:#fff; margin:0px 0px 0px 10px;_margin:0px 0px 0px 5px;  padding:0px;}
 .header-left span a{color:#fff;}
 .colorz{width:240px;margin:0px;padding:0px;float: right;}
@@ -51,7 +53,7 @@ a img{ border:none;}
 .bg{margin:0px;background: url(../images/bg3.gif) repeat-x; padding: 0px;height: 8px;}
 
 /* CSS底部开始*/
-#bottom{width:950px;height:109px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:10px auto;_margin:5px auto;padding:0; color:#fff;}
+#bottom{width:950px;height:109px;background: url(../images/foot.gif) repeat-x;text-align: center;margin:0 auto;padding:0; color:#fff;}
 .title-h {display: block;font-size: 12px;font-weight: bold;color: #ef5f01;}
 .title-h a{color: #ef5f01;}
 #bottom p a{color:#fff;}

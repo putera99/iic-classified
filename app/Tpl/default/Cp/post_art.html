@@ -2,16 +2,8 @@
 <link href="__PUBLIC__/js/datePicker.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
-	$("#typeid").change(function(){
-		var id=this.value;
-		ch_type(id);
-	});
 	$('.showend_job').datePicker({clickInput:true});
-	var typeid=$("#typeid").val();
-	if(typeid!=0){
-		ch_type(typeid);
-	}
-	
+
 });
 </script>
 <div class="mulu">
@@ -30,7 +22,7 @@ $(document).ready(function(){
             	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
             	<fieldset>
 				<legend>Basic Elements:</legend>
-					<div style="float:left; width:469px;">
+					<div style="float:left; width:4d69px;">
 	            	<p>
 	            		<label for="title">Title:</label><input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
 					</p>
@@ -43,6 +35,15 @@ $(document).ready(function(){
 					<p><label for="showend_job">Valid for</label>
 						<input type="text" name="showstart" id="showend_job" class="showend_job" style="width:80px;" value="{$data['showstart']|toDate='d/m/Y'}">
 						---> <input type="text" name="showend" id="showend_job" class="showend_job" style="width:80px;" value="{$data['showend']|toDate='d/m/Y'}">
+					</p>
+					<p>
+						<label for="cid">Post to</label>
+						<select name="cid" id="cid">
+							<option>--Favorite City--</option>
+							<volist name="citylist" id="v">
+								<option value="{$v['id']}"{$v['id']|selected=$data['cid']}>{$v['ctitle']}</option>
+							</volist>
+						</select>
 					</p>
 					<p>
 						<label for="flag">Attribute</label>
@@ -78,7 +79,7 @@ $(document).ready(function(){
 							</volist>
 						</select>
 					</p>
-					<p>
+					<!--p>
 						<label for="typeid2">Second<br>Category:</label>
 						<select id="typeid2" name="typeid2[]" size="5" multiple="multiple" >
 							<option>---Select Second Category---</option>
@@ -95,7 +96,7 @@ $(document).ready(function(){
 														
 							</volist>
 						</select>
-					</p>
+					</p-->
 				</fieldset>
 				<fieldset>
 					<legend>Articles info:</legend>

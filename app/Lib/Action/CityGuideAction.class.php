@@ -78,7 +78,12 @@ class CityGuideAction extends CommonAction{
 		import("ORG.Util.Page");
 		$dao=D("Archives");
 		//$count=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
-		$count=$dao->where("($str AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->count();
+		if($info['id']=='1393' || $info['reid']=='1393'){
+			$city='1=1';
+		}else{
+			$city="cid={$this->pcid}";
+		}
+		$count=$dao->where("($str AND $city) AND ismake=1")->order("pubdate DESC")->count();
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
@@ -86,7 +91,7 @@ class CityGuideAction extends CommonAction{
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
-		$data=$dao->where("($str AND cid={$this->pcid}) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
+		$data=$dao->where("($str AND $city) AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
 		//dump($dao->getLastSql());
 		//分类信息 导航
@@ -158,11 +163,13 @@ class CityGuideAction extends CommonAction{
 	 */
 	protected function chk_cid() {
 		//检查城市选项
-		if (intval($_GET['cid'])){
+		$cid=Input::getVar($_GET['cid']);
+		if ($cid){
 			if($_SESSION['cid']){
-				$this->pcid=intval($_GET['cid']);
+				$this->pcid=$cid;
 			}else{
-				$_SESSION['cid']=intval($_GET['cid']);
+				$_SESSION['cid']=$cid;
+				$this->pcid=$cid;
 				cookie('cid',null);
 				if ($_REQUEST['remember']) {
 					cookie('cid',$cid,array('expire'=>60*60*60*24*30));

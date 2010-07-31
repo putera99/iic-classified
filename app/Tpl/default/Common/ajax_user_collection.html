@@ -1,14 +1,14 @@
 <dt class="w420">Subject</dt>
-<dt class="w100">Type</dt>
-<dt class="w100">View</dt>
+<dt class="w100">From</dt>
 <dt class="w100">Time</dt>
+<dt class="w100">Action</dt>
 <if condition="$collection">
-<volist name="collection" id="v">
+<volist name="collection" id="v"><br />
 	<dd>
 		<span class="w420"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
 		<span class="w100 c">{$v['types']|get_type}</span>
-		<span class="w100 c"> </span>
 		<span class="w100 c">{$v['ctime']|toDate='d/m/Y'}</span>
+		<span class="w100 c"><a href="__URL__/ajax_user_collection_remove/id/{$v['id']}">Remove</a></span>
 	</dd>
 </volist>
 <div class="fanye">

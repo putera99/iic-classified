@@ -1,4 +1,3 @@
-/* left开始*/
 #main {width:950px;padding: 0px;margin: 0px auto 0px auto;}
 .main-left{ width:188px;margin:0px; padding:0px;}
 .main-left ul{ margin:0px; padding:0px; list-style-type:none;}
@@ -39,14 +38,14 @@
 .events_neirong ul{line-height: 16px;list-style-type:none;margin: 0px 0px 5px 0px;padding: 0px;}
 .events_neirong li{margin: 0 3px 0 0;padding:0px;}
 .events_neirong span {margin: 0px;padding: 0px 10px 0px 5px;float: left;}
-.events_neirong span img{vertical-align:middle;max-width:120px;max-height:120px;_height:expression(this.width > 56 ? this.height*(56/this.width) : auto);_width:expression(this.width > 56 ? 56px : auto);}
+.events_neirong span img{vertical-align:middle;max-width:120px;max-height:120px;_height:expression(this.width > 56 ? this.height*(56/this.width) : "auto");_width:expression(this.width > 56 ? "56px" : "auto");}
 .events_neirong .zhuti {font-weight: bold;color: #993366;font-size: 12px;line-height: 14px;}
 .events_neirong .zhuti a{color:#993366;}
 .events_neirong .diz {margin: 0px; padding: 0px; line-height: 20px;color: #0f7892;text-decoration: underline;}
 .events_jingcai{color:#656565;margin: 0px 5px 10px 5px;padding: 0px;}
 .events_jingcai dl{height:auto; overflow:hidden;clear: both;line-height: 16px;padding: 0px 0px 13px 8px;margin: 0px;}
-.events_jingcai dt{margin:0px;padding:0px;float: left;}
-.events_jingcai dt img{vertical-align:middle;max-width:56px;max-height:56px;_height:expression(this.width > 56 ? this.height*(56/this.width) : auto);_width:expression(this.width > 56 ? 56px : auto);}
+.events_jingcai dt{margin:0;padding:0;float:left; width:60px; height:60px; text-align:center;}
+.events_jingcai dt img{vertical-align:middle;max-width:56px;max-height:56px;_height:expression(this.width > 56 ? this.height*(56/this.width) : "auto");_width:expression(this.width > 56 ? "56px" : "auto");}
 .events_jingcai dd{width: 350px;margin:0px;float: right;color: #186e83;padding: 0px 50px 0px 0px;}
 .events_jingcai span {margin-bottom: 3px;display: block;font-weight: bold;color: #993366;}
 .events_jingcai span a{color:#993366;}

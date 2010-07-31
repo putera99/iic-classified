@@ -28,7 +28,7 @@
     var PUBLIC = '../Public/';
     var REQUEST_URI = '{$_SERVER.REQUEST_URI}';
 	$(document).ready(function () {
-		var tourl=APP+'Public/ajax_is_login';
+		var tourl=APP+'/Public/ajax_is_login';
 		$('a.add_post').click(function (e) {
 			e.preventDefault();
 			$.post(tourl,'',function(data){
@@ -116,6 +116,7 @@
                     New members
                 </div>
                 <div class="chengyuan">
+<if condition="$new_members">
                     <dl>
                         <dt>
                             <img src="images/pc/toux.gif" alt="sz" />
@@ -124,12 +125,14 @@
                             Projection whiteboard
                         </dd>
                     </dl>
+</if>
                     <div class="clear"></div>
                 </div>
                 <div class="next-bg">
                     Group frequented
                 </div>
                 <div class="next-n">
+<if condition="$frequented">
                     <dl>
                         <dt>
                             <img src="images/pc/pic1.gif" alt="gth" />
@@ -140,9 +143,10 @@
                             long-....
                         </dd>
                     </dl>
+</if>
                 </div>
                 <div class="guang">
-                    <img src="images/pc/pic6.gif" alt="dsc" />
+
                 </div>
             </div>
         </div>
@@ -165,7 +169,7 @@
 						</span>
                         <ul>
                             <li>
-                                Group Administrators:{$info['username']} Created On {$info['ctime']|toDate=m/d/Y}
+                                Group Administrators:{$info['username']} Created On {$info['ctime']|toDate='m/d/Y'}
                             </li>
                             <li>
                                Total Members:{$info['membernum']} / Topics:{$info['threadnum']} / Replies:{$info['postnum']}
@@ -204,7 +208,7 @@
 <if condition="$thread">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w381"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
+								<span class="w381 l"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
 								<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
@@ -233,7 +237,9 @@
 <if condition="$collection">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w381"><a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
+								<span class="w381 l">
+									<a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a>
+								</span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['types']|get_type}</span>
 								<span class="w100 c">{$v['ctime']|toDate='Y-m-d'}</span>
