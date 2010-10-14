@@ -21,21 +21,35 @@
             </div>
             <div class="clear"></div>
 </if>
+		<div style="margin:10px auto; text-align:center">
+        	<script type="text/javascript"><!--
+			google_ad_client = "pub-0787067378614221";
+			/* 200x200, 创建于 10-8-27 fair_list_r */
+			google_ad_slot = "7498358587";
+			google_ad_width = 200;
+			google_ad_height = 200;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
         </div>
+        </div>
+        
         <div class="mian-center-n">
-            <div class="jianbian-h">Biz Focus</div>
+            <div class="jianbian-h"><span style="float:right;margin-right:10px;"><a href="__APP__/Arc/ls/id/2003" style="color:#FFFFFF;">More  &raquo;</a></span></span>Biz Focus</div>
             <div class="neirong-h">
 	
 				<div class="center-h">
                     <dl>
                         <dt class="m">
-                            <a href="__APP__/Arc/show/aid/{$pick['id']}">
-                            	<img src="{$pick['picurl']}" alt="{$pick['title']}" width="132" />
+                            <a href="__APP__/Arc/show/aid/{$pick['id']}.html">
+                            	<img src="{$pick['picurl']|picurl}" alt="{$pick['title']}" width="120" />
 							</a>
                         </dt>
                         <dd>
-                           <span class="title-h">{$pick['title']}</span>
-                            {$pick['my_content']|String::msubstr=0,120}<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
+                           <span class="title-h"><a href="__APP__/Arc/show/aid/{$pick['id']}.html">{$pick['title']}</a></span>
+                            {$pick['my_content']|String::msubstr=0,260}...<a href="__APP__/Arc/show/aid/{$pick['id']}.html">[Detail]</a>
                         </dd>
                     </dl>
                 </div>
@@ -56,10 +70,16 @@
                     </ul>
                 </div>-->
                 <div class="clear"></div>
+<if condition="$ad['banner']['0']">
+                <div align="left">
+                {$ad['banner']['0']}
+                </div>
+                <div class="clear"></div>
+</if>
             </div>
              <div class="chenshi">
                 <div class="diban">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">China Fairs</a>
+                    <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">China Fairs</a>
                 </div>
                 <!--div class="hot">
                     <div class="zhuti">
@@ -86,22 +106,41 @@
                 <div class="sdf">
 				<table width="98%" border="0" class="iic_table">
 <volist name="data" id="v">
+<php>
+$writer=get_fair_lang($v['writer']);
+$pw=$_SESSION['flang']=='CN'?$writer['1']:$writer['0'];
+</php>
+
 					<tr class="pingdaozs">
 					 	<td class="w120 c">
-                            <img src="{$v['picurl']|toImg=biz}" />
+                            <eq name="Think.session.iicc" value="1"><a href="/Cp/photo/info/11_{$v['id']}" title="edit photo"><else/><a href="__URL__/show/aid/{$v['id']}.html"></eq><img src="{$v['picurl']|toImg=biz}" alt="{$v['title']}" /></a>
                             <br />
-							<a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a><br />
                             [{$v['showstart']|toDate='d/m/Y'}]<br />
-                            ({$v['bycity']|get_city='ctitle'})<br />
 						</td>
-						<td class="w100 l">
-							<span>Venue:</span>
-                            {$v['maps']}
-						</td>
-						<td class="w180 l">
+						<td class="w280 l" valign="top">
+                        	<h4><a href="__URL__/show/aid/{$v['id']}.html">{$v['title']}</a></h4>
+							<span>Venue:</span>{$v['maps']}<br />
 							{$v['contact']}
 						</td>
-						<td class="w88 c">{$v['typeid']|get_arctype='typename'}</td>
+						<td class="w88 c" >
+                        <eq name="Think.session.flang" value="CN">
+                        {$v['typeid']|get_arctype='seotitle'}
+                        <br />({$v['bycity']|get_city='cename'})
+                        <else/>
+                        {$v['typeid']|get_arctype='typename'}
+                        <br />({$v['bycity']|get_city='ctitle'})
+                        </eq>
+                        <eq name="Think.session.iicc" value="1">
+                        <br />
+                        (<a href="#" title="Set color">C</a>)|
+                        (<a href="/Cp/my_edit_fair/info/11_{$v['id']}/writer/{$pw}" title="Edit">E</a>)|
+                        (<a href="/Cp/del_arc/info/11_{$v['id']}/to/{$tourl}/" title="Delet">D</a>)|
+                        (<a href="#" title="Set Featured">F</a>)
+                        </eq>
+                        <eq name="Think.session.uid" value="v['uid']">
+                        (<a href="/Cp/my_edit_fair/info/11_{$v['id']}/writer/{$pw}" title="Edit">Edit</a>)
+                        </eq>
+                        </td>
 					</tr>
 </volist>
 				</table>
@@ -116,31 +155,34 @@
         <div class="national">
             <ul>
                 <li>
-                    <a href="__URL__/index/flang/CN"><span>中文</span></a>
+                    <a href="__URL__/index/flang/CN.html"><span>中文</span></a>
                     <img src="__PUBLIC__/default/images/pc/chian.gif" alt="显示中文信息" />
                 </li>
                 <li>
-                    <a href="__URL__/index/flang/EN"><span>Einglish</span></a>
+                    <a href="__URL__/index/flang/EN.html"><span>Einglish</span></a>
                     <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="" />
                 </li>
             </ul>
         </div>
         <div class="dingt">
-            By Industries
+            <eq name="Think.session.flang" value="CN">按行业检索<else/>By Industries</eq>
         </div>
         <div class="menu">
             <ul>
             	<li>
-                    <a href="__URL__/ls/id/all" <php>if(empty($_SESSION['fair_id']))echo 'class="on"';</php>>All Industries</a>
+                    <a href="__URL__/ls/id/all.html" <php>if(empty($_SESSION['fair_id']))echo 'class="on"';</php>><eq name="Think.session.flang" value="CN">全部行业<else/>All Industries</eq></a>
                 </li>
 <volist name="industries" id="v">
                 <li>
-                    <a href="__URL__/ls/id/{$v['id']}">{$v['typename']}</a>
+                    <a href="__URL__/ls/id/{$v['id']}.html"><eq name="Think.session.flang" value="CN">{$v['seotitle']}<else/>{$v['typename']}</eq></a>
                 </li>
 </volist>
             </ul>
             <div class="yuanjiao">
             </div>
+        </div>
+        <div class="left_biz">
+        	{$ad['left']}
         </div>
     </div>
 </div>

@@ -1,0 +1,39 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_fair_post">My Post Fairs</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+        	<span><a href="__URL__/my_post_fair">Post</a></span>
+            <h3>Fairs</h3>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="list">
+            <dl class="h350">
+            	<dt class="w420">Subject</dt>
+				<dt class="w100">Type</dt>
+
+				<dt class="w100">Time</dt>
+				<dt class="w100">Action</dt>
+<volist name="fair" id="v">
+                	<dd>
+						<span class="w420"><a href="__APP__/Biz/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w100 c">{$v['channel']|get_type}</span>
+						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
+						<span class="w100 c"><a href="__URL__/Cp/fair_focus/types/{$v['channel']}/aid/{$v['id']}/act/add">Interested</a></span>
+					</dd>
+                    
+</volist>
+            </dl>
+        </div>
+    </div>
+    <div class="xuhao">
+    	{$showpage}
+    </div>
+</div>
+<div class="clear">
+</div>

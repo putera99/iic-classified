@@ -13,27 +13,50 @@
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
+        <div class="advertisement">
+        	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="237" height="200">
+              <param name="movie" value="/Public/img/group.swf" />
+              <param name="quality" value="high" />
+              <embed src="/Public/img/group.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="237" height="200"></embed>
+      	  </object>
+          </div>
             <div class="conter-group">
                 <div class="group">Latest Groups</div>
 <if condition="$group">
-	<volist name="group" id="v">
-            <div class="group-n">
-                    <h5>Projection whiteboard...</h5>
-                    <p>
-                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
-                    </p>
-                </div>
+	<volist name="group" id="g">
+               <dl class="group-x">
+				<dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+				<dd>
+					<h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+					<p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+				</dd>
+			</dl>
 	</volist>
 </if>
              </div>
             <div class="advertisement">
 
             </div>
+            <div style="margin-bottom:10px; text-align:center">
+				<script type="text/javascript"><!--
+                google_ad_client = "pub-0787067378614221";
+                /* 200x200, ������ 10-8-27 cityguide_classifieds_c_r */
+                google_ad_slot = "5468157928";
+                google_ad_width = 200;
+                google_ad_height = 200;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
-                <a href="/">Home</a> > <a href="__APP__/Classifieds/index">Classifieds</a> > 
-				<if condition="$reinfo"><a href="__APP__/Classifieds/ls/id/{$reinfo['id']}">{$reinfo['typename']}</a> ></if>
+				<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/my_post_classifieds" target="_blank">+Post classifieds</a></span>
+                <a href="/index.html">Home</a> > <a href="__APP__/classifieds.html">Classifieds</a> > 
+				<if condition="$reinfo"><a href="__APP__/clist/{$reinfo['id']}.html">{$reinfo['typename']}</a> ></if>
             </div>
             <div class="personals">
             	<h1>{$info['typename']}</h1>
@@ -48,11 +71,17 @@
             <div class="personals-a">
                 <div class="list-a">
 					<if condition="$v['picurl']">
-						<span style="float:right;"><img src="__PUBLIC__/img/img.jpg" /></span>
+						<span style="float:right;"><img src="__PUBLIC__/img/img.gif" /></span>
 					</if>
-                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Classifieds/show/aid/{$v['id']}">{$v['title']}</a></h6>
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" />
+                    <a href="__APP__/clss/{$v['id']}.html">{$v['title']}</a></h6>
+<if condition="$admin">
+					<p>
+						<a href="/Cp/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="/Cp/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">edit</a> / <a href="/Cp/del_arc/info/{$v['channel']}_{$v['id']}/to/{$tourl}/">remove</a>
+					</p>
+</if>
                     <p>
-                        {$v['description']|strip_tags}...<a href="__APP__/Classifieds/show/aid/{$v['id']}">[Detail]</a>
+                        {$v['description']|strip_tags}...<a href="__APP__/clss/{$v['id']}.html">[Detail]</a>
                     </p>
                 </div>
                 <div class="hui-bg">
@@ -64,7 +93,7 @@
                             <a href="#2_{$v['channel']}_{$v['id']}">Save as favorite</a>
                         </li>
                         <li id="3_{$v['channel']}_{$v['id']}" class="user_report">
-                            Report corrections
+                            <a href="__APP__/Common/report/aid/{$v['channel']}_{$v['id']}">Report Abuse</a>
                         </li>
 						<!--li>{$v['pubdate']|toDate='Y-m-d'}</li-->
                     </ul>
@@ -83,6 +112,9 @@
         </div>
         <div class="class_tree">
             <include file="Public:cityguide"/>
+        </div>
+        <div class="left_biz">
+        	{$ad['left']}
         </div>
     </div>
 </div>

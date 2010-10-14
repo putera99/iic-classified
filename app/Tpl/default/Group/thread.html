@@ -124,53 +124,49 @@
         <div class="right">
             <div class="next_lssue">
                 <div class="next-bg">
-                    New topics
+                    New Topics
                 </div>
                 <div class="next-n">
                     <ul>
 <if condition="$new_topics">
+	<volist name="new_topics" id="v">
                         <li>
-                            1、Philosophy of the people, 
-                            has become the  professional  ...
+                            {$i}.<a href="__APP__/grpts/{$v['id']}.html">{$v['title']}</a>
                         </li>
+	</volist>
 </if>
                     </ul>
                 </div>
-                <!--div class="next_lssue">
-                    <div class="next-bg">
-                        Group frequented
-                    </div>
-                    <div class="qunzhu-n">
-                        <dl>
-                            <dt>
-                                <img src="images/pc/pic1.gif" alt="gth" />
-                            </dt>
-                            <dd>
-                                <span>Projection whiteboard</span>
-                                Tianyuan and Sushui are a long-....
-                            </dd>
-                        </dl>
-                       
-                    </div>
+<if condition="$group">
+                <div class="conter-group" style="background-color:#f3f3f3;">
+                    <div class="group"><a href="__APP__/group.html">Featured Groups</a></div>
+	<volist name="group" id="g">
+                        <dl class="group-x">
+                        <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                        <dd>
+                            <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                            <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+                        </dd>
+                    </dl>
+	</volist>
                 </div>
-                <div class="clear">
-                </div>
-                <div class="next-bg">
-                    Next lssue
-                </div>
-                <div class="next-n">
-                    <ul>
-                        <li>
-                            1、Philosophy of the people, 
-                            has become the  professional  ...
-                        </li>
-
-                    </ul>
-                </div-->
+</if>
+                <div class="clear"></div>
             </div>
-            <div class="guang">
-			
-			</div>
+            <div class="guang"></div>
+            <div style="margin-bottom:10px; text-align:center">
+        	<script type="text/javascript"><!--
+			google_ad_client = "pub-0787067378614221";
+			/* 200x200, 创建于 10-8-27 event_group_all_r */
+			google_ad_slot = "2776601511";
+			google_ad_width = 200;
+			google_ad_height = 200;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+        </div>
         </div>
         <div class="n-life">
             <div class="classifieds content">
@@ -178,11 +174,11 @@
                     <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a> > 
                 <if condition="$dh">
                     <if condition="$dh[_pid]">
-                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+                        <a href="__APP__/glist/{$dh[_pid]['id']}.html">{$dh[_pid]['title']}</a> >
                     </if>
-                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+                    <a href="__APP__/glist/{$dh['id']}.html">{$dh['title']}</a> > 
                 </if>
-                	<a href="__APP__/Group/show/aid/{$ginfo['id']}">{$ginfo['groupname']}</a>
+                	<a href="__APP__/grps/{$ginfo['id']}.html">{$ginfo['groupname']}</a>
                 </div>
                 <div class="content-n">
                 	<div class="thread">
@@ -192,11 +188,24 @@
 						</div>
 						<div class="message">
 							{$info['message']}
+                            <div style="margin-bottom:10px; text-align:center">
+								<script type="text/javascript"><!--
+								google_ad_client = "pub-0787067378614221";
+								/* 468x60, 创建于 10-8-27 thread_content */
+								google_ad_slot = "0505340472";
+								google_ad_width = 468;
+								google_ad_height = 60;
+								//-->
+								</script>
+								<script type="text/javascript"
+								src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+								</script>
+                            </div>
 							<span class="time">
 								<a href="#" id="renew_{$info['id']}" class="add_post">[ Reply ]</a>   
 								<!--a href="#">[ Report ]</a-->
 							</span>
-							<span class="time"><a href="#thread_{$info['l']}">#{$info['l']}</a> {$info['dateline']|toDate='m-d-Y H:m:s'}</span>
+							<span class="time"><a href="#thread_{$info['l']}">#{$info['l']}</a> {$info['dateline']|toDate='m-d-Y H:i:s'}</span>
 						</div>
 					</div>
 					<div id="new_post" style="display:none;"></div>
@@ -214,7 +223,7 @@
 									<!--a href="#">[ Report ]</a-->
 							</span>
 							<span class="time">
-								<a href="#thread_{$v['l']}">#{$v['l']}</a> {$v['dateline']|toDate='m-d-Y H:m:s'}
+								<a href="#thread_{$v['l']}">#{$v['l']}</a> {$v['dateline']|toDate='m-d-Y H:i:s'}
 							</span>
 							<div id="new_reply_{$v['id']}" style="display:none;"></div>
 	<volist name="v['_rarr']" id="rv">
@@ -227,7 +236,7 @@
 									{$rv['message']}
 									<span class="time"></span>
 									<span class="time">
-										{$rv['dateline']|toDate='m-d-Y H:m:s'}
+										{$rv['dateline']|toDate='m-d-Y H:i:s'}
 									</span>
 								</div>
 							</div>

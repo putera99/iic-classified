@@ -4,19 +4,33 @@
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
-            <div class="conter-group">
+             <div class="main-bg">
+                Latest group
+            </div>
 <if condition="$group">
-                <div class="group-n">
-                    <h5>Projection whiteboard...</h5>
-                    <p>
-                        <img src="__PUBLIC__/default/images/pic1.gif" alt="pic1" />Tianyuan and Sushui are a long-....
-                    </p>
-                </div>
+            <volist name="group" id="g">
+               <dl class="group-x">
+                    <dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                    <dd>
+                        <h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                        <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+                    </dd>
+                </dl>
+		</volist>
 </if>
-            </div>
-            <div class="advertisement">
-                
-            </div>
+			<div style="margin:10px auto; text-align:center">
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-0787067378614221";
+				/* 200x200, ´´½¨ÓÚ 10-8-27 magazine_r */
+				google_ad_slot = "7870216458";
+				google_ad_width = 200;
+				google_ad_height = 200;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</div>
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
@@ -63,7 +77,13 @@
     </div>
     <div class="main-left">
         <div class="class_tree">
+            <include file="Public:classifieds"/>
+        </div>
+        <div class="class_tree">
             <include file="Public:cityguide"/>
+        </div>
+        <div class="left_biz">
+        	{$ad['left']}
         </div>
     </div>
 </div>

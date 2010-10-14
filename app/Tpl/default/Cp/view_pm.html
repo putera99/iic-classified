@@ -1,0 +1,25 @@
+<div class="mulu">
+	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_message">My Message</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="list">
+			<h1>{$info['title']}</h1>
+            <p>{$info['tousername']}({$info['touid']})  /  time:{$info['ctime']|toDate='Y-m-d H:i:s'}</p>
+            
+            <div style="word-wrap:break-word;height:300px;"><strong>Content:</strong><br />{$info['content']}
+            <p align="right">
+            <a href="__URL__/post_pm/reid/{$info['id']}">Reply</a> / <a href="__URL__/del_pm/id/{$info['id']}">Del</a>
+            </p>
+            </div>
+            
+        </div>
+    </div>
+    <div class="xuhao">
+    </div>
+</div>
+<div class="clear">
+</div>

@@ -10,7 +10,7 @@
 .reg .form p{clear:both; margin:20px 10px 0 150px;_margin:10px 5px 0 75px; text-align:left; font-weight:bold;}
 .reg .form .right{display:inline-block; text-align:left;}
 .reg .form .left{display:inline-block; text-align:left;}
-.reg .form .w200{width:470px;}
+.reg .form .w200{width:400px;}
 .reg .form .left .w88{width:10.5em;float:left;}
 .reg .form .send{width:105px;height:29px; background:url(/Public/img/submit2.gif) no-repeat; padding:0; border:none;}
 .reg .form .send:hover{background:url(/Public/img/submit.gif) no-repeat;color:#000000;}
@@ -21,30 +21,44 @@
 <p style="margin:0;">Thanks for reporting correcitons or service abuse! Beingfunchina is committed to creating an website that is free of offensive and illegal content. All the reports are taken seriously!</p>
 	</div>
 	<form action="__URL__/report_add" method="post" class="form">
-		<br>
-		<p>1.What is your name and BeingFunChina ID?</p>
-			<label for="name">Name:</label>
-			<div  class="left w200">
-			<input type="text" name="name" id="name" />
+    <table border="0" width="50%" align="center">
+    	<tr>
+        	<th colspan="2" align="left">1.What is your name and BeingFunChina ID?</th>
+        </tr>
+        <tr>
+        	<td><label for="name">Name:</label><br /><label for="id">I D:</label></td>
+            <td><div  class="left w200">
+			<input type="text" name="name" id="name" value="{@username}" />
+			</div><br />
+            <div  class="left w200">
+			<input type="text" name="id" id="id" value="{@uid}" />
 			</div>
-			<br><br>
-			<label for="id">I D:</label>
-			<div  class="left w200">
-			<input type="text" name="id" id="id" />
-			</div>
-		<p>2.What is your email address?</p>
-			<label for="email">Email:</label>
-			<div  class="left w200">
+            </td>
+        </tr>
+        <tr>
+        	<th colspan="2" align="left">2.What is your email address?</th>
+        </tr>
+        <tr>
+        	<td><label for="email">Email:</label></td>
+            <td><div  class="left w200">
 			<input type="text" name="email" id="email" />
-			</div>
-		<p>3.Who are you reporting?</p>
-			<label for="reid">ID:</label>
-			<div  class="left w200">
-			<input type="text" name="reid" id="reid" />
-			</div>
-		<p>4.What kinds of abuse are you reporting?</p>
-			<label for="Subject">Subject:</label>
-			<div  class="left w200">
+			</div></td>
+        </tr>
+        <tr>
+        	<th colspan="2" align="left">3.Who are you reporting?</th>
+        </tr>
+        <tr>
+        	<td><label for="reid">ID:</label></td>
+            <td><div  class="left w200">
+			<input type="text" name="reid" id="reid" value="{.aid}" />
+			</div></td>
+        </tr>
+        <tr>
+        	<th colspan="2" align="left">4.What kinds of abuse are you reporting?</th>
+        </tr>
+        <tr>
+        	<td><label for="Subject">Subject:</label></td>
+            <td><div  class="left w200">
 			<select id="Subject" name="subject">
 				<option value="User Spam">User Spam</option>
 				<option value="Racism or discrimination">Racism or discrimination</option>
@@ -58,27 +72,35 @@
 				<option value="Copyright violation">Copyright violation</option>
 				<option value="Others ">Others </option>
 			</select>
-			</div>	
-		<p>5.Paste the web page address that the abuse could be found on: </p>
-		<div  class="left w200">
+			</div>	</td>
+        </tr>
+        <tr>
+        	<th colspan="2" align="left">5.Paste the web page address that the abuse could be found on: </th>
+        </tr>
+        <tr>
+        	<td></td>
+            <td><div  class="left w200">
 			<textarea style="width:400px;" rows="8" cols="70" id="url" name="reason"></textarea>
-		</div>
-		<p>6.Send the form to us. </p>
-		<p>Enter the code shown. </p>
-		<label for="verifyImg">Verification code:</label>
-		<div  class="left w200">
+		</div></td>
+        </tr>
+        <tr>
+        	<th colspan="2" align="left">6.Send the form to us.<br />
+		Enter the code shown. </th>
+        </tr>
+        <tr>
+        	<td><label for="verifyImg">Verification code:</label></td>
+            <td><div  class="left w200">
 			<input type="text" id="verify" name="verify" size="4">
 			<a href="javascript:fleshVerify();">
             <img style="vertical-align: -6px;" id="verifyImg" src="__URL__/verify">
 			</a>
-		</div>
-		<p style="padding-left:100px;">
-			<input type="submit" value="Send" class="send" />
-		</p>
-		<br />
-		<br />
-		<br />
-		<br />
+		</div></td>
+        </tr>
+        <tr><td colspan="2" height="20"></td></tr>
+        <tr>
+        	<th colspan="2" align="center"><input type="submit" value="Send" class="send" /></th>
+        </tr>
+    </table>
 	</form>
 
 </div>

@@ -15,7 +15,7 @@ class McpAction extends CpAction{
 	function _initialize() {
 		//预处理
 		parent::_initialize();
-		if ($this->user['username']!='iicc' && $this->user['username']!='bfcadmin') {
+		if (!in_array($this->user['username'],$this->admin,true)) {
 			$this->error("Insufficient privileges!");
 		}
 	}//end _initialize()
@@ -60,7 +60,7 @@ class McpAction extends CpAction{
 		$limit=$page->firstRow.','.$page->listRows;
     	$alog=array();
     	$alog=$dao->where($condition)->order("ctime DESC")->limit("$limit")->findAll();
-    	dump($dao->getLastSql());
+    	//dump($dao->getLastSql());
 		$this->assign('alog',$alog);
 		
 		
@@ -73,6 +73,91 @@ class McpAction extends CpAction{
 		$this->assign('content','Mcp:stat');
 		$this->display("Cp:layout");
 	}//end stat
+	
+	/**
+	   *管理友情链接
+	   *@date 2010-8-12
+	   *@time 下午03:19:24
+	   */
+	function links() {
+		//管理友情链接
+		$act=empty($_GET['act'])?'index':Input::getVar($_GET['act']);
+		$jump=empty($_GET['to'])?'/Mcp/links/act/index':mydecode($_REQUEST['to']);
+		$this->assign('jumpUrl',$jump);
+		$dao=D("Flink");
+		switch ($act) {
+			case 'add'://添加链接
+				$vo=$dao->create();
+				if($vo){
+					if(empty($_POST['is_upfile'])){
+						$vo['logo']=$_POST['logo_url'];
+					}else{
+						if(!empty($_FILES["logo"]["name"])) {
+							$vo['logo']=$this->_group_up(132,105,false,'/Public/Uploads/flinks/');
+						}else{
+							$vo['logo']=$_POST['logo_url'];
+						}
+					}
+					if($_POST['action']=="edit"){
+						if($dao->save($vo)){
+							$this->success("Saved successfully!");
+						}else{
+							$this->error("Failed to save, try again!");
+						}
+					}elseif($_POST['action']=="add"){
+						$id=$dao->add($vo);
+						if($id){
+							$this->success("Added successfully!");
+						}else{
+							$this->error("Failed to add, try again!");
+						}
+					}
+				}else{
+					$this->error($dao->getDbError());
+				}
+			break;
+			case 'del'://删除链接
+				$id=Input::getVar($_GET['id']);
+				$condition=array('id'=>$id);
+				if($dao->where($condition)->limit('1')->delete()){
+					$this->success("delete successfully!");
+				}else{
+					$this->error("Failed to delete, try again!");
+				}
+			break;
+			case 'show'://隐藏或显示
+				$id=Input::getVar($_GET['id']);
+				$condition=array('id'=>$id);
+				$info=$dao->where($condition)->find();
+				if($info['ischeck']=='1'){
+					$data=array("ischeck"=>'0');
+				}else{
+					$data=array("ischeck"=>'1');
+				}
+				if($dao->where($condition)->save($data)){
+					$this->success("Saved successfully!");
+				}else{
+					$this->error("Failed to save, try again!");
+				}
+			break;
+			case 'edit'://修改链接
+				$id=Input::getVar($_GET['id']);
+				$condition=array('id'=>$id);
+				$info=$dao->where($condition)->find();
+				$this->assign('info',$info);
+			break;
+		}
+		$condition=array();
+		$links=$dao->where($condition)->order("sortrank ASC")->findAll();
+		$this->assign('links',$links);
+		$page=array();
+		$page['title']='links -  My Control Panel -  BeingfunChina';
+		$page['keywords']='links';
+		$page['description']='links';
+		$this->assign('page',$page);
+		$this->assign('content','Mcp:links');
+		$this->display("Cp:layout");
+	}//end links
 	
 	/**
 	 *角色管理
@@ -214,4 +299,154 @@ class McpAction extends CpAction{
 		$this->assign('content','Mcp:user');
 		$this->display("Cp:layout");
 	}//end user
+	
+	/**
+	 *发布杂志
+	 *@date 2010-6-3
+	 *@time 下午02:48:59
+	 */
+	function post_magazine() {
+		//发布杂志
+		$page=array();
+		$page['title']='Post Magazine -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Post Magazine';
+		$page['description']='Post Magazine';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Mcp:post_magazine');
+		$this->display("Cp:layout");
+	}//end post_art
+	
+		/**
+	 *增加新闻
+	 *@date 2010-6-3
+	 *@time 下午04:06:38
+	 */
+	function add_magazine() {
+		//增加新闻
+		$dao=D("Archives");
+		if(!empty($_FILES["picurl"]["name"])) {
+			$this->_upload('',251,356);
+		}
+		$_POST['my_content']=Input::getVar($_POST['my_content']);
+		$vo=$dao->create();
+		if($vo){
+			if (empty($_POST['my_content'])) {
+				$this->error("You must fill in the field of 'Summary'");
+			}
+			$vo['my_content']=nl2br($vo['my_content']);
+			if($vo['showstart']){
+				$t=explode('/',$vo['showstart']);
+				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else {
+				$vo['showstart']=time();
+			}
+			if($vo['showend']){
+				$t=explode('/',$vo['showend']);
+				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			}else{
+				$vo['showend']=$vo['showstart']+(60*60*24*365);
+			}
+			$vo['typeid']=3000;
+			$vo['channel']=14;
+			$kw=str_word_count($vo['my_content'],1);
+    			$keywords="";
+    			foreach ($kw as $vkw){
+    				$keywords.=$vkw.',';
+    			}
+    		$vo['keywords']=trim($keywords,',');
+    		$eid='';
+    		$xid=Input::getVar($_REQUEST['id']);
+    		if($xid){
+    			$aid=Input::getVar($_REQUEST['id']);
+    			$eid=$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
+    		//dump($dao->getLastSql());
+    		$actlog=$dao->getLastSql();
+			if ($aid) {
+				//echo "发布成功!";
+				$txt='<h4>Successful release. </h4><br><a href="/Magazine/show/aid/'.$aid.'">View articles </a>   /   ';
+				$txt.='<a href="/Cp/photo/info/'.$vo['channel'].'_'.$aid.'">Add pictures</a><br>';
+				$txt.='<a href="/Cp/post_art">Post articles</a>   /   ';
+				$txt.='<a href="/Cp/my_art">Back to the list </a><br>';
+				$txt.='You will be directed to the picture uploading page in three seconds! ';
+				$this->assign('jumpUrl','/Cp/photo/info/'.$vo['channel'].'_'.$aid);
+				$this->success($txt);
+			}else{
+				$this->error('Failed to update the main profile table. ');
+			}
+			//dump($vo);
+		}else{
+			$this->error($dao->getError());
+		}
+	}//end add_art
+	
+	/**
+	 *我的新闻
+	 *@date 2010-6-3
+	 *@time 下午02:48:59
+	 */
+	function my_magazine() {
+		//发布新闻
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']='12';
+		$condition['ismake']='1';
+    	$condition['uid']=$this->user['uid'];
+    	$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+    	$classifieds=array();
+    	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
+		$this->assign('classifieds',$classifieds);
+		//dump($dao->getLastSql());
+		$page=array();
+		$page['title']='My Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My Articles';
+		$page['description']='My Articles';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:my_art');
+		$this->display("Cp:layout");
+	}//end my_art
+	
+	/**
+	 *编辑信息
+	 *@date 2010-6-18
+	 *@time 下午06:29:13
+	 */
+	function my_edit_art() {
+		//编辑信息
+		$info=Input::getVar($_REQUEST['info']);
+		$info=explode('_',$info);
+		$dao=D("Archives");
+		$condition=array();
+		$condition['channel']=$info['0'];
+		$condition['id']=$info['1'];
+		$data=$dao->where($condition)->find();
+		if ($data['uid']==$this->user['uid']) {
+			$data['content']=$dao->relationGet("arc");
+			$this->assign('data',$data);
+		}else{
+			$this->error("Insufficient privilege.");
+		}
+		
+		$this->assign('flag',$this->_get_flag());
+		$class_tree=$this->_get_tree(2000);
+		$this->assign("class_tree",$class_tree);
+		$this->assign('citylist',$this->_get_city('city'));
+		$page=array();
+		$page['title']='Edit Articles -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Edit Articles';
+		$page['description']='Edit Articles';
+		$this->assign('page',$page);
+		
+		$this->assign('content','Cp:post_art');
+		$this->display("Cp:layout");
+	}//end my_edit_art
+	
 }//end McpAction

@@ -15,20 +15,20 @@ $(document).ready(function(){
 		id=id.split('_');
 		var obj=id['2'];
 		var num=0;
-		for(var i=1; i<parseInt(obj); i++){
-			var title_id="#title_"+i;
-			var val=$(title_id).val();
-			if(val==''){
-				alert("You must fill in the field of 'Title'.");
-				$("#form").submit(function () {
-					return false;
-				});
-				num=parseInt(num)+1;
-			}
-		}
+//		for(var i=1; i<parseInt(obj); i++){
+//			var title_id="#title_"+i;
+//			var val=$(title_id).val();
+//			//if(val==''){
+//				//alert("You must fill in the field of 'Title'.");
+//				//$("#form").submit(function () {
+//					//return false;
+//				//});
+//				//num=parseInt(num)+1;
+//			}
+//		}
 		if(num==0){
 			$("#form").submit(function(){
-				alert('0000');
+				//alert('0000');
 				return true;
 			});
 		}
@@ -36,69 +36,109 @@ $(document).ready(function(){
 
 });
 function addimg(id,idname){
-	var text='<div id="potho_'+id+'" class=""><p><label for="title_'+id+'">title'+id+':</label><input type="text" name="title[]" id="title_'+id+'">';	
-		text+='</p><p><label for="filename_'+id+'">Photo'+id+':</label><input type="file" name="filename[]" id="filename_'+id+'" style="width:300px;" class="file">';
-		text+='</p><p><label for="msg_'+id+'">msg'+id+':</label><textarea name="msg[]" id="msg_'+id+'"></textarea></p><br><br></div>';
+	var text='<div id="potho_'+id+'" class=""><p><label for="title_'+id+'">Picture name'+id+':</label><input type="text" name="title[]" id="title_'+id+'" onfocus="$(\'#title_msg\').css(\'color\',\'red\');" onblur="$(\'#title_msg\').css(\'color\',\'#000000\');">';	
+		text+='</p><p><label for="filename_'+id+'">Pictures'+id+':</label><input type="file" name="filename[]" id="filename_'+id+'" style="width:300px;" class="file" onfocus="$(\'#filename_msg\').css(\'color\',\'red\');" onblur="$(\'#filename_msg\').css(\'color\',\'#000000\');">';
+		text+='</p><p><label for="msg_'+id+'">Description'+id+':</label><textarea name="msg[]" id="msg_'+id+'" onfocus="$(\'#msg_msg\').css(\'color\',\'red\');" onblur="$(\'#msg_msg\').css(\'color\',\'#000000\');"></textarea></p><br><br></div>';
 		$("#potho_form").append(text);
 		$(".add_table").attr("id",idname);
 		
 }
-
 </script>
+<link rel="stylesheet" href="__PUBLIC__/js/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	<script src="__PUBLIC__/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
-	#potho_form label{ width:80px; text-align:right; float:left;}
+	#potho_form label{ width:100px; text-align:right; float:left;}
 	.list dl dd a img{ margin-top:10px;_margin-top:5px;}
 </style>
 <div class="mulu">
 	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
-	<a href="__APP__/Cp/add_photo">My Photos</a>
+	<a href="__APP__/Cp/add_photo">My pictures</a>
 </div>
 <div class="right-neirong">
     <div class="clear">
     </div>
     <div class="right-messages">
         <div class="right-title">
-            <h3 style="margin:0;">My Photos</h3>
+            <h3 style="margin:0;">"<a href="__APP__/{$arc_info['channel']|get_type}/show/aid/{$arc_info['id']}">{$arc_info['title']}</a>" pictures</h3>
+            <table width="98%" border="0">
+            <tr>
+            	<td><p>
+           	<strong>Step 1: </strong>Fill in the information and submit it. <br>
+           	<strong>Step 2: Add picture(s) and finish the post.</strong> <br>
+           	<strong>Step 3: </strong> <a href="__APP__/{$reurl[$arc_info['channel']]}">Back to the list</a>. 
+           	</p></td>
+                <td width="120">
+                	<if condition="$arc_info['picurl']"><img src="{$arc_info['picurl']|picurl}" /></if>
+                </td>
+            </tr>
+            </table>
+            
         </div>
         <div class="list">
-        	
+<if condition="$pic">        	
 			<dl>
-				<dt class="w320">Title</dt>
-				<dt class="w100">username</dt>
-				<dt class="w100">size</dt>
+				<dt class="w320">Picture name</dt>
+				<dt class="w100">User name</dt>
+				<dt class="w100">Size</dt>
 				<dt class="w100">Time</dt>
 				<dt class="w100">Action</dt>
 <volist name="pic" id="v">
                 <dd>
                 	<span class="w320">
-						<a href="{$v['filepath']}{$v['filename']}" target="_blank">{$v['title']}</a>  
-						<a href="{$v['filepath']}m_{$v['filename']}" target="_blank">[ M ]</a>
+						<a href="/{$v['filepath']}{$v['filename']}" target="_blank" rel="prettyPhoto[unusual]">{$v['title']}</a>  /   
+						<a href="/{$v['filepath']}m_{$v['filename']}" target="_blank" rel="prettyPhoto[unusual]">[ M ]</a>  /   
+						<a href="/{$v['filepath']}s_{$v['filename']}" target="_blank" rel="prettyPhoto[unusual]">[ S ]</a>
 					</span>
 					<span class="w100 c">{$v['username']}</span>
 					<span class="w100 c">{$v['size']}</span>
 					<span class="w100 c">{$v['dateline']|toDate='d/m/Y'}</span>
-					<span class="w100 c"><a href="__APP__/Cp/photo/info/{$arc_info['channel']}_{$arc_info['id']}/act/del/pid/{$v['id']}"><img src="__PUBLIC__/img/icon_remove.png" /></a></span>
+					<span class="w100 c">
+						<a href="__APP__/Cp/photo/info/{$arc_info['channel']}_{$arc_info['id']}/act/cover/pid/{$v['id']}" title="Set as cover image">Cover</a>  /  
+						<a href="__APP__/Cp/photo/info/{$arc_info['channel']}_{$arc_info['id']}/act/del/pid/{$v['id']}"><img src="__PUBLIC__/img/icon_remove.png" /></a>
+					</span>
                 </dd>
 </volist>
 			</dl>
+</if>
 			<div class="clear"></div>
             <form action="__URL__/add_photo" method="post" enctype="multipart/form-data" id="form">
-            	<fieldset id="potho_form">
-				<legend>Photo:</legend>
-					
+            <style type="text/css">
+				#potho_form span{float:left;}
+			</style>
+            	<fieldset>
+				<legend>Pictures:</legend>
+					<table width="100%" border="0">
+					<tr>
+					<td width="60%" id="potho_form">
 					<div id="potho_1">
 					
 					<p>
-						<label for="title_1">title:</label><input type="text" name="title[]" id="title_1"><br />
+						<label for="title_1">Picture name:</label>
+						<input type="text" name="title[]" id="title_1" onfocus="$('#title_msg').css('color','red');" onblur="$('#title_msg').css('color','#000000');"><br />
+						
+<br />
 <br />
 
-						<label for="filename_1">Photo:</label><input type="file" name="filename[]" id="filename_1" style="width:300px;" class="file"><br />
+						<label for="filename_1">Pictures:</label><input type="file" name="filename[]" id="filename_1" style="width:300px;" class="file" onfocus="$('#filename_msg').css('color','red');" onblur="$('#filename_msg').css('color','#000000');"><br />
+						
+<br />
 <br />
 
-						<label for="msg_1">msg:</label><textarea name="msg[]" id="msg_1"></textarea>
+						<label for="msg_1">Picture description:</label><textarea name="msg[]" id="msg_1" onfocus="$('#msg_msg').css('color','red');" onblur="$('#msg_msg').css('color','#000000');"></textarea><br>
+						
 	            	</p>
 					</div>
-					<input type="button" id="add_table_2" class="add_table" value="Add image" />
+					<input type="button" id="add_table_2" class="add_table" value="Add more picture" />
+					</td>
+					<td width="44%" valign="top">
+					<p id="title_msg">If don’t specify a name for the picture, system will automatically default the file name as the picture name. </p>
+					<p id="filename_msg">The width and height of the picture is not limited, but its size should be less than 1 Mb.<br /> 
+					The system only accepts pictures in JPG, GIF, or PNG format.</p> 
+					<p id="msg_msg">When other people are viewing the picture, description will show them what the picture is about. </p>
+					</td>
+					</tr>
+					</table>
+					
 				</fieldset>
 				<p>
 					<input type="hidden" name="info" value="{$arc_info['channel']}_{$arc_info['id']}">
@@ -109,6 +149,11 @@ function addimg(id,idname){
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$(".list a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+});
+</script>
 <div class="clear"></div>
 
 

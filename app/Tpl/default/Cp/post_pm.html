@@ -1,0 +1,41 @@
+<div class="mulu">
+	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_message">My Message</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="list">
+<form action="__URL__/pm" method="post" id="add_post">
+<if condition="$info">
+	<input type="hidden" name="fromuid" value="{$info['touid']}" />
+    <input type="hidden" name="itype" value="{$info['itype']}" />
+    <input type="hidden" name="xid" value="{$info['xid']}" />
+</if>
+	<fieldset class="post">
+		<legend>Send P.M</legend>
+		<p>
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" style="width:425px;" />
+		</p>
+        <p>
+        	<label for="fromusername">User name</label>
+            <input type="text" name="fromusername" value="{$info['tousername']}" />
+        </p>
+		<p>
+			<label for="content">Content:</label>
+			<textarea name="content" id="content" cols="50" rows="8"></textarea>
+		</p>
+		<p style="text-align:center; padding-right:50px;">
+			<input type="submit" value="Submit" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Reset" />
+		</p>
+	</fieldset>
+</form>
+        </div>
+    </div>
+    <div class="xuhao">
+    </div>
+</div>
+<div class="clear">
+</div>

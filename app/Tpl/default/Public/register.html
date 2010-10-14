@@ -1,52 +1,75 @@
 <include file="Public:head" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/js/style/validator.css"></link>
+<script src="__PUBLIC__/js/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+<script src="__PUBLIC__/js/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
 <style type="text/css">
 .reg{border:none; text-align:center;}
 .reg .title{ font-size:131%; color:#333333; margin:0; font-weight:bold;}
-.reg .form{ width:500px; margin:0 auto;}
-.reg .form label{ width:100px; text-align:right; display:inline-block;}
+.reg .form{width:500px;margin:0 auto;*margin:auto;}
+.reg .form label{width:100px; text-align:right; display:inline-block;}
 .reg .form br{clear:both;}
-.reg .form .right{ display:inline-block; text-align:left;}
+.reg .form .right{display:inline-block; text-align:left;}
 .reg .form .w200{width:370px;}
 .reg .form .right .w88{width:10.5em; float:left;}
 </style>
 <div id="main" style="background-color:#ffffff;" class="reg">
 	<form action="__URL__/reg_add" method="post">
 	<p class="title">Register with Beingfunchina to get yourself connected now! If you are already a member,please log in directly.</p>
-
-	<fieldset class="form">
+<table align="center" class="form">
+	<tr><td>
+	<fieldset>
 		<legend>Select an Username and password</legend>
-		<br />
-			<label for="username">Username:</label>
+		<table width="100%" border="0">
+			<tr><td>
+			<label for="username">User name:</label>
+			</td>
+			<td>
 			<div  class="right w200">
 			<input type="text" name="username" id="username" />
 			</div>
-		<br /><br />
+			</td>
+		</tr><tr></tr>
+		<tr><td>
 			<label for="password">Password:</label>
+			</td><td>
 			<div  class="right w200">
 			<input type="password" name="password" id="password" />
 			</div>
-		<br /><br />
+			</td>
+		</tr><tr></tr>
+		<tr><td>
 			<label for="repassword">Retype Password:</label>
+			</td><td>
 			<div  class="right w200">
 			<input type="password" name="repassword" id="repassword" />
 			</div>
-		<br /><br />
+		</td>
+		</tr><tr></tr>
+		<tr><td>
 			<label for="email">E-mail:</label>
+			</td><td>
 			<div  class="right w200">
 			<input type="text" name="email" id="email" />
 			</div>
-		<br />
+		</td>
+		</tr>
+		</table>
 	</fieldset>
-	<fieldset class="form">
+	<fieldset>
 		<legend>Just one step to share more about yourself with your friends on Beingfunchina</legend>
-		<br />
+		<table width="100%" border="0">
+		<tr><th>
 			<label for="first_name">Name:</label>
+		</th><td>
 			<div  class="right w200">
 			<input type="text" name="first_name" id="first_name" value="First name" class="w88"/>
 			<input type="text" name="last_name" id="last_name" value="Last name" class="w88" />
 			</div>
-		<br /><br />
+		</td>
+		</tr><tr></tr>
+		<tr><th>
 			<label for="gender">Gender:</label>
+		</th><td>
 			<div  class="right w200">
 			<select id="gender" name="gender">
 				<option selected="selected" value="0">hidden</option>
@@ -54,8 +77,11 @@
 				<option value="2">Female</option>
 			</select>
 			</div>
-		<br /><br />
+		</td>
+		</tr><tr></tr>
+		<tr><th>
 			<label for="birthyear">Birthday:</label>
+		</th><td>
 			<div  class="right w200">
               <select onchange="showbirthday();" name="bdayyear" id="birthyear">
                 <option value="">Year</option>
@@ -210,13 +236,19 @@
                 <option value="31">31</option>
               </select>
 			</div>
-		<br /><br />
+		</td>
+		</tr><tr></tr>
+		<tr><th>
 			<label for="nationality">Nationality:</label>
+		</th><td>
 			<div  class="right w200">
 			<input type="text" name="nationality" id="nationality" />
 			</div>
-		<br /><br />
+		</td>
+		</tr><tr></tr>
+		<tr><th>
 			<label for="address">Address:</label>
+		</th><td>
 			<div  class="right w200">
 			<select name="address" id="address" />
 				<option value="Beijing">Beijing</option>
@@ -228,11 +260,15 @@
 			<input name="address2" type="text" id="address2" style="display:none;" />
 			Address at present
 			</div>
+		</td>
+		</tr><tr></tr>
+		</table>
 		<p>
 		<input type="checkbox" value="1" name="policy" />By registering I certify that I have <br />read and agreed to the Terms of Service and Privacy Policy.</p>
 		<input type="submit" value="Register now" />
 	</fieldset>
-	
+	</td></tr>
+	</table>
 	</form>
 </div>
 <script language="javascript">
@@ -265,6 +301,39 @@
 	el.value = birthday;
 }
 $(function(){
+	$("#username").blur(function(){
+		if(this.value!=""){
+			var tourl=URL+'/chk_info';
+			$.post(tourl,{fld:'username',val:this.value},function(data){
+				if(data['status']==1){
+					//alert(data['info']);
+				}else{
+					alert(data['info']);
+					$("#username").val('');
+					$("#username")[0].focus();
+				}
+			},'json');
+		}
+	});
+	$("#repassword").blur(function(){
+		var repas=this.value;
+		var pas=$("#password").val();
+		if(repas!=pas){
+			alert("Passwords do not match.");
+			$("#repassword").val('');
+			$("#repassword")[0].focus();
+		}
+	});
+	$("#first_name").focus(function(){
+		if(this.value=='First name'){
+			this.value='';
+		}
+	});
+	$("#last_name").focus(function(){
+		if(this.value=='Last name'){
+			this.value='';
+		}
+	});
 	$('#address').focus(function(){
 		var v=$('#address').val();
 		if(v=='0'){

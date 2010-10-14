@@ -1,0 +1,189 @@
+<script src="__PUBLIC__/js/jquery.datePicker-min.js" type="text/javascript"></script>
+<link href="__PUBLIC__/js/datePicker.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+	$("#typeid").change(function(){
+		var id=this.value;
+		ch_type(id);
+	});
+	$('.showend_job').datePicker({clickInput:true});
+	var typeid=$("#typeid").val();
+	if(typeid!=0){
+		ch_type(typeid);
+	}
+	$("#add_ltd").click(function(){
+		var title=$("#ltdtitle").val();
+		if(title){
+			var tourl=URL+'/ajax_add_ltd';
+			$.post(tourl,{title:title},function(data){
+				if(data['status']==1){
+					var t="<option value='"+data[data]+"' selected='selected'>"+title+"</option>";
+					$("#ltdid").append(t);
+					alert(data['info']);
+				}else{
+					alert(data['info']);
+				}
+			},'json')
+		}
+	});
+});
+function ch_type(id){
+	id=id.split('_');
+	var cache=$("#cache").html();
+	id="#channel_"+id['0'];
+	if(id!=cache){
+		$("#channel").html($(id).html());
+		$("#cache").html(id);
+	}
+}
+function zone(obj,id,name){
+	if(name==0){
+		var cid=obj.options[obj.options.selectedIndex].value;
+	}else{
+		var cid=obj.options[obj.options.selectedIndex].className;
+	}
+	$(id).load(URL+'/ajax_zone',{cid:cid,types:'localion',name:name});
+}
+</script>
+<div class="mulu">
+	<a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/my_fair_post">Fairs</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3 style="margin:0;">Post Classifieds</h3>
+        </div>
+        <div class="list">
+            <form action="__URL__/add_fair" method="post">
+            	<input type="hidden" name="industry" value="EN">
+            	<if condition="$writer">
+                	<input type="hidden" name="writer" value="{$writer}">
+                	<else/>
+                    <input type="hidden" name="writer" value="{$data['writer']}">
+                </if>
+            	<if condition="$data['id']"><input type="hidden" name="id" value="{$data['id']}"></if>
+            	<fieldset>
+				<legend>Basic Elements:</legend>
+					<div style="float:left;width:530px;overflow:hidden;">
+	            	<p>
+	            		<label for="title">Title:</label>
+	            		<input type="text" name="title" id="title" value="{$data['title']}" style="width:300px;">
+					</p>
+					<p><label for="showend_job">Valid for</label>
+						<input type="text" name="showstart" id="showend_job" class="showend_job" value="{$data['showstart']|toDate='d/m/Y'}" style="width:80px;">
+						---> <input type="text" name="showend" id="showend_job" class="showend_job" value="{$data['showend']|toDate='d/m/Y'}" style="width:80px;">
+					</p>
+					<p>
+						<label for="bycity">By City</label>
+						<select name="bycity" id="bycity">
+							<option value="0">--Select City--</option>
+							<volist name="citylist" id="v">
+								<option value="{$v['id']}"{$v['id']|selected=$data['bycity']}>{$v['ctitle']}</option>
+							</volist>
+						</select>
+					</p>
+					</div>
+					<div style="width:200px;float:left;overflow:hidden;">
+					<if condition="$data['picurl']">
+						<img src="{$data['picurl']}" id="picurl_img" width="120">	
+					</if>
+					</div>
+				</fieldset>
+				<fieldset>
+				<legend>Select Industries:</legend>
+					<p>
+						<label for="typeid">Industries:</label>
+						<select id="typeid" name="typeid">
+							<option value="0">---Select Industries---</option>
+							<volist name="class_tree" id="v">
+								<if condition="$v['ispart'] eq 1">
+									<optgroup label="{$v['typename']}">
+										<volist name="v['_son']" id="vs">
+											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+					<p>
+						<label for="typeid2">Second<br>Category:</label>
+						<select id="typeid2" name="typeid2" size="5" >
+							<option value="0">---Select Second Category---</option>
+							<volist name="class_tree" id="v">
+								<if condition="$v['ispart'] eq 1">
+									<optgroup label="{$v['typename']}">
+										<volist name="v['_son']" id="vs">
+											<option value="{$vs['id']}"{$vs['id']|string2checked=$data['typeid2'],',','selected'}>{$vs['typename']}</option>
+										</volist>
+									</optgroup>
+								<else/>
+									<option value="{$v['id']}"{$v['id']|string2checked=$data['typeid2'],',','selected'}>{$v['typename']}</option>
+								</if>
+														
+							</volist>
+						</select>
+					</p>
+				</fieldset>
+				<fieldset>
+					<legend>Fair info:</legend>
+					<p><label for="ltdid">Organizer:</label>
+						<textarea name="contact" id="contact">{$data['contact']}</textarea>
+					</p>
+					<p><label for="maps">Address:</label>
+						<input type="text" name="maps" id="maps" value="{$data['maps']}" style="width:300px;">
+					</p>
+					<!--p><label for="telephone">telephone:</label>
+						<input type="text" name="telephone" id="telephone" value="{$data['telephone']}">
+					</p>
+					<p><label for="fax">fax:</label>
+						<input type="text" name="fax" id="fax" value="{$data['fax']}">
+					</p>
+					<p><label for="mobphone">mobphone:</label>
+						<input type="text" name="mobphone" id="mobphone" value="{$data['mobphone']}">
+					</p>
+					<p><label for="email">email:</label>
+						<input type="text" name="email" id="email" value="{$data['email']}">
+					</p>
+					<p><label for="msn">msn:</label>
+						<input type="text" name="msn" id="msn" value="{$data['msn']}">
+					</p>
+					<p><label for="oicq">QQ:</label>
+						<input type="text" name="oicq" id="oicq" value="{$data['oicq']}">
+					</p>
+					<p><label for="linkman">Contact:</label>
+						<input type="text" name="linkman" id="linkman" value="{$data['linkman']}">
+					</p-->
+					<p><label for="description">Description:</label>
+						<textarea cols="50" rows="8" name="description" id="description">{$data['content']['description']|br2nl}</textarea>
+					</p>
+					<p>
+						<label for="product">Products:</label>
+						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" value="{$data['content']['product']}" />
+					</p>
+					<p>
+						<label for="website">Website:</label>
+						<input type="text" name="website" id="website" value="{$data['content']['website']}" style="width:300px;"/>
+					</p>
+					<p>
+						<label for="website">Source:</label>
+						<input type="text" name="source" id="source" value="{$data['source']}" style="width:300px;"/>
+					</p>
+				</fieldset>
+				<p>
+					<input type="submit" value="Submit">            
+					<input type="reset" value="Reset">            
+				</p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+

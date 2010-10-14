@@ -46,6 +46,8 @@ function load() {
     }
 </script>
 </if>
+<link rel="stylesheet" href="__PUBLIC__/js/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="__PUBLIC__/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body onload="load()" onunload="GUnload()">
 <include file="Public:top"/>
@@ -56,8 +58,8 @@ function load() {
         </div-->
         <div class="biz-content">
             <div class="biz-page">
-                <a href="__APP__/">Home</a> > <a href="__APP__/Biz/index">Business</a> > 
-				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}">{$dh['typename']}</a></if>
+                <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">Business</a> > 
+				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}.html">{$dh['typename']}</a></if>
             </div>
             <div class="biz-city">
 				<!--div class="hot">
@@ -93,7 +95,7 @@ function load() {
 						<th class="yans" width="40%">
                             Organizer 
                         </th>
-                        <td class="yans" width="15%">
+                        <th class="yans" width="15%">
                             Industry
                         </th>
                         
@@ -108,7 +110,17 @@ function load() {
                                 </tr>
                                 <tr>
                                     <td align="center" class="biz-kuan">
+                                        <if condition="$info['albumnum']==0">
                                         {$info['albumnum']} photos
+                                        <else/>
+                                            <volist name="album" id="va">
+                                                <if condition="$i==1">
+                                                <a href="{$va|out_images}" title="{$va['title']}" rel="prettyPhoto[unusual]">{$info['albumnum']} photos</a>
+                                                <else/>
+                                                <a href="{$va|out_images}" title="<b>{$va['title']}</b><br/>{$va['msg']}" style="display:none;" rel="prettyPhoto[unusual]">{$va['title']}</a>
+                                                </if>
+                                            </volist>
+                                        </if>
                                     </td>
                                 </tr>
                             </table>
@@ -125,6 +137,19 @@ function load() {
                         
                     </tr>
                 </table>
+                <div style="margin:10px auto; text-align:center;">
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-0787067378614221";
+				/* 728x90, 创建于 10-8-27 fair */
+				google_ad_slot = "2118030389";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+				</div>
                 <div class="biz-xinxi">
 					<span class="ditu" id="map"></span>
 					
@@ -134,8 +159,23 @@ function load() {
 					</p><p>
 						<span>Source:</span>{$info['source']}
 					</p>
+                    <ul class="act">
+                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
+                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
+                        </li>
+                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
+                            <a href="#2_{$info['channel']}_{$info['id']}">Save as favorite</a>
+                        </li>
+                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
+                            <a href="__APP__/Cp/report/aid/{$info['channel']}_{$info['id']}">Report corrections</a>
+                        </li>
+                        <li id="4_{$info['channel']}_{$info['id']}" class="user_interest">
+                        	<a href="__APP__/Cp/fair_focus/types/{$info['channel']}/aid/{$info['id']}/act/add/to/{$tourl}">Show interest</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="clear"></div>
+                
             </div>
         </div>
     </div>
@@ -143,11 +183,11 @@ function load() {
         <div class="national">
             <ul>
                 <li>
-                    <a href="__URL__/show/flang/{$lang['cn']}"><span>中文</span></a>
+                    <a href="__URL__/show/flang/{$lang['cn']}.html"><span>中文</span></a>
                     <img src="__PUBLIC__/default/images/pc/chian.gif" alt="显示中文信息" />
                 </li>
                 <li>
-                    <a href="__URL__/show/flang/{$lang['en']}"><span>Einglish</span></a>
+                    <a href="__URL__/show/flang/{$lang['en']}.html"><span>Einglish</span></a>
                     <img src="__PUBLIC__/default/images/pc/Einglish.gif" alt="" />
                 </li>
             </ul>
@@ -158,18 +198,26 @@ function load() {
          <div class="menu">
             <ul>
             	<li>
-                    <a href="__URL__/ls/id/all" <php>if($_SESSION['fair_id']=='')echo 'class="on"';</php>>All Industries</a>
+                    <a href="__URL__/ls/id/all.html" <php>if($_SESSION['fair_id']=='')echo 'class="on"';</php>>All Industries</a>
                 </li>
 <volist name="industries" id="v">
                 <li>
-                    <a href="__URL__/ls/id/{$v['id']}" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>
+                    <a href="__URL__/ls/id/{$v['id']}.html" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>
                 </li>
 </volist>
             </ul>
             <div class="yuanjiao">
             </div>
         </div>
+        <div class="left_biz">
+        	{$ad['left']}
+        </div>
     </div>
 </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$(".biz-kuan a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+});
+</script>
 <include file="Public:foot" />

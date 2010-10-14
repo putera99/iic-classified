@@ -8,7 +8,7 @@
         <link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
         <script src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
         <meta name="keywords" content="{$page['keywords']}" />
-        <meta name="description" content="{$page['description']|clearh}" />
+        <meta name="description" content="{$page['description']|strip_tags}" />
 		<script type="text/javascript">
 		var HOST		= window.location.host;
 		var Per_host	="http://"+HOST;
@@ -43,89 +43,201 @@ function load() {
     }
 </script>
 </if>
+<link rel="stylesheet" href="__PUBLIC__/js/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="__PUBLIC__/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body onload="load()" onunload="GUnload()">
-<include file="Public:top"/>
+<!--top-->
+<div id="top">
+    <div id="header-h">
+        <div class="header-left">
+            <span>
+			<empty name="Think.SESSION.uid">
+				{$now} | <a href="__APP__/Public/login/to/{$tourl}">Login</a> / <a href="__APP__/Public/register/to/{$tourl}">Register</a></span>
+			<else/>
+				 Welcome {@username}!   {$now}  |  <a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
+			</empty>
+        </div>
+        <div class="colorz">
+            <!--ul>
+                <li>Pick a Theme:</li>
+                <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color3.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
+            </ul-->
+        </div>
+    </div>
+    <div class="top-content">
+        <div class="top-logo">
+            <h1><a href="__APP__/Public/select_city"><img src="__PUBLIC__/img/logo.jpg" alt="{&P_NAME}" /></a></h1>
+            <div class="top-city">
+                <h2><a href="__APP__/Public/index/cid/2/to/{:myencode('/CityGuide/index')}" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/Public/index/cid/3/to/{:myencode('/CityGuide/index')}" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/Public/index/cid/1/to/{:myencode('/CityGuide/index')}" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/Public/index/cid/4/to/{:myencode('/CityGuide/index')}" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+				<span style="float:left; margin-right:10px; font-size:10px; margin-top:8px;">
+					<if condition="cookie('cid')">
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es2.gif" id="remember" class="remember_1" alt="Remember my choice" /></a>
+					<else/>
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es.gif" id="remember" class="remember_0" alt="Remember my choice" /></a>
+					</if>
+					
+				</span>
+            </div>
+			
+        </div>
+        <div class="clear">
+        </div>
+        <div class="top-nav">
+            <!--div class="search">
+                <img src="__PUBLIC__/default/images/search.gif" alt="search" />
+            </div-->
+            <div class="nav">
+                <ul>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index.html">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide.html">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds.html">Classifieds</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/biz.html">China Fairs</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event.html">Events</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index.html">Magazines</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/group.html">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bgh"></div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<!--top-->
 <div id="main">
     <div class="right">
+<if condition="$posts">
         <div class="next_lssue">
             <div class="next-bg">
                 Relevant Information
             </div>
             <div class="next-n">
                 <ul>
-<if condition="posts">
 	<volist name="posts" id="v">
                     <li>
                         1、Philosophy of the people, 
                         has become the  professional  ...
                     </li>
 	</volist>
-</if>
                 </ul>
             </div>
         </div>
+</if>
+<if condition="$group">
         <div class="main-group">
             <div class="main-bg">
                 Relevant Groups
             </div>
-<if condition="$group">
-	<volist name="group" id="v">
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-	</volist>
+        <volist name="group" id="g">
+               <dl class="group-x">
+                    <dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                    <dd>
+                        <h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                        <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+                    </dd>
+                </dl>
+		</volist>
+        </div>
 </if>
+        <div class="main-group m10">
+        	{$ad['right']}
+            <div style="text-align:center;">
+				<br>
+                <script type="text/javascript"><!--
+                google_ad_client = "pub-0787067378614221";
+                /* 200x200, 创建于 10-8-27 cityguide_classifieds_c_r */
+                google_ad_slot = "5468157928";
+                google_ad_width = 200;
+                google_ad_height = 200;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
         </div>
     </div>
     <div class="n-life">
-        <div class="classifieds content">
+        <div class="classifieds_content">
             <div class="content-bg">
-                <a href="/">Home</a> > <a href="__APP__/CityGuide/index">City Guide</a> > 
-				<if condition="$dh[_reid]"><a href="__APP__/CityGuide/ls/id/{$dh[_reid]['id']}">{$dh[_reid]['typename']}</a> ></if>
-				<a href="__APP__/CityGuide/ls/id/{$dh['id']}">{$dh['typename']}</a>
+            	<if condition="$cp"><span style="float:right; margin-right:10px;">{$cp}</span></if>
+                <a href="/">Home</a> > <a href="__APP__/cityguide.html">City Guide</a> > 
+				<if condition="$dh[_reid]"><a href="__APP__/cglist/{$dh[_reid]['id']}.html">{$dh[_reid]['typename']}</a> ></if>
+				<a href="__APP__/cglist/{$dh['id']}.html">{$dh['typename']}</a>
+                
             </div>
             <div class="content-n">
             	 <h1>{$info['title']}</h1>
-                    <div class="right">
+                 
+                    <div class="right album">
                     	<if condition="$info['picurl']">
-                            <img src="http://www.beingfunchina.com/upload_files/{$info['picurl']}" alt="{$info['title']}" class="iic_img" />
+                            <a href="{$info['picurl']|toImg=cityguide}" rel="prettyPhoto[unusual]"><img src="{$info['picurl']|toImg=cityguide}" alt="{$info['title']}" class="iic_img" /></a>
 						</if>
                         <p>
-                        	<a href="#" class="kuan" rel="{$info['albumid']}_{$info['albumnum']}"><if condition="$info['albumnum']">{$info['albumnum']}<else />0</if> photos</a>
+                        <if condition="$info['albumnum']==0">
+                        
+                        <else/>
+                            <volist name="album" id="va">
+                                <if condition="$i==1">
+                                <a href="{$va|out_images}" title="{$va['title']}" rel="prettyPhoto[unusual]">{$info['albumnum']} pictures</a>
+                                <else/>
+                                <a href="{$va|out_images}" title="<b>{$va['title']}</b><br/>{$va['msg']}" style="display:none;" rel="prettyPhoto[unusual]">{$va['title']}</a>
+                                </if>
+                            </volist>
+                        </if>
                         </p>
                     </div>
                 <div class="content-life">
                     <p>
                         {$info['my_content']}
+                        <if condition="$info['keywords']"><br />Tags:{$info['keywords']}</if>
 					</p>
 					</div>
 					<div class="i_content">
 					<div class="con">
                         {$info['content']['content']}
+                        
                     </div>
                     <ul>
-                        <li id="1_{$v['channel']}_{$v['id']}" class="user_share">
-                            <a href="__URL__/share/xid/{$v['id']}/xtype/{$v['channel']}" target="_blank">Share</a>
+                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
+                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
                         </li>
-                        <li id="2_{$v['channel']}_{$v['id']}" class="user_collection">
-                            <a href="#2_{$v['channel']}_{$v['id']}">Save as favorite</a>
+                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
+                            <a href="javascript:void(0);">Save as favorite</a>
                         </li>
-                        <li id="3_{$v['channel']}_{$v['id']}" class="user_report">
-                            Report corrections
+                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
+                           <a href="__APP__/Common/report/aid/{$info['channel']}_{$info['id']}">
+                           Report Abuse
+                           </a>
                         </li>
                     </ul>
                 </div>
-                <div class="kuan">
+          <div class="kuan">
                     <div class="gugou">
-                        <img src="__PUBLIC__/default/images/gugou.gif" alt="gu" />
+                    
+                        <script type="text/javascript">
+						google_ad_client = "pub-0787067378614221";
+						/* 300x250, 创建于 10-8-27 cityguide */
+						google_ad_slot = "4925910903";
+						google_ad_width = 300;
+						google_ad_height = 250;
+						</script>
+						<script type="text/javascript"
+						src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+						</script>
                     </div>
                     <div class="ditu" id="map"></div>
                 </div>
-                <div class="Comments">
+                <div class="comments">
                     <div class="biaoti">
                         <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
                     </div>
@@ -168,4 +280,9 @@ function load() {
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$(".album a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+});
+</script>
 <include file="Public:foot" />

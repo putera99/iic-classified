@@ -1,0 +1,113 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Mcp/role">role</a>
+</div>
+<style type="text/css">
+	.tab{border:1px solid #333333;}
+	.tab th,.tab td{border:1px solid #aaaaaa;}
+	.tab a{ color:#000000;}
+	.tab .h a{ color:#999999;}
+	.c{text-align:center}
+	.r{text-align:right;}
+	.l{text-align:left}
+</style>
+<script language="javascript" type="text/livescript">
+function file(){
+	var is_upfile=$("#is_upfile").attr("checked");
+	if(is_upfile){
+		$("#logo_url").attr("disabled","disabled");
+		$("#logo").attr("disabled","");
+	}else{
+		$("#logo_url").attr("disabled","");
+		$("#logo").attr("disabled","disabled");
+	}
+}
+</script>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3>Links</h3>
+        </div>
+        <div class="clear">
+        </div>
+         <table class="tab" width="100%" cellpadding="3">
+            	<tr class="th">
+            		<th width="20%">Web name</th>
+            		<th width="40%" style="overflow:hidden;">Logo</th>
+                    <th width="10%">Sort</th>
+                    <th width="10%">Rank</th>
+            		<th width="15%">Action</th>
+            	</tr>
+<volist name="links" id="v">
+                	<tr <if condition="$v['ischeck']=='0'">class='h'</if>>
+                		<td height="38"><a href="{$v['url']}" target="_blank">{$v['webname']}</a></td>
+                		<td><a href="{$v['url']}" target="_blank"><img src="{$v['logo']|picurl}" width="130" height="36" /></a></td>
+                        <td>{$v['itype']}</td>
+                        <td>{$v['sortrank']}</td>
+                		<td>
+                			<a href="__URL__/links/act/edit/id/{$v['id']}">Edit</a> / 
+                			<a href="__URL__/links/id/{$v['id']}/act/show/"><if condition="$v['ischeck']=='0'">Show<else/>Hide</if></a> / 
+                            <a href="__URL__/links/id/{$v['id']}/act/del/">Del</a>
+                		</td>
+					</tr>
+                    
+</volist>
+            </table>
+            <div class="xuhao">
+		    	{$showpage}
+		    </div>
+            <hr>
+        <fieldset>
+        	<legend>Add or Edit</legend>
+        <div class="list">
+
+        	<form action="__URL__/links/act/add" method="POST" enctype="multipart/form-data">
+        	<if condition="$info">
+        		<input type="hidden" name="id" value="{$info['id']}" />
+                <input type="hidden" name="action" value="edit" />
+        	<else/>
+        		<input type="hidden" name="action" value="add" />
+        	</if>
+        	<table border="0" width="98%">
+            	<colgroup>
+                	<col class="r" />
+                    <col class="l" />
+                </colgroup>
+                <tbody>
+        		<tr>
+        			<td width="100" class="r">Web name：</td><td><input type="text" name="webname" value="{$info['webname']}"></td>
+        		</tr>
+                <tr>
+        			<td class="r">Email：</td><td><input type="text" name="email" value="{$info['email']}" enabled="enabled"></td>
+        		</tr>
+                <tr>
+        			<td class="r">Logo url：</td><td><input  id="logo_url" type="text" name="logo_url" value="{$info['logo']}"><input type="checkbox" name="is_upfile" value="1" id="is_upfile" onclick="file();" />Upload file</td>
+        		</tr>
+                <tr id="logo">
+        			<td class="r">Logo：</td><td><input type="file" name="logo"></td>
+        		</tr>
+                <tr>
+        			<td class="r">Url：</td><td><input type="text" name="url" value="{$info['url']}"></td>
+        		</tr>
+                <tr>
+        			<td class="r">Rank：</td><td><input type="text" name="sortrank" value="{$info['sortrank']}"></td>
+        		</tr>
+                <tr>
+        			<td class="r">Sort：</td><td><input type="text" name="itype" value="{$info['itype']}"></td>
+        		</tr>
+        		<tr>
+        			<td class="r">About：</td><td><textarea rows="3" cols="20" name="msg">{$info['msg']}</textarea> </td>
+        		</tr>
+        		<tr>
+        			<td></td><td><input type="submit" value="Submit"></td>
+        		</tr>
+                </tbody>
+        	</table>
+			</form>
+        </div>
+        </fieldset>
+    </div>
+</div>
+<div class="clear"></div>
