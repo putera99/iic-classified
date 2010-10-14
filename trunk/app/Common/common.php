@@ -1,15 +1,68 @@
 <?php
 
-
+/**
+   *匹配展会编码
+   *@date 2010-9-18
+   *@time 下午06:04:53
+   */
+function get_fair_lang($w) {
+	//匹配展会编码
+	if(strstr($w,'_')){
+		$w=explode('_',$w);
+		if(empty($w['0'])){
+			$w=time().rand_string(5,2);
+		}else{
+			$w=$w['0'];
+		}
+	}else{
+		$w=time().rand_string(5,2);
+	}
+	return array('0'=>$w.'_EN','1'=>$w.'_CN');
+}//end get_fair_lang
+/**
+   *编码需要打开的网址
+   *@date 2010-9-8
+   *@time 下午06:06:25
+   */
+function jump($url,$id) {
+    //编码需要打开的网址
+    $url=$url.'||'.$id;
+    $url=myencode($url);
+    return __APP__.'/link/'.$url;
+}//end function_name
+/**
+   *针对图片数组组合图片地址
+   *@date 2010-8-13
+   *@time 下午07:00:47
+   */
+function out_images($pic=array(),$thumb='m') {
+	//针对图片数组组合图片地址
+	if($pic['remote']){
+		$image=picurl($pic['remote']);
+	}elseif($pic['thumb']){
+		if($thumb=='m'){
+			$image=picurl($pic['filepath'].'m_'.$pic['filename']);
+		}else{
+			$image=picurl($pic['filepath'].'s_'.$pic['filename']);
+		}
+	}else{
+		$image=picurl($pic['filename']);
+	}
+	return $image;
+}//end out_images
 
 function picurl($url){
 	$arr=explode('/',$url);
 	if ($arr['0']=='article') {
 		$url='http://www.beingfunchina.com/upload_files/'.$url;
 	}elseif($arr['0']=='customavatars'){
-		$url='http://www.beingfunchina.com/Forum/'.$url;
+		$url='/Public/'.$url;
 	}elseif($arr['0']=='Public'){
 		$url='/'.$url;
+	}elseif($arr['0']=='.'){
+		$url=str_replace("./Public",'/Public',$url);
+	}elseif($arr['0']=='http:'){
+		$url=$url;
 	}
 	return $url;
 }
@@ -143,11 +196,11 @@ function get_grade($id,$arr=array()) {
 	//获取群组级别
 	if (empty($arr)) {
 		$arr=array(
-			1=>'群主',
-			2=>'管理员',
+			1=>'Founder',
+			2=>'Admin',
 			3=>'VIP',
-			4=>'一般',
-			5=>'禁止',
+			4=>'Member',
+			5=>'Exclude',
 		);
 	}
 	return $arr[$id];
@@ -179,7 +232,7 @@ function get_type($type) {
 	$ch='';
 	switch (true) {
 		case $type==1:
-			$ch='Article';
+			$ch='Art';
 		break;
 		case $type==2:
 			$ch='CityGuide';
@@ -191,17 +244,24 @@ function get_type($type) {
 			$ch='Event';
 		break;
 		case $type==11:
-			$ch='Fair';
+			$ch='Biz';
 		break;
 		case $type==12:
-			$ch='News';
+			$ch='Art';
 		break;
 		case $type=="group":
-			$ch='group';
+			$ch='Group';
+		break;
+		case $type=="13":
+			$ch='Group';
+		break;
+		case $type=="14":
+			$ch='Magazine';
 		break;
 	}
 	return $ch;
 }//end function_name
+
 
 function get_arctype($typeid,$field='typename'){
 	$arctype=D("Arctype");
@@ -240,7 +300,8 @@ function get_city($cid,$field){
 	$dao=M("ActCity");
 	$city=$dao->where("id=$cid")->find();
 	if($field){
-	return $city[$field];
+		//$city[$field]=$_SESSION['flang']=='CN'?$city['cename']:$city[$field];
+		return $city[$field];
 	}else{
 		return $city;
 	}
@@ -260,7 +321,7 @@ function getkey($arr,$k) {
  *@time 下午08:35:01
  */
 function toDate($time,$format='Y-m-d H:i:s'){
-	if( empty($time)) {
+	if(empty($time)) {
 		return '';
 	}
     $format = str_replace('#',':',$format);
@@ -446,7 +507,7 @@ function dhtml($string) {
 function clearh($string) {
 	//清除HTML和双引号
 	$string = preg_replace("/<(\/?.*?)>/si","",$string);
-	//$string = preg_replace('"',"",$string);
+	$string = preg_replace('"',"",$string);
 	return $string;
 }//end clearh
 

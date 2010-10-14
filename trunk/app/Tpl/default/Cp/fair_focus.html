@@ -1,0 +1,36 @@
+<div class="mulu">
+    <a href="__APP__/">Home</a> > <a href="__APP__/Cp/index">Control Panel</a> > 
+	<a href="__APP__/Cp/fair_focus">My fair focus</a>
+</div>
+<div class="right-neirong">
+    <div class="clear">
+    </div>
+    <div class="right-messages">
+        <div class="right-title">
+            <h3>My fair focus</h3>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="list">
+            <dl class="h350">
+            	<dt class="w420">Subject</dt>
+
+				<dt class="w100">Time</dt>
+				<dt class="w200">Action</dt>
+<volist name="fair" id="v">
+                	<dd>
+						<span class="w420"><a href="__APP__/Biz/show/aid/{$v['tid']}">{$v['tid']|get_title}</a></span>
+						<span class="w100 c">{$v['ctime']|toDate='Y-m-d'}</span>
+						<span class="w200 c"><a href="__URL__/fair_focus/types/{$v['types']}/aid/{$v['tid']}/act/remove">Interested Remove</a></span>
+					</dd>
+                    
+</volist>
+            </dl>
+        </div>
+    </div>
+    <div class="xuhao">
+    	{$showpage}
+    </div>
+</div>
+<div class="clear">
+</div>

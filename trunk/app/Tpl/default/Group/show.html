@@ -60,7 +60,7 @@
 		if(data['status']==1){
 			alert(data['info']);
 			
-			var text='<dd><span class="w381"><a href="__URL__/thread/id/'+data['data']['id']+'">'+$("#title").val()+'</a></span>';
+			var text='<dd><span class="w381"><a href="__APP__/grpTs/'+data['data']['id']+'.html">'+$("#title").val()+'</a></span>';
 				text+='<span class="w100 c">'+data['data']['username']+'</span>';
 				text+='<span class="w100 c">'+data['data']['lasttime']+'</span>';
 				text+='<span class="w100 c">'+data['data']['dateline']+'</span></dd>';
@@ -111,61 +111,75 @@
     <!--中间开始-->
     <div id="main">
         <div class="right">
-            <div class="next lssue">
+            <div class="next_lssue">
                 <div class="next-bg">
-                    New members
+                    New Members
                 </div>
                 <div class="chengyuan">
-<if condition="$new_members">
-                    <dl>
+<if condition="$newmember">
+	<volist name="newmember" id="v">
+                    <dl class="group-m">
                         <dt>
-                            <img src="images/pc/toux.gif" alt="sz" />
+                            <img src="{$v['uid']|get_avatar}" alt="{$v['username']}" />
                         </dt>
                         <dd>
-                            Projection whiteboard
+                            {$v['username']}
                         </dd>
                     </dl>
+	</volist>
 </if>
                     <div class="clear"></div>
                 </div>
-                <div class="next-bg">
-                    Group frequented
-                </div>
-                <div class="next-n">
-<if condition="$frequented">
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic1.gif" alt="gth" />
-                        </dt>
+                <div class="conter-group" style="background-color:#f3f3f3;">
+                	<div class="group"><a href="__APP__/group.html">Featured Groups</a></div>
+<if condition="$member_group">
+	<volist name="member_group" id="g">
+                   <dl class="group-x">
+                        <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                         <dd>
-                            <span>Projection whiteboard</span>
-                            Tianyuan and Sushui are a
-                            long-....
+                            <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                            <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                         </dd>
                     </dl>
+	</volist>
 </if>
                 </div>
+                
                 <div class="guang">
-
+					
+                </div>
+                <div class="main-group m10" style="text-align:center">
+                	{$ad['right']}
+					<script type="text/javascript"><!--
+                    google_ad_client = "pub-0787067378614221";
+                    /* 200x200, 创建于 10-8-27 event_group_all_r */
+                    google_ad_slot = "2776601511";
+                    google_ad_width = 200;
+                    google_ad_height = 200;
+                    //-->
+                    </script>
+                    <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                    </script>
                 </div>
             </div>
         </div>
         <div class="n-life">
             <div class="classifieds_content">
                 <div class="content-bg">
-                    <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a> > 
+                    <a href="__APP__/index.html">Home</a> > <a href="__APP__/group.html">Groups</a> > 
 					<if condition="$dh">
 	                    <if condition="$dh[_pid]">
-	                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+	                        <a href="__APP__/glist/{$dh[_pid]['id']}.html">{$dh[_pid]['title']}</a> >
 	                    </if>
-	                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+	                    <a href="__APP__/glist/{$dh['id']}.html">{$dh['title']}</a> > 
 	                </if>
                 </div>
                 <div class="content-n">
                 	<h1>{$info['groupname']}</h1>
                     <div class="touxiang">
                         <span>
-                        	<img src="{$info['pic']}" alt="{$info['groupname']}" />
+                        	<img src="{$info['pic']|toImg=group}" alt="{$info['groupname']}" />
 						</span>
                         <ul>
                             <li>
@@ -184,6 +198,23 @@
                                 Brief Introduction:{$info['announcement']}
                             </li>
                         </ul>
+                      	<div align="left">
+<if condition="$ad['banner']['0']">
+							{$ad['banner']['0']}
+<else/>
+                        	<script type="text/javascript"><!--
+							google_ad_client = "pub-0787067378614221";
+							/* 468x60, 创建于 10-8-27 group event */
+							google_ad_slot = "2310586877";
+							google_ad_width = 468;
+							google_ad_height = 60;
+							//-->
+							</script>
+							<script type="text/javascript"
+							src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+							</script>
+</if>
+                        </div>
                         <div class="anjian">
                             <ul>
                                 <li>
@@ -201,14 +232,14 @@
 						<dl class="h350">
 			            	<dt class="w381">Topic</dt>
 							<dt class="w100">User name</dt>
-							<dt class="w100">Reply time</dt>
+							<dt class="w100">Latest reply</dt>
 							<dt class="w100">Post time</dt>
 							<div id="post_ok" style="display:none;"></div>
 
 <if condition="$thread">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w381 l"><a href="__URL__/thread/id/{$v['id']}">{$v['title']}</a></span>
+								<span class="w381 l"><a href="__APP__/grpts/{$v['id']}.html">{$v['title']}</a></span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
 								<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
@@ -226,6 +257,12 @@
 		            </dl>
 					
 					<div class="clear"></div>
+<if condition="$ad['banner']['1']">
+					<div align="left">
+					{$ad['banner']['1']}
+                    </div>
+                    <div class="clear"></div>
+</if>
                         <div class="grouptopics">
                             <span style="float:right; height:auto;"><a href="__URL__/collection/id/{$info['id']}">View all</a></span>Group favorite
                         </div>
@@ -238,7 +275,7 @@
 <volist name="thread" id="v">
 		                	<dd>
 								<span class="w381 l">
-									<a href="__APP__/{$v['types']|get_type}/show/aid/{$v['tid']}">{$v['tid']|get_title}</a>
+									<a href="__APP__/{$v['types']|get_type='r'}/{$v['tid']}.html">{$v['tid']|get_title}</a>
 								</span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['types']|get_type}</span>

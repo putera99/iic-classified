@@ -14,26 +14,123 @@
 class CommonAction extends Action{
 	protected $user=array();//用户信息
 	protected $cid;//城市ID
-
+	protected $admin=array('yeahbill','iicc','bfcadmin','Alex','bfc168');
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
+        $cid=intval($_GET['cid']);
+        if(!empty($cid)){
+        	$_SESSION['cid']=$cid;
+        }else{
+        	$_SESSION['cid']=empty($_SESSION['cid'])?'0':$_SESSION['cid'];
+        }
         $this->cid=$_SESSION['cid'];
-        $this->assign('cid',$this->cid);
-        $this->assign('now',date("l,F d Y",time()));
+        $cid=empty($this->cid)?0:$this->cid;
+        $this->assign('cid',$cid);
+        $this->assign('now',date("D,M dS, Y",time()));
         import("ORG.Util.String");
         import("ORG.Util.Input");
         load("extend");
-        $arr=array('/cid/3','/cid/2','/cid/1','/cid/4','/index.php?s=','/Public/select_city');
+        $arr=array('/cid/3','/cid/2','/cid/1','/cid/4','/cid/0','/1.html','/0.html','/2.html','/3.html','/4.html','.html','/index.php?s=','/Public/select_city');
         $url=str_replace($arr,'',$_SERVER["REQUEST_URI"]);
         $url=$url=='/'?'/Index/index':$url;
         $url=myencode($url);
         $this->assign('tourl',$url);
-        
+		/*if ($this->user['username']=='iicc'){
+			dump($_REQUEST);
+		}*/
         //import('ORG.Util.Image');
+        if($this->_is_admin()){
+        	$_SESSION['iicc']='1';
+        }else{
+        	$_SESSION['iicc']='0';
+        }
     }
-    
+
+    protected function _is_admin() {
+		//检查权限
+		if (in_array($this->user['username'],$this->admin,true)) {
+			$re=true;
+		}else{
+			$re=false;
+		}
+		return $re;
+	}//end is_admin
+    function ads($ch,$wz,$classfileds='0',$cat='0'){
+        $ad=array();
+        $ad['right']='';
+        $ads=M("Ad");
+        $condition=array();
+        if($classfileds=='1'){
+            if($ch=='3'){
+                $condition['model']=array('EQ','3');
+            }else{
+                $condition['model']=array(array('EQ','3'),array('EQ',$ch),'or');
+            }
+        }else{
+            $condition['model']=array('EQ',$ch);
+        }
+        $condition['wz']=$wz;
+        $condition['is_show']='1';
+        $condition['begintime']=array('lt',time());
+        $condition['endtime']=array('gt',time());
+        if($this->cid=='0'){
+            $condition['_string']="FIND_IN_SET('".$this->cid."',`cid`) > 0 ";
+        }else{
+            $condition['_string']="FIND_IN_SET('".$this->cid."',`cid`) > 0 ";
+        }
+        if($cat!='0'){
+        	$type=D("Arctype");
+        	$cinfo=$type->where("id=$cat")->find();
+        	if($cinfo['reid']!=$cinfo['topid']){
+        		$cat=$cinfo['reid'];
+        	}
+        	if(empty($condition['_string'])){
+        		$condition['_string']="((FIND_IN_SET('".$cat."',`cat`) > 0) or cat='')";
+        	}else{
+        		$condition['_string'].="AND ((FIND_IN_SET('".$cat."',`cat`) > 0) or cat='')";
+        	}
+        }
+        $adlist=$ads->where($condition)->findAll();
+        /*if($this->_is_admin()){
+        	dump($ads->getLastSql());
+        	dump($this->cid);
+        }*/
+        shuffle($adlist);
+        $x=0;
+        foreach($adlist as $adl){
+            $x++;
+            if($this->cid=='0'&&$x>9){
+                break;
+            }
+            if($adl['type']=='banner'){
+                if(empty($adl['adcode'])){
+                    $ad['banner'][]='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a>';
+                }else{
+                    $ad['banner'][]=$adl['adcode'];
+                }
+            }elseif($adl['type']=='right'){
+                if(empty($adl['adcode'])){
+                    $ad['right'].='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a><br>';
+                }else{
+                    $ad['right'].=$adl['adcode'];
+                }
+            }else{
+           		if(empty($adl['adcode'])){
+                    $ad['left'].='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a><br>';
+                }else{
+                    $ad['left'].=$adl['adcode'];
+                }
+            }
+        }
+        /*if($this->user['username']=='iicc'){
+        	dump($ads->getLastSql());
+        	dump($ad);
+        }*/
+        $this->assign('ad',$ad);
+    }
+
     /**
      *查城市和区
      *@date 2010-5-26
@@ -124,8 +221,9 @@ class CommonAction extends Action{
      */
     public function user_collection($tid,$types,$listid=0) {
     	//用户收藏
-    	$tid=empty($tid)?$_REQUEST['tid']:$tid;
-    	$types=empty($types)?$_REQUEST['types']:$types;
+    	$id=explode('_',$_REQUEST['id']);
+    	$tid=empty($tid)?$id['2']:$tid;
+    	$types=empty($types)?$id['1']:$types;
     	$listid=empty($_REQUEST['listid'])?0:$_REQUEST['tid'];
     	if (!$this->_is_login()){
 			$this->ajaxReturn(0,'no login!',0);
@@ -166,7 +264,7 @@ class CommonAction extends Action{
      *@date 2010-5-20
      *@time 上午09:26:44
      */
-    protected function _get_carc($typeid,$limit="0,10",$cid,$uid) {
+    protected function _get_carc($typeid,$limit="0,10",$cid=0,$uid) {
     	//获取指定类的信息
     	
     	$condition=array();
@@ -193,6 +291,7 @@ class CommonAction extends Action{
     	if($uid){
     		$condition['uid']=$uid;
     	}
+    	$condition['ismake']='1';
     	$info=$dao->where($condition)->order("pubdate DESC")->limit($limit)->findAll();
     	//dump($info);
     	return $info;
@@ -344,6 +443,7 @@ class CommonAction extends Action{
     	if (!$this->_is_login()){
 			$this->error("Log On Please");
 		}else{
+			$id=explode('_',$_REQUEST['id']);
 			$xid=$_REQUEST['xid'];
 			$xtype=$_REQUEST['xtype'];
 			$this->assign('xid',$xid);
@@ -738,6 +838,10 @@ class CommonAction extends Action{
     	$dao=D("Archives");
     	$condition=array();
     	$condition['typeid']=$typeid;
+    	$condition['ismake']=1;
+		$time=time();
+		$condition['showstart']=array('lt',$time);
+		$condition['showend']=array('gt',$time);
     	if($flag){
     		$arr=explode(',',$flag);
     		foreach ($arr as $v){
@@ -749,7 +853,7 @@ class CommonAction extends Action{
     		}
     	}
     	if($cid!='0'){
-    		$condition['cid']=$cid;
+    		$condition['_string']="cid={$cid} or cid=0";
     	}
     	if($limit=='0,1'||$limit=='1'){
     		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->find();
@@ -779,9 +883,9 @@ class CommonAction extends Action{
        //设置需要生成缩略图的文件后缀
 	    $upload->thumbPrefix   =  's_';  //生产2张缩略图
        //设置缩略图最大宽度
-		$upload->thumbMaxWidth =  '120';
+		$upload->thumbMaxWidth =  $width;
        //设置缩略图最大高度
-		$upload->thumbMaxHeight = '140';
+		$upload->thumbMaxHeight = $height;
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
@@ -798,7 +902,7 @@ class CommonAction extends Action{
         return $_POST['picurl'];
 	}
 	
-	protected function _group_up($tid,$width='120',$height='140'){
+	protected function _group_up($width='120',$height='140',$thumb=true,$d="/Public/Uploads/Group/"){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
         //设置上传文件大小
@@ -806,15 +910,14 @@ class CommonAction extends Action{
         //设置上传文件类型
         $upload->allowExts  = explode(',','jpg,gif,png,jpeg');
         //设置附件上传目录
-        $tid=empty($tid)?$_REQUEST['cat_id']:$tid;
-        $path=$tid.'/'.date('Y-m').'/';
-        $upload->savePath =  './Public/Uploads/Group/'.$path;
+        $path=date('Y-m').'/';
+        $upload->savePath =  '.'.$d.$path;
         mk_dir($upload->savePath);
-        $path='/Public/Uploads/Group/'.$path;
+        $path=$d.$path;
 	    //设置需要生成缩略图，仅对图像文件有效
-       $upload->thumb =  true;
+       $upload->thumb =$thumb;
        //设置需要生成缩略图的文件后缀
-	    $upload->thumbPrefix   =  's_';  //生产2张缩略图
+	    $upload->thumbPrefix   =  's_';  //生产1张缩略图
        //设置缩略图最大宽度
 		$upload->thumbMaxWidth =  '120';
        //设置缩略图最大高度
@@ -829,9 +932,12 @@ class CommonAction extends Action{
         }else {
             //取得成功上传的文件信息
             $uploadList = $upload->getUploadFileInfo();
-            $_POST['pic']  = $path.'s_'.$uploadList[0]['savename'];
+            if($thumb){
+            	$_POST['pic']  = $path.'s_'.$uploadList[0]['savename'];
+            }else{
+            	$_POST['pic']  = $path.$uploadList[0]['savename'];
+            }
         }
-        
         return $_POST['pic'];
 	}
 	
@@ -850,11 +956,11 @@ class CommonAction extends Action{
 	    //设置需要生成缩略图，仅对图像文件有效
        $upload->thumb =  true;
        //设置需要生成缩略图的文件后缀
-	    $upload->thumbPrefix   =  'm_';  //生产1张缩略图
+	    $upload->thumbPrefix   =  'm_,s_';  //生产1张缩略图
        //设置缩略图最大宽度
-		$upload->thumbMaxWidth =  '800';
+		$upload->thumbMaxWidth =  '650,120';
        //设置缩略图最大高度
-		$upload->thumbMaxHeight = '600';
+		$upload->thumbMaxHeight = '550,120';
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
@@ -914,7 +1020,7 @@ class CommonAction extends Action{
 	public function post_comment() {
 		//发布评论
 		if (empty($this->user['uid'])) {
-			$this->ajaxReturn(0,'Log On Please!',0);
+			$this->ajaxReturn(0,'Log in Please!',0);
 		}
 		if (empty($_REQUEST['verify']) || md5($_REQUEST['verify'])!=$_SESSION['verify']){
 			$this->ajaxReturn(0,'Code Error!',0);
@@ -1033,7 +1139,7 @@ class CommonAction extends Action{
 	 *@date 2010-6-23
 	 *@time 下午02:55:18
 	 */
-	protected function get_gmember($gid,$grade='',$limit='') {
+	protected function get_gmember($gid,$grade='',$limit='0,9') {
 		//获取群组内的成员
 		$dao=D("Tagspace");
 		$condition=array();
@@ -1041,12 +1147,68 @@ class CommonAction extends Action{
 		if(!empty($grade)){
 			$condition['grade']='3';
 		}
-		return $dao->where($condition)->limit($limit)->findAll();
+		return $dao->where($condition)->order("ctime DESC")->limit($limit)->findAll();
 		
 	}//end get_gmember
 	
+	/**
+	   *成员常来的群组
+	   *@date 2010-8-18
+	   *@time 下午03:10:03
+	   */
+	function member_group($marr,$limit="0,10") {
+		//成员常来的群组
+		$condition=array();
+		if(is_array($marr)){
+			$str='';
+			foreach ($marr as $v){
+				$str.=$v['uid'].',';
+			}
+			$str=trim($str,',');
+		}else{
+			$str=$marr;
+		}
+		$dao=D("Tagspace");
+		$condition['_string']="uid in($str)";
+		$glist=$dao->where($condition)->group("tagid")->order("ctime DESC")->limit($limit)->findAll();
+		$return=array();
+		if(count($glist)>0){
+			$group=D("Group");
+			foreach ($glist as $v){
+				$return[]=$group->where("id={$v['tagid']}")->find();
+			}
+		}
+		return $return;
+	}//end member_group
+	
 ///////////////////////////////群组的共用类————end//////////////////////////
-
+	
+	/**
+	   *一个话题内的成员
+	   *@date 2010-8-19
+	   *@time 下午05:58:23
+	   */
+	function member_thread($topid,$field="uid,username",$limit="0,10") {
+		//一个话题内的成员
+		$dao=D("Post");
+		$condition=array("topid"=>$topid);
+		return $dao->where($condition)->field($field)->group("uid")->order("dateline DESC")->limit($limit)->findAll();
+	}//end function_name
+	
+	/**
+	   *获取参与评论的成员
+	   *@date 2010-8-19
+	   *@time 下午05:16:13
+	   */
+	function member_comments($aid,$type,$field='*',$limit="0,10") {
+		//获取参与评论的成员
+		$dao=D("Comment");
+		$condition=array();
+		$condition['xid']=$aid;
+		$condition['types']=$type;
+		return $dao->where($condition)->field($field)->group("uid")->order("dateline DESC")->limit($limit)->findAll();
+	}//end member_comments
+	
 	/**
 	 *搜索
 	 *@date 2010-6-30
@@ -1054,9 +1216,49 @@ class CommonAction extends Action{
 	 */
 	public function so() {
 		//搜索
-		$key=Input::getVar($_REQUEST['key']);
+		$key=Input::getVar($_GET['key']);
+		$condition=array();
 		
+		
+		$page=array();
+		$page['title']=$key.'  -  BeingfunChina 缤纷中国';
+		$page['keywords']=$key;
+		$page['description']='Search '.$key;
+		$this->assign('page',$page);
+		
+		$this->assign('city_type',$this->_get_tree(1000));
+		$this->assign('classifieds_type',$this->_get_tree(1));
+		$this->display();
 	}//end so
+	
+	/**
+	   *高级搜索
+	   *@date 2010-10-9
+	   *@time 下午04:34:47
+	   */
+	function advso() {
+		//高级搜索
+		
+		$this->assign('city_type',$this->_get_tree(1000));
+		$this->assign('classifieds_type',$this->_get_tree(1));
+		$this->display();
+	}//end advso
+	
+	/**
+	   *查询指定话题的相册图片组
+	   *@date 2010-8-13
+	   *@time 下午06:34:09
+	   */
+	protected function get_album($aid,$xtype) {
+		//查询指定话题的相册图片组
+		$dao=D("Pic");
+		$condition=array();
+		$condition['xid']=$aid;
+		$condition['xtype']=$xtype;
+		$condition['is_show']=1;
+		$picarr=$dao->where($condition)->findAll();
+		return $picarr;
+	}//end get_album
 	
 ///////////////////////////校验权限/////////////////////////
 	/**
@@ -1072,5 +1274,78 @@ class CommonAction extends Action{
 		return $dao->query($sql);
 		//dump($dao->query($sql));
 	}//end _r
+	
+	
+	/**
+	   *发送短消息
+	   *@date 2010-9-29
+	   *@time 下午05:41:19
+	   */
+	function pm() {
+		//发送短消息
+		if(!$this->_is_login()){
+			$this->error("Login please.",$_REQUEST['is_ajax']);
+		}
+		if(Input::getVar($_REQUEST['fromusername'])&&empty($_REQUEST['fromuid'])){
+			$member=D("Members");
+			$condition=array('username'=>Input::getVar($_REQUEST['fromusername']));
+			$info=$member->where($condition)->find();
+			if($info['id']){
+				$fromuid=$info['id'];
+			}else{
+				$this->error("Wrong user name!",$_REQUEST['is_ajax']);
+			}
+		}else{
+			$fromuid=Input::getVar($_REQUEST['fromuid']);
+		}
+		$content=Input::getVar($_REQUEST['content']);
+		$title=Input::getVar($_REQUEST['title']);
+		if (!empty($fromuid)) {
+			if(empty($content)){
+				$this->error('You must fill in the field of "Content".',$_REQUEST['is_ajax']);
+			}
+			if(empty($title)){
+				$this->error('You must fill in the field of "Title".',$_REQUEST['is_ajax']);
+			}
+			$data=array();
+			$data['fromuid']=$fromuid;
+			$data['content']=nl2br(remove_xss($content));
+			$data['title']=$title;
+			$data['itype']=Input::getVar($_REQUEST['itype']);
+			$data['xid']=Input::getVar($_REQUEST['xid']);
+			$dao=D("Pm");
+			$vo=$dao->create($data);
+			if($vo){
+				$id=$dao->add($vo);
+				if($id){
+					$this->success('sucess.',$_REQUEST['is_ajax']);
+				}else{
+					$this->error('failure.',$_REQUEST['is_ajax']);
+				}
+			}else{
+				$this->error($dao->getError(),$_REQUEST['is_ajax']);
+			}
+		}else{
+			$this->error("Wrong parameter!");
+		}
+	}//end pm
+	
+	/**
+	   *检查短信
+	   *@date 2010-10-9
+	   *@time 下午03:44:43
+	   */
+	protected function ckh_pm() {
+		//检查短信
+		$dao=D("Pm");
+		$condition=array();
+		$condition['fromuid']=$this->user['uid'];
+		$arr=array();
+		$all['all']=$dao->where($condition)->count();
+		$condition['ifnew']='1';
+		$all['new']=$dao->where($condition)->count();
+		return $all;
+	}//end ckh_pm
+	
 }//END CommonAction
 ?>

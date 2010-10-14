@@ -14,7 +14,7 @@
                     <a href="__APP__/Cp/ch_password">Modify Password</a>
                 </div>
                 <div class="information">
-                    <!--img src="__PUBLIC__/default/images/xinfeng.gif" alt="f" /><a href="__APP__/Cp/my_message">( 20 / 80 )</a-->
+                    <img src="__PUBLIC__/default/images/xinfeng.gif" alt="f" /><a href="__APP__/Cp/my_message">( {$pmnum['new']} / {$pmnum['all']} )</a>
 					<span><a href="__APP__/Cp/my_stuff">My Favorite</a></span>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <br/-->
                 <a href="__APP__/Cp/event_my_post">I’ve initiated</a>
                 <br/>
-				<a href="__APP__/Cp/event_create">+Initiated</a>
+				<a href="__APP__/Cp/event_create">+Initiate Event</a>
             </div>
         </div>
         <div class="memcp-groups">
@@ -60,7 +60,7 @@
                 <img src="__PUBLIC__/img/cp/zhanh.gif">Fairs 
             </div>
             <div class="neirong">
-                <a href="__APP__/Cp/fair_latest">Latest</a>
+                <a href="__APP__/Cp/fair_latest">Latest Fairs</a>
                 <br/>
                 <a href="__APP__/Cp/fair_focus">My Focus</a>
                 <br/>
@@ -80,7 +80,7 @@
                 <br/>
                 <a href="__APP__/Cp/my_comments">I’ve Commented</a>
                 <br/>
-                <a href="__APP__/Cp/my_post_classifieds">+Post a Classifieds</a>
+                <a href="__APP__/Cp/my_post_classifieds">+Post Classified</a>
                 <br/>
             </div>
         </div>
@@ -96,6 +96,12 @@
                 <a href="__APP__/Cp/my_cityguide_repor">Report Correction</a>
                 <br/>
                 <a href="__APP__/Cp/reg_cityguide_post">To Contribute</a>
+<php>
+	if($_SESSION["info"]['extcredits8']=='1'){
+</php>
+                <br/>
+                <a href="__APP__/Cp/my_post_cityguide">+Post City Guide</a>
+<php>}</php>
             </div>
         </div>
         <!--<div class="memcp-groups">
@@ -112,7 +118,7 @@
             </div>
         </div>-->
 
-<if condition="$_SESSION['username']=='iicc' || $_SESSION['username']=='bfcadmin' || $_SESSION['username']=='yeahbill' || $_SESSION['username']=='alex'">
+<if condition="$_SESSION['username']=='iicc' || $_SESSION['username']=='bfcadmin' || $_SESSION['username']=='yeahbill' || $_SESSION['username']=='Alex'">
 		<div class="memcp-groups">
             <div class="memcp-groups-bg">
                 <img src="__PUBLIC__/img/cp/wenz.gif">Articles
@@ -136,6 +142,8 @@
                 <a href="__APP__/Mcp/user">User</a>
                 <br/>
                 <a href="__APP__/Mcp/stat">Statistics</a>
+                <br/>
+                <a href="__APP__/Mcp/links">Links</a>
                 <br/>
             </div>
         </div>

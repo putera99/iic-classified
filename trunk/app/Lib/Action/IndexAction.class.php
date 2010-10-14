@@ -9,24 +9,27 @@ class IndexAction extends CommonAction{
 	  */
 	function _initialize() {
 		//预处理
+		parent::_initialize();
 		if (intval($_GET['cid'])){
 			$this->pcid=intval($_GET['cid']);
 		}else{
-			$this->_set_cid();
-			$this->pcid=$this->cid;
+			//$this->_set_cid();
+			//$this->cid=empty($this->user['usercid'])?$_SESSION['cid']:$this->user['usercid'];
+    		$this->cid=empty($this->cid)?cookie('cid'):$this->cid;
+			$this->pcid=empty($this->cid)?'0':$this->cid;
 		}
-		parent::_initialize();
+
 	}//end _initialize()
 	
 	
     public function index(){
     	$this->assign('pick',$this->_new_list(2001,'h','0,1',$this->pcid));
     	$this->assign('pick2',$this->_new_list(2001,'p','0,2',$this->pcid));
-    	$this->assign('pick8',$this->_new_list(2001,'','2,8',$this->pcid));
+    	$this->assign('pick8',$this->_new_list(3001,'h','0,8',$this->pcid));
     	$this->assign('do',$this->_new_list(2004,'','0,1',$this->pcid));
     	//$this->assign('biz_news',$this->_new_list(2003,'','0,10'));
     	
-    	$group=$this->_get_group('hot');
+    	$group=$this->_get_group('hot','0,3');
     	$this->assign('group',$group);
     	
     	$this->assign('city_type',$this->_get_tree(1000));
@@ -49,45 +52,79 @@ class IndexAction extends CommonAction{
     	$this->assign('fair',$fair);
     	
     	$page=array();
-		$page['title']='BeingfunChina';
-		$page['keywords']='BeingfunChina';
-		$page['description']='BeingfunChina';
-		$this->assign('page',$page);
-		
-		$chau_list=array();
-		/*$chau_list['0']['id']='1';
-		$chau_list['0']['name']='Asia';
-		$chau_list['0']['ename']='asia';*/
-		
-		$chau_list['1']['id']='2';
-		$chau_list['1']['name']='Europe';
-		$chau_list['1']['ename']='europe';
-		$chau_list['1']['url']='http://www.listenlive.eu';
-		
-		/*$chau_list['2']['id']='3';
-		$chau_list['2']['name']='Africa';
-		$chau_list['2']['ename']='africa';
-		
-		$chau_list['3']['id']='4';
-		$chau_list['3']['name']='North America';
-		$chau_list['3']['ename']='northa_merica';
-		
-		$chau_list['4']['id']='5';
-		$chau_list['4']['name']='South America';
-		$chau_list['4']['ename']='south_america';
-		
-		$chau_list['5']['id']='6';
-		$chau_list['5']['name']='Oceania';
-		$chau_list['5']['ename']='oceania';
-		
-		$chau_list['6']['id']='7';
-		$chau_list['6']['name']='Antarctica';
-		$chau_list['6']['ename']='antarctica';*/
-		
-		$this->assign('chau',$chau_list);
-		
-		$cityname=array(1=>array('GUANGZHOU','CH006'),2=>array('BEIJING','CH002'),3=>array('SHANGHAI','CH024'),4=>array('SHENZHEN','CH006'));
-		$this->assign('cityname',$cityname[$this->pcid]);
+        $page['title']='缤纷中国 Beingfunchina: Being fun in China, start with us!';
+        $page['keywords']='缤纷中国,City Guide, Classifieds, Feature Columns, China Fairs, Events, E-magazines, Groups, Beijing, shanghai, Guangzhou, Shenzhen, China, jobs, property, service, commerce, personal, arts and culture, bars, education, hotel, leisure, restaurant, shopping, consulates, health, banking, cafes, agencies, web resource';
+        $page['description']='缤纷中国 Beingfunchina is an English website providing practical and localized information, supporting free posts of classifieds and facilitating interpersonal communication for foreigners in China. Our channels include City Guide, Classifieds, Feature Columns, China Fairs, Events, E-magazines and Groups. At present, our target cities include Beijing, Shanghai, Guangzhou and Shenzhen. To explore more cities is within our future development plan.';
+        $this->assign('page',$page);
+        $ad=array();
+        $ad['right']='';
+        $ads=M("Ad");
+        $condition=array();
+        $condition['wz']='index';
+        $condition['is_show']='1';
+        $condition['begintime']=array('lt',time());
+        $condition['endtime']=array('gt',time());
+        $condition['_string']="FIND_IN_SET('".$this->pcid."',`cid`) > 0";
+        $adlist=$ads->where($condition)->findAll();
+        shuffle($adlist);
+        foreach($adlist as $adl){
+            if($adl['type']=='banner'){
+                if(empty($adl['adcode'])){
+                    $ad['banner'][]='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a>';
+                }else{
+                    $ad['banner'][]=$adl['adcode'];
+                }
+            }elseif($adl['type']=='right'){
+                if(empty($adl['adcode'])){
+                    $ad['right'].='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a><br>';
+                }else{
+                    $ad['right'].=$adl['adcode'];
+                }
+            }elseif($adl['type']=='left'){
+            	if(empty($adl['adcode'])){
+                    $ad['left'].='<a href="'.jump($adl['adlink'],$adl['id']).'" target="'.$adl['isclose'].'" alt="'.$adl['title'].'"><img src="'.$adl['picurl'].'" /></a><br>';
+                }else{
+                    $ad['left'].=$adl['adcode'];
+                }
+            }
+        }
+        $this->assign('ad',$ad);
+
+        $chau_list=array();
+        /*$chau_list['0']['id']='1';
+        $chau_list['0']['name']='Asia';
+        $chau_list['0']['ename']='asia';*/
+
+        $chau_list['1']['id']='2';
+        $chau_list['1']['name']='Europe';
+        $chau_list['1']['ename']='europe';
+        $chau_list['1']['url']='http://www.listenlive.eu';
+
+        /*$chau_list['2']['id']='3';
+        $chau_list['2']['name']='Africa';
+        $chau_list['2']['ename']='africa';
+
+        $chau_list['3']['id']='4';
+        $chau_list['3']['name']='North America';
+        $chau_list['3']['ename']='northa_merica';
+
+        $chau_list['4']['id']='5';
+        $chau_list['4']['name']='South America';
+        $chau_list['4']['ename']='south_america';
+
+        $chau_list['5']['id']='6';
+        $chau_list['5']['name']='Oceania';
+        $chau_list['5']['ename']='oceania';
+
+        $chau_list['6']['id']='7';
+        $chau_list['6']['name']='Antarctica';
+        $chau_list['6']['ename']='antarctica';*/
+
+        $this->assign('chau',$chau_list);
+
+        $cityname=array(1=>array('GUANGZHOU','CH006'),2=>array('BEIJING','CH002'),3=>array('SHANGHAI','CH024'),4=>array('SHENZHEN','CH006'));
+        $incity=empty($this->pcid)?$cityname['2']:$cityname[$this->pcid];
+        $this->assign('cityname',$incity);
     	$this->display();
     }
     
@@ -105,7 +142,9 @@ class IndexAction extends CommonAction{
 		$condition['ismake']='1';
 		$condition['showstart']=array('lt',$time);
 		$condition['showend']=array('gt',$time);
-		$condition['cid']=$this->pcid;
+		if($this->pcid){
+			$condition['cid']=$this->pcid;
+		}
 		$list=$dao->where($condition)->order("showstart DESC")->limit("0,6")->findAll();
 		return $list;
     }//end new_event

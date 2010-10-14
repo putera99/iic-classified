@@ -39,7 +39,7 @@ class ArcAction extends CommonAction{
 		$now=time();
 		import("ORG.Util.Page");
 		$dao=D("Archives");
-		//$count=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
+		//$count=$dao->where("((typeid={$typeid} AND (cid={$this->pcid}) OR cid=0) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
 		$count=$dao->where("$str AND ismake=1")->order("pubdate DESC")->count();
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
@@ -60,7 +60,7 @@ class ArcAction extends CommonAction{
 		$info=$arctype->where("id=$typeid")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina':$info['seotitle'].'  -  BeingfunChina';
+		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina 缤纷中国':$info['seotitle'].'  -  BeingfunChina 缤纷中国';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
@@ -69,7 +69,7 @@ class ArcAction extends CommonAction{
 			$reinfo=$arctype->where("id={$info['reid']}")->find();
 			$this->assign('reinfo',$reinfo);
 		}
-
+		$this->assign('group',$this->_get_group('new','0,6'));
 		$this->display();
 	}//end ls
 	
@@ -99,18 +99,54 @@ class ArcAction extends CommonAction{
 		if(empty($info)){
 			$this->error("is null!");
 		}
+		//dump($info);
+		if(!empty($info['reurl'])&&$info['reurl']!='http://'){
+			redirect($info['reurl']);
+		}
 		$info['content']=$dao->relationGet("arc");
 		
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=$info['title'].'  -  BeingfunChina';
+		$page['title']=$info['title'].'-'.$info['keywords'].' - BeingfunChina 缤纷中国';
 		$page['keywords']=$info['keywords'];
 		$page['description']=$info['description'];
 		$this->assign('page',$page);
 		
 		$this->assign('dh',$this->_get_dh($info['typeid']));
-		
+		$this->assign('group',$this->_get_group('new','0,6'));
+		$this->assign("otherarc",$this->otherarc($info['typeid']));
 		$this->display();
 	}//end show
 	
+	/**
+	   *其他文章
+	   *@date 2010-9-28
+	   *@time 下午03:04:38
+	   */
+	protected function otherarc($cat,$order='pubdate DESC',$limit="0,5") {
+		//其他文章
+		$dao=D("Archives");
+		$arctype=D("Arctype");
+		$info=$arctype->where("id=$cat")->find();
+		
+		if($info['ispart']==1){
+			$small=$arctype->where("reid=$cat")->field("id")->findAll();
+			$str='';
+			foreach ($small as $v){
+				$str.=$v['id'].',';
+			}
+			$str='typeid IN ('.trim($str,',').')';
+		}else{
+			$str="typeid={$cat}";
+		}
+		//信息列表
+		$now=time();
+		$data=$dao->where("$str AND ismake=1")->order($order)->limit($limit)->findAll();
+		//dump($dao->getLastSql());
+		if($data){
+			return $data;
+		}else{
+			return false;
+		}
+	}//end other
 }//end ArcAction

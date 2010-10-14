@@ -54,16 +54,16 @@ class BizAction extends CommonAction{
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
-		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>'%first% %upPage%  %prePage%  %linkPage%  %nextPage% %downPage% %end%');
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		$data=$dao->where($condition)->limit($limit)->order("id DESC")->findAll();
 		$this->assign('data',$data);
 		
 		$page=array();
-		$page['title']='China Biz  -  BeingfunChina';
-		$page['keywords']="China,Biz,Fair";
-		$page['description']="China,Biz,Fair";
+		$page['title']='China Fairs provides information about China’s fairs China Biz / China Fairs  -  BeingfunChina 缤纷中国';
+		$page['keywords']="China,Biz,Fair,information,latest,business,opportunities,缤纷中国";
+		$page['description']="缤纷中国 China Fairs provides information about China’s fairs, latest business policies and business opportunities, etc.";
 		$this->assign('page',$page);
 		
 		$this->display();
@@ -165,7 +165,7 @@ class BizAction extends CommonAction{
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
-		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>' %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>'%first% %upPage%  %prePage%  %linkPage%  %nextPage% %downPage% %end%');
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->limit($limit)->findAll();
@@ -175,7 +175,7 @@ class BizAction extends CommonAction{
 		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].' - Fair -  BeingfunChina':$info['seotitle'].' - Fair  -  BeingfunChina';
+		$page['title']=empty($info['seotitle'])?$info['typename'].' - Fair -  BeingfunChina 缤纷中国':$info['seotitle'].' - Fair  -  BeingfunChina 缤纷中国';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		if($info['reid']!='1232'){
@@ -224,14 +224,30 @@ class BizAction extends CommonAction{
 			$condition['id']=$aid;
 		}
 		$info=$dao->where($condition)->find();
+		if($info['ismake']=='0'){
+			$this->error("error: the information has been deleted!");
+		}
+		if(empty($info)){
+			$this->error("sorry,the information is not available now.<br/>您查看的信息暂时空缺。");
+		}
 		$lan=explode('_',$info['writer']);
 		$lang['cn']=$lan['0'].'_CN';
 		$lang['en']=$lan['0'].'_EN';
 		$this->assign('lang',$lang);
 		$info['_fair']=$dao->relationGet("fair");
+		
+		$album=$this->get_album($info['id'],$info['channel']);
+		if($info['picurl']){
+			$info['picurl']=str_replace('../Public/Uploads','/Public/Uploads',$info['picurl']);
+		}else{
+			$info['picurl']=out_images($album['0'],'s');
+		}
+		$info['albumnum']=count($album);
+		$this->assign("album",$album);
+		
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=$info['title'].' China Biz  -  BeingfunChina';
+		$page['title']=$info['title'].'-'.$info['keywords'].' - BeingfunChina 缤纷中国';
 		$page['keywords']=$info['keywords'].',fair,china,biz';
 		$page['description']=$info['description'];
 		$this->assign('page',$page);

@@ -21,14 +21,16 @@
 				<dt class="w150">Action</dt>
 <volist name="classifieds" id="v">
                 	<dd>
-						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a></span>
+						<span class="w320"><a href="__APP__/Classifieds/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']}</a>
+							<if condition="$v['ismake']=='0'"><a href="__URL__/del_arc/info/{$v['channel']}_{$v['id']}/act/show/to/{$tourl}" style="color:#ff0000;">[[show]]</a></if>
+						</span>
 						<span class="w100 c">{$v['channel']|get_type}</span>
 						<span class="w50 c">{$v['albumnum']}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
 						<span class="w150 c">
 							<a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Photos</a>\\
 							<a href="__URL__/my_edit_classifieds/info/{$v['channel']}_{$v['id']}">Edit</a>\\
-							<a href="__URL__/del_arc/info/{$arc_info['channel']}_{$arc_info['id']}/to/my_classifieds_post">remove</a>
+							<a href="__URL__/del_arc/info/{$v['channel']}_{$v['id']}/to/{$tourl}">remove</a>
 						</span>
 					</dd>
                     

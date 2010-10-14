@@ -23,4 +23,10 @@ class MembersModel extends Model{
 		array('regdate','time',1,'function'),
 		array('lastvisit','time',3,'function'),
 	);
+	
+	protected $_validate=array(
+		array("username",'username','Sorry, Username should contain at least 4 characters and the first character should be letter.',1),
+		array("email",'email','Sorry, email Format error.',1),
+		array("nationality",'require','Sorry, nationality Format error.',1),
+	);
 }//end MemberModel

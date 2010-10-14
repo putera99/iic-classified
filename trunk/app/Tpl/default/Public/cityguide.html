@@ -1,16 +1,16 @@
 <div class="ul">
     <div class="li bg-h">
-    <a href="__APP__/CityGuide/index">City Guide</a>
+    <a href="__APP__/cityguide<if condition="$cid">/{$cid}</if>.html">City Guide</a>
     </div>
     <volist name="city_type" id="v">
     	<dl id="cg_{$v['id']}" class="s_cg">
     		<if condition="$v['_son']">
     			<dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
 				<volist name="v['_son']" id="vs">
-					<dd class="cg_{$v['id']} none"><a href="__APP__/CityGuide/ls/id/{$vs['id']}/cid/{$cid}" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+					<dd class="cg_{$v['id']} none"><a href="__APP__/cglist/{$vs['id']}<if condition="$cid">/{$cid}</if>.html" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
 				</volist>
 			<else/>
-				<dt><a href="__APP__/CityGuide/ls/id/{$v['id']}/cid/{$cid}" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+				<dt><a href="__APP__/cglist/{$v['id']}/{$cid}.html" title="{$v['seotitle']}">{$v['typename']}</a></dt>
     		</if>
         </dl>
     </volist>

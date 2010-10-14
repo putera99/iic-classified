@@ -1,66 +1,232 @@
-<include file="Public:head" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{$page['title']}</title>
+	<meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
+	<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
+	<script src="__PUBLIC__/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/js/jquery.simplemodal.js"></script>
+	<script src="__PUBLIC__/js/jquery.form.js"></script>
+	<meta name="keywords" content="{$page['keywords']}" />
+	<meta name="description" content="{$page['description']|strip_tags}" />
+	<script type="text/javascript">
+	var HOST		= window.location.host;
+	var Per_host	="http://"+HOST;
+	var JS_PATH		="../Public/js/";
+	var IMG_PATH	="../Public/images/";
+	var URL			='__URL__';
+	var APP			='__APP__';
+	var PUBLIC		='../Public/';
+	var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
+	$(document).ready(function () {
+		var tourl=APP+'/Public/ajax_is_login';
+		$('a.post_msg').click(function (e) {
+			e.preventDefault();
+			$.post(tourl,'',function(data){
+				if(data['status']==1){
+					$('#basic-modal-content').modal();
+				}else{
+					alert(data['info']);
+					$('#login').modal();
+				}
+			},'json');
+		});
+
+		var option={dataType:'json',success:processJson};
+		var option_login={dataType:'json',success:login};
+	    $('#add_post').ajaxForm(option);
+	    $('#post_login').ajaxForm(option_login);
+		
+	});
+	function processJson(data){
+		alert(data['info']);
+		if(data['status']==1){
+			$.modal.close();
+		}
+	}
+	function login(data){
+		if(data['status']==1){
+			alert(data['info']);
+			$.modal.close();
+			//$('#basic-modal-content').modal();
+		}else{
+			alert(data['info']);
+
+		} 
+	}
+
+	</script>
+	<script src="__PUBLIC__/js/iic.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="__PUBLIC__/js/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	<script src="__PUBLIC__/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+	#simplemodal-overlay {background-color:#000; cursor:wait;}
+	#simplemodal-container {height:320px; width:600px; color:#111; background-color:#eee; border:4px solid #444; padding:12px;}
+	#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; margin-bottom:12px; padding:4px 6px 6px;}
+	#simplemodal-container a {color:#ddd;}
+	#simplemodal-container a.modalCloseImg {background:url(__PUBLIC__/default/images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+	#simplemodal-container #basic-modal-content {padding:8px;}
+</style>
+</head>
+<body>
+<!--top-->
+<div id="top">
+    <div id="header-h">
+        <div class="header-left">
+            <span>
+			<empty name="Think.SESSION.uid">
+				{$now} | <a href="__APP__/Public/login/to/{$tourl}">Login</a> / <a href="__APP__/Public/register/to/{$tourl}">Register</a></span>
+			<else/>
+				 Welcome {@username}!   {$now}  |  <a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
+			</empty>
+        </div>
+        <div class="colorz">
+            <!--ul>
+                <li>Pick a Theme:</li>
+                <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color3.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
+                <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
+            </ul-->
+        </div>
+    </div>
+    <div class="top-content">
+        <div class="top-logo">
+            <h1><a href="__APP__/Public/select_city"><img src="__PUBLIC__/img/logo.jpg" alt="{&P_NAME}" /></a></h1>
+            <div class="top-city">
+                <h2><a href="__APP__/Public/index/cid/2/to/{:myencode('/Classifieds/index')}" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/Public/index/cid/3/to/{:myencode('/Classifieds/index')}" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/Public/index/cid/1/to/{:myencode('/Classifieds/index')}" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/Public/index/cid/4/to/{:myencode('/Classifieds/index')}" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+				<span style="float:left; margin-right:10px; font-size:10px; margin-top:8px;">
+					<if condition="cookie('cid')">
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es2.gif" id="remember" class="remember_1" alt="Remember my choice" /></a>
+					<else/>
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es.gif" id="remember" class="remember_0" alt="Remember my choice" /></a>
+					</if>
+					
+				</span>
+            </div>
+			
+        </div>
+        <div class="clear">
+        </div>
+        <div class="top-nav">
+            <!--div class="search">
+                <img src="__PUBLIC__/default/images/search.gif" alt="search" />
+            </div-->
+            <div class="nav">
+                <ul>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index.html">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide.html">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds.html">Classifieds</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/biz.html">China Fairs</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event.html">Events</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index.html">Magazines</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/group.html">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bgh"></div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<!--top-->
 <div id="main">
     <div class="right">
+<if condition="$posts">
         <div class="next_lssue">
             <div class="next-bg">
                 Relevant Posts
             </div>
             <div class="next-n">
                 <ul>
-<if condition="posts">
+
 	<volist name="posts" id="v">
                     <li>
                         1、Philosophy of the people, 
                         has become the  professional  ...
                     </li>
 	</volist>
-</if>
+
                 </ul>
             </div>
         </div>
+</if>
+<if condition="$group">
         <div class="main-group">
             <div class="main-bg">
                 Relevant Groups
             </div>
-<if condition="$group">
-	<volist name="group" id="v">
-            <div class="main-n">
-                <h5>will explore the "naked wedding...</h5>
-                <p>
-                    <img src="__PUBLIC__/default/images/pic5.gif" alt="pic01" />so I'm selling my 1 Year old Giant Khan with wheel lock,...
-                </p>
-            </div>
-	</volist>
+        <volist name="group" id="g">
+               <dl class="group-x">
+                    <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                    <dd>
+                        <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                        <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+                    </dd>
+                </dl>
+		</volist>
+        </div>
 </if>
+        <div class="main-group m10" style="text-align:center">
+			{$ad['right']}
+        	<script type="text/javascript">
+			google_ad_client = "pub-0787067378614221";
+			/* 200x200, 创建于 10-8-27 cityguide_classifieds_c_r */
+			google_ad_slot = "5468157928";
+			google_ad_width = 200;
+			google_ad_height = 200;
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
         </div>
     </div>
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                <a href="/">Home</a> > <a href="__APP__/Classifieds/index/cid/{$cid}">Classifieds</a> > 
-				<if condition="$dh[_reid]"><a href="__APP__/Classifieds/ls/id/{$dh[_reid]['id']}/cid/{$cid}">{$dh[_reid]['typename']}</a> ></if>
-				<a href="__APP__/Classifieds/ls/id/{$dh['id']}/cid/{$cid}">{$dh['typename']}</a>
+				<span style="float:right; margin-right:10px;">
+                <if condition="$cp">{$cp}</if>
+				<a href="__APP__/Cp/my_post_classifieds" target="_blank">+Post classifieds</a></span>
+                <a href="/index.html">Home</a> > <a href="__APP__/classifieds/{$cid}.html">Classifieds</a> > 
+				<if condition="$dh[_reid]"><a href="__APP__/clss/{$dh[_reid]['id']}/{$cid}.html">{$dh[_reid]['typename']}</a> ></if>
+				<a href="__APP__/clss/{$dh['id']}/cid/{$cid}.html">{$dh['typename']}</a>
             </div>
             <div class="content-n">
                  <h1>{$info['title']}</h1>
-				 <if condition="$info['picurl']">
-                    <div class="right">
-                        <img src="{$info['picurl']}" alt="{$info['title']} photos" />
+                    <div class="right album">
+                        <a href="{$info['picurl']|toImg=classifieds}" rel="prettyPhoto[unusual]"><img src="{$info['picurl']|toImg=classifieds}" alt="{$info['title']} pictures" /></a>
                         <p>
-                        	{$info['albumnum']} photo
+                        	<if condition="$info['albumnum']==0">
+                                
+                            <else/>
+                                <volist name="album" id="va">
+                                	<if condition="$i==1">
+                                    <a href="{$va|out_images}" title="{$va['title']}" rel="prettyPhoto[unusual]">{$info['albumnum']} pictures</a>
+                                    <else/>
+                                    <a href="{$va|out_images}" title="<b>{$va['title']}</b><br/>{$va['msg']}" style="display:none;" rel="prettyPhoto[unusual]">{$va['title']}</a>
+                                    </if>
+                                </volist>
+                            </if>
                         </p>
                     </div>
-                	</if>
                 <div class="content-life">
 <switch name="info['channel']">
     <case value="4">{//JObs}
                             <p>
                                 Type:{$info['itype']}<br>
 								Category:{$info['category']}<br>
-								Valid for:{$info['showstart']|toDate='d/m/Y'}--{$info['showend']|toDate='d-m-Y'}<br>
+								Valid for:{$info['showstart']|toDate='d/m/Y'}--{$info['showend']|toDate='d/m/Y'}<br>
 								Position:{$info['position']}<br>
-								Salary:{$info['_jobs']['salary']}<br>
-								Experience:{$info['_jobs']['experience']}<br>
+								Salary:{$info['_jobs']['salary']} RMB<br>
+								Experience:{$info['_jobs']['experience']} months<br>
 								Job Located in:{$info['_jobs']['joblocated']}<br>
                             </p>
 	<php>$content=$info['_jobs']['content']</php>
@@ -115,25 +281,39 @@
 </switch>
 					</div>
 					<div class="i_content">
+                    	<div align="left">
+						<script type="text/javascript"><!--
+						google_ad_client = "pub-0787067378614221";
+						/* 468x60, 创建于 10-8-27 classifieds */
+						google_ad_slot = "2236147769";
+						google_ad_width = 468;
+						google_ad_height = 60;
+						//-->
+						</script>
+						<script type="text/javascript"
+						src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+						</script>
+                        </div>
 						<h4>Description</h4>
                             <div class="con">
-                                {$content}
+                                {$content}<br/>
+                                <if condition="$info['keywords']"><p style="word-wrap:break-word;">Tags:{$info['keywords']}</p></if>
                             </div>
 		                    <ul>
 		                        <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
 		                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
 		                        </li>
 		                        <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
-		                            <a href="#2_{$info['channel']}_{$info['id']}">Save as favorite</a>
+		                            <a href="javascript:void(0);">Save as favorite</a>
 		                        </li>
 		                        <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
-		                            Report corrections
+		                            <a href="__APP__/Common/report/aid/{$info['channel']}_{$info['id']}">Report Abuse</a>
 		                        </li>
-								<li class="pm"><a href="#"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)</li>
+								<li class="pm"><a href="#" class="post_msg"><img src="__PUBLIC__/default/images/pic4.gif" alt="Send P.M" /></a>(Send P.M)</li>
 		                    </ul>
                 	</div>
 					
-                <div class="Comments">
+                <div class="comments">
                     <div class="biaoti">
                         <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
                     </div>
@@ -176,5 +356,53 @@
             </div>
         </div>
     </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$(".album a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+});
+</script>
+<div id="basic-modal-content" style="display:none;">
+<form action="__URL__/pm" method="post" id="add_post">
+	<input type="hidden" name="fromuid" value="{$info['uid']}" />
+    <input type="hidden" name="itype" value="{$info['channel']}" />
+    <input type="hidden" name="xid" value="{$info['id']}" />
+    <input type="hidden" name="is_ajax" value="1" />
+	<fieldset class="post">
+		<legend>Send P.M</legend>
+		<p>
+			<label for="title">Title:</label>
+			<input type="text" name="title" id="title" style="width:425px;" />
+		</p>
+		<p>
+			<label for="content">Content:</label>
+			<textarea name="content" id="content" cols="50" rows="8"></textarea>
+		</p>
+		<p style="text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
+<span id="v_title"></span>
+<span id="v_message"></span>
+</div>
+<div id="login" style="display:none;">
+<form action="__APP__/Public/check" method="post" id="post_login">
+	<input type="hidden" name="is_ajax" value="1" />
+	<fieldset class="post">
+		<legend>Login</legend>
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" name="username" id="username" style="width:200px;" />
+		</p>
+		<p>
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" style="width:200px;"/>
+		</p>
+		<p style=" text-align:right; padding-right:50px;">
+			<input type="submit" value="Submit" />
+		</p>
+	</fieldset>
+</form>
 </div>
 <include file="Public:foot" />

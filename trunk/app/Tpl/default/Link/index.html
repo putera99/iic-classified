@@ -1,0 +1,59 @@
+<include file="Public:head" />
+<div id="main">
+  <div class="right">
+    <div class="next lssue">
+      <div class="next-bg"> Partner Links </div>
+      <div class="next-n">
+        <ul>
+<if condition="$partner"><br />
+	<volist name="partner" id="v">
+            <li><a href="{$v['url']}"><img src="{$v['logo']|picurl}" width="200" height="60" alt="{$v['webname']}" /></a></li>
+	</volist>
+</if>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="n-life">
+    <div class="classifieds content">
+      <div class="content-bg"> <a href="/">Home</a> > Links </div>
+      <div class="content-n">
+        <h1>Links</h1>
+        <div class="i_content">
+          <div class="con">
+		  <style type="text/css">
+			.content table img{margin:10px 0;}
+		  </style>
+            <div class="content">
+              <table width="100%" cellspacing="5" cellpadding="5" style="table-layout: fixed; word-wrap: break-word;">
+                <tbody>
+                  <tr>
+                    <td align="left">
+<if condition="$other">
+	<volist name="other" id="v">
+    	<p><span style="font-size: 14px;"><u><strong>{$v['name']}:</strong></u></span></p>
+      <p>&nbsp; </p>
+      <p>{$v['text']}</p>
+      <p>&nbsp; </p>
+      <p>&nbsp; </p>
+    </volist>
+</if>
+                      <p> <strong><span style="font-size: 12px;">Link Exchange:<br>
+                        </span></strong></p>
+                      <p> <span style="font-family: verdana,geneva,sans-serif;"><span style="font-size: 12px;"><br>
+                        QQ: 1183227395<br>
+                        </span></span></p>
+                      <p><span style="font-size: 12px;">MSN: <a href="mailto:beingfunchina@hotmail.com">beingfunchina@hotmail.com</a><br>
+                        </span></p>
+                      <p><span style="font-size: 12px;">Email: <a href="mailto:beingfunchina365@gmail.com">beingfunchina365@gmail.com</a></span></p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Public:foot" /> 

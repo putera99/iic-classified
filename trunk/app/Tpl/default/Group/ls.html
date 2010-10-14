@@ -20,7 +20,7 @@
                 <ul>
 	<volist name="son" id="v">
                     <li>
-                        <a href="__URL__/ls/id/{$v['id']}">{$v['title']}</a>({$v['count']})
+                        <a href="__APP__/glist/{$v['id']}.html">{$v['title']}</a>({$v['count']})
                     </li>
 	</volist>
                 </ul>
@@ -57,12 +57,12 @@
     <div class="n-life">
         <div class="classifieds_content">
             <div class="content-bg">
-                <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a> > 
+                <a href="__APP__/index.html">Home</a> > <a href="__APP__/group.html">Groups</a> > 
                 <if condition="$dh">
                     <if condition="$dh[_pid]">
-                        <a href="__APP__/Group/ls/id/{$dh[_pid]['id']}">{$dh[_pid]['title']}</a> >
+                        <a href="__APP__/grps/{$dh[_pid]['id']}.html">{$dh[_pid]['title']}</a> >
                     </if>
-                    <a href="__APP__/Group/ls/id/{$dh['id']}">{$dh['title']}</a> > 
+                    <a href="__APP__/grps/{$dh['id']}.html">{$dh['title']}</a> > 
                 </if>
                 <if condition="$kw">
                     Search "{$kw}"
@@ -77,9 +77,9 @@
                 </div>
                 <volist name="list" id="v">
                 	<div class="thread">
-						<h3><a href="__URL__/show/aid/{$v['id']}">{$v['groupname']}</a></h3>
+						<h3><a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a></h3>
 						<div class="face">
-							<img src="{$v['pic']}" alt="{$v['groupname']}" />
+							<img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" />
 						</div>
 						<div class="message">
 							{$v['announcement']|String::msubstr=0,200}

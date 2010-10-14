@@ -22,8 +22,9 @@
 			<dd>
 				<h4>Login BeingFunChina!</h4>
 				<form action="__URL__/check" method="post">
+                <input type="hidden" name="to" value="{$to}" />
 				<p>
-					<label for="username">UserName:</label><br />
+					<label for="username">User Name:</label><br />
 					<input type="text" name="username" id="username" class="lan">
 				</p>
 				<p>
@@ -34,13 +35,13 @@
 					<input type="submit" value="Login">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="remember" />Remember Me
 				</p>
 				<p>
-					<a href="__APP__/Public/">Forgot your password?</a>
+					<a href="__URL__/getpassword.html" target="_blank">Forgot your password?</a>
 				</p>
 				</form>
 			</dd>
-			<dt>Don't have a BeingFunChina Account</dt>
+			<dt>Don't have a BeingFunChina Account?</dt>
 			<dd>
-				<span><a href="__APP__/Public/register/">Create New Account</a></span>
+				<span><a href="__APP__/Public/register.html">Create New Account</a></span>
 			</dd>
 		</dl>
 		<div class="bot"></div>

@@ -19,12 +19,12 @@
 			</div>
     	</div-->
         <div class="next_lssue">
-            <div class="next-bg">Latest Created Groups</div>
+            <div class="next-bg">Latest Groups</div>
             <div class="next-n">
                 <ul>
 <volist name="new" id="v">
                     <li>
-                        {$i}、<a href="__APP__/Group/show/aid/{$v['id']}">{$v['groupname']}</a>
+                        {$i}、<a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a>
                     </li>
 </volist>
                 </ul>
@@ -32,9 +32,9 @@
         </div>
     </div>
     <div class="n-life">
-        <div class="classifieds content">
+        <div class="classifieds_content">
             <div class="content-bg">
-               <a href="__APP__/">Home</a> > <a href="__APP__/Group/index">Groups</a>
+               <a href="__APP__/index.html">Home</a> > <a href="__APP__/group.html">Groups</a>
             </div>
             <div class="content-n">
                 <div class="welcome">
@@ -45,9 +45,9 @@
                 <div class="welcome-quan">
 <volist name="hot" id="v">
                     <div class="renshu">
-                        <h5><a href="__APP__/Group/show/aid/{$v['id']}">{$v['groupname']}</a></h5>
+                        <h5><a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a></h5>
                         <p>
-                            <a href="__APP__/Group/show/aid/{$v['id']}"><img src="{$v['pic']}" alt="{$v['groupname']}" /></a>Members:({$v['membernum']})
+                            <a href="__APP__/grps/{$v['id']}.html"><img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" /></a>Members:({$v['membernum']})
                         </p>
                     </div>
 </volist>

@@ -13,18 +13,18 @@
 <div id="main">
     <div class="mian-right">
         <div class="events_poular">
-            <a href="__APP__/">Home</a> > <a href="__APP__/Event/index">Events</a> > 
+            <a href="__APP__/index.html">Home</a> > <a href="__APP__/event.html">Events</a> > 
 			<if condition="$dh"><a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > </if>
         </div>
 <volist name="data" id="v">
         <div class="events_neibiao">
-            <span><a href="__URL__/show/aid/{$v['id']}"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
+            <span><a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
             <ul>
                 <li class="biaop">
-                    <a href="__URL__/show/aid/{$v['id']}">{$v['title']}</a>
+                    <a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a>
                 </li>
                 <li>
-                    Time: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}
+                    Date: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}
                 </li>
                 <li>
                     Location: {$v['maps']}
@@ -34,6 +34,7 @@
                 </li>
             </ul>
         </div>
+		<div class="clear"></div>
 </volist>
 
 		<div class="fanye">{$showpage_bot}</div>
@@ -67,6 +68,9 @@
 </volist>
             <li class="di-yuan"></li>
         </ul>
+        <div class="left_biz">
+        	{$ad['left']}
+        </div>
     </div>
 </div>
 <include file="Public:foot"/>
