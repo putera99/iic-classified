@@ -165,7 +165,7 @@ function zone(obj,id,name){
 					</p>
 					<p>
 						<label for="product">Products:</label>
-						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" value="{$data['content']['product']}" />
+                        <textarea name="product" id="product" cols="50" rows="5" />{$data['content']['product']|br2nl}</textarea>
 					</p>
 					<p>
 						<label for="website">Website:</label>

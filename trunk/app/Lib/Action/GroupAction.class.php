@@ -130,6 +130,15 @@ class GroupAction extends CommonAction{
 		$all_member=$this->get_gmember($info['id'],"","");
 		$this->assign('member_group',$this->member_group($all_member,"0,6"));
 		
+		//获取群组收藏
+		$mc=D("MtagCollection");
+		$condition=array();
+		$condition['gid']=$info['id'];
+		$condition['is_show']=1;
+		$mc_data=$mc->where($condition)->order("ctime DESC")->limit("0,10")->findAll();
+		$this->assign("collection",$mc_data);
+		
+		
 		$page=array();
 		$page['title']=$info['groupname'].'  -  BeingfunChina 缤纷中国';
 		$page['keywords']=$info['groupname'];

@@ -24,17 +24,21 @@ class PublicAction extends CommonAction{
 		if($cid){
 			$_SESSION['cid']=$cid;
 			cookie('cid',null);
+			$url='';
+			$title=$_GET['title']?'/'.$_GET['title']:'';
 			if ($_REQUEST['remember']) {
 				cookie('cid',$cid,array('expire'=>60*60*60*24*30));
 			}
 			if(empty($_REQUEST['to'])){
-				$this->redirect('/Index/index');
+				$url=array_search($cid,$this->cityname);
+				redirect("/index/".$url.".html");
 			}else{
 				$url=mydecode($_REQUEST['to']);
-				redirect($url.'/'.$cid.'.html');
+				//dump($_REQUEST);
+				redirect($url.'/'.array_search($cid,$this->cityname).$title.'.html');
 			}
 		}else{
-			$this->select_city();
+			$this->display("Public:select_city");
 		}
 	}//end index
 	
@@ -77,7 +81,7 @@ class PublicAction extends CommonAction{
 					$dao->where("id={$info['id']}")->save($data);
 					$str=$info['id'].'-_-'.$repw;
 					$repw=myencode($str);
-					$Title="From\"Beingfunchina.com\"The message, get your password!";
+					$Title="The massage is from Beingfunchina, please get your password back";
 					$Content="Hi,\n\t <br>Your ID on Beingfunchina.com is: \"{$info['username']}\" \n<br>(ID partially hidden for your privacy) \n \n \n<br>";
 					$Content.="You recently requested a new password to sign in to your account. To select a new password, click on the link below:\n\n";
 					$Content.="<br><br><A HREF='http://www.beingfunchina.com/Public/repassword/repw/{$repw}.html' target='_blank'>http://www.beingfunchina.com/Public/repassword/repw/{$repw}.html</A>\n <br>";
@@ -102,7 +106,9 @@ class PublicAction extends CommonAction{
 					$headers .= 'From: beingfunchina@gmail.com' . "\r\n" ;
 					//$headers .= 'Reply-To: webmaster@example.com' . "\r\n";
 					if(mail($info['email'], $Title, $Content,$headers)){
-						$msg="New password has been successfully sent to your mailbox, please watch for!";
+						
+						$this->assign("jumpUrl","/Public/login.html");
+						$this->success("New password has been successfully sent to your mailbox, please note!");
 					}else{
 						$msg="Failed to send e-mail. This may be due to wrong e-mail address or problems of the mail server.";
 					}
@@ -146,7 +152,8 @@ class PublicAction extends CommonAction{
 				$data['password']=md5($data['password']);
 				$data['repw']='';
 				$dao->where($condition)->save($data);
-				redirect("/index.html",3,"the successful activation of a new password.");
+				$this->assign("jumpUrl","/Public/login.html");
+				$this->success("you have sucessfully reset your password,please login.");
 			}else{
 				$this->error("Wrong parameter!");
 			}
@@ -164,7 +171,7 @@ class PublicAction extends CommonAction{
 		unset($_SESSION['info']);
 		$this->user='';
 		if(empty($_REQUEST['to'])){
-			$this->redirect('/Index/index');
+			redirect('/index.html');
 		}else{
 			$url=mydecode($_REQUEST['to']);
 			redirect($url);
@@ -286,7 +293,7 @@ class PublicAction extends CommonAction{
 	 */
 	function select_city() {
 		//选择城市
-		$this->display();
+		$this->display("Public:select_city");
 	}//end select_city
 	
 	/**
@@ -307,4 +314,18 @@ class PublicAction extends CommonAction{
 			$this->ajaxReturn("0",'User name "'.$val.'" already existed. Please select another one.','0');
 		}
 	}//end chk_info
+	
+	/**
+	   *天气预报
+	   *@date 2010-11-22
+	   *@time 下午02:57:49
+	   */
+	function weather_forecast() {
+		//天气预报
+		//$_SESSION['cid']=empty($_GET['cid'])?$_SESSION['cid']:$_GET['cid'];
+		$cityname = array (1 => array ('GUANGZHOU', 'CH006' ), 2 => array ('BEIJING', 'CH002' ), 3 => array ('SHANGHAI', 'CH024' ), 4 => array ('SHENZHEN', 'CH006' ) );
+		//$incity = empty ( $_SESSION['cid']) ? $cityname ['2'] : $cityname [$_SESSION['cid']];
+		$this->assign ( 'city_name', $cityname );
+		$this->display();
+	}//end weather_forecast
 }//END PublicAction

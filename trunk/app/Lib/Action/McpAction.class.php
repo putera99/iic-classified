@@ -313,6 +313,13 @@ class McpAction extends CpAction{
 		$page['description']='Post Magazine';
 		$this->assign('page',$page);
 		
+		if($_GET['act']=='edit'){
+			$id=Input::getVar($_GET['id']);
+			$dao=D("Magazines");
+			$data=$dao->where("id=$id")->find();
+			$this->assign("data",$data);
+		}
+		
 		$this->assign('content','Mcp:post_magazine');
 		$this->display("Cp:layout");
 	}//end post_art
@@ -324,55 +331,28 @@ class McpAction extends CpAction{
 	 */
 	function add_magazine() {
 		//增加新闻
-		$dao=D("Archives");
-		if(!empty($_FILES["picurl"]["name"])) {
-			$this->_upload('',251,356);
-		}
-		$_POST['my_content']=Input::getVar($_POST['my_content']);
+		$dao=D("Magazines");
 		$vo=$dao->create();
 		if($vo){
-			if (empty($_POST['my_content'])) {
-				$this->error("You must fill in the field of 'Summary'");
-			}
-			$vo['my_content']=nl2br($vo['my_content']);
-			if($vo['showstart']){
-				$t=explode('/',$vo['showstart']);
-				$vo['showstart']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
-			}else {
-				$vo['showstart']=time();
-			}
-			if($vo['showend']){
-				$t=explode('/',$vo['showend']);
-				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			$vo['middleimg']=trim($vo['middleimg'],',');
+			$vo['smallimg']=trim($vo['smallimg'],',');
+			$vo['content']=nl2br($vo['content']);
+			$t=explode('/',$vo['showtime']);
+			$vo['showtime']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
+			if($_POST['id']){
+				$dao->save($vo);
+				$aid=$_POST['id'];
 			}else{
-				$vo['showend']=$vo['showstart']+(60*60*24*365);
-			}
-			$vo['typeid']=3000;
-			$vo['channel']=14;
-			$kw=str_word_count($vo['my_content'],1);
-    			$keywords="";
-    			foreach ($kw as $vkw){
-    				$keywords.=$vkw.',';
-    			}
-    		$vo['keywords']=trim($keywords,',');
-    		$eid='';
-    		$xid=Input::getVar($_REQUEST['id']);
-    		if($xid){
-    			$aid=Input::getVar($_REQUEST['id']);
-    			$eid=$dao->where("id=$aid")->save($vo);
-    		}else{
 				$aid=$dao->add($vo);
-    		}
-    		//dump($dao->getLastSql());
-    		$actlog=$dao->getLastSql();
+			}
 			if ($aid) {
 				//echo "发布成功!";
-				$txt='<h4>Successful release. </h4><br><a href="/Magazine/show/aid/'.$aid.'">View articles </a>   /   ';
-				$txt.='<a href="/Cp/photo/info/'.$vo['channel'].'_'.$aid.'">Add pictures</a><br>';
-				$txt.='<a href="/Cp/post_art">Post articles</a>   /   ';
-				$txt.='<a href="/Cp/my_art">Back to the list </a><br>';
+				$txt='<h4>Successful release. </h4><br><a href="/Magazine/index/vol/'.$vo['vol'].'">View magazine </a>   /   ';
+				$txt.='<a href="/Mcp/photo/info/14_'.$aid.'">Add pictures</a><br>';
+				$txt.='<a href="/Mcp/post_magazine">Post magazine</a>   /   ';
+				$txt.='<a href="/Mcp/my_magazine">Back to the list </a><br>';
 				$txt.='You will be directed to the picture uploading page in three seconds! ';
-				$this->assign('jumpUrl','/Cp/photo/info/'.$vo['channel'].'_'.$aid);
+				$this->assign('jumpUrl','/Cp/photo/info/14_'.$aid);
 				$this->success($txt);
 			}else{
 				$this->error('Failed to update the main profile table. ');
@@ -390,27 +370,24 @@ class McpAction extends CpAction{
 	 */
 	function my_magazine() {
 		//发布新闻
-		$dao=D("Archives");
+		$dao=D("Magazines");
 		$condition=array();
-		$condition['channel']='12';
-		$condition['ismake']='1';
-    	$condition['uid']=$this->user['uid'];
     	$count=$dao->where($condition)->count();
 		$page=new Page($count,25);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
 		$limit=$page->firstRow.','.$page->listRows;
-    	$classifieds=array();
-    	$classifieds=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
-		$this->assign('classifieds',$classifieds);
+    	$magazine=array();
+    	$magazine=$dao->where($condition)->order("id DESC")->limit("$limit")->findAll();
+		$this->assign('magazine',$magazine);
 		//dump($dao->getLastSql());
 		$page=array();
-		$page['title']='My Articles -  My Control Panel -  BeingfunChina';
-		$page['keywords']='My Articles';
-		$page['description']='My Articles';
+		$page['title']='My magazine -  My Control Panel -  BeingfunChina';
+		$page['keywords']='My magazine';
+		$page['description']='My magazine';
 		$this->assign('page',$page);
 		
-		$this->assign('content','Cp:my_art');
+		$this->assign('content','Mcp:my_magazine');
 		$this->display("Cp:layout");
 	}//end my_art
 	

@@ -145,4 +145,19 @@ class DbAction extends CommonAction{
 			}//foreach
 			
 		}//end del
+		
+	/**
+	   *生成文章关键字
+	   *@date 2011-1-19 / @time 上午11:34:30
+	   */
+	function ctags() {
+		//生成文章关键字
+		$arc=D("Archives");
+		import ("@.Com.Split");
+		$str='';
+		$split=new Split($str);
+		$str=$split->get_tags();
+		$tags=D("Tags");
+		$tagslink=D("TagsLink");
+	}//end ctags
 }//end DbAction

@@ -9,25 +9,16 @@
 			</empty>
         </div>
         <div class="colorz">
-            <!--ul>
-                <li>Pick a Theme:</li>
-                <li><img src="__PUBLIC__/default/images/color1.gif" alt="color" /></li>
-                <li><img src="__PUBLIC__/default/images/color2.gif" alt="color" /></li>
-                <li><img src="__PUBLIC__/default/images/color3.gif" alt="color" /></li>
-                <li><img src="__PUBLIC__/default/images/color4.gif" alt="color" /></li>
-                <li><img src="__PUBLIC__/default/images/color5.gif" alt="color" /></li>
-                <li><img src="__PUBLIC__/default/images/color6.gif" alt="color" /></li>
-            </ul-->
         </div>
     </div>
     <div class="top-content">
         <div class="top-logo">
-            <h1><a href="__APP__/Public/select_city"><img src="__PUBLIC__/img/logo.jpg" alt="{&P_NAME}" /></a></h1>
+            <h1><a href="__APP__/select_city.html"><img src="__PUBLIC__/img/logo.jpg" alt="Being Fun China" /></a></h1>
             <div class="top-city">
-                <h2><a href="__APP__/Public/index/cid/2/to/{$tourl}" class="cid <eq name="cid" value="2">on</eq>">Beijing</a></h2>
-                <h2><a href="__APP__/Public/index/cid/3/to/{$tourl}" class="cid <eq name="cid" value="3">on</eq>">Shanghai</a></h2>
-                <h2><a href="__APP__/Public/index/cid/1/to/{$tourl}" class="cid <eq name="cid" value="1">on</eq>">Guangzhou</a></h2>
-                <h2><a href="__APP__/Public/index/cid/4/to/{$tourl}" class="cid <eq name="cid" value="4">on</eq>">Shenzhen</a></h2>
+                <h2><a href="__APP__/select_city/beijing/{$tourl}.html" class="cid <eq name="cid" value="beijing">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/select_city/shanghai/{$tourl}.html" class="cid <eq name="cid" value="shanghai">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/select_city/guangzhou/{$tourl}.html" class="cid <eq name="cid" value="guangzhou">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/select_city/shenzhen/{$tourl}.html" class="cid <eq name="cid" value="shenzhen">on</eq>">Shenzhen</a></h2>
 				<span style="float:left; margin-right:10px; font-size:10px; margin-top:8px;">
 					<if condition="cookie('cid')">
 						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es2.gif" id="remember" class="remember_1" alt="Remember my choice" /></a>
@@ -42,16 +33,18 @@
         <div class="clear">
         </div>
         <div class="top-nav">
-            <!--div class="search">
-                <img src="__PUBLIC__/default/images/search.gif" alt="search" />
-            </div-->
+        	<form action="__APP__/so.html">
+            <div class="search" style="background-color:#ffffff; line-height:20px;">
+                <input type="text" name="key" style="width:190px; border:none;*border:#ffffff;" /> <input type="image" src="__PUBLIC__/default/images/so.gif" style="margin-top:2px;" />
+            </div>
+            </form>
             <div class="nav">
                 <ul>
-                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index.html">Home</a></li>
-					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide.html">City Guide</a></li>
-                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds.html">Classifieds</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide<if condition="$cid">/{$cid}</if>.html">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds<if condition="$cid">/{$cid}</if>.html">Classifieds</a></li>
                     <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/biz.html">China Fairs</a></li>
-					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event.html">Events</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event<if condition="$cid">/{$cid}</if>.html">Events</a></li>
                     <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index.html">Magazines</a></li>
                     <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/group.html">Groups</a></li>
                 </ul>

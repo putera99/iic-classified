@@ -33,13 +33,18 @@ class LinkAction extends CommonAction {
                     $other[$v['itype']]['text'] = '';
                 }
                 $other[$v['itype']]['name'] = $v['itype'];
-                $other[$v['itype']]['text'].='<a href="' . $v['url'] . '"><img height="36" width="130" src="' . picurl($v['logo']) . '" alt="' . $v['webname'] . '"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                $other[$v['itype']]['text'].='<a href="' . $v['url'] . '" target=\"_blank\"><img height="36" width="130" src="' . picurl($v['logo']) . '" alt="' . $v['webname'] . '"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             } else {
                 $partner[] = $v;
             }
         }
         $this->assign("other", $other);
         $this->assign("partner", $partner);
+        $page = array();
+        $page['title'] = 'Partner Links  -  BeingfunChina 缤纷中国';
+        $page['keywords'] ="Partner,Links ";
+        $page['description'] ="Partner Links in BeingfunChina" ;
+        $this->assign('page', $page);
         $this->display();
     }
     

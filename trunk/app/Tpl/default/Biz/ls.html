@@ -9,16 +9,28 @@
 			
 <if condition="$featured">
             <div class="zhanhui">
-                <dl>
+	<volist name="featured" id="v">
+                <dl class="group-x">
                     <dt>
-                        <img src="__PUBLIC__/default/images/pc/pic04.gif" alt="c vv" />
+                        <a href="__APP__/fair/{$v['id']}/{$v['title']|str_to_url}.html"></eq><img src="{$v['picurl']|toImg=biz}" alt="{$v['title']}" /></a>
                     </dt>
                     <dd>
-                        <a href="#"><span>Kung-fu and Dance Drama: Shaolin in Wind</span></a>November 11 - 13, 2009
+                        <h4><a href="__APP__/fair/{$v['id']}/{$v['title']|str_to_url}.html"><span>{$v['title']}</span></a>
+                        <eq name="Think.session.iicc" value="1">
+                        <a href="/Cp/attr/info/11_{$v['id']}/clear/f/to/{$tourl}/" title="clear Featured"><font color="#FF0000">(F)</font></a></eq>
+                        <!--[{$v['showstart']|toDate='d/m/Y'}]
                         <br/>
-                        <span>Shenzhen</span>
+                        <span>
+                        <eq name="Think.session.flang" value="CN">
+                        ({$v['bycity']|get_city='cename'})
+                        <else/>
+                        ({$v['bycity']|get_city='ctitle'})
+                        </eq>
+                        </span-->
+                        </h4>
                     </dd>
                 </dl>
+		</volist>
             </div>
             <div class="clear"></div>
 </if>
@@ -44,8 +56,17 @@
         <div class="mian-center-n">
             <div class="chenshi">
                 <div class="diban">
-                    <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">China Fairs</a> > 
-					<a href="__APP__/Biz/ls/id/{$info['id']}.html">{$info['typename']}</a>
+                <eq name="Think.session.flang" value="CN">
+            	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/my_post_fair.html" target="_blank">+ 发布展会信息</a></span>
+                <a href="__APP__/index.html">首页</a> > <a href="__APP__/biz.html">中国展会</a> > 
+				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}.html">{$dh['seotitle']}</a></if>
+            <else/>
+            	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/my_post_fair.html" target="_blank">+ Post a Fair</a></span>
+                <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">China Fairs</a> > 
+				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}.html">{$dh['typename']}</a></if>
+             </eq>
                 </div>
                 <!--<div class="hot">
                     <div class="zhuti">
@@ -84,14 +105,14 @@ $writer=get_fair_lang($v['writer']);
 $pw=$_SESSION['flang']=='CN'?$writer['1']:$writer['0'];
 </php>
 
-					<tr class="pingdaozs">
+					<tr class="pingdaozs{:string2checked("c",$v['flag'],',',' color')}">
 					 	<td class="w120 c">
                             <eq name="Think.session.iicc" value="1"><a href="/Cp/photo/info/11_{$v['id']}" title="edit photo"><else/><a href="__URL__/show/aid/{$v['id']}.html"></eq><img src="{$v['picurl']|toImg=biz}" alt="{$v['title']}" /></a>
                             <br />
                             [{$v['showstart']|toDate='d/m/Y'}]<br />
 						</td>
 						<td class="w280 l" valign="top">
-                        	<h4><a href="__URL__/show/aid/{$v['id']}.html">{$v['title']}</a></h4>
+                        	<h4><a href="__APP__/fair/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></h4>
 							<span>Venue:</span>{$v['maps']}<br />
 							{$v['contact']}
 						</td>
@@ -105,10 +126,14 @@ $pw=$_SESSION['flang']=='CN'?$writer['1']:$writer['0'];
                         </eq>
                         <eq name="Think.session.iicc" value="1">
                         <br />
-                        (<a href="#" title="Set color">C</a>)|
+                        <if condition="string2checked('c',$v['flag'],',','1')==1">
+                        (<a href="/Cp/attr/info/11_{$v['id']}/clear/c/to/{$tourl}/" title="clear color">C</a>)|
+                        <else/>
+                        (<a href="/Cp/attr/info/11_{$v['id']}/fld/c/to/{$tourl}/" title="Set color">C</a>)|
+                        </if>
                         (<a href="/Cp/my_edit_fair/info/11_{$v['id']}/writer/{$pw}" title="Edit">E</a>)|
-                        (<a href="/Cp/del_arc/info/11_{$v['id']}/to/{$tourl}/" title="Delet">D</a>)|
-                        (<a href="" title="Set Featured">F</a>)
+                        (<a href="/Cp/del_arc/info/11_{$v['id']}/to/{$tourl}/" title="Delete">D</a>)|
+                        (<a href="/Cp/attr/info/11_{$v['id']}/fld/f/to/{$tourl}/" title="Set Featured">F</a>)
                         </eq>
                         <eq name="Think.session.uid" value="v['uid']">
                         (<a href="/Cp/my_edit_fair/info/11_{$v['id']}/writer/{$pw}" title="Edit">Edit</a>)
@@ -147,9 +172,16 @@ $pw=$_SESSION['flang']=='CN'?$writer['1']:$writer['0'];
                 </li>
 <volist name="industries" id="v">
                 <li>
-                    <a href="__URL__/ls/id/{$v['id']}.html"><eq name="Think.session.flang" value="CN">{$v['seotitle']}<else/>{$v['typename']}</eq></a>
+                   <a href="__URL__/ls/id/{$v['id']}/Categories/<eq name="Think.session.flang" value="CN">{$v['seotitle']|str_to_url}.html">{$v['seotitle']}<else/>{$v['typename']|str_to_url}.html">{$v['typename']}</eq></a>
                 </li>
 </volist>
+				<li>
+                	 <eq name="Think.session.flang" value="CN">
+                        <a href="__APP__/Cp/my_post_fair.html" target="_blank" class="on">+ 发布展会信息</a>
+                    <else/>
+                        <a href="__APP__/Cp/my_post_fair.html" target="_blank" class="on">+ Post a Fair</a>
+                     </eq>
+                </li>
             </ul>
             <div class="yuanjiao">
             </div>

@@ -24,7 +24,7 @@
                 <ul>
 <volist name="new" id="v">
                     <li>
-                        {$i}、<a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a>
+                        {$i}、<a href="__APP__/grps/{$v['id']}/{$v['groupname']|str_to_url}.html">{$v['groupname']}</a>
                     </li>
 </volist>
                 </ul>
@@ -39,15 +39,15 @@
             <div class="content-n">
                 <div class="welcome">
                     <h1><span>
-				   	<a href="__APP__/Cp/group_create/">Create My Group</a>
+				   	<a href="__APP__/Cp/group_create.html">+ Create a Group</a>
 				   </span>Groups</h1>
                 </div>
                 <div class="welcome-quan">
 <volist name="hot" id="v">
                     <div class="renshu">
-                        <h5><a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a></h5>
+                        <h5><a href="__APP__/grps/{$v['id']}/{$v['groupname']|str_to_url}.html">{$v['groupname']}</a></h5>
                         <p>
-                            <a href="__APP__/grps/{$v['id']}.html"><img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" /></a>Members:({$v['membernum']})
+                            <a href="__APP__/grps/{$v['id']}/{$v['groupname']|str_to_url}.html"><img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" /></a>Members:({$v['membernum']})
                         </p>
                     </div>
 </volist>

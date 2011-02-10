@@ -3,12 +3,12 @@
     <div class="right">
         <div class="main-group" style="padding:0;">
         <div class="conter-group">
-        	<div class="group"><a href="__APP__/Arc/ls/id/{$info['typeid']}.html">More</a></div>
+        	<div class="group"><a href="__APP__/alist/id/{$info['typeid']}.html">>> More</a></div>
         	<div class="hot-h">
             	<ul>
 <volist name="otherarc" id="v">
                    <li>
-                       <h5>• <a href="__APP__/Arc/show/aid/{$v['id']}.html" title="{$v['title']}">{$v['title']|String::msubstr=0,60}...</a></h5>
+                       <h5>• <a href="__APP__/article/{$v['id']}/{$v['title']|str_to_url}.html" title="{$v['title']}">{$v['title']|String::msubstr=0,60}...</a></h5>
                    </li>
 </volist>
             	</ul>
@@ -20,9 +20,9 @@
 <if condition="$group">
             <volist name="group" id="g">
                <dl class="group-x">
-                    <dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                    <dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                     <dd>
-                        <h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                        <h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                         <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                     </dd>
                 </dl>
@@ -46,11 +46,11 @@
     <div class="n-life">
         <div class="classifieds content">
             <div class="content-bg">
-                <a href="/">Home</a> > {$info['title']}
+                <a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a> > {$info['title']}
             </div>
             <div class="content-n">
             	 <h1>{$info['title']}</h1>
-                <div class="i_content" style="min-height:500px;*height:500px;*overflow:visible;">
+                <div class="i_content" style="min-height:500px;height:auto;_height:500px; overflow:hidden;_overflow:visible;">
 					<div class="con">
                         {$info['content']['content']}
                         <br/>
@@ -59,61 +59,19 @@
 <if condition="$info['typeid']!='2002'">
                     <ul>
                         <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
-                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
+                            <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}.html" target="_blank">Share</a>
                         </li>
                         <li id="2_{$info['channel']}_{$info['id']}" class="user_collection">
                             <a href="javascript:void(0);">Save as favorite</a>
                         </li>
                         <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
-                            <a href="__APP__/Common/report/aid/{$info['channel']}_{$info['id']}">
+                            <a href="__APP__/Common/report/aid/{$info['channel']}_{$info['id']}.html">
                            Report Abuse
                            </a>
                         </li>
                     </ul>
 </if>
                 </div>
-<if condition="$info['typeid']!='2002'">
-				<div class="Comments">
-                    <div class="biaoti">
-                        <img src="__PUBLIC__/default/images/comments.gif" alt="comments" />
-                    </div>
-					<script type="text/javascript">
-						$(document).ready(function(){
-							var xid={$info['id']};
-							var types={$info['channel']};
-							$("#comments").load(URL+'/ajax_comments',{xid:xid,types:types});
-						});
-					</script>
-					<div id="comments"></div>
-
-                    <div class="liuyan">
-                    	<form name="post_comment" action="__URL__/post_comment" method="post">
-                    		<p style="text-align:left;" class="star">
-								<!--span class="nx" id="star_1"></span>
-								<span class="nx" id="star_2"></span>
-								<span class="nx" id="star_3"></span>
-								<span class="nx" id="star_4"></span>
-								<span class="nx" id="star_5"></span>
-								<span id="star_text" class="t"></span-->
-							<span style="text-align:left;">
-							Verification code:<input type="text" size="4" name="verify" id="verify">
-                    			<a href="javascript:fleshVerify();">
-                    				<img src="__URL__/verify" id="verifyImg" style="vertical-align:-6px;" />
-								</a>
-							</span>
-							</p>
-                    		<p><textarea name="content" id="comment_content" class="content"></textarea></p>
-							<input type="hidden" value="{$info['channel']}_{$info['id']}" id="comment_hidden" name="hidden" >
-							<input type="hidden" value="0" id="click_6" name="click_6" >
-							<P>
-								
-								<input type="button" id="post_comment" class="submit" style="border:none;padding:0;" value="Submit" >
-							</P>
-                    	</form>
-						
-                    </div>
-                </div>
-</if>
             </div>
         </div>
     </div>

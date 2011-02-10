@@ -20,8 +20,6 @@ class ArcAction extends CommonAction{
 	function ls() {
 		//文章列表
 		$typeid=intval($_GET['id']);
-		
-		
 		$arctype=D("Arctype");
 		$info=$arctype->where("id=$typeid")->find();
 		
@@ -107,7 +105,7 @@ class ArcAction extends CommonAction{
 		
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=$info['title'].'-'.$info['keywords'].' - BeingfunChina 缤纷中国';
+		$page['title']=$info['title'].' - BeingfunChina 缤纷中国';
 		$page['keywords']=$info['keywords'];
 		$page['description']=$info['description'];
 		$this->assign('page',$page);
@@ -149,4 +147,6 @@ class ArcAction extends CommonAction{
 			return false;
 		}
 	}//end other
+	
+
 }//end ArcAction

@@ -1,0 +1,23 @@
+<include file="Public:head" />
+<div id="main">
+  <div class="title"> <a href="/">Home</a> >> <a href="__APP__/weather_forecast.html">Weather Forecast</a>
+    <h1>Weather Forecast</h1>
+  </div>
+<volist name="city_name" id="v">
+  <div align="center" style="padding-top:10px; padding-bottom:10px; background-color:#dfdfdf; text-align:center;">
+    <div style="width:499px;height:104px;background-repeat: no-repeat; background:url(/Public/img/bg.gif) no-repeat; margin:0 auto;">
+      <div style="height: 75px;" id="NetweatherContainer">
+        <object width="435" height="74" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" name="netWxV2" id="netWxV2">
+          <param value="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$v['1']}|{$v['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" name="movie">
+          <param value="transparent" name="wmode">
+          <param value="always" name="AllowScriptAccess">
+          <embed width="435" height="74" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent" name="netWxV2" src="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$v['1']}|{$v['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" id="netWxV2">
+        </object>
+      </div>
+      <div style="text-align: center; font-family: arial,helvetica,verdana,sans-serif; font-size: 10px; line-height: 15px; color: rgb(255, 255, 255);"><a href="http://www.accuweather.com/world-index-forecast.asp?partner=netweather&amp;locCode=ASI|CN|{$v['1']}|{$v['0']}|&amp;metric=1" style="color: rgb(255, 255, 255);">Forecast</a> | <a href="http://www.accuweather.com/maps-satellite.asp" style="color: rgb(255, 255, 255);">Maps</a> | <a href="http://www.accuweather.com/index-radar.asp?partner=accuweather&amp;traveler=0&amp;zipcode=ASI|CN|{$v['1']}|{$v['0']}|" style="color: rgb(255, 255, 255);">Radar</a></div>
+    </div>
+  </div>
+</volist>
+</div>
+
+<include file="Public:foot" />

@@ -39,6 +39,7 @@ class CityGuideAction extends CommonAction{
 			//$this->_set_cid();
 			$this->pcid=$this->cid;
 		}
+		
 	}//end _initialize()
 	
 	/**
@@ -48,19 +49,37 @@ class CityGuideAction extends CommonAction{
 	 */
 	function index() {
 		//城市指南频道首页
-		//$this->chk_cid();
+		$this->chk_cid();
 		$this->ads('2','channel');
+		$kinfo='';//标题后面附加的城市后缀
+		if($this->pcid){//检查城市或者城市群
+			if($this->pcid > 1000){
+				$kinfo=$this->cgroup[$this->pcid]['name'].' ';
+				$this->assign('city_group',$this->cgroup[$this->pcid]['name']);
+			}else{
+				$kinfo=get_cityname($this->pcid).' ';
+			}
+			$this->assign("cityname",$kinfo);
+		}//检查城市或者城市群
 		$arctype=D("Arctype");
-		$data=$arctype->where("id>1000 AND topid=1000")->order("id asc")->findAll();
+		$data=$arctype->where("id>1000 AND topid=1000 AND ishidden=0")->order("id asc")->findAll();
 		$list=list_to_tree($data,'id','reid','_son',1000);
 		//dump($list);
 		$this->assign('list',$list);
 		$info=$arctype->where('id=1000')->find();
 		$this->assign('info',$info);
 		$group=$this->_get_group('hot',"0,5");
-                $this->assign('group',$group);
+		$this->assign('group',$group);
+		
+		$cityinfo='';
+		if($this->pcid){
+			$cityinfo=get_cityname($this->pcid)?'in '.get_cityname($this->pcid):'';
+		}
+		$info['keywords']=rand_arr($info['keywords'],5);
+		$info['keywords']=$cityinfo?$cityinfo:$info['keywords'];
+		
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina 缤纷中国':$info['seotitle'].'  -  BeingfunChina 缤纷中国';
+		$page['title']=empty($info['seotitle'])?$info['typename'].$kinfo.'  -  BeingfunChina 缤纷中国':$info['seotitle'].$kinfo.' - BeingfunChina 缤纷中国';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
@@ -77,19 +96,29 @@ class CityGuideAction extends CommonAction{
 	 */
 	function ls() {
 		//分类信息列表页面
-		//$this->chk_cid();
+		$this->chk_cid();
 		$typeid=intval($_GET['id']);
-		
 		$arctype=D("Arctype");
-		$info=$arctype->where("id=$typeid")->find();
+		$kinfo='';//标题后面附加的城市后缀
+		if($this->pcid){//检查城市或者城市群
+			if($this->pcid > 1000){
+				$kinfo=' in '.$this->cgroup[$this->pcid]['name'];
+				$this->assign('city_group',$this->cgroup[$this->pcid]['name']);
+			}else{
+				$kinfo=' in '.get_cityname($this->pcid);
+			}
+			$this->assign("cityname",$kinfo);
+		}//检查城市或者城市群
 		
-		//if($info['ispart']==1){
+		
+		$info=$arctype->where("id=$typeid")->find();
 		$small=$arctype->where("reid=$typeid")->field("id")->findAll();
 		$str='';
 		if($small){
 			foreach ($small as $v){
 				$str.=$v['id'].',';
 			}
+			$str.=$typeid;
 			$str='typeid IN ('.trim($str,',').')';
 		}else{
 			$str="typeid={$typeid}";
@@ -101,8 +130,15 @@ class CityGuideAction extends CommonAction{
 		//$count=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
 		if($info['id']=='1393' || $info['reid']=='1393' || $this->pcid=='0'||empty($this->pcid)){
 			$city='1=1';
-		}else{
+		}elseif($this->pcid<1000){
 			$city="(cid={$this->pcid} or cid='0')";
+		}else{
+			$city_temp=array('name'=>'','id'=>'');
+			foreach ($this->cgroup[$this->pcid]['city'] as $k=>$v){
+				$city_temp['id'].=$k.',';
+				$city_temp['name'].=$v.',';
+			}
+			$city="(cid in ({$city_temp['id']}) or cid='0')";
 		}
 		$count=$dao->where("($str AND $city) AND ismake=1")->order("pubdate DESC")->count();
 		$page=new Page($count,10);
@@ -114,7 +150,6 @@ class CityGuideAction extends CommonAction{
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
 		$data=$dao->where("($str AND $city) AND ismake=1")->order("edittime DESC, pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
-		//dump($dao->getLastSql());
 		//分类信息 导航
 		$this->assign('city_type',$this->_get_tree(1000));
         $this->assign('classifieds_type',$this->_get_tree(1));
@@ -124,7 +159,14 @@ class CityGuideAction extends CommonAction{
 		$info=$arctype->where("id=$typeid")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].'  -  BeingfunChina 缤纷中国':$info['seotitle'].' -'.$info['keywords'].' -  BeingfunChina 缤纷中国';
+		$cityinfo='';
+		if($this->pcid){
+			$cityinfo=get_cityname($this->pcid)?' in '.get_cityname($this->pcid):$kinfo;
+		}
+		$info['keywords']=rand_arr($info['keywords'],5);
+		$info['keywords']=$cityinfo?$cityinfo.' '.$info['keywords']:$info['keywords'];
+		$info['keywords'].=empty($_GET['p'])?'':" page ".$_GET['p'];
+		$page['title']=empty($info['seotitle'])?$info['typename'].$info['keywords'].' - BeingfunChina 缤纷中国':$info['seotitle'].$info['keywords'].' -  BeingfunChina 缤纷中国';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		$this->assign('page',$page);
@@ -134,6 +176,9 @@ class CityGuideAction extends CommonAction{
 			$this->assign('reinfo',$reinfo);
 		}
         $this->ads('2','list',0,$typeid);
+		if($this->_is_admin()){
+			$this->assign('admin',true);
+		}
 		$this->display();
 	}//end function_name
 	
@@ -148,10 +193,14 @@ class CityGuideAction extends CommonAction{
 		if(empty($aid)){
 			$this->error("error: aid is null!");
 		}
+		$this->chk_cid();
 		/*$dao=D("CityGuideView");
 		$info=$dao->where("Archives.id=$aid")->find();*/
 		$dao=D("Archives");
 		$info=$dao->where("id=$aid")->find();
+		if(!empty($info['reurl'])&&$info['reurl']!='http://'){
+			redirect($info['reurl']);
+		}
 		if($info['ismake']=='0'){
 			$this->error("error: the information has been deleted!");
 		}
@@ -180,7 +229,7 @@ class CityGuideAction extends CommonAction{
 		$this->assign("group",$this->member_group($this->member_comments($info['id'],$info['channel']),"0,6"));
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=$info['title'].'-'.$info['keywords'].' - BeingfunChina 缤纷中国';
+		$page['title']=$info['title'].' - BeingfunChina 缤纷中国';
 		$page['keywords']=$info['keywords'];
 		$page['description']=$info['description'];
 		$this->assign('page',$page);
@@ -191,6 +240,33 @@ class CityGuideAction extends CommonAction{
 			$cp='<a href="/Cp/photo/info/2_'.$info['id'].'">Add Photos</a> / <a href="/Cp/my_edit_cityguide/info/2_'.$info['id'].'">edit</a> / <a href="/Cp/del_arc/info/2_'.$info['id'].'/to/'.myencode("/cglist/{$info['typeid']}.html").'">remove</a>';
 			$this->assign('cp',$cp);
 		}
+		
+		$this->assign("new_arc",$this->_get_uptype_arc($info['typeid']));
+		
+		$condition=array();
+		$st=mktime(0,0,1,date("m"),date("d"),date("Y"));
+        $et=mktime(59,59,59,date("m"),date("d")+30,date("Y"));
+        $condition['channel'] = '10';
+        $condition['ismake'] = '1';
+        $condition['_string']="`showstart`>={$st} AND `showstart`<={$et}";
+		if($this->pcid=='0'||empty($this->pcid)){
+			$city='';
+		}elseif($this->pcid<1000){
+			$city=" AND (cid={$this->pcid} or cid='0')";
+		}else{
+			$city_temp=array('name'=>'','id'=>'');
+			foreach ($this->cgroup[$this->pcid]['city'] as $k=>$v){
+				$city_temp['id'].=$k.',';
+				$city_temp['name'].=$v.',';
+			}
+			$city=" AND (cid in ({$city_temp['id']}) or cid='0')";
+		}
+        $condition['_string'].=$city;
+        $f_event=array();
+        $f_event=$dao->where($condition)->order("pubdate DESC")->limit("0,20")->findAll();
+        shuffle ( $f_event );
+        //dump($dao->getLastSql());
+        $this->assign("event",$f_event);
 		$this->display();
 	}//end show
 	

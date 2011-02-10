@@ -1,28 +1,135 @@
-<include file="Public:head" />
-<link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__/default/css/cityguide_content.css" rel="stylesheet" type="text/css" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{$page['title']}</title>
+	<meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
+	<link href="__PUBLIC__/default/css/global.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/default/css/cennter.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/default/css/link.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/default/css/cityguide_content.css" rel="stylesheet" type="text/css" />
+	<script src="__PUBLIC__/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+	<meta name="keywords" content="{$page['keywords']}" />
+	<meta name="description" content="{$page['description']|strip_tags}" />
+	<script type="text/javascript">
+	var HOST		= window.location.host;
+	var Per_host	="http://"+HOST;
+	var JS_PATH		="../Public/js/";
+	var IMG_PATH	="../Public/images/";
+	var URL			='__URL__';
+	var APP			='__APP__';
+	var PUBLIC		='../Public/';
+	var REQUEST_URI ='{$_SERVER.REQUEST_URI}';
+	</script>
+	<script src="__PUBLIC__/js/iic.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="top">
+    <div id="header-h">
+        <div class="header-left">
+            <span>
+			<empty name="Think.SESSION.uid">
+				{$now} | <a href="__APP__/login/{$tourl}.html">Login</a> / <a href="__APP__/register/{$tourl}.html">Register</a></span>
+			<else/>
+				 Welcome {@username}!   {$now}  |  <a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout.html">Logout</a>
+			</empty>
+        </div>
+        <div class="colorz">
+        </div>
+    </div>
+    <div class="top-content">
+        <div class="top-logo">
+            <h1><a href="__APP__/select_city.html"><img src="__PUBLIC__/img/logo.jpg" alt="Being Fun China" /></a></h1>
+            <div class="top-city">
+                <h2><a href="__APP__/select_city/beijing/{:myencode('/cglist/'.$info['id'])}/{$info['typename']|str_to_url}.html" class="cid <eq name="cid" value="beijing">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/select_city/shanghai/{:myencode('/cglist/'.$info['id'])}/{$info['typename']|str_to_url}.html" class="cid <eq name="cid" value="shanghai">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/select_city/guangzhou/{:myencode('/cglist/'.$info['id'])}/{$info['typename']|str_to_url}.html" class="cid <eq name="cid" value="guangzhou">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/select_city/shenzhen/{:myencode('/cglist/'.$info['id'])}/{$info['typename']|str_to_url}.html" class="cid <eq name="cid" value="shenzhen">on</eq>">Shenzhen</a></h2>
+				<span style="float:left; margin-right:10px; font-size:10px; margin-top:8px;">
+					<if condition="cookie('cid')">
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es2.gif" id="remember" class="remember_1" alt="Remember my choice" /></a>
+					<else/>
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es.gif" id="remember" class="remember_0" alt="Remember my choice" /></a>
+					</if>
+					
+				</span>
+            </div>
+			
+        </div>
+        <div class="clear">
+        </div>
+        <div class="top-nav">
+        	<form action="__APP__/so.html">
+            <div class="search" style="background-color:#ffffff; line-height:20px;">
+                <input type="text" name="key" style="width:190px; border:none;*border:#ffffff;" /> <input type="image" src="__PUBLIC__/default/images/so.gif" style="margin-top:2px;" />
+            </div>
+            </form>
+            <div class="nav">
+                <ul>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide<if condition="$cid">/{$cid}</if>.html">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds<if condition="$cid">/{$cid}</if>.html">Classifieds</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/biz.html">China Fairs</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event<if condition="$cid">/{$cid}</if>.html">Events</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index.html">Magazines</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/group.html">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bgh"></div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
 <div id="main">
     <div class="mian-right">
         <div class="mian-center">
             <div class="jianbian">
-                <a href="/">Home</a> > <a href="__APP__/cityguide.html">City Guide</a> >
-				<if condition="$reinfo"><a href="__APP__/cglist/{$reinfo['id']}/{$cid}.html">{$reinfo['typename']}</a> ></if>
+                <a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a> > <a href="__APP__/cityguide<if condition="$cid">/{$cid}</if>.html">City Guide</a> >
+				<if condition="$reinfo"><a href="__APP__/cglist/{$reinfo['id']}<if condition="$cid">/{$cid}</if>/{$reinfo['typename']|str_to_url}.html">{$reinfo['typename']}</a> ></if>
             </div>
             <div class="personals">
-                <h1>{$info['typename']}</h1>
-                <p>{$showpage}</p>
+                <h1>{$info['typename']}{$cityname}</h1>
+                <div class="ctgl">
+                <php>
+                	$i=0;
+                	foreach($ctls as $k=>$v){
+                    	if($v<5){
+                            $i++;
+                            echo "<h3>[<a href=\"".__APP__."/cglist/".$info['id']."/".$k.".html\">".ucwords($k)."</a>]</h3>";
+                            if($i=='5'||$i=='7'){
+                                echo "<br />";
+                            }
+                       }
+                    }
+                 </php>
+                    <p>{$showpage}</p>
+                </div>
             </div>
+            
 <if condition="$list">
 	<volist name="list" id="v">
             <div class="personals-a">
                 <div class="xiangce">
                 	<if condition="$v['picurl']">
                     <img src="{$v['picurl']|toImg=cityguide}" alt="{$v['title']}" class="iic_img" />
-                    <if condition="$v['albumnum']"><a href="#" class="kuan">{$v['albumnum']} pictures</a></if>
+                    <if condition="$v['albumnum']"><a href="__APP__/ctgs/{$v['id']}/{$v['title']|str_to_url}.html" class="kuan">{$v['albumnum']} pictures</a></if>
 					</if>
                 </div>
                 <div class="list-a" style="width:560px;">
-                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" /><a href="__APP__/ctgs/{$v['id']}.html">{$v['title']}</a></h6>
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" /><a href="__APP__/ctgs/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></h6>
+<if condition="$admin">
+					<p class="admin">
+						<a href="/Cp/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / <a href="/Cp/my_edit_cityguide/info/{$v['channel']}_{$v['id']}">edit</a> / <a href="/Cp/del_arc/info/{$v['channel']}_{$v['id']}/to/{$tourl}/">remove</a> / 
+                        <if condition="string2checked('f',$v['flag'],',','1')==1">
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/clear/f/to/{$tourl}/" title="clear Featured" class="on">Featured</a>
+                        <else/>
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/fld/f/to/{$tourl}/" title="Set Featured">Featured</a>
+                        </if>
+					</p>
+</if>
                     <p>
                         {$v['my_content']|strip_tags="<br>"}
                     </p>
@@ -37,7 +144,7 @@
                         </li>
                         <li id="3_{$v['channel']}_{$v['id']}" class="user_report">
                             <a href="__APP__/Common/report/aid/{$v['channel']}_{$v['id']}">
-                           Report Abuse
+                           Report corrections
                            </a>
                         </li>
                     </ul>

@@ -243,18 +243,28 @@ class CpAction extends CommonAction{
 	 */
 	function comment_delete() {
 		//删除留言
-		$this->is_act(1,2);
+		//$this->is_act(1,2);
 		$xid=$_REQUEST['xid'];
 		$dao=D("Comment");
-		$info=$dao->where("xid=$xid")->find();
-		if (empty($info) || $info['uid']!=$this->user['uid']){
+		$condition=array();
+		$condition['id']=$xid;
+		if(!$this->is_admin()){
+			$condition['uid']=$this->user['uid'];
+		}
+		$info=$dao->where($condition)->find();
+		if (empty($info)){
 			$this->error("Insufficient privileges!");
 		}else{
-			$dao->where("xid=$xid")->limit('1')->delete();
+			$dao->where($condition)->limit('1')->delete();
+			if($_GET['url']){
+				$url=mydecode($_GET['url']);
+			}else{
+				$url='/Cp/my_comments/';
+			}
 			if($_REQUEST['types']){
 				redirect('/Cp/my_comments/types/'.$_REQUEST['types']);
 			}else{
-				redirect('/Cp/my_comments');
+				redirect($url);
 			}
 		}
 		
@@ -705,7 +715,9 @@ class CpAction extends CommonAction{
 		$limit=$page->firstRow.','.$page->listRows;
     	$cityguide=array();
     	$cityguide=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
-    	//dump($dao->getLastSql());
+    	if($_GET['act']=='iicc'){
+    		dump($dao->getLastSql());
+    	}
 		$this->assign('cityguide',$cityguide);
 		
 		$page=array();
@@ -970,6 +982,9 @@ class CpAction extends CommonAction{
 			$dao=D("Archives");
 			$condition=array('writer'=>$writer,'channel'=>'11');
 			$data=$dao->where($condition)->find();
+			/*if($this->user['uid']=='3755'){
+				dump($dao->getLastSql());
+			}*/
 			if($data){
 				redirect('/Cp/my_edit_fair/info/11_'.$data['id'].'/writer/'.$writer);
 			}else{
@@ -1055,8 +1070,8 @@ class CpAction extends CommonAction{
 		$dao=D("Archives");
 		$_POST['typeid2']=array2string($_POST['typeid2'],',');
 		$vo=$dao->create();
-		$vo['industry']=$_POST['writer'];
-		$vo['writer']=time().'_'.$vo['writer'];
+		$vo['industry']=end(explode("_",$vo['writer']));
+		//$vo['writer']=time().'_'.$vo['writer'];
 		if($vo){
 			$area=$this->_get_city('fair');
 			if($vo['showstart']){
@@ -1095,7 +1110,7 @@ class CpAction extends CommonAction{
 			if ($aid) {
 				$data=array();
 				$data['description']=nl2br(Input::getVar($_POST['description']));
-				$data['product']=Input::getVar($_POST['product']);
+				$data['product']=nl2br(Input::getVar($_POST['product']));
 				$data['website']=Input::getVar($_POST['website']);
 				if($xid){
 					$id=$dao->Table("iic_fair")->where("aid=$aid")->save($data);
@@ -1243,12 +1258,12 @@ class CpAction extends CommonAction{
 	   *@date 2010-9-20
 	   *@time 下午01:59:29
 	   */
-	function fair_attr() {
+	function attr() {
 		//修改展会属性
 		$info=Input::getVar($_GET['info']);
 		$info=explode('_',$info);
 		$fld=Input::getVar($_GET['fld']);
-		$val=Input::getVar($_GET['val']);
+		$clear=Input::getVar($_GET['clear']);
 		if(empty($info['1'])){
 			$this->error('Wrong parameter!');
 		}
@@ -1257,8 +1272,45 @@ class CpAction extends CommonAction{
 			$condition=array();
 			$condition['id']=$info['1'];
 			$condition['channel']=$info['0'];
-			$infot=$dao->where($condition)->find();
-			$arr=explode(',',$info['flag']);
+			$info=$dao->where($condition)->find();
+			//dump($info);
+			if(empty($info)){
+				$this->error('Wrong parameter!');
+			}
+			$data=array();
+			if(empty($clear)){
+				if(empty($info['flag'])){
+					$data['flag']=$fld;
+				}else{
+					$arr=explode(',',$info['flag']);
+					if(!in_array($fld,$arr,TRUE)){
+						$data['flag']=$info['flag'].','.$fld;
+					}else{
+						$this->error('property set!');
+					}
+				}
+			}else{
+				if(empty($info['flag'])){
+					$this->error('property canceled!');
+				}else{
+					$arr=explode(',',$info['flag']);
+					if(in_array($clear,$arr,TRUE)){
+						foreach ($arr as $v){
+							if($v!=$clear){
+								$data['flag']=$v.',';
+							}
+						}
+					}else{
+						$this->error('property canceled!');
+					}
+				}
+			}
+			$data['flag']=trim($data['flag'],',');
+			$data['edittime']=time();
+			$dao->where($condition)->save($data);
+			$to=mydecode($_GET['to']);
+			$to=empty($_GET['p'])?$to:$to.'?p='.$_GET['p'];
+			redirect($to,3,"Successful release.");
 		}else{
 			$this->error('Wrong parameter!');
 		}
@@ -1325,7 +1377,11 @@ class CpAction extends CommonAction{
 		//增加新闻
 		$dao=D("Archives");
 		if(!empty($_FILES["picurl"]["name"])) {
-			$this->_upload('',132,105);
+			if(in_array('l', $_POST['flag'])){
+				$this->_upload('',506,190,1);
+			}else{
+				$this->_upload('',132,105);
+			}
 		}
 		if (!empty($_POST['flag'])) {
 			$flag='';
@@ -1438,9 +1494,9 @@ class CpAction extends CommonAction{
 		$dao=D("Archives");
 		$condition=array();
 		$condition['channel']='12';
-		$condition['ismake']='1';
-		if($this->user['username']!='iicc'){
-    	$condition['uid']=$this->user['uid'];
+		if(!$this->is_admin()){
+			$condition['uid']=$this->user['uid'];
+			$condition['ismake']='1';
 		}
     	$count=$dao->where($condition)->count();
 		$page=new Page($count,25);
@@ -1787,7 +1843,24 @@ class CpAction extends CommonAction{
 		$condition=array();
 		$condition['channel']=$info['0'];
 		$condition['id']=$info['1'];
+		$data=$dao->where($condition)->find();
+		if ($data['uid']==$this->user['uid']||$this->is_admin()) {
+			$data['content']=$dao->relationGet("event");
+			$this->assign('data',$data);
+		}else{
+			$this->error("Insufficient privilege.");
+		}
+		$this->assign('citylist',$this->_get_city('city'));
+		$class_tree=$this->_get_tree(2050);
+		$this->assign('class_tree',$class_tree);
+		$page=array();
+		$page['title']='Edit My Event -  My Control Panel -  BeingfunChina';
+		$page['keywords']='Edit My Event';
+		$page['description']='Edit My Event';
+		$this->assign('page',$page);
 		
+		$this->assign('content','Cp:event_create');
+		$this->display("Cp:layout");
 	}//end my_edit_event
 	
 	/**
@@ -1815,36 +1888,57 @@ class CpAction extends CommonAction{
 			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];
 			$vo['channel']=$t['0'];
-			$vo['maps']=$_POST['position'].','.$area[$_POST['city_id']]['_zone'][$_POST['zone_id']]['name'].','.$area[$_POST['city_id']]['ctitle'];
+			$vo['maps']=empty($_POST['position'])?'':$_POST['position'].',';
+			$vo['maps'].=$_POST['zone_id']!=0?$area[$_POST['city_id']]['_zone'][$_POST['zone_id']]['name'].',':'';
+			$vo['maps'].=$_POST['city_id']!=0?$area[$_POST['city_id']]['ctitle']:'';
+			$vo['maps']=empty($vo['maps'])?$_POST['old_maps']:$vo['maps'];
 			$kw=str_word_count($vo['my_content'],1);
     			$keywords="";
     			foreach ($kw as $vkw){
     				$keywords.=$vkw.',';
     			}
     		$vo['keywords']=trim($keywords,',');
-			$aid=$dao->add($vo);
+			$eid='';
+    		$xid=Input::getVar($_REQUEST['id']);
+    		if($xid){
+    			$aid=$xid;
+    			$eid=$xid;
+    			$dao->where("id=$aid")->save($vo);
+    		}else{
+				$aid=$dao->add($vo);
+    		}
+			
 			$actlog=$dao->getLastSql();
 			if ($aid) {
 				$data=array();
+				$data['detail']=nl2br($_REQUEST['detail']);
+				if(!empty($xid)){
+					$id=$dao->Table("iic_event")->where("aid=$aid")->save($data);
+				}else{
+					$data['aid']=$aid;
+					$data['public']='2';
+					$data['membernum']='0';
+					$id=$dao->Table("iic_event")->add($data);
+				}
 				
-				$data['deadline']=ftime($_REQUEST['deadline']);
-				$data['starttime']=ftime($_REQUEST['starttime']);
-				$data['endtime']=ftime($_REQUEST['endtime']);
-				$data['detail']=nl2br(strip_tags($_REQUEST['detail']));
-				$data['aid']=$aid;
-				$data['public']='2';
-				$data['membernum']='0';
-				$id=$dao->Table("iic_event")->add($data);
-				if($id){
+				if($id || $id=='0'){
 					$actlog='<br>'.$dao->getLastSql();
 					if (empty($xid)) {
 						$this->_act_log($aid,$vo['channel'],'add',$actlog);
 					}else{
 						$this->_act_log($aid,$vo['channel'],'edit',$actlog);
 					}
-					$this->success('Successful release. ');
+					$txt='<h4>Successful release. </h4><br><a href="/Art/show/aid/'.$aid.'">View articles </a>   /   ';
+					$txt.='<a href="/Cp/photo/info/'.$vo['channel'].'_'.$aid.'">Add pictures</a><br>';
+					$txt.='<a href="/Cp/post_art">Post articles</a>   /   ';
+					$txt.='<a href="/Cp/my_art">Back to the list </a><br>';
+					$txt.='You will be directed to the picture uploading page in three seconds! ';
+					$this->assign('jumpUrl','/Cp/photo/info/'.$vo['channel'].'_'.$aid);
+					$this->success($txt);
 				}else{
-					$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					if(empty($xid)){
+						$dao->Table("iic_archives")->where("id=$aid")->limit('1')->delete();
+					}
 					$this->error("Failed to write in subsidiary table. ");
 				}
 			}else{
@@ -1855,6 +1949,7 @@ class CpAction extends CommonAction{
 			$this->error($dao->getError());
 		}
 	}//end event_add
+
 	
 ///////////////////////////////////////////活动部分结束//////////////////////////////////////////////
 	

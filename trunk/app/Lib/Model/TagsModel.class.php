@@ -13,6 +13,7 @@
  */
 class TagsModel extends Model{
 	protected $_auto=array(
-		array('dateline','time',1,'function'),
+		array('ctime','time',1,'function'),
+		array('mtime','time',2,'function'),
 	);
 }//end TagsModel

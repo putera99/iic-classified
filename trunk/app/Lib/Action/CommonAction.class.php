@@ -15,37 +15,104 @@ class CommonAction extends Action{
 	protected $user=array();//用户信息
 	protected $cid;//城市ID
 	protected $admin=array('yeahbill','iicc','bfcadmin','Alex','bfc168');
+	protected $cgroup=array(
+						'1001'=>array('name'=>'Bohai Rim',
+							'city'=>array(
+								'13'=>'Tianjin',
+								'22'=>'Dalian',
+								'7'=>'Qingdao',
+								'23'=>'Shenyang',
+							),
+						),//Bohai Rim
+						'1002'=>array('name'=>'Yangtze River Delta',
+							'city'=>array(
+								'24'=>'Suzhou',
+								'25'=>'Hangzhou',
+								'17'=>'Nanjing',
+								'19'=>'Ningbo',
+								'8'=>'Yiwu',
+							),
+						),//Yangtze River Delta
+						'1003'=>array('name'=>'Pan Pearl River Delta',
+							'city'=>array(
+								'26'=>'Kunming',
+								'12'=>'Nanning',
+							),
+						),//Pan Pearl River Delta
+						'1004'=>array('name'=>'Other areas',
+							'city'=>array(
+								'21'=>'Wuhan',
+								'15'=>"Xi'an",
+								'11'=>'Chengdu',
+							),
+						),//Other areas
+					);
+	protected $cityname=array(
+		'all'=>'0',
+		'beijing'=>'2',
+		'guangzhou'=>'1',
+		'shenzhen'=>'4',
+		'shanghai'=>'3',
+		'bohai_rim'=>'1001',
+		'yangtze_river_delta'=>'1002',
+		'pan_pearl_river_delta'=>'1003',
+		'other_areas'=>'1004',
+		'tianjin'=>'13',
+		'dalian'=>'22',
+		'qingdao'=>'7',
+		'shenyang'=>'23',
+		'suzhou'=>'24',
+		'hangzhou'=>'25',
+		'nanjing1'=>'17',
+		'ningbo1'=>'19',
+		'yiwu'=>'8',
+		'kunming'=>'26',
+		'nanning'=>'12',
+		'wuhan'=>'21',
+		'xi_an'=>"15",
+		'chengdu'=>'11',
+	);
 	protected function _initialize(){
         header("Content-Type:text/html; charset=utf-8");
+		import("ORG.Util.Input");
         $this->user=$this->_is_login();
         $this->assign('user',$this->user);
-        $cid=intval($_GET['cid']);
-        if(!empty($cid)){
+        $cid=trim(Input::getVar($_GET['cid']));
+       if(!empty($cid)&&array_key_exists($cid,$this->cityname)){
+        	$_GET['cid']=$cid=$this->cityname[strtolower($cid)];
+        }elseif(!is_integer($cid)){
+        	$_GET['cid']=$cid=isset($_SESSION['cid'])?$_SESSION['cid']:0;
+        }
+        if(!empty($cid)||$cid=='0'){
         	$_SESSION['cid']=$cid;
         }else{
-        	$_SESSION['cid']=empty($_SESSION['cid'])?'0':$_SESSION['cid'];
+        	$_SESSION['cid']=$_GET['cid']==empty($_SESSION['cid'])?'0':$_SESSION['cid'];
         }
         $this->cid=$_SESSION['cid'];
+		
         $cid=empty($this->cid)?0:$this->cid;
-        $this->assign('cid',$cid);
+        
+        $this->assign('cid',array_search($cid,$this->cityname));
         $this->assign('now',date("D,M dS, Y",time()));
         import("ORG.Util.String");
-        import("ORG.Util.Input");
         load("extend");
-        $arr=array('/cid/3','/cid/2','/cid/1','/cid/4','/cid/0','/1.html','/0.html','/2.html','/3.html','/4.html','.html','/index.php?s=','/Public/select_city');
+        $arr1=array('/all.html','/all','/beijing.html','/beijing','/guangzhou.html','/guangzhou','/shenzhen.html','/shenzhen','/shanghai.html','/shanghai','/bohai_rim.html','/bohai_rim','/yangtze_river_delta.html','/yangtze_river_delta','/pan_pearl_river_delta.html','/pan_pearl_river_delta','/other_areas.html','/other_areas','/tianjin.html','/tianjin','/dalian.html','/dalian','/qingdao.html','/qingdao','/shenyang.html','/shenyang','/suzhou.html','/suzhou','/hangzhou.html','/hangzhou','/nanjing1.html','/nanjing1','/ningbo1.html','/ningbo1','/yiwu.html','/yiwu','/kunming.html','/kunming','/nanning.html','/nanning','/wuhan.html','/wuhan','/xi_an.html','/xi_an','/chengdu.html','/chengdu');
+        $arr2=array('/cid/3','/cid/2','/cid/1','/cid/4','/cid/0','/cid/1001','/cid/1002','/cid/1003','/cid/1004','/1.html','/0.html','/2.html','/3.html','/4.html','/1001.html','/1002.html','/1003.html','/1004.html','.html','/index.php?s=','/Public/select_city');
+        $arr=array_merge($arr1,$arr2);
         $url=str_replace($arr,'',$_SERVER["REQUEST_URI"]);
         $url=$url=='/'?'/Index/index':$url;
+        $url=preg_replace("/\/to\/(.*)/i","",$url);
         $url=myencode($url);
         $this->assign('tourl',$url);
-		/*if ($this->user['username']=='iicc'){
-			dump($_REQUEST);
-		}*/
-        //import('ORG.Util.Image');
+
         if($this->_is_admin()){
+        	$this->assign('admin',true);
         	$_SESSION['iicc']='1';
         }else{
         	$_SESSION['iicc']='0';
         }
+        //$this->assign("ctls",array(1=>'Guangzhou',2=>'Beijing',3=>'Shanghai',4=>'Shenzhen',));//1001=>'Bohai Rim',1002=>'Yangtze River Delta',1003=>'Pan Pearl River Delta',1004=>'Other areas'));
+        $this->assign("ctls",$this->cityname);
     }
 
     protected function _is_admin() {
@@ -158,7 +225,7 @@ class CommonAction extends Action{
 	    		}
 	    		$data[$v['id']]['_zone']=$qu;
 	    	}
-	    	S($name,$data,60*60*60*24);
+	    	S($name,$data,60*60);
 		}
 		return $data;
     }//end _get_city
@@ -226,7 +293,7 @@ class CommonAction extends Action{
     	$types=empty($types)?$id['1']:$types;
     	$listid=empty($_REQUEST['listid'])?0:$_REQUEST['tid'];
     	if (!$this->_is_login()){
-			$this->ajaxReturn(0,'no login!',0);
+			$this->ajaxReturn(0,'Log in please.',0);
 		}else{
 	    	$dao=D("UserCollection");
 	    	$condition=array();
@@ -286,7 +353,9 @@ class CommonAction extends Action{
 		
     	$dao=D("Archives");
     	if ($cid) {
-    		$condition['cid']=$cid;
+    		if($cid<1000){
+    			$condition['cid']=$cid;
+    		}
     	}
     	if($uid){
     		$condition['uid']=$uid;
@@ -294,6 +363,7 @@ class CommonAction extends Action{
     	$condition['ismake']='1';
     	$info=$dao->where($condition)->order("pubdate DESC")->limit($limit)->findAll();
     	//dump($info);
+    	unset($dao);
     	return $info;
     }//end _get_cart
     
@@ -384,6 +454,7 @@ class CommonAction extends Action{
     	import("ORG.Util.Page");//引用分页类
 		import("@.Com.ajaxpage");//引用ajax分页类
 		$p= new ajaxpage($count,10);
+		$p->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>'%first% %upPage%  %prePage%  %linkPage%  %nextPage% %downPage% %end%');
 		$page=$p->ajaxshow();//显示分页
 		$this->assign("showpage_bot",$page);//显示分页
 		$limit=$p->firstRow.",".$p->listRows;//设定分面的大小
@@ -401,7 +472,9 @@ class CommonAction extends Action{
 	public function share() {
     	//分享到群组收藏夹
 		if (!$this->_is_login()){
-			$this->ajaxReturn(0,'Log in please.',0);
+			$url=myencode($_SERVER["REQUEST_URI"]);
+			$this->assign("jumpUrl","/Public/login/to/$url");
+			$this->error('Log in please.');
 		}else{
 			$act=Input::getVar($_POST['act']);
 			if($act!="share"){
@@ -496,6 +569,11 @@ class CommonAction extends Action{
     			$this->ajaxReturn(0,"Failure! Try it again!",0);
     		}
     	}else{
+    		$page = array();
+	        $page['title'] = 'Report Abuse  -  BeingfunChina 缤纷中国';
+	        $page['keywords'] ="Report,Abuse";
+	        $page['description'] ="Report Abuse in BeingfunChina" ;
+	        $this->assign('page', $page);
     		$this->display();
     	}
     }//end report
@@ -536,6 +614,11 @@ class CommonAction extends Action{
        */
     function feedback() {
     	//发布留言
+    	$page = array();
+        $page['title'] = 'We appreciate your feedback  -  BeingfunChina 缤纷中国';
+        $page['keywords'] ="appreciate,feedback";
+        $page['description'] ="We appreciate your feedback in BeingfunChina" ;
+        $this->assign('page', $page);
     	$this->display();
     }//end feedback
     
@@ -572,9 +655,9 @@ class CommonAction extends Action{
     protected function _get_dh($typeid) {
     	//获取当前位置
     	$dao=D("Arctype");
-    	$data=$dao->where("id=$typeid")->field('id,typename,reid,topid')->find();
+    	$data=$dao->where("id=$typeid")->field('id,typename,seotitle,reid,topid')->find();
     	if ($data['reid']!=$data['topid']){
-    		$data['_reid']=$dao->where("id={$data['reid']}")->field('id,typename,reid,topid')->find();
+    		$data['_reid']=$dao->where("id={$data['reid']}")->field('id,seotitle,typename,reid,topid')->find();
     	}
     	return $data;
     }//end _get_dh
@@ -724,10 +807,32 @@ class CommonAction extends Action{
     /**
      * 检查用户是否登录并获取用户信息
      */
-    protected function _is_login() {
+    protected function _is_login($u='',$p='') {
+    	
     	if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
     		$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['cid']);
-    	}else $user=false;
+    	}else{
+	    	if($u&&$p){
+	    		$dao=D("Members");
+				$info=array();
+				$info=$dao->where("username='$u'")->find();
+				if ($info){
+					if(md5($p)==$info['password']) {
+						unset($_SESSION['uid']);
+						unset($_SESSION['username']);
+						unset($_SESSION['info']);
+						
+						$_SESSION['uid']=$info['id'];
+						$_SESSION['username']=$info['username'];
+						$info['avatar']=avatar($info['avatar']);
+						$_SESSION["info"]=$info;
+						$user=array('uid'=>$_SESSION['uid'],'username'=>$_SESSION['username'],'cid'=>$_SESSION['cid']);
+					}else $user=false;
+	    		}else $user=false;
+	    	}else{
+	    		$user=false;
+	    	}
+    	}
     	return $user;
     }// END _is_login
 	
@@ -754,7 +859,7 @@ class CommonAction extends Action{
 		//时间日志
 		$dao=D("Action");
 		$data=array();
-		$data['mon']=mktime(0, 0, 0, date('n'), 1);
+		$data['mon']=mktime(0, 0, 0, date('n'),1);
 		$data['xid']=$xid;
 		$data['stype']=$stype;
 		$data['act']=$act;
@@ -821,9 +926,9 @@ class CommonAction extends Action{
 		return $m->query($sql);
 	}// END _top7
 	
-	protected function _get_tree($topid) {
+	protected function _get_tree($topid,$fld='*') {
 		$dao=new Model();
-		$list=$dao->query("SELECT * FROM iic_arctype where topid=$topid AND ishidden=0 ORDER BY id ASC");
+		$list=$dao->query("SELECT $fld FROM iic_arctype where topid=$topid AND ishidden=0 ORDER BY id ASC");
 		$news=list_to_tree($list,'id','reid','_son',$topid);
 		unset($dao);
 		return $news;
@@ -834,38 +939,64 @@ class CommonAction extends Action{
 		return $dao->findAll();
 	}
 	
-	protected function _new_list($typeid,$flag='',$limit="0,10",$cid='0'){
+	protected function _new_list($typeid='',$flag='',$limit="0,10",$cid='0',$ch=''){
     	$dao=D("Archives");
     	$condition=array();
-    	$condition['typeid']=$typeid;
+    	if($typeid!=''){
+    		$condition['typeid']=$typeid;
+    	}elseif ($ch!=''){
+    		$condition['channel']=array('in',$ch);
+    	}else{
+    		$time=time();
+			$condition['showstart']=array('lt',$time);
+			$condition['showend']=array('gt',$time);
+    	}
     	$condition['ismake']=1;
-		$time=time();
-		$condition['showstart']=array('lt',$time);
-		$condition['showend']=array('gt',$time);
+    	
+		
     	if($flag){
     		$arr=explode(',',$flag);
     		foreach ($arr as $v){
     			if($v=='p'){
-    				$condition['_string'].="picurl<>''";
+    				$condition['_string']="picurl<>''";
     			}else{
-    				$condition['_string'].="FIND_IN_SET('$v',`flag`) > 0";
+    				$condition['_string']="FIND_IN_SET('$v',`flag`) > 0";
     			}
     		}
     	}
     	if($cid!='0'){
-    		$condition['_string']="cid={$cid} or cid=0";
+    		if($cid<1000){
+    			if($condition['_string']){
+    				$condition['_string'].=" and (cid={$cid} or cid=0 or cid is null)";
+    			}else{
+    				$condition['_string']="cid={$cid} or cid=0 or cid is null";
+    			}
+    		}else{
+	    		$city_temp=array('name'=>'','id'=>'');
+				foreach ($this->cgroup[$this->pcid]['city'] as $k=>$v){
+					$city_temp['id'].=$k.',';
+					$city_temp['name'].=$v.',';
+				}
+				if($condition['_string']){
+					$condition['_string'].="AND (cid in ({$city_temp}) or cid=0 or cid is null)";
+				}else{
+					$condition['_string']="cid in ({$city_temp}) or cid=0 or cid is null";
+				}
+    		}
     	}
     	if($limit=='0,1'||$limit=='1'){
-    		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->find();
+    		$data=$dao->where($condition)->order('edittime DESC, pubdate DESC')->limit($limit)->find();
     	}else{
-    		$data=$dao->where($condition)->order('pubdate DESC')->limit($limit)->findAll();
+    		$data=$dao->where($condition)->order('edittime DESC, pubdate DESC')->limit($limit)->findAll();
     	}
-    	//dump($dao->getLastSql());
+    	/*if($this->user['username']=='iicc'){
+    		dump($dao->getLastSql());
+    	}*/
     	return $data;
     }
     
 /////////////////////////////////上传图片部分 start/////////////////////////////////
-    protected function _upload($tid,$width='120',$height='140'){
+    protected function _upload($tid,$width='120',$height='140',$y=0){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
         //设置上传文件大小
@@ -896,7 +1027,11 @@ class CommonAction extends Action{
         }else {
             //取得成功上传的文件信息
             $uploadList = $upload->getUploadFileInfo();
-            $_POST['picurl']  = $path.'s_'.$uploadList[0]['savename'];
+            if($y!=0){
+            	$_POST['picurl']  = $path.$uploadList[0]['savename'];
+            }else{
+            	$_POST['picurl']  = $path.'s_'.$uploadList[0]['savename'];
+            }
         }
         
         return $_POST['picurl'];
@@ -1216,20 +1351,112 @@ class CommonAction extends Action{
 	 */
 	public function so() {
 		//搜索
-		$key=Input::getVar($_GET['key']);
-		$condition=array();
 		
+		$key=Input::getVar($_GET['key']);
+		if($key){
+			$this->_so_key($key);
+			$ch=Input::getVar($_GET['channel']);
+			$pnm=Input::getVar($_GET['pnm']);
+			$cid=Input::getVar($_GET['cid']);
+			$field=Input::getVar($_GET['field']);
+			$order=Input::getVar($_GET['order']);
+			$limit_arr=array('a'=>'10','b'=>'20','c'=>'30','d'=>'50');
+			$order_arr=array('a'=>'id','b'=>'pubdate','c'=>'showend','d'=>'cid');
+			$desc_arr=array('a'=>" DESC",'b'=>" ASC");
+			$channel=array('cityguide'=>'2','classifieds'=>'4,5,6,7,8,9','event'=>'10','biz'=>'11','art'=>"12");
+			//$enkey=Input::getVar($_GET['enkey']);
+			
+			//条件组合
+			$condition=array();
+			$condition['ismake']="1";
+			/*if(empty($key)&&!empty($enkey)){
+				$enkey=mydecode($enkey);
+				$enkey=explode('|-|', $enkey);
+			}*/
+			$condition['title']=array("like","%{$key}%");
+			if(!empty($ch)&&array_key_exists($ch,$channel)){
+				if($ch=='classifieds'){
+					$condition['channel']=array("in",$channel[$ch]);
+				}else{
+					$condition['channel']=$channel[$ch];
+				}
+			}
+			
+			if($cid){
+				if($cid<1000){
+					$condition['cid']=$cid;
+				}else{
+					$city_temp=array('name'=>'','id'=>'');
+					foreach ($this->cgroup[$this->pcid]['city'] as $k=>$v){
+						$city_temp['id'].=$k.',';
+						$city_temp['name'].=$v.',';
+					}
+					$condition['cid']=array('in',$city_temp['id']);
+				}
+			}
+			
+			//结果查询
+			$dao=D("Archives");
+			$cou=$dao->where($condition)->count();
+			import("ORG.Util.Page");
+			$pnm=array_key_exists($pnm, $limit_arr)?$limit_arr[$pnm]:20;
+			$page=new Page($cou,$pnm);
+			$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+			$this->assign('showpage',$page->show());
+			$page->config=array('header'=>'','prev'=>'<','next'=>'>','first'=>'«','last'=>'»','theme'=>'  %first% %upPage%  %prePage%  %linkPage%  %nextPage% %downPage% %end%');
+			$this->assign('showpage_bot',$page->show_img());
+			$limit=$page->firstRow.','.$page->listRows;
+			$field=array_key_exists($field, $order_arr)?$order_arr[$field]:'pubdate';
+			$order=array_key_exists($order, $desc_arr)?$desc_arr[$order]:" DESC";
+			$order=$field.$order;
+			$data=$dao->where($condition)->order($order)->limit("$limit")->findAll();
+			$this->assign("data",$data);
+			
+			//dump($dao->getLastSql());
+			//结果综合统计
+			$count=array();
+			$count['all']=$cou;
+			$condition['channel']='2';
+			$count['cityguide']=$dao->where($condition)->count();
+			$condition['channel']=array('in',$channel['classifieds']);
+			$count['classifieds']=$dao->where($condition)->count();
+			$condition['channel']='10';
+			$count['event']=$dao->where($condition)->count();
+			$condition['channel']='11';
+			$count['biz']=$dao->where($condition)->count();
+			$condition['channel']='12';
+			$count['art']=$dao->where($condition)->count();
+			
+			$this->assign("count",$count);
+			
+		}
+		$sokey=D("SoKey");
+		$hotkey=$sokey->order("hot DESC")->limit("0,10")->findAll();
+		$this->assign("hotkey",$hotkey);
 		
 		$page=array();
-		$page['title']=$key.'  -  BeingfunChina 缤纷中国';
+		$page['title']='Search '.$key.'  -  BeingfunChina 缤纷中国';
 		$page['keywords']=$key;
 		$page['description']='Search '.$key;
 		$this->assign('page',$page);
 		
 		$this->assign('city_type',$this->_get_tree(1000));
 		$this->assign('classifieds_type',$this->_get_tree(1));
-		$this->display();
+		$this->display("Common:so");
 	}//end so
+	
+	/**
+	   *记录关键字
+	   *@date 2010-10-29
+	   *@time 上午10:45:24
+	   */
+	function _so_key($key) {
+		//记录关键字
+		$time=time();
+		$sql="INSERT INTO `iic_so_key` (`id` ,`keyword` ,`ctime` ,`mtime` ,`hot`) VALUES (NULL , '$key', '$time', '$time', '0') ON DUPLICATE KEY UPDATE `mtime` = '$time', `hot`=`hot`+1;";
+		$m=new Model();
+		return $m->execute($sql);
+	}//end _so_key
 	
 	/**
 	   *高级搜索
@@ -1346,6 +1573,38 @@ class CommonAction extends Action{
 		$all['new']=$dao->where($condition)->count();
 		return $all;
 	}//end ckh_pm
+	
+	
+	/**
+	   *获取上级分类的最新文章
+	   *@date 2010-10-22
+	   *@time 下午03:08:50
+	   */
+	function _get_uptype_arc($type_id,$limit="0,5",$cid) {
+		//获取上级分类的最新文章
+		$dao=D("Archives");
+		$cat=D("Arctype");
+		$type=$cat->where("id=$type_id")->find();
+		$str='';
+		if ($type['reid']!=$type['topid']){
+			$small=$cat->where("reid={$type['reid']}")->field("id")->findAll();
+			if($small){
+				foreach ($small as $v){
+					$str.=$v['id'].',';
+				}
+				$str='typeid IN ('.trim($str,',').')';
+			}else{
+				$str="typeid={$type_id}";
+			}
+    	}else{
+    		$str="typeid={$type_id}";
+    	}
+    	if($cid){
+    		$str.=$cid;
+    	}
+    	$data=$dao->where($str.' AND ismake=1')->order("edittime DESC, pubdate DESC")->limit($limit)->findAll();
+    	return $data;
+	}//end _get_uptype_arc
 	
 }//END CommonAction
 ?>

@@ -20,7 +20,7 @@
                 <ul>
 	<volist name="son" id="v">
                     <li>
-                        <a href="__APP__/glist/{$v['id']}.html">{$v['title']}</a>({$v['count']})
+                        <a href="__APP__/glist/{$v['id']}/Subclass/{$v['title']|str_to_url}.html">{$v['title']}</a>({$v['count']})
                     </li>
 	</volist>
                 </ul>
@@ -47,7 +47,7 @@
         </div>
 		<div class="next_lssue">
             <div class="next-bg">
-                Create My Group
+                Create a Group
             </div>
             <div class="next-n">
                 
@@ -60,9 +60,9 @@
                 <a href="__APP__/index.html">Home</a> > <a href="__APP__/group.html">Groups</a> > 
                 <if condition="$dh">
                     <if condition="$dh[_pid]">
-                        <a href="__APP__/grps/{$dh[_pid]['id']}.html">{$dh[_pid]['title']}</a> >
+                        <a href="__APP__/grps/{$dh[_pid]['id']}/Subclass/{$dh[_pid]['title']|str_to_url}.html">{$dh[_pid]['title']}</a> >
                     </if>
-                    <a href="__APP__/grps/{$dh['id']}.html">{$dh['title']}</a> > 
+                    <a href="__APP__/grps/{$dh['id']}/Subclass/{$dh['title']|str_to_url}.html">{$dh['title']}</a> > 
                 </if>
                 <if condition="$kw">
                     Search "{$kw}"
@@ -71,13 +71,13 @@
             <div class="content-n">
                 <div class="welcome">
                    <span>
-				   <a href="__APP__/Cp/group_create/">Create My Group</a>
+				   <a href="__APP__/Cp/group_create.html">+ Create a Group</a>
 				   </span>
 					{$info['title']} 
                 </div>
                 <volist name="list" id="v">
                 	<div class="thread">
-						<h3><a href="__APP__/grps/{$v['id']}.html">{$v['groupname']}</a></h3>
+						<h3><a href="__APP__/grps/{$v['id']}/{$v['groupname']|str_to_url}.html">{$v['groupname']}</a></h3>
 						<div class="face">
 							<img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" />
 						</div>

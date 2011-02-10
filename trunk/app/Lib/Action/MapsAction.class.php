@@ -131,8 +131,9 @@ class MapsAction extends Action{
 		return $output;
 	}
 	
-	/*
+	/**
 	 * 写入文件
+	 * @param $str 写入文件的内容
 	 */
 	function writeTo($str){
 		return fwrite($this->handle,$str);
@@ -167,4 +168,63 @@ class MapsAction extends Action{
 		echo $x;
 	}//end evst
 	
+	/*
+	   *站点地图
+	   */
+	function sitemap() {
+		//站点地图
+		header("Content-Type:text/html; charset=utf-8");
+		load("extend");
+		$this->assign("all_city",array(1=>'Guangzhou',2=>'Beijing',3=>'Shanghai',4=>'Shenzhen'));//,1001=>'Bohai Rim',1002=>'Yangtze River Delta',1003=>'Pan Pearl River Delta',1004=>'Other areas'));
+		$www_url="http://www.beingfunchina.com";
+		$arctype=D("Arctype");
+		$url=array(
+			'2'=>array('1'=>'/ctgs/','2'=>'/cglist/'),
+			'4'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'5'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'6'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'7'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'8'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'9'=>array('1'=>'/clss/','2'=>'/clist/'),
+			'10'=>array('1'=>'/evts/','2'=>'/Event/ls/id/'),
+			'11'=>array('1'=>'/Biz/show/aid/','2'=>'/Biz/ls/id/'),
+			'12'=>array('1'=>'/Art/show/aid/','2'=>'/Arc/ls/id/'),
+			'13'=>array('1'=>'/grps/','2'=>'/cglist/','3'=>'/grpts/'),
+		);
+		
+		$condition=array();
+		$condition['ishidden']=0;
+		$condition['topid']=1;
+		$classifieds=$arctype->where($condition)->field("id,reid,typename,channeltype")->order("id ASC")->findAll();
+		$classifieds=list_to_tree($classifieds,'id','reid','_son',1);
+		$this->assign("classifieds",$classifieds);
+		
+		$condition['topid']=1000;
+		$cityguide=$arctype->where($condition)->field("id,reid,typename,channeltype")->order("id ASC")->findAll();
+		$cityguide=list_to_tree($cityguide,'id','reid','_son',1000);
+		$this->assign("cityguide",$cityguide);
+		
+		$condition=array();
+		$condition['ishidden']=0;
+		$condition['reid']=1232;
+		$fairs=$arctype->where($condition)->field("id,reid,typename,channeltype,seotitle")->order("id ASC")->findAll();
+		$fairs=list_to_tree($fairs,'id','reid','_son',1232);
+		$this->assign("fairs",$fairs);
+		
+		$condition=array();
+		$condition['ishidden']=0;
+		$condition['topid']=2050;
+		$events=$arctype->where($condition)->field("id,reid,typename,channeltype,seotitle")->order("id ASC")->findAll();
+		$events=list_to_tree($events,'id','reid','_son',2050);
+		$this->assign("events",$events);
+		
+		$dao=D("Group");
+		
+		
+		$page['title']='Site Map  -  BeingfunChina 缤纷中国';
+		$page['keywords']='BeingfunChina,缤纷中国,site map,站点地图';
+		$page['description']='BeingfunChina site map,缤纷中国站点地图.';
+		$this->assign('page',$page);
+		$this->display();
+	}//end sitemap
 }//end MapsAction
