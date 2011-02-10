@@ -7,9 +7,9 @@
 <legend>My Group</legend>
 <if condition="$info">
 <volist name="info" id="v">
-	<div style="width:150px; height:150px; overflow:hidden; float:left;">
-	<img src="http://tel.beingfunchina.com{$v['pic']}" alt="{$v['groupname']}" /><br />
-	<input type="checkbox" name="gid[]" value="{$i}" id="gid_{$i}" /><label for="gid_{$i}">{$v['groupname']}</label>
+	<div style="width:150px; height:auto;_height:150px; overflow:hidden; float:left;">
+	<img src="{$v['pic']|toImg=group}" alt="{$v['groupname']}" /><br />
+	<input type="checkbox" name="gid[]" value="{$v['id']}" id="gid_{$v['id']}" /><label for="gid_{$v['id']}">{$v['groupname']}</label>
 	</div>
 </volist>
 </if>

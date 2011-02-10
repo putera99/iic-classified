@@ -13,26 +13,85 @@
 <div id="main">
     <div class="mian-right">
         <div class="events_poular">
-            <a href="__APP__/index.html">Home</a> > <a href="__APP__/event.html">Events</a> > 
-			<if condition="$dh"><a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > </if>
+        	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/event_create.html" target="_blank">+ Initiate an Event</a></span>
+            <a href="__APP__/index<if condition="$cid">/{$cid}</if>.html">Home</a> > <a href="__APP__/event<if condition="$cid">/{$cid}</if>.html">Events</a> > 
+			<if condition="$dh"><a href="__APP__/event-time/{$dh['id']}/{$dh['typename']|str_to_url}<if condition="$cid">/{$cid}</if>.html">{$dh['typename']}</a> > </if>
         </div>
+        <div class="personals">
+                <h1>
+                	<if condition="$info['typename']&&$_SESSION['tk_name']">
+                		<div class="fore">
+                        	<a href="__URL__/ls/type/all/tk/{$tk}.html">Category:<strong>{$info['typename']}</strong><b></b></a>
+                        </div>
+                        <if condition="$cid">
+                        <div class="fore">
+                        	<a href="__URL__/ls/type/{$typeid}/tk/{$tk}/cid/all.html">City:<strong>{$cid}</strong><b></b></a>
+                        </div>
+                        </if>
+                        <div class="fore">
+                        	<a href="__URL__/ls/clrt/ok/type/{$typeid}.html">Time:<strong>{@tk_name}</strong><b></b></a>
+                        </div>
+                	<else/>
+                    	<if condition="$cid">{$cid|get_cityname}</if>   {$info['typename']}  {@tk_name}
+                    </if>
+                </h1>
+                <div class="ctgl">
+                <php>
+                	$i=0;
+                	foreach($ctls as $k=>$v){
+                    if($v<5){
+                    	$i++;
+                    	echo "<h3>[<a href=\"".__APP__."/event-category/".$info['id']."/".str_to_url($info['typename'])."/".$k.".html\">".ucwords($k)."</a>]</h3>";
+                        if($i=='5'||$i=='7'){
+                        	echo "<br />";
+                        }
+                       }
+                    }
+                 </php>
+                    <p>{$showpage}</p>
+                </div>
+            </div>
 <volist name="data" id="v">
         <div class="events_neibiao">
-            <span><a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
-            <ul>
-                <li class="biaop">
-                    <a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a>
-                </li>
-                <li>
-                    Date: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}
-                </li>
-                <li>
-                    Location: {$v['maps']}
-                </li>
-                <li>
-                    {$v['my_content']|strip_tags|String::msubstr=0,180}...
-                </li>
-            </ul>
+            <span><a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
+            <div class="event_info">
+            	<div class="calendar">
+                	<span class="m">{$v['showstart']|toDate='F'}</span>
+                    <span class="d1">{$v['showstart']|toDate='D'}</span>
+                    <span class="d2">{$v['showstart']|toDate='d'}</span>
+                    <span class="t">{$v['showstart']|toDate='m-d'} -- {$v['showend']|toDate='m-d'}</span>
+                </div>
+            	<h4 class="biaop"><a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></h4>
+                <p class="admin">
+                <if condition="$admin">
+						<a href="/Cp/photo/info/{$v['channel']}_{$v['id']}" target="_blank">Add Photos</a> / 
+                        <a href="/Cp/my_edit_event/info/{$v['channel']}_{$v['id']}" target="_blank">edit</a> / 
+                        <if condition="string2checked('r',$v['flag'],',','1')==1">
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/clear/r/to/{$tourl}/" target="_blank" class="on">HP Pick</a> /  
+                        <else/>
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/fld/r/to/{$tourl}/" target="_blank">HP Pick</a> /  
+                        </if>
+                        <if condition="string2checked('f',$v['flag'],',','1')==1">
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/clear/f/to/{$tourl}/" target="_blank" title="clear Featured" class="on">Featured</a> / 
+                        <else/>
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/fld/f/to/{$tourl}/" target="_blank" title="Set Featured">Featured</a> / 
+                        </if>
+                        <if condition="string2checked('h',$v['flag'],',','1')==1">
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/clear/h/to/{$tourl}/" target="_blank" title="clear Headline" class="on">IP Pick</a> / 
+                        <else/>
+                        <a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/fld/h/to/{$tourl}/" target="_blank" title="Set Headline">IP Pick</a> / 
+                        </if>
+                        <a href="/Cp/del_arc/info/{$v['channel']}_{$v['id']}/to/{$tourl}/">remove</a>
+                    <br>
+                    {$v['showstart']|toDate='Y-m-d'} -- {$v['showend']|toDate='Y-m-d'}
+                    <br>
+				</if>
+                Location: {$v['maps']|strip_tags}<br />
+                {$v['my_content']|strip_tags|String::msubstr=0,180}...
+                </p>
+            </div>
+            
         </div>
 		<div class="clear"></div>
 </volist>
@@ -41,17 +100,15 @@
     </div>
     <div class="main-left">
 		<ul>
-            <li class="bg-A">
+            <li class="bg-h">
                 Time
             </li>
 <volist name="range_time" id="v">
             <li>
-                <a href="__URL__/ls/st/{$v['st']}/et/{$v['et']}">{$v['name']}</a>
+                <a href="__APP__/event-time/{$v['tk']}.html" <if condition="$v['tk']==$tk">class="on"</if>>{$v['name']}</a>
             </li>
 </volist>
-            <li>
-                <a href="#">Choose a Date</a>
-            </li>
+			<!--a href="__URL__/ls/st/{$v['st']}/et/{$v['et']}">{$v['name']}</a-->
             <li class="di-yuan"></li>
         </ul>
         <ul>
@@ -59,13 +116,14 @@
                 Category
             </li>
             <li>
-                <a href="__URL__/ls/type/all">All</a>
+                <a href="__URL__/ls/type/all.html" <if condition="empty($typeid)">class="on"</if>>All</a>
             </li>
 <volist name="class_tree" id="v">
             <li>
-                <a href="__URL__/ls/id/{$v['id']}" title="{$v['typename']}">{$v['typename']}</a>
+                <a href="__APP__/event-category/{$v['id']}/{$v['typename']|str_to_url}.html" title="{$v['typename']}" <if condition="$v['id']==$typeid">class="on"</if>>{$v['typename']}</a>
             </li>
 </volist>
+			<li><a href="__APP__/Cp/event_create.html" target="_blank" class="on">+ Initiate an Event</a></li>
             <li class="di-yuan"></li>
         </ul>
         <div class="left_biz">

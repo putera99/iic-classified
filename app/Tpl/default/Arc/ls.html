@@ -10,9 +10,9 @@
 <if condition="$group">
             <volist name="group" id="g">
                <dl class="group-x">
-                    <dt><a href="__APP__/Group/show/aid/{$g['id']}"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                    <dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                     <dd>
-                        <h5><a href="__APP__/Group/show/aid/{$g['id']}" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                        <h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                         <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                     </dd>
                 </dl>
@@ -34,8 +34,8 @@
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
-                <a href="/">Home</a> > 
-				<if condition="$reinfo"><a href="__APP__/Arc/ls/id/{$reinfo['id']}">{$reinfo['typename']}</a> ></if>
+                <a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a> > 
+				<if condition="$reinfo"><a href="__APP__/alist/{$reinfo['id']}<if condition="$cid">/{$cid}</if>/{$reinfo['typename']|str_to_url}.html">{$reinfo['typename']}</a> ></if>
             </div>
             <div class="personals">
             	<h1>{$info['typename']}</h1>
@@ -49,9 +49,9 @@
 <volist name="list" id="v">
             <div class="personals-a">
                 <div class="list-a">
-                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']}</a></h6>
+                    <h6><img src="__PUBLIC__/default/images/{$i}.gif" alt="{$i}" /><a href="__APP__/article/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></h6>
                     <p>
-                        {$v['description']|strip_tags}...<a href="__APP__/Arc/show/aid/{$v['id']}">[Detail]</a>
+                        {$v['description']|strip_tags}...<a href="__APP__/article/{$v['id']}/{$v['title']|str_to_url}">[Detail]</a>
                     </p>
                 </div>
                 <div class="hui-bg">

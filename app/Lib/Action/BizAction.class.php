@@ -66,6 +66,12 @@ class BizAction extends CommonAction{
 		$page['description']="缤纷中国 China Fairs provides information about China’s fairs, latest business policies and business opportunities, etc.";
 		$this->assign('page',$page);
 		
+		$condition['_string']="FIND_IN_SET('f',`flag`) > 0";
+		$featured=$dao->where($condition)->limit("0,10")->order("edittime DESC")->findAll();
+		//dump($dao->getLastSql());
+		$this->assign('featured',$featured);
+		
+		$this->ads('11','channel');
 		$this->display();
 	}//end index
 	
@@ -171,11 +177,26 @@ class BizAction extends CommonAction{
 		$data=$dao->where($condition)->order("id {$_SESSION['order']}")->limit($limit)->findAll();
 		$this->assign('data',$data);
 		
+		unset($condition['_string']);
+		unset($condition['bycity']);
+		
+		$condition['_string']="FIND_IN_SET('f',`flag`) > 0";
+		$featured=$dao->where($condition)->limit("0,10")->order("edittime DESC")->findAll();
+		//dump($dao->getLastSql());
+		$this->assign('featured',$featured);
+		
+		
 		$arctype=D("Arctype");
 		$info=$arctype->where("id={$_SESSION['fair_id']}")->find();
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=empty($info['seotitle'])?$info['typename'].' - Fair -  BeingfunChina 缤纷中国':$info['seotitle'].' - Fair  -  BeingfunChina 缤纷中国';
+		$title='';
+		if($_SESSION['flang']=='CN'){
+			$title=$info['seotitle'];
+		}else{
+			$title=$info['typename'];
+		}
+		$page['title']=$title.' - Fair -  BeingfunChina 缤纷中国';
 		$page['keywords']=empty($info['keywords'])?$info['typename']:$info['keywords'];
 		$page['description']=empty($info['description'])?$info['typename']:$info['description'];
 		if($info['reid']!='1232'){
@@ -220,6 +241,7 @@ class BizAction extends CommonAction{
 			}
 			$condition['writer']=$flang;
 			$condition['channel']=11;
+			$_SESSION['flang']=$lan['1'];
 		}else{
 			$condition['id']=$aid;
 		}
@@ -228,7 +250,7 @@ class BizAction extends CommonAction{
 			$this->error("error: the information has been deleted!");
 		}
 		if(empty($info)){
-			$this->error("sorry,the information is not available now.<br/>您查看的信息暂时空缺。");
+			$this->error("sorry,the information is not available now.<br/>\n您查看的信息暂时空缺。");
 		}
 		$lan=explode('_',$info['writer']);
 		$lang['cn']=$lan['0'].'_CN';
@@ -247,7 +269,7 @@ class BizAction extends CommonAction{
 		
 		$this->assign('info',$info);
 		$page=array();
-		$page['title']=$info['title'].'-'.$info['keywords'].' - BeingfunChina 缤纷中国';
+		$page['title']=$info['title'].' - BeingfunChina 缤纷中国';
 		$page['keywords']=$info['keywords'].',fair,china,biz';
 		$page['description']=$info['description'];
 		$this->assign('page',$page);

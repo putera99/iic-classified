@@ -22,12 +22,15 @@
 <volist name="fair" id="v">
 	<php>$writer=get_fair_lang($v['writer']);</php>
                 	<dd>
-						<span class="w320"><a href="__APP__/Biz/show/aid/{$v['id']}">{$v['title']}</a></span>
+						<span class="w320"><a href="__APP__/Biz/show/aid/{$v['id']}">{$v['title']}</a>
+                        <if condition="$v['ismake']=='0'"><a href="__URL__/del_arc/info/{$v['channel']}_{$v['id']}/act/show/to/{$tourl}" style="color:#ff0000;">[[show]]</a></if></span>
 						<span class="w100 c">{$v['channel']|get_type}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
                         <span class="w100 c"><a href="/Cp/my_post_fair/writer/{$writer['0']}">[EN]</a> / <a href="/Cp/my_post_fair/writer/{$writer['1']}">[中文]</a></span>
 						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}">Add Photos</a> / 
-						<a href="__URL__/my_edit_fair/info/{$v['channel']}_{$v['id']}/writer/{$writer['0']}">Edit</a></span>
+						<a href="__URL__/my_edit_fair/info/{$v['channel']}_{$v['id']}/writer/{$writer['0']}" title="Edit">E</a>
+                        / <a href="__URL__/del_arc/info/{$v['channel']}_{$v['id']}/to/{$tourl}/" title="Delete">D</a>
+                        </span>
 					</dd>
                     
 </volist>

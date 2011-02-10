@@ -113,7 +113,64 @@
 <script src="__PUBLIC__/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-<include file="Public:top"/>
+<div id="top">
+    <div id="header-h">
+        <div class="header-left">
+            <span>
+			<empty name="Think.SESSION.uid">
+				{$now} | <a href="__APP__/login/{$tourl}.html">Login</a> / <a href="__APP__/register/{$tourl}.html">Register</a></span>
+			<else/>
+				 Welcome {@username}!   {$now}  |  <a href="__APP__/Cp/index">Control Panel</a> / <a href="__APP__/Public/logout">Logout</a>
+			</empty>
+        </div>
+        <div class="colorz">
+        </div>
+    </div>
+    <div class="top-content">
+        <div class="top-logo">
+            <h1><a href="__APP__/select_city.html"><img src="__PUBLIC__/img/logo.jpg" alt="Being fun in china" /></a></h1>
+            <div class="top-city">
+                <h2><a href="__APP__/event-category/{$dh['id']}/beijing.html" class="cid <eq name="cid" value="beijing">on</eq>">Beijing</a></h2>
+                <h2><a href="__APP__/event-category/{$dh['id']}/shanghai.html" class="cid <eq name="cid" value="shanghai">on</eq>">Shanghai</a></h2>
+                <h2><a href="__APP__/event-category/{$dh['id']}/guangzhou.html" class="cid <eq name="cid" value="guangzhou">on</eq>">Guangzhou</a></h2>
+                <h2><a href="__APP__/event-category/{$dh['id']}/shenzhen.html" class="cid <eq name="cid" value="shenzhen">on</eq>">Shenzhen</a></h2>
+				<span style="float:left; margin-right:10px; font-size:10px; margin-top:8px;">
+					<if condition="cookie('cid')">
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es2.gif" id="remember" class="remember_1" alt="Remember my choice" /></a>
+					<else/>
+						<a href="#" title="Remember my choice"><img src="__PUBLIC__/img/es.gif" id="remember" class="remember_0" alt="Remember my choice" /></a>
+					</if>
+					
+				</span>
+            </div>
+			
+        </div>
+        <div class="clear">
+        </div>
+        <div class="top-nav">
+        	<form action="__APP__/so.html">
+            <div class="search" style="background-color:#ffffff;">
+                <input type="text" name="key" style="border:none; width:202px;" /> <input type="image" src="__PUBLIC__/default/images/so.gif" style="vertical-align: -3px;" />
+            </div>
+            </form>
+            <div class="nav">
+                <ul>
+                    <li <if condition="$Think.MODULE_NAME=='Index'">class="annv"</if>><a href="/index.html">Home</a></li>
+					<li <eq name="Think.MODULE_NAME" value="CityGuide"> class="annv"</eq>><a href="__APP__/cityguide.html">City Guide</a></li>
+                    <li <if condition="$Think.MODULE_NAME=='Classifieds'">class="annv"</if>><a href="__APP__/classifieds.html">Classifieds</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Biz"> class="annv"</eq>><a href="__APP__/biz.html">China Fairs</a></li>
+					<li <eq name="Think.MODULE_NAME" value="Event"> class="annv"</eq>><a href="__APP__/event.html">Events</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Magazine"> class="annv"</eq>><a href="__APP__/Magazine/index.html">Magazines</a></li>
+                    <li <eq name="Think.MODULE_NAME" value="Group"> class="annv"</eq>><a href="__APP__/group.html">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bgh"></div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
 <div id="main">
     <div class="main-right">
         <div class="events_bg">
@@ -124,7 +181,7 @@
 <if condition="$topics">
 	<volist name="topics" id="v">
                 <li>
-                    {$i}.<a href="__URL__/thread/id/{$v['id']}.html">{$v['title']}</a>
+                    {$i}.<a href="__URL__/thread/id/{$v['id']}/subject/{$v['title']|str_to_url}.html">{$v['title']}</a>
                 </li>
 	</volist>
 </if>
@@ -137,9 +194,9 @@
 <if condition="$interested">
     <volist name="interested" id="g">
            <dl class="group-x">
-                <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                <dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                 <dd>
-                    <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                    <h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                     <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                 </dd>
             </dl>
@@ -162,9 +219,11 @@
     </div>
     <div class="mian-left">
         <div class="events_poular">
-            <a href="__APP__/index.html">Home</a> > <a href="__APP__/event.html">Events</a> > 
+        	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/event_create.html" target="_blank">+ Initiate an Event</a></span>
+            <a href="__APP__/index<if condition="$cid">/{$cid}</if>.html">Home</a> > <a href="__APP__/event/<if condition="$cid">/{$cid}</if>.html">Events</a> > 
 			<if condition="$dh">
-				<a href="__APP__/Event/ls/{$dh['id']}">{$dh['typename']}</a> > 
+				<a href="__APP__/event-category/{$dh['id']}/{$dh['typename']|str_to_url}<if condition="$cid">/{$cid}</if>.html">{$dh['typename']}</a> > 
 			</if>
         </div>
         <div class="events_neit">
@@ -185,7 +244,7 @@
                 <span class="pic">
                 <a href="{$info['picurl']|toImg=event}" rel="prettyPhoto[unusual]"><img src="{$info['picurl']|toImg=event}" alt="{$info['title']}" /></a><br />
                 	<if condition="$info['albumnum']==0">
-                        No picture
+                        <!--No picture-->
                     <else/>
                         <volist name="album" id="va">
                             <if condition="$i==1">
@@ -264,7 +323,7 @@
 <if condition="$thread">
 	<volist name="thread" id="v">
             	<dd>
-					<span class="w381"><a href="__URL__/thread/id/{$v['id']}.html">{$v['title']}</a></span>
+					<span class="w381"><a href="__URL__/thread/id/{$v['id']}/subject/{$v['title']|str_to_url}.html">{$v['title']}</a></span>
 					<span class="w100 c">{$v['username']}</span>
 					<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
 					<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
@@ -311,7 +370,7 @@
 	<fieldset class="post">
 		<legend>Login</legend>
 		<p>
-			<label for="username">Username:</label>
+			<label for="username">User name:</label>
 			<input type="text" name="username" id="username" style="width:200px;" />
 		</p>
 		<p>

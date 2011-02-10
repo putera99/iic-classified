@@ -18,9 +18,9 @@
 <if condition="$group">
 	<volist name="group" id="g">
                <dl class="group-x">
-				<dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+				<dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
 				<dd>
-					<h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+					<h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
 					<p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
 				</dd>
 			</dl>
@@ -33,9 +33,26 @@
       </div>
   <div class="mian-center-n">
             <div class="jianbian">
-                <a href="/index.html">Home</a>
-                > <a href="__APP__/cityGuide.html">{$info['typename']}</a>
+                <a href="/index<if condition="$cid">/{$cid}</if>.html">Home</a>
+                > <a href="__APP__/cityguide/{$cid}.html">{$cityname}{$info['typename']}</a>
             </div>
+            <div class="personals">
+            	<h1>{$cityname}{$info['typename']}</h1>
+                <div class="ctgl">
+                    <php>
+                        $i=0;
+                        foreach($ctls as $k=>$v){
+                        	if($v<5){
+                                $i++;
+                                echo "<h3>[<a href=\"".__APP__."/cityguide/".$k.".html\" title='$k City Guide'>".ucwords($k)."</a>]</h3>";
+                                if($i=='5'||$i=='7'){
+                                    echo "<br />";
+                                }
+                            }
+                        }
+                     </php>
+                 </div>
+             </div>
             {$ad['banner']['0']}
             <if condition="$list">
                 <volist name="list" id="v">
@@ -46,10 +63,20 @@
                                 <img src="__PUBLIC__/img/cityguide/{$v['id']}.gif" alt="{$v['typename']}" />
                             </dt>
                             <dd>
-                                <h2 class="chegn_ttitle"><a href="__APP__/cglist/{$v['id']}/{$cid}.html">{$v['typename']}</a></h2>
+                                <h2 class="chegn_ttitle">
+                                <if condition="$city_group">
+                                <a href="__APP__/cglist/1000/{$cid}/{$v['typename']|str_to_url}.html">{$v['typename']} <if condition="$cityname">in {$cityname}</if></a>
+                                <else/>
+                                <a href="__APP__/cglist/{$v['id']}/{$cid}/{$v['typename']|str_to_url}.html">{$v['typename']} <if condition="$cityname">in {$cityname}</if></a>
+                                </if>
+                                </h2>
                                 <if condition="$v['_son']">
                                     <volist name="v['_son']" id="sv">
-                                        <a href="__APP__/cglist/{$sv['id']}/{$cid}.html">{$sv['typename']}</a>
+                                    	<if condition="$city_group">
+                                        <a href="__APP__/cglist/1000/{$cid}/{$sv['typename']|str_to_url}.html">{$sv['typename']}</a>
+                                        <else/>
+                                        <a href="__APP__/cglist/{$sv['id']}/{$cid}/{$sv['typename']|str_to_url}.html">{$sv['typename']}</a>
+                                        </if>
                                         | 
                                     </volist>
                                 </if>

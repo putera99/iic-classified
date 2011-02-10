@@ -1,104 +1,120 @@
 <include file="Public:head" />
 <link href="__PUBLIC__/default/css/home.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.xiantiao{ float:left;}
+.center-h{width:504px;}
+.center-h .dl{margin:0;}
+.center-h .dl .dt{float:left;}
+.center-h .dl .banner_title{width:378px; float:left;}
+.center-h .dl .banner_title ul{margin:0; padding:5px 0 0 0;}
+.center-h .dl .banner_title ul li{margin:0;list-style:none; height:25px; line-height:25px;}
+.center-h .dl .banner_title ul li a{color:#DADADA; display:block; height:25px; width:370px;padding-left:0; margin-left:8px;}
+.center-h .dl .banner_title ul li a:hover,.center-h .dl .banner_title ul li .slidenow{background:url(/Public/img/li_move.gif) no-repeat;text-decoration:none;font-weight:bold;padding-left:8px; margin-left:0;}
+.conter-group .magazine{height:auto; overflow:hidden; text-align:center; padding-bottom:8px;background:url("/Public/default/images/bg-h3.gif") repeat-x scroll 0 0 transparent;}
+.conter-group .magazine h4{margin:5px 0;}
+.conter-group .magazine p{padding:0 5px; margin:0;font-weight:bold;}
+.conter-group .magazine p span{display:inline-block; line-height:25px; margin:5px 10px 0 0;_margin:5px 5px 0 0;}
+.conter-group .magazine p span a{display:inline-block;font-weight:bold; color:#ffffff; text-decoration:none;width:82px; height:25px;}
+.conter-group .magazine p span a:hover{color:#FF0000;}
+</style>
 <div id="main">
     <div class="mian-right">
         <div class="conter-right">
-            <div class="conter-group">
-                <!--div class="fair-h">
-                    <ul>
-                        <li id="biz" class="bizshow">
-                            <a href="__APP__/Arc/ls/id/2003">Biz</a>
-                        </li>
-                        <li id="fair" class="bizshow">
-                            <a href="__APP__/Biz/index">Fair</a>
-                        </li>
-                    </ul>
-                </div-->
-				<div class="group"><a href="__APP__/biz.html">Latest Fairs</a></div>
-                <!--div class="hot-h" id="show_biz" style="display:none;">
-                    <ul>
-< volist name="biz_news" id="v">
-                        <li>
-                            <h5>• <a href="__APP__/Arc/show/aid/{ $ v['id']}">{ $ v['title'] | String::msubstr=0,35}</a></h5>
-                        </li>
-</ volist >
-                    </ul>
-                </div-->
-				<div class="hot-h" id="show_fair">
-                    <ul>
-<volist name="fair" id="v">
-                        <li>
-                            <h5>• <a href="__APP__/Biz/show/aid/{$v['id']}" title="{$v['title']}">{$v['title']|String::msubstr=0,60}...</a></h5>
-                        </li>
-</volist>
-                    </ul>
-                </div>
-            </div>
-            <div class="clear"></div>
-
-
-            <div class="conter-group">
-                <div class="group"><a href="__APP__/group.html">Featured Groups</a></div>
-<volist name="group" id="g">
+        
+            <div class="conter-group" style="margin-bottom:5px;">
+                <div class="group">Featured City Guide</div>
+<volist name="citygui_featured" id="v">
+<if condition="$i lt 6">
                <dl class="group-x">
-				<dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+				<dt>
+                    <a href="__APP__/ctgs/{$v['id']}/{$v['title']|str_to_url}.html" target="_blank">
+                        <img src="{$v['picurl']|toImg=cityguide}" alt="{$v['title']}"/>
+                    </a>
+                </dt>
 				<dd>
-					<h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
-					<p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
+					<h4><a href="__APP__/ctgs/{$v['id']}/{$v['title']|str_to_url}.html" target="_blank">{$v['title']}</a></h4>
 				</dd>
 			</dl>
+</if>
 </volist>
-			
             </div>
+            
+            <div class="clear"></div>
+            
+            <div class="conter-group">
+				<div class="group"><a href="__APP__/Magazine/index.html">DateCity e-magazine</a></div>
+				<div class="magazine">
+                    <h4>{$magazine_index['seotitle']}</h4>
+                    <p><img src="{$magazine_index['cover_s']}" width="140" height="170" alt="{$magazine_index['seotitle']}" /><span style="background:url(/Public/img/zine_down.gif) no-repeat;"><a href="__APP__/Magazine/download/vol/{$magazine_index['vol']}.html">Download</a></span>  <span style="background:url(/Public/img/zine_down2.gif) no-repeat;"><a href="{$magazine_index['readurl']}" target="_blank">Read online</a></span>
+                    </p>
+                </div>
+            </div>
+            
 			<div class="conter-group m10">
             	{$ad['right']}
             </div>
 			<div class="clear"></div>
-            <!--div class="advertisement">
-                <img src="__PUBLIC__/default/images/pic2.gif" alt="pic2" />
-            </div-->
         </div>
         <div class="mian-center-n">
+            <div class="neirong-h" style="background:none;">
             <div class="jianbian-h">Editor's Pick</div>
-            <div class="neirong-h">
-                <div class="center-h">
-                    <dl>
-                        <dt class="m">
-                            <a href="__APP__/Arc/show/aid/{$pick['id']}">
-                            	<img src="{$pick['picurl']|picurl}" alt="{$pick['title']}"/>
-							</a>
-                        </dt>
-                        <dd>
-                            <span class="title-h"><a href="__APP__/Arc/show/aid/{$pick['id']}">{$pick['title']}</a></span>
-                            {$pick['my_content']|String::msubstr=0,200}...<a href="__APP__/Arc/show/aid/{$pick['id']}">[Detail]</a>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="xiantiao"></div>
-                <!--<div class="list-h">
-<volist name="pick2" id="v">
-                    <div class="neiR-h">
-                        <h5><a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']}</a></h5>
-                        <p>
-                            <span class="m"><a href="__APP__/Arc/show/aid/{$v['id']}">
-                            	<img src="{$v['picurl']|picurl}" alt="{$v['title']}" width="100" /></a></span>
-							{$v['my_content']|String::msubstr=0,60}...
-                        </p>
-                    </div>
+<if condition="$slide">
+                <div class="center-h" style="height:250px; padding-top:5px;">
+              <script language='javascript'>
+var filesarr = new Array();
+var linksarr = new Array();
+var textsarr = new Array();
+var swf_width=506;
+var swf_height=250;
+var files='';
+var links='';
+var texts='';
+
+<volist name="slide" id="s">
+<if condition="$s['picurl']">
+filesarr[{$i}] = "{$s['picurl']}";
+linksarr[{$i}] = "__APP__/article/{$s['id']}/{$s['title']|str_to_url}.html";
+textsarr[{$i}] ="{$s['title']}";
+</if>
 </volist>
-                </div>-->
+
+for(i=1;i<filesarr.length;i++){
+    if(files=="") files = filesarr[i]; else files += "|"+filesarr[i];
+}
+for(i=1;i<linksarr.length;i++){
+    if(links=="") links = linksarr[i]; else links += "|"+linksarr[i];
+}
+for(i=1;i<textsarr.length;i++){
+    if(texts=="") texts = textsarr[i]; else texts += "|"+textsarr[i];
+}
+document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ');
+document.write('codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" ');
+document.write('width="'+ swf_width +'" height="'+ swf_height +'">');
+document.write('<param name="movie" value="__PUBLIC__/flash.swf"><param name="quality" value="high">');
+document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+document.write('<param name="FlashVars" value="TitleBgPosition=1&bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'">');
+document.write('<embed src="__PUBLIC__/flash.swf" wmode="opaque" ');
+document.write('FlashVars="TitleBgPosition=1&bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'& ');
+document.write('menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" ');
+document.write('pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+document.write('</object>'); 
+</script>
+
+                </div>
+</if>
+
+                <div class="xiantiao" style="background:none; margin:auto;"></div>
 <if condition="$pick8">
                 <div class="clear"></div>
                 <div class="xinwen-h">
                     <ul>
 <volist name="pick8" id="v">
+<if condition="$i lt 9">
                         <li>
-                            <a href="__APP__/Arc/show/aid/{$v['id']}" title="{$v['title']}">• {$v['title']|msubstr=0,30}</a>
+                            <span>[{$v['typeid']|get_arctype}]</span>
+                            <a href="__APP__/{$v['channel']|get_url}/{$v['id']}/{$v['title']|str_to_url}.html" title="{$v['title']}">• {$v['title']}</a>
                         </li>
-	<if condition="$i==4">
-                    </ul>
-            		<ul>
-	</if>
+</if>
 </volist>
                     </ul>
                 </div>
@@ -111,50 +127,55 @@
 <div class="property-h">
                 <div class="jianbg-h">
                     <ul>
-					<li class="post"><a href="__APP__/Cp/my_post_classifieds" target="_blank">+Post classifieds</a></li>
-                    <volist name="classifieds_type" id="v">
-                    	<if condition="$v['id'] neq 8">
-		                <li id="ch_class_{$v['id']}" class="ch <if condition="$i==1">on</if>">
-		                    <a href="__APP__/clist/{$v['id']}/{$cid}.html" title="{$vs['seotitle']}">{$v['typename']}</a>
-		                </li>
-						<li class="span"></li>
-						</if>
-		            </volist>
-					
+					<li class="post"><a href="__APP__/Cp/my_post_classifieds.html" target="_blank">+ Post a classified</a></li>
+					<li id="ch_class_4" class="ch">
+                    	<a href="__APP__/classifieds<if condition="$cid">/{$cid}</if>.html">Latest Classifieds</a>
+					</li>
+                    <li id="ch_class_5" class="ch on">
+                    	<a href="__APP__/featured_classifieds<if condition="$cid">/{$cid}</if>.html">Featured Classifieds</a>
+                    </li>
                     </ul>
                 </div>
                 <div class="news-h">
-
-	<volist name="classifieds" id="v">
-		<if condition="$v['id'] neq 8">
-                    <ul id="ch_info_{$v['id']}" class="cinfo" <neq name="v['id']" value="2">style="display:none;"</neq>>
-                    	<volist name="v['_sub']" id="sv">
-                        <li>
-                            <span><a href="__APP__/clss/{$sv['id']}.html">[Detail]</a></span>·　<a href="__APP__/clss/{$sv['id']}.html">{$sv['title']|String::msubstr=0,55|strtolower}</a>
-                        </li>
-						</volist>
-                    </ul>
-		</if>
-	</volist>
-
+    <if condition="$classifieds_featured">
+    	<ul id="ch_info_5" class="cinfo">
+    	<volist name="classifieds_featured" id="f">
+        	<if condition="$i lt 11">
+        	<li><span>[{$f['cid']|get_cityname}]</span>• <a href="__APP__/clss/{$f['id']}/{$f['title']|str_to_url}.html">{$f['title']|String::msubstr=0,60|strtolower}...</a>
+            </li>
+            </if>
+        </volist>
+        </ul>
+    </if>
+	<if condition="$classifieds">
+    	<ul id="ch_info_4" class="cinfo" style="display:none;">
+    	<volist name="classifieds" id="c">
+        	<if condition="$i lt 11">
+        	<li><span>[{$c['cid']|get_cityname}]</span>• <a href="__APP__/clss/{$c['id']}/{$c['title']|str_to_url}.html">{$c['title']|String::msubstr=0,60|strtolower}...</a>
+            </li>
+            </if>
+        </volist>
+        </ul>
+    </if>
                 </div>
             </div>
-            <div class="banner" style="margin-bottom:10px;_margin-bottom:5px; height:120px;">
+            <div class="banner" style="margin-bottom:10px;_margin-bottom:5px;height:auto; _height:120px;">
             	{$ad['banner']['1']}
             </div>
             <div class="product-h">
                 <div class="event-h">
-                    <span><a href="__APP__/event.html"> >>more </a></span><a href="__APP__/event.html" title="Events">Events</a>
+                    <span><a href="__APP__/event/{$cid}.html"> >>more </a></span><span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/event_create.html" target="_blank">+ Initiate an Event</a></span><a href="__APP__/event/{$cid}.html" title="Events">Events</a>
                 </div>
                 <div class="magazine-h">
 <volist name="event" id="v">
                     <div class="magazine">
                         <dl>
                             <dt>
-                                <a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
+                                <a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                             </dt>
                             <dd>
-                                <span><a href="__APP__/evts/{$v['id']}.html">{$v['title']|msubstr=0,45}</a></span>
+                                <span><a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']|msubstr=0,45}</a></span>
 								{$v['showstart']|toDate='M-d'} / {$v['showend']|toDate='M-d'}
                             </dd>
                         </dl>
@@ -163,20 +184,20 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div class="banner">
+            <div class="banner" style="margin-bottom:10px;_margin-bottom:5px;height:auto; _height:120px;">
                 {$ad['banner']['2']}
             </div>
             <div class="product-h" style="margin:0;">
                 <div class="event-h">
-                    <span><a href="__APP__/Arc/ls/id/2004.html">>>more</a> </span>Do You Know?
+                    <span><a href="__APP__/alist/2004<if condition="$cid">/{$cid}</if>/do_you_know.html">>>more</a> </span>Do You Know?
                 </div>
                 <div class="backdrop-h">
                     <dl>
                         <dt>
-                            <a href="__APP__/Arc/show/aid/{$do['id']}.html"><img src="{$do['picurl']|picurl}" alt="{$do['title']}" /></a>
+                            <a href="__APP__/article/{$do['id']}/{$do['title']|str_to_url}.html"><img src="{$do['picurl']|picurl}" alt="{$do['title']}" /></a>
                         </dt>
                         <dd>
-                            <span><a href="__APP__/Arc/show/aid/{$do['id']}.html" class="t">{$do['title']}</a></span>
+                            <span><a href="__APP__/article/{$do['id']}/{$do['title']|str_to_url}.html" class="t">{$do['title']}</a></span>
                             {$do['my_content']|String::msubstr=0,400}...
                         </dd>
                     </dl>
@@ -184,13 +205,26 @@
             </div>
             
             <div class="clear"></div>
-<div align="center" style="padding-top:10px; padding-bottom:10px; background-color:#dfdfdf; text-align:center;">
-<div style="width:499px;height:104px;background-repeat: no-repeat; background:url(/Public/img/bg.gif) no-repeat; margin:0 auto;">
-<div style="height: 75px;" id="NetweatherContainer">
-<object width="435" height="74" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" name="netWxV2" id="netWxV2"><param value="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" name="movie"> <param value="transparent" name="wmode"> <param value="always" name="AllowScriptAccess"> <embed width="435" height="74" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" wmode="transparent" name="netWxV2" src="http://netwx.accuweather.com/netWx-V210.swf?zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|&amp;customtheme=&amp;theme=silver&amp;metric=1&amp;target=_self&amp;lang=eng&amp;url=&amp;video=&amp;category=&amp;logo=1&amp;tStyle=whteYell&amp;partner=netweather&amp;myspace=0" id="netWxV2"></object></div>
-<div style="text-align: center; font-family: arial,helvetica,verdana,sans-serif; font-size: 10px; line-height: 15px; color: rgb(255, 255, 255);"><a href="http://www.accuweather.com/world-index-forecast.asp?partner=netweather&amp;locCode=ASI|CN|CH006|{$cityname}|&amp;metric=1" style="color: rgb(255, 255, 255);">Forecast</a> | <a href="http://www.accuweather.com/maps-satellite.asp" style="color: rgb(255, 255, 255);">Maps</a> | <a href="http://www.accuweather.com/index-radar.asp?partner=accuweather&amp;traveler=0&amp;zipcode=ASI|CN|{$cityname['1']}|{$cityname['0']}|" style="color: rgb(255, 255, 255);">Radar</a></div>
-</div>
-</div>
+			<div class="product-h" style="margin:0;">
+                <div class="event-h">
+                    <span><a href="__APP__/group.html">>>more</a> </span>Featured Group
+                </div>
+                <div class="magazine-h">
+<volist name="group" id="g">
+                    <div class="magazine">
+                        <dl>
+                            <dt>
+                                <a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a>
+                            </dt>
+                            <dd>
+                                <span><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html">{$g['groupname']}</a></span>
+                                Member:{$g['membernum']} / Topic:{$g['threadnum']}
+                            </dd>
+                        </dl>
+                    </div>
+</volist>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -203,24 +237,24 @@
         </div>
         <div class="voices-h">
             <div class="global-h">
-                Global Voices
+               <img src="/Public/img/radio.gif" /> Global Voices
             </div>
             <div class="xuankuan-h">
-                <h5>select voices:</h5>
-					<select name="chau" id="chau" style="width:150px; overflow-x:hidden;">
-						<option>Select a continent</option>
+            <object width="180" height="40" align="" id="audioEQ" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"><param value="/Public/img/audioEQ.swf" name="movie"> <param value="transparent" name="wmode"> <param value="high" name="quality"> <embed width="180" height="40" align="" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" name="audioEQ" quality="high" wmode="transparent" src="/Public/img/audioEQ.swf"></object>
+	  <select name="chau" id="chau" style="width:150px; overflow-x:hidden;">
+						<option value="0">Select a continent</option>
 <volist name="chau" id="v">
 						<option value='{$v['ename']}'>{$v['name']}</option>
 </volist>
 					</select>
                     <select name="country" id="country" style="width:150px; overflow-x:hidden;">
-						<option>Select a country/district</option>
+						<option value="0">Select a country/district</option>
 					</select>
                     <select name="radio" id="radio" style="width:150px; overflow-x:hidden;">
-						<option>Select a radio</option>
+						<option value="0">Select a radio</option>
 					</select>
-                <img src="__PUBLIC__/default/images/the_radio.png" id="Play"/>
-				<a href="#">Click here if it can’t play.</a>
+                <img src="/Public/img/play.png" id="Play"/>
+				<a href="/article/66883/play_help.html" style=" color:#EC5E00;">Click here if it can’t play.</a>
             </div>
         </div>
         <div class="left_biz">
@@ -252,8 +286,9 @@ $(document).ready(function(){
 	$('#Play').click(
 		function(){
 				var url=$("#radio").val();
-				if(url){
-					PopModalWindow(url,50,50);
+				if(url!='0'){
+					//PopModalWindow(url,50,50);
+					window.open(url,'','width=468,height=300');
 				}else{
 					alert('select radio');
 				}
@@ -272,4 +307,6 @@ function PopModalWindow(url,width,height){
 	return result;
 }
 </script>
+
+
 <include file="Public:foot" />

@@ -14,9 +14,9 @@
                 <div class="group"><a href="__APP__/group.html">Featured Groups</a></div>
 <volist name="group" id="g">
                <dl class="group-x">
-				<dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+				<dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
 				<dd>
-					<h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+					<h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
 					<p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
 				</dd>
 			</dl>
@@ -30,22 +30,44 @@
             </div>
         </div><!--div class="clear"></div-->
         <div class="mian-center-n">
-            <div class="jianbian"><span style="float:right; margin-right:10px;"><a href="__APP__/Cp/my_post_classifieds" target="_blank">+Post classifieds</a></span>
+            <div class="jianbian"><span style="float:right; margin-right:10px;"><a href="__APP__/Cp/my_post_classifieds.html" target="_blank">+ Post a classified</a></span>
                 <a href="/">Home</a>
-                > <a href="__APP__/classifieds/{$cid}.html">{$info['typename']}</a>
+                > <a href="__APP__/classifieds/{$cid}.html">{$cityname} {$info['typename']}</a>
             </div>
+            <div class="personals" style="height:75px;">
+            	<h1>{$cityname} Classifieds</h1>
+                <div class="ctgl">
+                    <php>
+                        $i=0;
+                        foreach($ctls as $k=>$v){
+                        if($v<5){
+                            $i++;
+                            echo "<h3>[<a href=\"".__APP__."/classifieds/".$k.".html\" title='classifieds in $k'>".ucwords($k)."</a>]</h3>";
+                            if($i=='5'||$i=='7'){
+                                echo "<br />";
+                            }
+                           }
+                        }
+                     </php>
+                     <h3 style="float:right; height:20px; padding-top:5px;"><a href="/Arc/show/ename/adv.html" target="_blank" style="height:20px; width:230px; display:block; border:1px solid #999999; color:#FF0000; text-align:center;">Feature your classifieds on homepage</a></h3>
+                 </div>
+             </div>
             {$ad['banner']['0']}
             <volist name="list" id="v">
                 <div class="center">
                     <div class="content_top top_y">
-                        <div class="span"><img src="__PUBLIC__/img/classifieds/{$v['id']}.gif"></div><a href="__APP__/clist/{$v['id']}/{$cid}.html" title="{$vs['seotitle']}">{$v['typename']}</a>
+                        <div class="span"><img src="__PUBLIC__/img/classifieds/{$v['id']}.gif"></div><a href="__APP__/clist/{$v['id']}/{$cid}/{$vs['typename']|str_to_url}.html" title="{$vs['seotitle']}">{$v['typename']} <if condition="$cityname">in {$cityname}</if></a>
                     </div>
                     <div class="content_di">
                         <if condition="$v['_son']">
                             <ul>
                                 <volist name="v['_son']" id="vs" mod="3">
                                     <li>
-                                        <a href="__APP__/clist/{$vs['id']}/{$cid}.html" title="{$vs['seotitle']}">{$vs['typename']}</a>
+                                    <if condition="$city_group">
+                                    	<a href="__APP__/clist/{$v['id']}/{$cid}/{$vs['typename']|str_to_url}.html" title="{$vs['seotitle']}">{$vs['typename']}</a>
+                                    <else/>
+                                        <a href="__APP__/clist/{$vs['id']}/{$cid}/{$vs['seotitle']|str_to_url}.html" title="{$vs['seotitle']}">{$vs['typename']}</a>
+                                    </if>
                                     </li>
                                 </volist>
                             </ul>

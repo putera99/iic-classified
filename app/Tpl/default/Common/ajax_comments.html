@@ -5,7 +5,7 @@
 		<dt>
 			<a href="#"><img src="{$v['uid']||get_avatar}" alt="{$v['username']}" /></a>
 			<br>
-			<a href="#">{$v['username']}</a>
+			{$v['username']}
 		</dt>
 		<if condition="($i%2) eq 1">
 		<dd class="h">
@@ -13,6 +13,9 @@
 		<dd class="r">
 		</if>
 			<p>{$v['message']}<br>
+            <if condition="$admin">
+            <a href="__APP__/Cp/comment_delete/xid/{$v['id']}" target="_blank">Delete</a>
+            </if>
 			</p>
 		</dd>
 	</dl>

@@ -1,17 +1,21 @@
 <div class="ul">
     <div class="li bg-h">
-    <a href="__APP__/classifieds<if condition="$cid">/{$cid}</if>.html">Classifieds</a>
+    <a href="__APP__/classifieds<if condition="$cid">/{$cid}</if>.html"><if condition="$cid">{$cid|get_cityname}</if> Classifieds</a>
     </div>
     <volist name="classifieds_type" id="v">
         <dl id="cf_{$v['id']}" class="s_cf">
+        	<if condition="$city_group">
+            	<dt><a href="__APP__/clist/{$v['id']}<if condition="$cid">/{$cid}</if>/{$v['typename']|str_to_url}.html" title="{$v['seotitle']}">{$v['typename']}</a></dt>
+            <else/>
             <dt><a href="javascript:void(0);" title="{$v['seotitle']}">{$v['typename']}</a></dt>
 			<volist name="v['_son']" id="vs">
-				<dd class="cf_{$v['id']} none"><a href="__APP__/clist/{$vs['id']}<if condition="$cid">/{$cid}</if>.html" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
+				<dd class="cf_{$v['id']} none"><a href="__APP__/clist/{$vs['id']}<if condition="$cid">/{$cid}</if>/{$vs['typename']|str_to_url}.html" title="{$vs['seotitle']}">{$vs['typename']}</a></dd>
 			</volist>
+            </if>
         </dl>
     </volist>
     <dl class="pcf">
-    	<dt><a href="__APP__/Cp/my_post_classifieds" target="_blank">+Post classifieds</a></dt>
+    	<dt><a href="__APP__/Cp/my_post_classifieds.html" target="_blank">+ Post a classified</a></dt>
     </dl>
     <div class="li di-yuan"></div>
 </div>

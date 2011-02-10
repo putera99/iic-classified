@@ -58,8 +58,17 @@ function load() {
         </div-->
         <div class="biz-content">
             <div class="biz-page">
-                <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">Business</a> > 
+            <eq name="Think.session.flang" value="CN">
+            	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/my_post_fair.html" target="_blank">+ 发布展会信息</a></span>
+                <a href="__APP__/index.html">首页</a> > <a href="__APP__/biz.html">中国展会</a> > 
+				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}.html">{$dh['seotitle']}</a></if>
+            <else/>
+            	<span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/my_post_fair.html" target="_blank">+ Post a Fair</a></span>
+                <a href="__APP__/index.html">Home</a> > <a href="__APP__/biz.html">China Fairs</a> > 
 				<if condition="$dh"><a href="__APP__/Biz/ls/id/{$dh['id']}.html">{$dh['typename']}</a></if>
+             </eq>
             </div>
             <div class="biz-city">
 				<!--div class="hot">
@@ -82,10 +91,28 @@ function load() {
                 </div-->
                 <div class="biz-title">
                     <h1>{$info['title']}</h1>
-                    <span>Time:　</span>{$info['showstart']|toDate='M d, Y'} - {$info['showend']|toDate='M d, Y'}({$info['bycity']|get_city='ctitle'})
+                    <eq name="Think.session.flang" value="CN">
+                    <span>时间:　</span>{$info['showstart']|toDate='Y-m-d'} - {$info['showend']|toDate='Y-m-d'}({$info['bycity']|get_city='cename'})
+                    <else/>
+                    <span>Time:　</span>{$info['showstart']|toDate='M  d, Y'} - {$info['showend']|toDate='M  d, Y'}({$info['bycity']|get_city='ctitle'})
+                    </eq>
                 </div>
                 <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="biz_info">
                     <tr align="center">
+                    <eq name="Think.session.flang" value="CN">
+						<th class="yans" width="20%">
+                            展会
+                        </th>
+                        <th class="yans" width="25%">
+                            地点
+                        </th>
+						<th class="yans" width="40%">
+                            组织者 
+                        </th>
+                        <th class="yans" width="15%">
+                            行业
+                        </th>
+             			<else/>
                         <th class="yans" width="20%">
                             Fair
                         </th>
@@ -98,7 +125,7 @@ function load() {
                         <th class="yans" width="15%">
                             Industry
                         </th>
-                        
+                        </eq>
                     </tr>
                     <tr>
                         <td class="yans">
@@ -132,7 +159,11 @@ function load() {
                             {$info['contact']}
                         </td>
                         <td class="yans" align="center" bordercolor="#CCCCCC">
+                            <eq name="Think.session.flang" value="CN">
+                            {$info['typeid']|get_arctype='seotitle'}
+                            <else/>
                             {$info['typeid']|get_arctype='typename'}
+                            </eq>
                         </td>
                         
                     </tr>
@@ -152,13 +183,21 @@ function load() {
 				</div>
                 <div class="biz-xinxi">
 					<span class="ditu" id="map"></span>
-					
+					<eq name="Think.session.flang" value="CN">
+                    <span>简介:</span>{$info['_fair']['description']}
+					<p>
+						<span>产品:</span>{$info['_fair']['product']}
+					</p><p>
+						<span>来源:</span>{$info['source']}
+					</p>
+                    <else/>
 						<span>Description:</span>{$info['_fair']['description']}
 					<p>
 						<span>Product:</span>{$info['_fair']['product']}
 					</p><p>
 						<span>Source:</span>{$info['source']}
 					</p>
+                    </eq>
                     <ul class="act">
                         <li id="1_{$info['channel']}_{$info['id']}" class="user_share">
                             <a href="__URL__/share/xid/{$info['id']}/xtype/{$info['channel']}" target="_blank">Share</a>
@@ -167,7 +206,7 @@ function load() {
                             <a href="#2_{$info['channel']}_{$info['id']}">Save as favorite</a>
                         </li>
                         <li id="3_{$info['channel']}_{$info['id']}" class="user_report">
-                            <a href="__APP__/Cp/report/aid/{$info['channel']}_{$info['id']}">Report corrections</a>
+                            <a href="__APP__/Common/report/aid/{$info['channel']}_{$info['id']}">Report corrections</a>
                         </li>
                         <li id="4_{$info['channel']}_{$info['id']}" class="user_interest">
                         	<a href="__APP__/Cp/fair_focus/types/{$info['channel']}/aid/{$info['id']}/act/add/to/{$tourl}">Show interest</a>
@@ -193,18 +232,25 @@ function load() {
             </ul>
         </div>
         <div class="dingt">
-            By Industries
+            <eq name="Think.session.flang" value="CN">按行业检索<else/>By Industries</eq>
         </div>
          <div class="menu">
             <ul>
             	<li>
-                    <a href="__URL__/ls/id/all.html" <php>if($_SESSION['fair_id']=='')echo 'class="on"';</php>>All Industries</a>
+                    <a href="__URL__/ls/id/all.html" <php>if(empty($_SESSION['fair_id']))echo 'class="on"';</php>><eq name="Think.session.flang" value="CN">全部行业<else/>All Industries</eq></a>
                 </li>
 <volist name="industries" id="v">
                 <li>
-                    <a href="__URL__/ls/id/{$v['id']}.html" <php>if($_SESSION['fair_id']==$v['id'])echo 'class="on"';</php>>{$v['typename']}</a>
+                    <a href="__URL__/ls/id/{$v['id']}/Categories/<eq name="Think.session.flang" value="CN">{$v['seotitle']|str_to_url}.html">{$v['seotitle']}<else/>{$v['typename']|str_to_url}.html">{$v['typename']}</eq></a>
                 </li>
 </volist>
+				<li>
+                	 <eq name="Think.session.flang" value="CN">
+                        <a href="__APP__/Cp/my_post_fair.html" target="_blank" class="on">+ 发布展会信息</a>
+                    <else/>
+                        <a href="__APP__/Cp/my_post_fair.html" target="_blank" class="on">+ Post a Fair</a>
+                     </eq>
+                </li>
             </ul>
             <div class="yuanjiao">
             </div>

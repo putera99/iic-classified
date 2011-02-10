@@ -13,24 +13,6 @@
 <div id="main">
     <div class="mian-right">
         <div class="events_right">
-            <!--div class="events_yong">
-                <div class="next-bg">
-                    Are You Interested?
-                </div>
-                <div class="events_zhuban">
-<if condition="$interested">
-                    <dl>
-                        <dt>
-                            <img src="images/pc/pic05.gif" alt="pic" />
-                        </dt>
-                        <dd>
-                            <span>Milano Daily Specials ...</span>middle 191 (metro line 5 five-
-                            goat estate stood A ...
-                        </dd>
-                    </dl>
-</if>
-                </div>
-            </div-->
             <div class="events_xin">
                 <div class="next-bg">
                     New Events
@@ -40,10 +22,10 @@
 	<volist name="new_activities" id="v">
                     <dl class="group-x">
                         <dt>
-                            <a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
+                            <a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                         </dt>
                         <dd>
-                            <h5><a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a></h5>
+                            <h5><a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></h5>
                             <p>Date:{$v['showstart']|toDate='M d'} -- {$v['showend']|toDate='M d'}</p>
                         </dd>
                     </dl>
@@ -61,9 +43,9 @@
 <if condition="$group">
 	<volist name="group" id="g">
                     <dl class="group-x">
-                        <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                        <dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                         <dd>
-                            <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                            <h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                             <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                         </dd>
                     </dl>
@@ -74,48 +56,56 @@
         </div>
         <div class="mian-center-n">
             <div class="jianbian">
-                <a href="__APP__/index.html">Home</a> > <a href="__APP__/event.html">Events</a> 
+            <span style="float:right; margin-right:10px;">
+				<a href="__APP__/Cp/event_create.html" target="_blank">+ Initiate an Event</a></span>
+                <a href="__APP__/index<if condition="$cid">/{$cid}</if>.html">Home</a> > <a href="__APP__/event<if condition="$cid">/{$cid}</if>.html">{$cityname}Events</a> 
             </div>
+
+<if condition="$headline"> 
             <div class="events_popula">
-                <h2>Weekly Hot Spot</h2>
+            	<h1>{$cityname}Events</h1>
+                <h2>Featured Event</h2>
             </div>
-<if condition="$list">
-<volist name="list" id="v">
-	<if condition="$i eq 1">
+
+
 			<div class="events_neirong">
-                <span><a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a></span>
+                <span><a href="__APP__/evts/{$headline['id']}.html"><img src="{$headline['picurl']|toImg=event}" alt="{$headline['title']}" /></a></span>
                 <div class="cool">
-                	<h2 class="zhuti"><a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a></h2>
-                	<p>{$v['my_content']|strip_tags|String::msubstr=0,180}...</p>
+                	<h2 class="zhuti"><a href="__APP__/evts/{$headline['id']}/{$headline['title']|str_to_url}.html">{$headline['title']}</a></h2>
+                	<p>{$headline['my_content']|strip_tags|String::msubstr=0,180}...</p>
                 </div>
             </div>
+</if>
+<if condition="$list">   
             <div class="events_jingcai">
-	<else/>
+            <div class="events_popula">
+                <h2>Upcoming events</h2>
+            </div>
+<volist name="list" id="v">
 				<dl>
                     <dt>
-                        <a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
+                        <a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                     </dt>
                     <dd>
-                        <span><a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a></span>
+                        <span><a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></span>
                         <p>Date: {$v['showstart']|toDate='M d,Y'} -- {$v['showend']|toDate='M d,Y'}</p>
 						<p>{$v['my_content']|strip_tags|String::msubstr=0,180}...</p>
                     </dd>
                 </dl>
-	</if>
 </volist>
             </div>
 </if>
             <div class="events_highlights">
-                <span>more</span>Fun Review
+                <span><a href="__URL__/ls/type/all/tk/whats_off.html"> »More</a></span>Fun Review
             </div>
             <div class="events_zuix">
 <volist name="old" id="v">
                 <dl>
                     <dt>
-                        <a href="__APP__/evts/{$v['id']}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
+                        <a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html"><img src="{$v['picurl']|toImg=event}" alt="{$v['title']}" /></a>
                     </dt>
                     <dd>
-                       <a href="__APP__/evts/{$v['id']}.html">{$v['title']}</a>
+                       <a href="__APP__/evts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a>
                     </dd>
                 </dl>
 </volist>
@@ -123,18 +113,16 @@
         </div>
     </div>
     <div class="main-left">
-        <ul>
+		<ul>
             <li class="bg-h">
                 Time
             </li>
 <volist name="range_time" id="v">
             <li>
-                <a href="__URL__/ls/st/{$v['st']}/et/{$v['et']}">{$v['name']}</a>
+                <a href="__APP__/event-time/{$v['tk']}.html" <if condition="$v['tk']==$tk">class="on"</if>>{$v['name']}</a>
             </li>
 </volist>
-            <li>
-                <a href="#">Choose a Date</a>
-            </li>
+			<!--a href="__URL__/ls/st/{$v['st']}/et/{$v['et']}">{$v['name']}</a-->
             <li class="di-yuan"></li>
         </ul>
         <ul>
@@ -142,13 +130,14 @@
                 Category
             </li>
             <li>
-                <a href="__URL__/ls/type/all">All</a>
+                <a href="__URL__/ls/type/all.html" <if condition="empty($typeid)">class="on"</if>>All</a>
             </li>
 <volist name="class_tree" id="v">
             <li>
-                <a href="__URL__/ls/id/{$v['id']}" title="{$v['typename']}">{$v['typename']}</a>
+                <a href="__APP__/event-category/{$v['id']}/{$v['typename']|str_to_url}.html" title="{$v['typename']}" <if condition="$v['id']==$typeid">class="on"</if>>{$v['typename']}</a>
             </li>
 </volist>
+			<li><a href="__APP__/Cp/event_create.html" target="_blank" class="on">+ Initiate an Event</a></li>
             <li class="di-yuan"></li>
         </ul>
         <div class="left_biz">

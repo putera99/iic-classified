@@ -55,7 +55,7 @@ function zone(obj,id,name){
     </div>
     <div class="right-messages">
         <div class="right-title">
-            <h3 style="margin:0;">Create My Event</h3>
+            <h3 style="margin:0;">Create/Edit My Event</h3>
         </div>
         <div class="list">
             <form action="__URL__/event_add" method="post" enctype="multipart/form-data">
@@ -100,9 +100,13 @@ function zone(obj,id,name){
 						<input type="text" name="position" id="position" value="{$data['position']}">
 						
 					</p>
+                    
+                    <if condition="$data['maps']"><p>Mpas:{$data['maps']}</p>
+                    <input type="hidden" name="old_maps" value="{$data['maps']}" />
+                    </if>
 					<p>
-						<label for="bycity">*By City</label>
-						<select name="bycity" id="bycity">
+						<label for="cid">*By City</label>
+						<select name="cid" id="cid">
 							<option value="0">--Favorite City--</option>
 							<volist name="citylist" id="v">
 							<option value="{$v['id']}"{$v['id']|selected=$data['cid']}>{$v['ctitle']}</option>
@@ -178,7 +182,7 @@ function zone(obj,id,name){
 					</p>
 					<p><label for="detail">*Detail:</label>
 						<!-- 编辑器调用开始 -->
-						<textarea id="editor_editor" rows="8" cols="50" name="detail">{$addon['detail']|br2nl}</textarea>
+						<textarea id="editor_editor" rows="8" cols="50" name="detail">{$data['content']['detail']|br2nl}</textarea>
 						<!--script type="text/javascript">
 						var id="editor_editor";
 						var oFCKeditor = new FCKeditor(id,"100%","445px" );

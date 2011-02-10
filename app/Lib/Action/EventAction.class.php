@@ -14,13 +14,6 @@
 class EventAction extends CommonAction {
 
     protected $pcid = '';
-
-    function _initialize() {
-        parent::_initialize();
-    }
-
-//end _initialize()
-
     /**
      * 活动频道首页
      * @date 2010年 05月 04日 星期二 10:56:27 CST
@@ -28,17 +21,28 @@ class EventAction extends CommonAction {
     function index() {
         //活动频道首页
         $this->chk_cid();
+        $kinfo='';//标题后面附加的城市后缀
+		if($this->pcid){//检查城市或者城市群
+			if($this->pcid > 1000){
+				$kinfo=$this->cgroup[$this->pcid]['name'].' ';
+				$this->assign('city_group',$this->cgroup[$this->pcid]['name']);
+			}else{
+				$kinfo=get_cityname($this->pcid).' ';
+			}
+			$this->assign("cityname",$kinfo);
+		}//检查城市或者城市群
         $time = time();
         $dao = D("Archives");
         $condition = array();
         $condition['channel'] = '10';
         $condition['ismake'] = '1';
-        if(!empty($this->pcid)||$this->pcid!='0'){
+        if(!empty($this->pcid)&&$this->pcid!='0'&&$this->pcid<1000){
         	$condition['cid'] = $this->pcid;
         }
         $condition['showstart'] = array('lt', $time);
         $condition['showend'] = array('gt', $time);
         $list = $dao->where($condition)->order("showstart DESC")->limit("0,11")->findAll();
+        //dump($dao->getLastSql());
         $this->assign('list', $list);
         $condition['showend'] = array('lt', $time);
         $old = $dao->where($condition)->order("showstart DESC")->limit("0,4")->findAll();
@@ -55,15 +59,15 @@ class EventAction extends CommonAction {
         $this->assign('group', $group);
 
         $page = array();
-        $page['title'] = 'You can view, join and initiate events in Beijing, Shanghai, Guangzhou and Shenzhen. There are various events like Night Life, Party and Community Activities.  Events  -  BeingfunChina 缤纷中国';
-        $page['keywords'] = "缤纷中国,Events,BeingfunChina,Night Life,Party,Community,Activities";
-        $page['description'] = "You can view, join and initiate events in Beijing, Shanghai, Guangzhou and Shenzhen. There are various events like Night Life, Party and Community Activities.";
+        $page['title'] = $kinfo.' You can view, join and initiate events. There are various events like Night Life, Party and Community Activities.';
+        $page['keywords'] = "Events,BeingfunChina,Night Life,Party,Community,Activities,$kinfo";
+        $page['description'] = $kinfo." You can view, join and initiate events. There are various events like Night Life, Party and Community Activities.";
         $this->assign('page', $page);
         $this->ads('10', 'channel');
+        $headline=self::attr_event("h",'0,1');
+        $this->assign("headline",$headline);
         $this->display();
-    }
-
-//end index
+    }//end index
 
     /**
      * 活动列表页
@@ -72,33 +76,53 @@ class EventAction extends CommonAction {
     function ls() {
         //活动列表页
         $this->chk_cid();
-        if ($_REQUEST['id']) {
-            $_SESSION['typeid'] = Input::getVar($_REQUEST['id']);
+        if ($_GET['id']) {
+            $_SESSION['typeid'] = Input::getVar($_GET['id']);
         }
-        if ($_REQUEST['type'] == 'all') {
+        if ($_GET['type'] == 'all') {
             unset($_SESSION['typeid']);
         }
-        if ($_REQUEST['st']) {
-            $_SESSION['st'] = Input::getVar($_REQUEST['st']);
-        }
-        if ($_REQUEST['et']) {
-            $_SESSION['et'] = Input::getVar($_REQUEST['et']);
-        }
-        $condition['cid'] = $this->pcid;
-        $this->assign('range_time', $this->range_time());
+        
+    	
+        //$condition['cid'] = $this->pcid;
+        $range_time=$this->range_time();
+        $this->assign('range_time',$range_time);
         $this->assign('class_tree', $this->get_class(2050));
-
+		
+        //设置时间段筛选时间
+    	if ($_GET['tk']) {
+    		foreach ($range_time as $v){
+	    		if($v['tk']==Input::getVar($_GET['tk'])){
+					$_SESSION['sql']=$v['sql'];
+					$_SESSION['tk']=$v['tk'];
+					$_SESSION['tk_name']=$v['name'];
+				}
+    		}
+        }
+        
+        if($_GET['clrt']=="ok"){
+        	unset($_SESSION['sql']);
+        	unset($_SESSION['tk']);
+        	unset($_SESSION['tk_name']);
+        }
+        
         $time = time();
         $dao = D("Archives");
         $condition = array();
+    	if(!empty($this->pcid)&&$this->pcid!='0'){
+    		if($this->pcid < 1000){
+        		$condition['cid']=$this->pcid;
+    		}
+        }
         $condition['channel'] = '10';
         $condition['ismake'] = '1';
-        if ($_SESSION['st'] != '0' && $_SESSION['et'] != '0') {
-            $condition['_string'] = "(`showstart`>='{$_SESSION['st']}' AND `showstart`<='{$_SESSION['et']}') OR (`showend`>='{$_SESSION['st']}' AND `showend`>='{$_SESSION['et']}')";
-        } else {
-            $condition['_string'] = "";
+        if ($_SESSION['sql']) {
+        	$this->assign("tk",$_SESSION['tk']);
+            //$condition['_string'] = "(`showstart`>='{$_SESSION['st']}' AND `showstart`<='{$_SESSION['et']}') OR (`showend`>='{$_SESSION['st']}' AND `showend`>='{$_SESSION['et']}')";
+            $condition['_string'] = $_SESSION['sql'];
         }
         if ($_SESSION['typeid']) {
+        	$this->assign("typeid",$_SESSION['typeid']);
             $condition['typeid'] = $_SESSION['typeid'];
         }
 
@@ -111,17 +135,46 @@ class EventAction extends CommonAction {
         $this->assign('showpage_bot', $page->show_img());
         $limit = $page->firstRow . ',' . $page->listRows;
         $data = $dao->where($condition)->order("showstart DESC")->limit($limit)->findAll();
+        //dump($dao->getLastSql());
         $this->assign('data', $data);
-
+        
+        //获取类别信息
+        $info=array();
+        if($_SESSION['typeid']){
+        	$arctype=D("Arctype");
+        	$info=$arctype->where("id={$_SESSION['typeid']}")->find();
+        	
+        	$this->assign("info",$info);
+        }else{
+        	$info['typename']="All";
+        	$this->assign("info",$info);
+        }
+        
+        //导航
         $this->assign('dh', $this->_get_dh($_SESSION['typeid']));
-
+		
+        //页头信息
+    	$cityinfo='';
+		if($this->pcid){
+			$cityinfo=get_cityname($this->pcid)?' in '.get_cityname($this->pcid):'';
+		}
+		
+        $title="";
+        
+        $title.=empty($info['typename'])?'Events list':$info['typename'];
+        $title.=empty($_SESSION['tk_name'])?'':','.$_SESSION['tk_name'];
+        $title.=$cityinfo;
         $page = array();
-        $page['title'] = empty($info['title']) ? 'Events list  -  BeingfunChina 缤纷中国' : $info['title'] . '  -  BeingfunChina 缤纷中国';
-        $page['keywords'] = empty($info['tags']) ? "Events,list" : $info['tags'];
-        $page['description'] = empty($info['title']) ? "Events list in BeingfunChina" : $info['title'];
+        $page['title'] = empty($info['title']) ? $title.' - BeingfunChina 缤纷中国' :$title.' - BeingfunChina 缤纷中国';
+        $page['keywords'] = empty($info['tags']) ? $title: $info['tags'];
+        $page['description'] = empty($info['title']) ? "Events list in BeingfunChina" :$title;
         $this->assign('page', $page);
 
-        $this->ads('10', 'list');
+        $this->ads('10', 'list');//调用广告
+        
+    	if($this->_is_admin()){//检查管理权限
+			$this->assign('admin',true);
+		}
         $this->display();
     }
 
@@ -149,7 +202,7 @@ class EventAction extends CommonAction {
         $this->assign('dh', $this->_get_dh($info['typeid']));
 
         $page = array();
-        $page['title'] = empty($info['title']) ? 'Events  -  BeingfunChina 缤纷中国' : $info['title'] . '  -  BeingfunChina 缤纷中国';
+        $page['title'] = empty($info['title']) ? 'Events  -  BeingfunChina 缤纷中国' : $info['title'] . ' - BeingfunChina 缤纷中国';
         $page['keywords'] = empty($info['tags']) ? "Events" : $info['tags'];
         $page['description'] = empty($info['title']) ? "Events in BeingfunChina" : $info['title'];
         $this->assign('page', $page);
@@ -335,9 +388,7 @@ class EventAction extends CommonAction {
         $page['description'] = empty($info['title']) ? "Events in BeingfunChina" : $info['title'];
         $this->assign('page', $page);
         $this->display();
-    }
-
-//end thread
+    }//end thread
 
     /**
      * 获取最新话题
@@ -358,9 +409,7 @@ class EventAction extends CommonAction {
         }
         $list = $post->where($condition)->order($order)->limit($limit)->findAll();
         return $list;
-    }
-
-//end _new_thread
+    }//end _new_thread
 
     /**
      * 生成时间段
@@ -372,25 +421,69 @@ class EventAction extends CommonAction {
         $t = time();
         $tarr = array();
         $day = 60 * 60 * 24;
-        $tarr['7']['name'] = 'Last Week';
+        
+        $tarr['1']['name'] = 'Today';//今天
+        $tarr['1']['tk'] = 'today';
+        $tarr['1']['st'] =mktime(0,0,1,date("n"),date("d"),date("Y"));
+        $tarr['1']['et'] =mktime(23,59,59,date("n"),date("d"),date("Y"));
+        $tarr['1']['sql']="`showstart`>={$tarr['1']['st']} AND `showstart`<={$tarr['1']['et']}";
+        
+        $tarr['7']['name'] = 'Next 7 Days';//下七天
+        $tarr['7']['tk'] = 'seven_days';
+        $tarr['7']['st'] =mktime(0,0,1,date("n"),date("d"),date("Y"));
+        $tarr['7']['et'] =mktime(59,59,59,date("n"),date("d")+7,date("Y"));
+        $tarr['7']['sql']="`showstart`>={$tarr['7']['st']} AND `showstart`<={$tarr['7']['et']}";
+        
+        $tarr['30']['name'] = 'Next 30 Days';//下三十天
+        $tarr['30']['tk'] = 'thirty_days';
+        $tarr['30']['st'] =mktime(0,0,1,date("m"),date("d"),date("Y"));
+        $tarr['30']['et'] =mktime(59,59,59,date("m"),date("d")+30,date("Y"));
+        $tarr['30']['sql']="`showstart`>={$tarr['30']['st']} AND `showstart`<={$tarr['30']['et']}";
+        
+        $tarr['next']['name'] = "What's next";//所有没有开始的活动
+        $tarr['next']['tk']="whats_next";
+        $tarr['next']['sql']="`showstart`>{$t}";
+        
+        
+        $tarr['on']['name'] = "What's on";//正在举办的
+        $tarr['on']['tk']="whats_on";
+        $tarr['on']['sql']="`showstart`>={$t} AND `showend`<{$t}";
+        
+        $tarr['past7']['name'] = "The Past 7 Days";//过去七天
+        $tarr['past7']['tk']="past_seven_days";
+        $tarr['past7']['st'] =mktime(0,0,1,date("n"),date("d"),date("Y"));
+        $tarr['past7']['et'] =mktime(0,0,1,date("n"),date("d")-7,date("Y"));
+        $tarr['past7']['sql']="`showstart`>={$tarr['past7']['et']} AND `showstart`<={$tarr['past7']['st']}";
+        
+        $tarr['off']['name'] = "What's off";//所有的已经结束的
+		$tarr['off']['tk']="whats_off";
+		$tarr['off']['sql']="`showend`<{$t}";
+        
+        /*$tarr['7']['name'] = 'Last Week';
+        $tarr['7']['tk'] = 'last_week';
         $tarr['7']['st'] = $t - ($day * 7);
         $tarr['7']['et'] = $t + ($day * 7);
         $tarr['30']['name'] = 'Last Month';
+        $tarr['30']['tk'] = 'last_month';
         $tarr['30']['st'] = $t - ($day * 30);
         $tarr['30']['et'] = $t + ($day * 30);
         $tarr['90']['name'] = 'Recent Three Months';
+        $tarr['90']['tk'] = 'recent_three_months';
         $tarr['90']['st'] = $t - ($day * 30 * 3);
         $tarr['90']['et'] = $t + ($day * 30 * 3);
         $tarr['365']['name'] = 'This Year';
+        $tarr['365']['tk'] = 'this_year';
         $tarr['365']['st'] = mktime(0, 0, 0, 1, 1, date('Y'));
         $tarr['365']['et'] = mktime(0, 0, 0, 1, 1, date('Y') + 1) - 1;
         $tarr['all']['name'] = 'All Time';
+        $tarr['all']['tk'] = 'all_time';
         $tarr['all']['st'] = 0;
-        $tarr['all']['et'] = 0;
+        $tarr['all']['et'] = 0;*/
+        
+        
+        
         return $tarr;
-    }
-
-//end range_time
+    }//end range_time
 
     /**
      * 获取分类
@@ -398,15 +491,14 @@ class EventAction extends CommonAction {
      * @time 下午03:48:19
      */
     protected function get_class($topid) {
-        //sm
+        //获取分类
         $dao = D("Arctype");
         $list = $dao->where("topid=$topid AND ishidden=0")->order("id ASC")->findAll();
         unset($dao);
         return $list;
-    }
+    }//end get_class
 
-//end function_name
-
+    
     /**
      * 检查城市选项
      * @date 2010-6-23
@@ -417,6 +509,7 @@ class EventAction extends CommonAction {
         $cid = Input::getVar($_GET['cid']);
         if ($cid) {
             if ($_SESSION['cid']) {
+            	$_SESSION['cid']=$cid;
                 $this->pcid = $cid;
             } else {
                 $_SESSION['cid'] = $cid;
@@ -518,10 +611,33 @@ class EventAction extends CommonAction {
         }
         $list = $dao->where($condition)->order("pubdate DESC")->limit("0,6")->findAll();
         return $list;
-    }
-
-//end new_event
-}
-
-// END EventAction
+    }//end new_event
+    
+    	/**
+	 *获取最新活动
+	 *@date 2010-6-17
+	 *@time 上午09:51:38
+	 */
+	protected function attr_event($fld='h',$limit="0,1") {
+		//获取最新活动
+		$time = time ();
+		$dao = D ( "Archives" );
+		$condition = array ();
+		$condition ['channel'] = '10';
+		$condition ['ismake'] = '1';
+		/*$condition ['showstart'] = array ('lt', $time );
+		$condition ['showend'] = array ('gt', $time );*/
+		$condition['_string']="FIND_IN_SET('$fld',`flag`) > 0";
+		if ($this->pcid) {
+			$condition ['cid'] = $this->pcid;
+		}
+		if($limit=='0,1'){
+			$list = $dao->where ( $condition )->order ( "edittime DESC,showstart DESC" )->limit ($limit)->find();
+		}else{
+			$list = $dao->where ( $condition )->order ( "edittime DESC,showstart DESC" )->limit ($limit)->findAll ();
+		}
+		return $list;
+	} //end attr_event
+	
+}// END EventAction
 ?>

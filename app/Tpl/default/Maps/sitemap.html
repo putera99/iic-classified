@@ -1,0 +1,277 @@
+<include file="Public:head"/>
+<style type="text/css">
+.reg{border:none;text-align:center; overflow:hidden;background-color:#ffffff;}
+.reg .title{font-size:131%; color:#333333; margin:0; font-weight:bold; text-align:left; padding-left:50px;}
+.reg .title a{color:#333333;}
+.reg .title p{font-size:12px; font-weight:normal;margin:0;}
+.reg .list{margin-bottom:50px; padding-left:20px; float:left; text-align:left;}
+
+.reg .list h2{}
+.reg .list h2 a{color:#333333;}
+.reg .list h3{float:left; margin:0 0 10px 10px;_margin-left:0 0 5px 5px; display:inline-block; border:1px #CCCCCC solid; font-weight:normal;}
+.reg .list h3 a{color:#333333; display:block; padding:0 8px; font-size:16px; font-weight:bold;}
+
+
+.reg .list dl{padding-left:25px; margin:0; list-style:none; padding:0;}
+.reg .list dl dt{line-height:25px; height:auto; overflow:hidden; display:block;}
+.reg .list dl dt b{line-height:25px; height:25px;margin:0;}
+.reg .list dl dt b a{ font-size:14px; font-weight:bold; color:#000000;}
+.reg .list dl dt p{margin:0;}
+.reg .list dl dt p a{display:inline-block; float:left; margin:0 5px; color:#000000; font-size:14px;}
+
+.reg .list dl dd{height:auto; display:block; margin-left:0;}
+.reg .list dl dd a{color:#333333;}
+.reg .list dl dd p{float:left;display:block; clear:both; width:100%;height:auto; overflow:hidden;}
+.reg .list dl dd p b{float:left; display:inline-block; margin:0 10px 0 0; width:160px; text-align:right;}
+.reg .list dl dd p span{float:left;height:auto; overflow:hidden; width:760px;}
+.reg .list dl dd .ul{float:left;display:block; clear:both; width:100%;height:auto;overflow:hidden; padding-left:160px;}
+.reg .list dl dd .ul .li{float:left;height:auto; overflow:hidden; width:760px;}
+</style>
+<div id="main" class="reg"><br />
+	<div class="title">
+		<a href="/">Home</a>  >>  <a href="__APP__/sitemap.html">SiteMap</a>
+		<h1>SiteMap</h1>
+	</div>
+	<div class="list">
+    <h2><a href="__APP__/classifieds.html">Classifieds</a></h2>
+<php>
+foreach($all_city as $i=>$c){
+     echo '<h3><a href="__APP__/classifieds/'.$i.'.html">'.$c.' Classifieds</a></h3>';
+}//foreach($all_city
+foreach($classifieds as $v){
+</php>
+			<div class="clear"></div>
+        	<dl>
+            	<dt>
+                	<b><a href="__APP__/clist/{$v['id']}.html">{$v['typename']}</a></b>
+                    <p>
+    <php>
+    foreach($all_city as $i=>$c){
+    </php>
+                    	<a href="__APP__/clist/{$v['id']}/{$i}.html">{$v['typename']} in {$c}</a>
+    <php>
+    }//foreach($all_city as $i=>$c)
+    </php>
+                    </p>
+                </dt>
+    <php>
+    if($v['_son']){
+    </php>
+                <dd>
+    <php>
+    foreach($v['_son'] as $sv){
+    </php>
+        			<p>
+                    	<b><a href="__APP__/clist/{$sv['id']}.html">{$sv['typename']}</a></b>
+                        <span>
+        <php>
+        foreach($all_city as $i=>$c){
+        if($i){
+        </php>
+                    	<a href="__APP__/clist/{$sv['id']}/{$i}.html">{$sv['typename']} in {$c}</a> /  
+        <php>
+        }else{
+        </php>
+                    	<a href="__APP__/clist/{$sv['id']}/{$i}.html">{$sv['typename']} in {$c}</a>
+        <php>
+        }
+        }//foreach($all_city as $i=>$c)
+        </php>
+            			</span>
+        <php>
+        if($sv['_son']){
+        </php>
+                		<div class="ul">
+        <php>
+        foreach($sv['_son'] as $ssv){
+        </php>
+                    		<div class="li">
+                            	<b><a href="__APP__/clist/{$ssv['id']}.html">{$ssv['typename']}</a></b>
+                                <span>
+            <php>
+            foreach($all_city as $i=>$c){
+            if($i){
+            </php>
+                                <a href="__APP__/clist/{$ssv['id']}/{$i}.html">{$ssv['typename']} in {$c}</a> / 
+            <php>
+            }else{
+            </php>
+                                <a href="__APP__/clist/{$ssv['id']}/{$i}.html">{$ssv['typename']} in {$c}</a>
+            <php>
+            }
+            }//foreach($all_city as $i=>$c)
+            </php>
+                                </span>
+                            </div>
+        <php>
+        }//foreach($sv['_son'] as $ssv)
+        </php>
+                    	</div>
+		<php>
+        }//if($sv['_son'])
+        </php>
+                    </p>
+        <php>
+        }//foreach($v['_son'] as $sv)
+        </php>
+                </dd>
+<php>
+}
+</php>
+            </dl>
+<php>
+}
+</php>
+<div class="clear"><br /></div>
+
+ <h2><a href="__APP__/cityguide.html">City Guide</a></h2>
+<php>
+foreach($all_city as $i=>$c){
+     echo '<h3><a href="__APP__/cityguide/'.$i.'.html">'.$c.' City Guide</a></h3>';
+}//foreach($all_city
+foreach($cityguide as $v){
+</php>
+			<div class="clear"></div>
+        	<dl>
+            	<dt>
+                	<b><a href="__APP__/cglist/{$v['id']}.html">{$v['typename']}</a></b>
+                    <p>
+    <php>
+    foreach($all_city as $i=>$c){
+    </php>
+                    	<a href="__APP__/cglist/{$v['id']}/{$i}.html">{$v['typename']} in {$c}</a>
+    <php>
+    }//foreach($all_city as $i=>$c)
+    </php>
+                    </p>
+                </dt>
+    <php>
+    if($v['_son']){
+    </php>
+                <dd>
+    <php>
+    foreach($v['_son'] as $sv){
+    </php>
+        			<p>
+                    	<b><a href="__APP__/cglist/{$sv['id']}.html">{$sv['typename']}</a></b>
+                        <span>
+        <php>
+        foreach($all_city as $i=>$c){
+        if($i){
+        </php>
+                    	<a href="__APP__/cglist/{$sv['id']}/{$i}.html">{$sv['typename']} in {$c}</a> /  
+        <php>
+        }else{
+        </php>
+                    	<a href="__APP__/cglist/{$sv['id']}/{$i}.html">{$sv['typename']} in {$c}</a>
+        <php>
+        }
+        }//foreach($all_city as $i=>$c)
+        </php>
+            			</span>
+        <php>
+        if($sv['_son']){
+        </php>
+                		<div class="ul">
+        <php>
+        foreach($sv['_son'] as $ssv){
+        </php>
+                    		<div class="li">
+                            	<b><a href="__APP__/cglist/{$ssv['id']}.html">{$ssv['typename']}</a></b>
+                                <span>
+            <php>
+            foreach($all_city as $i=>$c){
+            if($i){
+            </php>
+                                <a href="__APP__/cglist/{$ssv['id']}/{$i}.html">{$ssv['typename']} in {$c}</a> / 
+            <php>
+            }else{
+            </php>
+                                <a href="__APP__/cglist/{$ssv['id']}/{$i}.html">{$ssv['typename']} in {$c}</a>
+            <php>
+            }
+            }//foreach($all_city as $i=>$c)
+            </php>
+                                </span>
+                            </div>
+        <php>
+        }//foreach($sv['_son'] as $ssv)
+        </php>
+                    	</div>
+		<php>
+        }//if($sv['_son'])
+        </php>
+                    </p>
+        <php>
+        }//foreach($v['_son'] as $sv)
+        </php>
+                </dd>
+<php>
+}
+</php>
+            </dl>
+<php>
+}
+</php>
+		<div class="clear"><br /></div>
+
+ 		<h2><a href="__APP__/biz.html">China Fairs</a></h2>
+        <h3><a href="__APP__/Biz/index/flang/CN.html">中国展会</a></h3>
+        <h3><a href="__APP__/Biz/index/flang/EN.html">China Fairs</a></h3>
+<volist name="fairs" id="f">
+     <h3><a href="__APP__/Biz/ls/id/{$f['id']}/flang/EN.html">{$f['typename']}</a></h3>
+</volist>
+<volist name="fairs" id="f">
+     <h3><a href="__APP__/Biz/ls/id/{$f['id']}/flang/CN.html">{$f['seotitle']}</a></h3>
+</volist>
+	
+    <div class="clear"><br /></div>
+    <h2><a href="__APP__/event.html">Events</a></h2>
+    <php>
+foreach($all_city as $i=>$c){
+     echo '<h3><a href="__APP__/event/'.$i.'.html">'.$c.' Events</a></h3>';
+}//foreach($all_city
+</php>
+<volist name="events" id="v">
+    <div class="clear"></div>
+    <dl>
+        <dt>
+            <b><a href="__APP__/Event/ls/id/{$v['id']}.html">{$v['typename']}</a></b>
+            <p>
+            <php>
+                foreach($all_city as $k=>$c){
+            	echo '<a href="__APP__/Event/ls/id/'.$v['id'].'/cid/'.$k.'.html">'.$c." ".$v['typename']." events</a> ";
+            	}//foreach($all_city
+            </php> 
+            </p>
+         </dt>
+         <dd>
+         <p>
+         	<b><a href="__APP__/Event/ls/id/{$v['id']}/tk/whats_on.html">What {$v['typename']} events are on</a></b>
+            <span>
+            	     <php>
+                    foreach($all_city as $i=>$c){
+                         echo '<a href="__APP__/Event/ls/id/'.$v['id'].'/tk/whats_on/cid/'.$i.'.html">What '.$v['typename']." events are on in ".$c."</a> / ";
+                    }//foreach($all_city
+                    </php>
+            </span>
+         </p>
+         <p>
+         	<b><a href="__APP__/Event/ls/id/{$v['id']}/tk/whats_off.html">What {$v['typename']} events are off</a></b>
+            <span>
+            	     <php>
+                    foreach($all_city as $i=>$c){
+                         echo '<a href="__APP__/Event/ls/id/'.$v['id'].'/tk/whats_off/cid/'.$i.'.html">What '.$v['typename']." events are off in ".$c."</a> / ";
+                    }//foreach($all_city
+                    </php>
+            </span>
+         </p>
+         </dd>
+
+</volist>
+
+
+
+	</div>
+</div>
+<include file="Public:foot"/>

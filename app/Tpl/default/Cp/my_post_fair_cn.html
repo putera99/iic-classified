@@ -100,13 +100,13 @@ function zone(obj,id,name){
 							<option value="0">---选择行业---</option>
 							<volist name="class_tree" id="v">
 								<if condition="$v['ispart'] eq 1">
-									<optgroup label="{$v['typename']}">
+									<optgroup label="{$v['seotitle']}">
 										<volist name="v['_son']" id="vs">
-											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['typename']}</option>
+											<option value="{$v['channeltype']}_{$vs['id']}"{$vs['id']|selected=$data['typeid']}>{$vs['seotitle']}</option>
 										</volist>
 									</optgroup>
 								<else/>
-									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['typename']}</option>
+									<option value="{$v['channeltype']}_{$v['id']}"{$v['id']|selected=$data['typeid']}>{$v['seotitle']}</option>
 								</if>
 														
 							</volist>
@@ -134,7 +134,7 @@ function zone(obj,id,name){
 				<fieldset>
 					<legend>展会信息:</legend>
 					<p><label for="ltdid">举办方:</label>
-						<textarea name="contact" id="contact">{$data['contact']}</textarea>
+						<textarea name="contact" id="contact" cols="50" rows="5">{$data['contact']}</textarea>
 					</p>
 					<p><label for="maps">展馆地址:</label>
 						<input type="text" name="maps" id="maps" value="{$data['maps']}" style="width:300px;"> 地图将以此查询
@@ -165,7 +165,7 @@ function zone(obj,id,name){
 					</p>
 					<p>
 						<label for="product">相关产品:</label>
-						<input type="text" name="product" id="product" maxlength="200" style="width:520px;" value="{$data['content']['product']}" />
+						<textarea name="product" id="product" cols="50" rows="5" />{$data['content']['product']|br2nl}</textarea>
 					</p>
 					<p>
 						<label for="website">官方网站:</label>
@@ -177,8 +177,8 @@ function zone(obj,id,name){
 					</p>
 				</fieldset>
 				<p>
-					<input type="submit" value="Submit">            
-					<input type="reset" value="Reset">            
+					<input type="submit" value="提交表单">            
+					<input type="reset" value="重置表单">            
 				</p>
             </form>
         </div>

@@ -135,9 +135,9 @@
 <if condition="$member_group">
 	<volist name="member_group" id="g">
                    <dl class="group-x">
-                        <dt><a href="__APP__/grps/{$g['id']}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
+                        <dt><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html"><img src="{$g['pic']|toImg=group}" alt="{$g['groupname']}" /></a></dt>
                         <dd>
-                            <h5><a href="__APP__/grps/{$g['id']}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
+                            <h5><a href="__APP__/grps/{$g['id']}/{$g['groupname']|str_to_url}.html" title="{$g['groupname']}">{$g['groupname']}</a></h5>
                             <p>Member:{$g['membernum']}<br/>Topic:{$g['threadnum']}</p>
                         </dd>
                     </dl>
@@ -170,9 +170,9 @@
                     <a href="__APP__/index.html">Home</a> > <a href="__APP__/group.html">Groups</a> > 
 					<if condition="$dh">
 	                    <if condition="$dh[_pid]">
-	                        <a href="__APP__/glist/{$dh[_pid]['id']}.html">{$dh[_pid]['title']}</a> >
+	                        <a href="__APP__/glist/{$dh[_pid]['id']}/{$dh[_pid]['title']|str_to_url}.html">{$dh[_pid]['title']}</a> >
 	                    </if>
-	                    <a href="__APP__/glist/{$dh['id']}.html">{$dh['title']}</a> > 
+	                    <a href="__APP__/glist/{$dh['id']}/{$dh['title']|str_to_url}.html">{$dh['title']}</a> > 
 	                </if>
                 </div>
                 <div class="content-n">
@@ -239,7 +239,7 @@
 <if condition="$thread">
 <volist name="thread" id="v">
 		                	<dd>
-								<span class="w381 l"><a href="__APP__/grpts/{$v['id']}.html">{$v['title']}</a></span>
+								<span class="w381 l"><a href="__APP__/grpts/{$v['id']}/{$v['title']|str_to_url}.html">{$v['title']}</a></span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['lasttime']|toDate='Y-m-d'}</span>
 								<span class="w100 c">{$v['dateline']|toDate='Y-m-d'}</span>
@@ -272,10 +272,10 @@
 							<dt class="w100">Channel</dt>
 							<dt class="w100">Share time</dt>
 <if condition="$collection">
-<volist name="thread" id="v">
+<volist name="collection" id="v">
 		                	<dd>
 								<span class="w381 l">
-									<a href="__APP__/{$v['types']|get_type='r'}/{$v['tid']}.html">{$v['tid']|get_title}</a>
+									<a href="__APP__/{$v['types']|get_url='show'}/{$v['xid']}/subject/{$v['xid']|get_title||str_to_url}.html">{$v['xid']|get_title}</a>
 								</span>
 								<span class="w100 c">{$v['username']}</span>
 								<span class="w100 c">{$v['types']|get_type}</span>
@@ -328,7 +328,7 @@
 	<fieldset class="post">
 		<legend>Login</legend>
 		<p>
-			<label for="username">Username:</label>
+			<label for="username">User name:</label>
 			<input type="text" name="username" id="username" style="width:200px;" />
 		</p>
 		<p>
