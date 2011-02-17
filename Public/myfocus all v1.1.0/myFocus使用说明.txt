@@ -1,0 +1,11 @@
+js文件夹包含：
+
+1、pattern文件夹（风格应用目录,共20多款风格）
+2、pattern-sd文件夹（自定义风格应用目录,共3个示例）
+3、myFocus库v1.1.0 min版
+4、myFocus库v1.1.0 full版
+
+详细使用说明：http://www.cosmissy.com/myfocus/usage.html
+详细demo地址：http://www.cosmissy.com/myfocus/demo.html
+
+Date:12/15.
