@@ -23,7 +23,7 @@ $(document).ready(function(){
 	$(".ch").mouseover(function(){
 		$(".ch").removeClass('on');
 		$('#'+this.id).addClass('on');
-		var id="#ch_info_"+this.id.substr(-1,1);
+		var id="#ch_info_"+this.id.substring(9,10);
 		$(".cinfo").hide();
 		$(id).show(); 
 	});
@@ -57,10 +57,10 @@ $(document).ready(function(){
 	$(".user_collection").click(function(){
 		//var id=$(".user_collection").attr('rel');
 		var id=this.id;
-		var types=id.substr(2,1);
-		var tid=id.substr(4);
+		//var types=id.substr(2,1);
+		//var tid=id.substr(4);
 		var tourl=URL+'/user_collection';
-		$.post(tourl,{tid:tid,types:types},function(data){
+		$.post(tourl,{id:id},function(data){
 			if(data['status']==1){
 				alert(data['info']);
 			}else{
@@ -70,20 +70,20 @@ $(document).ready(function(){
 	});
 	
 	//分享资源
-	$(".user_share").click(function(){
-		var id=this.id;
-		var types=id.substr(2,1);
-		var tid=id.substr(4);
-		$.post(login,'',function(data){
-			if(data['status']==1){
-				$('#group_content').load(URL+'/ajax_group');
-				//$('#group_content').modal();
-			}else{
-				alert(data['info']);
-				//$('#login').modal();
-			}
-		},'json');
-	});
+//	$(".user_share").click(function(){
+//		var id=this.id;
+//		var types=id.substr(2,1);
+//		var tid=id.substr(4);
+//		$.post(login,'',function(data){
+//			if(data['status']==1){
+//				$('#group_content').load(URL+'/ajax_group');
+//				//$('#group_content').modal();
+//			}else{
+//				alert(data['info']);
+//				//$('#login').modal();
+//			}
+//		},'json');
+//	});
 	
 	//发送评论
 	$("#post_comment").click(function(){

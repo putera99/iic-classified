@@ -28,6 +28,7 @@
 .right-neirong{margin:0px;padding:0px;border: 1px solid #bcbcbc;background-color:#f4f4f4;}
 .right-messages{width:725px;margin: 10px auto 0 auto;padding: 0 0 5px 0;}
 .right-title {margin:0px;padding:0;}
+.right-title a{ color:#000000;}
 .right-title span {float: right;}
 .yangshi {font-weight: bold;color: #993366;margin:0;}
 

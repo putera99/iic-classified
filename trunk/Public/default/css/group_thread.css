@@ -4,7 +4,7 @@
 .n-life{width:706px;padding:0px;margin: 0px;float: left;}
 .content-bg {font-weight: bold;color: #212121;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .content-bg a{color:#212121;}
-.content-n {border: 1px solid #CCCCCC;background-color:#f3f3f3;margin:0px;padding: 5px 0 0 0; min-height:500px; height:auto;_height:500px;overflow:hidden;_overflow:auto;}
+.content-n {border: 1px solid #CCCCCC;background-color:#f3f3f3;margin:0px;padding: 5px 0 0 0; min-height:500px; height:auto;_height:500px;overflow:hidden;_overflow:visible;}
 .content-life{width:540px;margin:0px;color: #7d7c7c;padding: 0px;}
 .qun-xinx {width: 500px;padding:0px;margin: 0 5px 0 5px;float: left;}
 .qun-xinx dl{margin:0px;padding:0px;line-height: 14px;clear: both;}
@@ -19,28 +19,26 @@
 /* CSS 右边 开始 */
 .right{padding:0px;float:right;margin: 0px;width: 234px;}
 .next_lssue { margin:0px; padding: 0px;}
-.next-bg{background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color: #FFFFFF;margin: 0px;padding: 0 0 0 10px;}
-.next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0;}
+.next-bg{background-color:#706c6d;border: 1px solid #aaaaaa;font-weight:bold;color:#FFFFFF;margin: 0px;padding: 0 0 0 10px;}
+.next-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color:#595959;line-height:18px;padding: 0px;margin: 0 0 10px 0;}
 .next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width:1px;border-bottom-style:dashed;border-bottom-color: #535353;padding-bottom:5px;}
+.next-n li a{color:#595959;}
 .class-xinxi h6 {font-size: 12px;color: #79214d;margin: 0px;padding: 5px 0 0 0; }
 .class-xinxi a {color: #353535;text-decoration: none;padding-left: 10px;}
-.qunzhu-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0;float: right;}
-.qunzhu-n dl {clear: both;margin: 0px; padding: 10px 0 0 5px;line-height: 14px;}
-.qunzhu-n dt {float: left;margin: 0px;padding: 0px;}
-.qunzhu-n dd {width: 130px;padding: 0px;margin: 0 0 0 5px;float: right;}
-.qunzhu-n span {display: block;font-weight: bold;color: #993366;margin-bottom: 3px;}
-.cuti {color: #993366;font-weight: bold;}
+.qunzhu-n{border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px;padding: 0px;margin: 0 0 10px 0; height:auto; overflow:hidden; background-color:#ffffff;}
 
+
+.cuti {color: #993366;font-weight: bold;}
 .thread{margin:0 10px 10px 10px;}
-.thread,.reply,.reply .toreply{height:auto; min-height:50px;border-bottom:#aaa dotted 1px; display:block;overflow:hidden;}
+.thread,.reply,.reply .toreply{height:auto;_height:80px; min-height:60px;border-bottom:#aaa dotted 1px; display:block;overflow:hidden;_overflow:visible;}
 .reply{margin:0 10px 10px 73px;}
-.reply,.reply .toreply{border:#ccc dotted 1px; margin-bottom:10px;}
-.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:600px;}
+.reply,.reply .toreply{border:#ccc dotted 1px; margin-bottom:10px; clear:both;}
+.thread .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left;width:600px;_width:570px; }
 .thread .face,.reply .face{text-align:center; width:63px; overflow:hidden; float:left;}
-.thread .face img,.reply .face img{vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : "auto");_width:expression(this.width > 60 ? "60px" : "auto");}
-.reply .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:530px;}
-.reply .toreply .message{height:auto; float:left; padding:0; word-wrap:break-word; text-align:left; width:460px;}
+.thread .face img,.reply .face img{vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) :this.height);_width:expression(this.width > 60 ? "60px" :this.width);}
+.reply .message{height:auto; float:left; padding:5px 10px; word-wrap:break-word; text-align:left; width:530px;_width:500px;}
+.reply .toreply .message{height:auto;float:left;padding:0; word-wrap:break-word; text-align:left; width:460px;_width:420px;}
 
 .thread .time,.reply .time{ text-align:right; padding-right:10px; width:100%; display:block;}
 .thread h1{font-size:14px; font-weight:bold; line-height:21px; height:21px;color: #993366;}

@@ -16,14 +16,14 @@
             <dl class="h350">
             	<dt class="w320">Subject</dt>
 				<dt class="w100">Type</dt>
-				<dt class="w100">View</dt>
+				<dt class="w100">Attribute</dt>
 				<dt class="w100">Time</dt>
 				<dt class="w100">Action</dt>
 <volist name="classifieds" id="v">
                 	<dd>
 						<span class="w320"><a href="__APP__/Arc/show/aid/{$v['id']}">{$v['title']}</a><if condition="$v['ismake']=='0'"><a href="__URL__/del_arc/info/{$v['channel']}_{$v['id']}/act/show/to/{$tourl}" style="color:#ff0000;">[[show]]</a></if></span>
 						<span class="w100 c">{$v['typeid']|get_arctype}</span>
-						<span class="w100 c">{$v['click']}</span>
+						<span class="w100 c">{$v['flag']}</span>
 						<span class="w100 c">{$v['senddate']|toDate='Y-m-d'}</span>
 						<span class="w100 c"><a href="__URL__/photo/info/{$v['channel']}_{$v['id']}" title="add Photos">P</a> / <a href="__URL__/my_edit_art/info/{$v['channel']}_{$v['id']}" title="Edit">E</a> / <a href="__URL__/del_art/info/{$v['channel']}_{$v['id']}" title="del">D</a> / <if condition="string2checked('f',$v['flag'],',','1')==1"><a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/clear/f/to/{$tourl}/" title="clear Featured" style="color:#FF0000">F</a><else/><a href="/Cp/attr/info/{$v['channel']}_{$v['id']}/fld/f/to/{$tourl}/" title="Set Featured">F</a></if></span>
 					</dd>
@@ -34,6 +34,18 @@
     </div>
     <div class="xuhao">
     	{$showpage}
+    </div>
+    <div><p style="font-size:14px;">
+    	Attribute <strong>s</strong>:Scroll <strong>h</strong>:Headline  <strong>l</strong>:Slide  <strong>r</strong>:Recommend  <strong>p</strong>:Picture  <strong>j</strong>:Jump  <strong>f</strong>:Feature  <strong>b</strong>:Bold
+    </p>
+    <p>
+    	首页幻灯 <strong>l</strong>:Slide 图片506*190<br />
+        首页推荐 <strong>f</strong>:Feature<br />
+		电子杂志频道首页幻灯 <strong>h</strong>:Headline 图片550*376<br />
+		电子杂志频道首页 Featured部分 小图 <strong>p</strong>:Picture 图片 132*90<br />
+		电子杂志频道首页 四个专题部分 小图 <strong>p</strong>:Picture 图片 132*90<br />
+        电子杂志频道首页 四个专题部分 文字 <strong>f</strong>:Feature + Select Section的type
+    </p>
     </div>
 </div>
 <div class="clear">

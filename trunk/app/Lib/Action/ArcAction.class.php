@@ -22,23 +22,29 @@ class ArcAction extends CommonAction{
 		$typeid=intval($_GET['id']);
 		$arctype=D("Arctype");
 		$info=$arctype->where("id=$typeid")->find();
-		
-		if($info['ispart']==1){
+		$condition=array();
+		if($typeid=='3001'){
+			$condition['typeid']=$typeid;
+			if(!empty($_GET['type'])){
+				$condition['itype']=$_GET['type'];
+			}
+		}elseif($info['ispart']==1){
 			$small=$arctype->where("reid=$typeid")->field("id")->findAll();
 			$str='';
 			foreach ($small as $v){
 				$str.=$v['id'].',';
 			}
-			$str='typeid IN ('.trim($str,',').')';
+			$condition['typeid']=array('IN',trim($str,','));
 		}else{
-			$str="typeid={$typeid}";
+			$condition['typeid']=$typeid;
 		}
+		$condition['ismake']='1';
 		//信息列表
 		$now=time();
 		import("ORG.Util.Page");
 		$dao=D("Archives");
 		//$count=$dao->where("((typeid={$typeid} AND (cid={$this->pcid}) OR cid=0) AND ismake=1) AND (showstart<{$now} AND showend>{$now})")->order("pubdate DESC")->count();
-		$count=$dao->where("$str AND ismake=1")->order("pubdate DESC")->count();
+		$count=$dao->where($condition)->order("pubdate DESC")->count();
 		$page=new Page($count,10);
 		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
 		$this->assign('showpage',$page->show());
@@ -46,7 +52,7 @@ class ArcAction extends CommonAction{
 		$this->assign('showpage_bot',$page->show_img());
 		$limit=$page->firstRow.','.$page->listRows;
 		//$data=$dao->where("((typeid={$typeid} AND cid={$this->pcid}) AND ismake=1) AND (showstart<{$now} AND showend>{$now}))")->order("pubdate DESC")->limit("$limit")->findAll();
-		$data=$dao->where("$str AND ismake=1")->order("pubdate DESC")->limit("$limit")->findAll();
+		$data=$dao->where($condition)->order("pubdate DESC")->limit("$limit")->findAll();
 		$this->assign('list',$data);
 		//dump($dao->getLastSql());
 		//分类信息 导航

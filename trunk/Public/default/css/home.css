@@ -1,5 +1,5 @@
 #header-h{ height:26px; margin:0px; padding:0px; background-color:#fc7f2b;}
-.main-left .bg-h a{font-size: 14px;font-weight: bold;color: #e25a02;}
+.main-left .bg-h a{font-size: 14px;font-weight: bold;color: #e25a02; background:#262626;}
 .jianbian-h{height:25px;margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #fff;font-weight: bold;padding: 0 0 0 16px; background-color:#888888;}
 
 .list-h {margin: 0px;padding: 0 0 0 8px;}
@@ -8,8 +8,8 @@
 .list-h .m{height:80px; display:table;position: absolute;left: 5px;top: 5px;}
 .list-h .m a{display:table-cell; vertical-align:middle; }
 .list-h .m img{vertical-align: middle;
-	max-width:90px;max-height:90px;_height:expression(this.width > 90 ? this.height*(90/this.width) : "auto");
-	_width:expression(this.width > 90 ? "90px" : "auto");margin-top:7px;
+	max-width:90px;max-height:90px;_height:expression(this.width > 90 ? this.height*(90/this.width):this.height);
+	_width:expression(this.width > 90 ?"90px":this.width);margin-top:7px;
 	}
 
 .neiR-h {width:240px;position:relative;margin: 0;float: left;padding: 5px 0 0 5px;}
@@ -22,26 +22,30 @@
 .main-left .bg-A{height:24px;font-size: 14px;font-weight: bold;color: #993366;margin: 0px;background: url(../images/bg4.gif) repeat-x;padding: 0px;}
 
 .mian-center{width:752px;padding:0;background-color: #f3f3f3;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-right-color: #CCCCCC;border-bottom-color: #CCCCCC;border-left-color: #CCCCCC;margin: 0px;float: left;}
-.xinwen-h{margin-top:5px;_margin-top:2px; height:auto; overflow:hidden;}
-.xinwen-h ul{ margin:0px; padding:5px 12px 0 12px; list-style-type:none; float:left; }
-.xinwen-h li{ margin:0px; padding:0px; width:220px;}
-.xinwen-h li a{ color:#fff;}
-.banner{ margin:10px 0 0 0; padding:0px;}
-.property-h {padding:0; margin-bottom:10px;_ margin-bottom:5px;}
+.xinwen-h{margin-top:0; height:auto; width:506px; overflow:hidden; background:url("../images/bg-h3.gif") repeat-x scroll 0 0 transparent;}
+.xinwen-h ul{margin:0; padding:0 12px 0 12px; list-style-type:none; float:left;width:496px;}
+.xinwen-h li{margin:0;padding:0; width:496px; line-height:24px;}
+.xinwen-h li span{padding-right:32px; float:right;}
+.xinwen-h li a{color:#3A3838; width:368px; overflow:hidden;}
+.banner{margin:10px 0 0 0;_margin:5px 0 0 0; padding:0px;}
+.property-h {padding:0; margin-bottom:10px;_margin-bottom:5px;}
 .jianbg-h{height: 25px; line-height:25px; margin:0;padding:0;display: block;font-weight: bold;color: #1c1c1c;background:url(../images/bg02.gif) no-repeat;}
 .jianbg-h ul{ margin:0; padding:0; list-style-type:none;}
 .jianbg-h .ch{ margin:0; padding:0 4px; float:left;}
-.jianbg-h li a{font-weight:bold;color: #1c1c1c;width:60px;text-align:center;}
-.jianbg-h li a:hover,.jianbg-h .on a{height: 25px; line-height:25px; margin:0;padding:0 8px;display: block;background: url(../images/bg021.gif) repeat-x;color: #FFFFFF; width:60px; text-align:center;}
+.jianbg-h .post{ margin:0; padding:0 4px; float:right; background:none;}
+.jianbg-h .post a{font-weight:bold;color: #1c1c1c;width:130px;text-align:center;}
+.jianbg-h .post a:hover{color:#FF0000;}
+.jianbg-h li.ch a{font-weight:bold;color: #1c1c1c;width:130px;text-align:center;display: block;}
+.jianbg-h li.ch a:hover,.jianbg-h .on a{height: 25px; line-height:25px; margin:0;padding:0 8px;display: block;background: url(../images/bg021.gif) repeat-x;color: #FFFFFF; width:130px; text-align:center;}
 
 .jianbg-h .span{float:left;margin:5px;_margin:2px; padding:0; width:1px; height:15px; background:url(../images/shuxian.gif) no-repeat;}
 
 
-.news-h{ height:250px; background:url(../images/bg-h3.gif) repeat-x;color:#3a3838;margin:0;padding: 0;}
+.news-h{height:250px; background:url(../images/bg-h3.gif) repeat-x;color:#3a3838;margin:0;padding: 0;}
 .news-h a{color: #3a3838;}
 .news-h a:hover{ text-decoration:underline;}
-.news-h .cinfo{margin:0;list-style-type:none;line-height: 24px;padding: 5px 0 0 10px;}
-.news-h li{ margin:0px; padding:0px; }
+.news-h .cinfo{margin:0;list-style-type:none;padding: 5px 0 0 10px; height:auto; overflow:hidden;}
+.news-h .cinfo li{margin:0px; padding:0px;line-height:24px;}
 .news-h span{ padding-right:32px; float:right;}
 .product-h{margin-bottom:10px;_ margin-bottom:5px;padding:0; height:auto;overflow:hidden;}
 .event-h{margin:0px; padding:0 0 0 20px;background:url(../images/bg6.gif) no-repeat;color:#3a3838;font-weight: bold; height:25px; line-height:25px;}
@@ -60,15 +64,15 @@
 .backdrop-h span {margin:0px;padding:0px;display:block;font-family: Verdana, Arial, Helvetica, sans-serif;font-weight: bold;color: #ec5d00;}
 
 .magazine-h{margin:0;padding:0 0 10px 0;background: url(../images/bg-h4.gif) repeat-x;min-height:200px; height:auto;overflow:hidden;}
-.magazine-h .magazine{width: 237px;padding:0px;color:#000000;line-height:20px;float: left;margin: 8px 0px 0px 0px;}
-.magazine-h .magazine dl{margin:0;clear: both;padding:5px 0 0 19px;max-height:80px; height:auto; overflow:hidden;}
+.magazine-h .magazine{width: 245px;padding:0px;color:#000000;line-height:20px;float: left;margin: 8px 0px 0px 0px;}
+.magazine-h .magazine dl{margin:0;clear: both;padding:5px 0 0 15px;max-height:80px; height:auto; overflow:hidden;}
 .magazine-h .magazine dt{margin:0; padding:0;float:left;clear:both;line-height:14px; width:70px; height:70px; text-align:center; overflow:hidden;}
 .magazine-h .magazine dt img{vertical-align:middle;max-width:70px;max-height:70px;
-	_height:expression(this.width > 70 ? this.height*(70/this.width) : "auto");
-	_width:expression(this.width > 70 ? "70px" : "auto");
+	_height:expression(this.width > 70 ? this.height*(70/this.width):this.height);
+	_width:expression(this.width > 70 ?"70px":this.width);
 	}
 
-.magazine-h .magazine dd{width:135px;margin:0px;float:right;line-height:14px;padding: 0 10px 0 0;}
+.magazine-h .magazine dd{width:145px;margin:0px;float:right;line-height:14px;padding: 0 5px 0 0;}
 .magazine-h .magazine span{display: block;margin: 0px;padding-bottom:5px;line-height:14px;font-weight: bold;color: #ff6600;}
 .magazine-h .magazine span a{color: #ff6600; text-decoration:none;}
 .magazine-h .magazine a{margin:0px;color: #42c8ea;text-decoration: underline;}
@@ -87,13 +91,7 @@
 .fair-h a{color:#E4E4E4;}
 .fair-h ul {margin: 0px;padding: 0px;list-style-type: none;}
 .fair-h li{width:60px;padding:0px;background:url(../images/Button4.png) repeat-x;text-align: center;font-size: 14px;font-weight: bold;color: #e4e4e4;float: left;margin-left: 1px;}
-.hot-h {width: 234px;background: url(../images/bg-h6.gif) repeat-x;border: 1px solid #cdcdcd; border-left:none; border-right:none; position: relative;float: right;margin: 0px;padding: 0px;}
-.hot-h h5 {font-size: 12px;color: #3A3838;padding:0 5px;margin: 0;line-height:18px;}
-.hot-h a{color:#3A3838; font-weight:normal;}
-.hot-h img {position: absolute;left: 8px;top: 5px;}
-.hot-h p {line-height: 14px;padding:0 5px;margin-top:5px;}
-.hot-h ul{ margin:5px 8px 0 8px; padding:0px; list-style-type:none; height:auto; overflow:hidden;}
-.hot-h li{ margin:0; padding:0; border-bottom:1px #cccccc solid;}
+
 
 .voices-h{ margin:0; padding:0;}
 .global-h {background-color: #cccccc;font-weight: bold;color: #ec5e00;margin: 0px;padding:0 0 0 10px; height:24px; line-height:24px;}

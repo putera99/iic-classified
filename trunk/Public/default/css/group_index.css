@@ -1,17 +1,17 @@
 .content-bg {font-weight: bold;color: #212121;font-family: Verdana, Arial, Helvetica, sans-serif;padding-left: 10px;background: url(../images/bg10.gif) no-repeat;}
 .main-left{width:188px;margin:0; padding:0;}
-.content-n{border: 1px solid #CCCCCC;background-color:#f3f3f3;margin:0;padding: 5px 0 0 0;}
+.content-n{border: 1px solid #CCCCCC;background-color:#f3f3f3;margin:0;padding: 5px 0 0 0; height:auto;}
 .content-life{width:540px;margin:0;color:#7d7c7c;padding:0;}
 .welcome{margin: 5px 7px 5px 7px;_margin:2px 3px 2px 3px;padding: 0 0 8px 0;}
 .welcome h1,.welcome h2{border-bottom: 1px solid #b5b5b5; height:30px; line-height:30px; font-size:14px; font-weight:bold; margin:0; padding:0;}
 .welcome h1 span{float:right; margin-bottom:4px;_margin-bottom:2px;}
 .welcome h1 span a{display:block; padding:0px 5px; border:1px #cccccc solid; color:#333333; font-size:12px; font-weight:normal;line-height:20px;}
 .welcome h1 span a:hover{color:#fff; background-color:#706c6d;}
-.welcome-quan{height:290px;margin: 0px 7px 10px 7px;_margin: 0px 3px 5px 3px;padding: 0 0 0 10px;overflow:hidden;}
+.welcome-quan{height:auto;_height:350px;margin: 0px 7px 10px 7px;_margin: 0px 3px 5px 3px;padding: 0 0 0 10px;overflow:hidden;_overflow:visible;}
 .renshu {width:200px;padding:0;float: left;position:relative;margin: 0px 5px 10px 0px;_margin: 0px 2px 5px 0px; height:80px;}
 .renshu h5{margin:0;font-size: 12px;line-height:16px;font-weight: normal;padding: 0 0 0 70px;}
 .renshu h5 a{color:#717171;}
-.renshu img {position:absolute;top:0;left:0;vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) : "auto");_width:expression(this.width > 60 ? "60px" : "auto");/*  IE6 */}
+.renshu img {position:absolute;top:0;left:0;vertical-align: middle;max-width:60px;max-height:60px;_height:expression(this.width > 60 ? this.height*(60/this.width) :this.height);_width:expression(this.width > 60 ? "60px" :this.width);/*  IE6 */}
 .renshu p {margin: 0;padding: 0 0 0 70px;color: #a32062;}
 .class-xinxi {margin:0 5px;_margin:0 2px;padding: 0 0 0 10px;}
 .class-xinxi h3 {font-size: 12px;color: #79214d;margin:0;padding: 5px 0 0 0; }
