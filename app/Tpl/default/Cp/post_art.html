@@ -4,6 +4,15 @@
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
 	$('.showend_job').datePicker({clickInput:true});
+	$("#typeid").change(function(){
+		var typeid=$("#typeid").val();
+
+		if(typeid=='12_3001'){
+			$("#itype_box").html($("#itype_html").html());
+		}else{
+			$("#itype_box").html("");
+		}
+	});
 
 });
 </script>
@@ -91,6 +100,23 @@ $(document).ready(function(){
 							</volist>
 						</select>
 					</p>
+                    <p id="itype_box">
+                    <php>
+$itype=array('spot','walk','talk','vision');
+if($data['typeid']=='3001'){
+</php>
+                    	<label for="typeid">Type:</label>
+
+						<select id="itype" name="itype">
+							<option>---Select Type---</option>
+                            <volist name="itype" id="t">
+                                <option value="{$t}"{$t|selected=$data['itype']}>{$t}</option>
+                            </volist>
+						</select>
+<php>
+}
+</php>
+                    </p>
 					<!--p>
 						<label for="typeid2">Second<br>Category:</label>
 						<select id="typeid2" name="typeid2[]" size="5" multiple="multiple" >
@@ -144,9 +170,33 @@ $(document).ready(function(){
 					<input type="reset" value="Reset">            
 				</p>
             </form>
-        
+            <div><p style="font-size:14px;">
+    	Attribute <strong>s</strong>:Scroll <strong>h</strong>:Headline  <strong>l</strong>:Slide  <strong>r</strong>:Recommend  <strong>p</strong>:Picture  <strong>j</strong>:Jump  <strong>f</strong>:Feature  <strong>b</strong>:Bold
+    </p>
+    <p>
+    	首页幻灯 <strong>l</strong>:Slide 图片506*190<br />
+        首页推荐 <strong>f</strong>:Feature<br />
+		电子杂志频道首页幻灯 <strong>h</strong>:Headline 图片550*376<br />
+		电子杂志频道首页 Featured部分 小图 <strong>p</strong>:Picture 图片 132*90<br />
+		电子杂志频道首页 四个专题部分 小图 <strong>p</strong>:Picture 图片 132*90<br />
+        电子杂志频道首页 四个专题部分 文字 <strong>f</strong>:Feature + Select Section的type
+    </p>
+    </div>
     </div>
 </div>
+<div id="itype_html" style="display:none;">
+                    	<label for="typeid">Type:</label>
+<php>
+$itype=array('spot','walk','talk','vision');
+</php>
+						<select id="itype" name="itype">
+							<option>---Select Type---</option>
+                            <volist name="itype" id="t">
+                                <option value="{$t}"{$t|selected=$data['itype']}>{$t}</option>
+                            </volist>
+						</select>
+</div>
+
 <div class="clear"></div>
 
 

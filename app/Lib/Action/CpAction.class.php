@@ -1378,7 +1378,11 @@ class CpAction extends CommonAction{
 		$dao=D("Archives");
 		if(!empty($_FILES["picurl"]["name"])) {
 			if(in_array('l', $_POST['flag'])){
-				$this->_upload('',506,190,1);
+				$this->_upload('',506,190,'s_');
+			}elseif(in_array('h', $_POST['flag'])){
+				$this->_upload('',550,376,'s_');
+			}elseif($_POST['itype']){
+				$this->_upload('','145,85','145,85','m_','m_,s_');
 			}else{
 				$this->_upload('',132,105);
 			}
@@ -1412,7 +1416,7 @@ class CpAction extends CommonAction{
 				$t=explode('/',$vo['showend']);
 				$vo['showend']=mktime('0',0,0,$t['1'],$t['0'],$t['2']);
 			}else{
-				$vo['showend']=1280000000;
+				$vo['showend']=$vo['showstart']+(60*60*60*24);
 			}
 			$t=explode('_',$vo['typeid']);
 			$vo['typeid']=$t['1'];

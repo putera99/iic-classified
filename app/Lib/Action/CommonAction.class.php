@@ -996,7 +996,7 @@ class CommonAction extends Action{
     }
     
 /////////////////////////////////上传图片部分 start/////////////////////////////////
-    protected function _upload($tid,$width='120',$height='140',$y=0){
+    protected function _upload($tid,$width='120',$height='140',$y='s_',$thumbPrefix='s_'){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
         //设置上传文件大小
@@ -1012,7 +1012,7 @@ class CommonAction extends Action{
 	    //设置需要生成缩略图，仅对图像文件有效
        $upload->thumb =  true;
        //设置需要生成缩略图的文件后缀
-	    $upload->thumbPrefix   =  's_';  //生产2张缩略图
+	    $upload->thumbPrefix   = $thumbPrefix;  //生产2张缩略图
        //设置缩略图最大宽度
 		$upload->thumbMaxWidth =  $width;
        //设置缩略图最大高度
@@ -1027,11 +1027,7 @@ class CommonAction extends Action{
         }else {
             //取得成功上传的文件信息
             $uploadList = $upload->getUploadFileInfo();
-            if($y!=0){
-            	$_POST['picurl']  = $path.$uploadList[0]['savename'];
-            }else{
-            	$_POST['picurl']  = $path.'s_'.$uploadList[0]['savename'];
-            }
+            $_POST['picurl']  = $path.$y.$uploadList[0]['savename'];
         }
         
         return $_POST['picurl'];

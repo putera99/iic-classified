@@ -18,12 +18,17 @@
 .riqi {padding: 0 0 5px 0; margin: 0px 5px 10px 5px;text-align: center;  border-bottom: 1px solid #bfbfbf;}
 .biz-title span {margin: 0px;padding: 0px;font-weight: bold;color: #333333;}
 .biz-kuan {width: 50px; height: 20px; border: 1px solid #d5d5d5;background-color: #FFFFFF;color: #b12169;}
+.biz-kuan a{color: #b12169;}
 .biz-title {margin: 0px 5px 0px 5px;padding: 0 0 0 5px;line-height: 24px;}
 .biz-title h6 {font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #B12169;margin: 0px;padding: 0px;}
 .yans {color: #8a0e4c;}
-.biz-xinxi {height:auto;padding: 0px;margin: 10px 5px 0px 5px; overflow:hidden; min-height:712px;}
+.biz-xinxi {height:auto;_height:712px;padding: 0px;margin: 10px 5px 0px 5px; overflow:hidden; _overflow:visible; min-height:712px;}
 .biz-xinxi .ditu{float:left;}
 .biz-xinxi span{font-weight: bold;color: #8a0e4c;}
+.biz-xinxi .act{padding:0px;list-style-type:none;margin: 20px 0 0 0;_margin: 10px 0 0 0; height:30px;}
+.biz-xinxi .act li{color: #FFFFFF;width: 116px;height: 25px; line-height:25px; background: url(../images/button.gif) no-repeat; margin:10px 8px;_margin:5px 4px;float: left;text-align: center;}
+.biz-xinxi .act li a{color: #FFFFFF; text-decoration:none;}
+.biz-xinxi .act li a:hover{color:#FFFFFF;text-decoration:underline;}
 
 .biz-right{width:390px;margin:0px;padding:0px;float:left;}
 .biz-right ul {margin: 0px;padding: 0px;list-style-type: none;}

@@ -1,7 +1,6 @@
-.personals{border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #d3d3d3;margin: 0px 5px 0px 5px;padding: 10px 0px 8px 8px;}
 .personals p{margin:0px;padding:0px;float: right;color: #841f52;}
-
+.personals p a,.personals p a:hover{color: #841f52;}
 .personals-a {border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #8e8e8e;margin: 5px 5px 0px 5px;padding: 0px;}
 .list-a img {padding-right:5px;}
-
+.conter-group ul a,.conter-group ul a:hover{color: #841f52;}
 
