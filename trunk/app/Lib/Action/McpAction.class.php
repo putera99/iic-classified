@@ -243,51 +243,83 @@ class McpAction extends CpAction{
 	 */
 	function user() {
 		//用户管理
+		$permissions=array(
+			"1"=>"Article",//文章可发布条数
+			"2"=>"Gropus",//可建高级群组
+			"3"=>"Albums",//可建相册
+			"4"=>"Events",//可发起活动
+			"5"=>"Cityguide",//可创建城市指南
+		);
+		$this->assign("per",$permissions);
 		$id=Input::getVar($_REQUEST['id']);
+		$ruid=Input::getVar($_REQUEST['ruid']);
 		$dao=D("RoleUser");
-		if($id){
-			$this->assign('roid',$id);
-			$data['role_id']=$id;
-			$info=$dao->where($data)->findAll();
-		}else{
-			$this->assign('jumpUrl',__URL__."/role/");
-			$this->error('请先选择角色组');
+		$member=D("Members");
+		$this->assign('roid',$id);
+		$condition=array();
+		if($_POST['fuid']){
+			$condition['user_id']=$_POST['fuid'];
 		}
-		$this->assign('info',$info);
+		if($id){
+			$condition['role_id']=$id;
+		}
+		if($_POST['fusername']){
+			$uinfo=array();
+			$uinfo=$member->where("username='{$_POST['fusername']}'")->find();
+			$condition['user_id']=$uinfo['id'];
+		}
+		$count=$dao->where($condition)->count();
+		$page=new Page($count,25);
+		$page->config=array('header'=>'Rows','prev'=>'Previous','next'=>'Next','first'=>'«','last'=>'»','theme'=>' %nowPage%/%totalPage% %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+		$this->assign('showpage',$page->show());
+		$limit=$page->firstRow.','.$page->listRows;
+		$info=$dao->where($condition)->limit($limit)->findAll();
+		$this->assign('list',$info);
 		
 		$act=Input::getVar($_REQUEST['act']);
 		if($act=='add'){
-			$member=D("Member");
-			$uinfo=$member->where("username='{$_POST['username']}' AND uid='{$_POST['uid']}'")->find();
-			dump($member->getLastSql());
+			$uinfo=array();
+			$uinfo=$member->where("username='{$_POST['username']}' AND id='{$_POST['uid']}'")->find();
 			if($uinfo){
-				$vo=$dao->create();
-				if(empty($vo['role_id'])){
+				$arr=array();
+				$arr['role_id']=$id;
+				$arr['user_id']=$_POST['uid'];
+				$arr['permissions']=serialize($_POST['per']);
+				$vo=$dao->create($arr);
+				if(empty($vo['role_id'])||empty($vo['user_id'])){
 					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
 					$this->error('设置失败');
 				}
-				if(empty($vo['user_id'])){
-					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
-					$this->error('设置失败');
-				}
-				
-				$id=$dao->add($vo);
-				if($id){
+				if($_POST['id']){
+					$vo['id']=$_POST['id'];
+					$dao->save($vo);
 					$this->redirect("/Mcp/user/id/{$id}");
 				}else{
-					$this->assign('jumpUrl',__URL__."/user/id/{$id}");
-					$this->error('设置失败');
+					$ruid=$dao->add($vo);
+					if($id){
+						$this->redirect("/Mcp/user/id/{$id}");
+					}else{
+						$this->assign('jumpUrl',__URL__."/user/id/{$id}");
+						$this->error('设置失败');
+					}
 				}
+				//dump($dao->getLastSql());
 			}else{
 				//$this->assign('jumpUrl',__URL__."/user/id/{$id}");
 				$this->error('用户信息不匹配');
 			}
 			
 		}elseif($act=='del'){
-			$ruid=Input::getVar($_REQUEST['ruid']);
+			
 			if ($ruid){
 				$dao->where("id=$ruid")->delete();
 				$this->redirect("/Mcp/user/id/{$id}");
+			}
+		}elseif($act=='edit'){
+			if ($ruid){
+				$info=$dao->where("id=$ruid")->find();
+				$info['per']=unserialize($info['permissions']);
+				$this->assign("info",$info);
 			}
 		}
 		$page=array();
@@ -426,4 +458,66 @@ class McpAction extends CpAction{
 		$this->display("Cp:layout");
 	}//end my_edit_art
 	
+	
+	/**
+	 +----------------------------------------------------------
+	 * 上传FLASH及生成可用的代码
+	 * @date 2011-3-10 - @time 上午09:52:08
+	 +----------------------------------------------------------
+	 * @static
+	 * @access public
+	 +----------------------------------------------------------
+	 * @param string 
+	 +----------------------------------------------------------
+	 * @return void
+	 +----------------------------------------------------------
+	 */
+	function swfupload() {
+		//上传FLASH及生成可用的代码
+		if(isset ( $_FILES ['upfile'] ) && ! empty ( $_FILES ['upfile'] ['name'] )){
+			import("ORG.Net.UploadFile");
+	        $upload = new UploadFile();
+	        $upload->maxSize  = 1024000 ;
+	        $upload->saveRule  = uniqid ;
+	        $upload->allowExts  = array('swf') ;
+	        $path=date('Y-m').'/';
+	        $upload->savePath =  './Public/Uploads/'.$path;
+	        mk_dir($upload->savePath);
+	        $path='/Public/Uploads/'.$path;
+			if(!$upload->upload()) {
+	            //捕获上传异常
+	            $this->error($upload->getErrorMsg());
+	        }else {
+	            //取得成功上传的文件信息
+	            $uploadList = $upload->getUploadFileInfo();
+	            dump($uploadList);
+	            if($uploadList['0']['extension']=='swf'){
+	            	
+	            	$this->assign("swf",$path.$uploadList['0']['savename']);
+	            }
+	        }
+		}
+		$this->display();
+	}//end swfupload
+	
+	
+	/**
+	 +----------------------------------------------------------
+	 * 更改文章作者
+	 * @date 2011-3-12 - @time 上午10:50:50
+	 +----------------------------------------------------------
+	 * @static
+	 * @access public
+	 +----------------------------------------------------------
+	 * @param string 
+	 +----------------------------------------------------------
+	 * @return void
+	 +----------------------------------------------------------
+	 */
+	function ch_uid() {
+		//更改文章作者
+		$info=mydecode($_GET['info']);
+		empty($info)?$this->error('Wrong parameter!' ):$info=explode("_", $info);
+		
+	}//end ch_uid
 }//end McpAction

@@ -12,6 +12,7 @@ return array(
 	'select_city'=>array("Public","index","cid,to,title"),	
 	'login'=>array("Public","login","to,title"),	
 	'register'=>array("Public","register","to,title"),	
+	'album'=>array("Album","index","ctg,title"),	
 
     //index
     'cityguide'=>array('CityGuide','index','cid'),

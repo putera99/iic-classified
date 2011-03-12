@@ -328,4 +328,114 @@ class PublicAction extends CommonAction{
 		$this->assign ( 'city_name', $cityname );
 		$this->display();
 	}//end weather_forecast
+	
+	/**
+   *邮件列表
+   *@date 2010-8-20
+   *@time 上午10:47:07
+   */
+	function maillist() {
+		//邮件列表
+		if($_POST['submit']){
+			$dao=D("MailList");
+			$mail=trim($_POST['email ']);
+			$this->assign("jumpUrl",'/index.html');
+			if($mail){
+				$this->error("Failed to subscribe!");
+			}
+			$vo=$dao->create();
+			$condition=array();
+			$condition['email']=$mail;
+			$info=$dao->where($condition)->find();
+			if($info){
+				$this->error("You've been sucessfully subscribe to Beingfunchina newsletter.");
+			}
+			if($vo){
+				$vo['types']='news';
+				$vo['status']='0';
+				$id=$dao->add($vo);
+				if($id){
+					//发送验证邮件
+					$repw=$vo['mail'].'||'.$vo['ctime'].'||'.$vo['status'];
+					$repw=myencode($repw);
+					$Title="Confirmation Letter-Beingfunchina Newsletter";
+					$Content='Hello, <br>Welcome, and thank you for becoming a Beingfunchina.com Insider. <br>';
+					$Content.="you have subscribed {$vo['mail']} to Beingfunchina.com's newsletter. <br>";
+					$Content.='To confirm this subscription, please click the link below:<br>';
+					$Content.="<br><br><A HREF='http://www.beingfunchina.com/Public/chmail/key/{$repw}.html' target='_blank'>http://www.beingfunchina.com/Public/chmail/key/{$repw}.html</A>\n <br>";
+					$Content.='If you do not wish to subscribe, do nothing. <br>';
+					$Content.='You will be automatically removed. <br>';
+					$Content.='Regards,Beingfunchina.com<br>';
+					/*if(!C('MAILSERVER')||!C('MAILPORT')||!C('MAILID')||!C('MAILPW')){
+						$this->error("Please administrator to set up mail server");
+					}
+					import("@.COM.Smtp");
+					//require_once(BeingfunChina_PATH."inc/class.mail.php");
+					$smtp = new smtp(C('MAILSERVER'),C('MAILPORT'),true,C('MAILID'),C('MAILPW'));
+					$smtp->debug = false;
+					if($smtp->sendmail($info['email'],C("MAILID"), $Title, $Content, "HTML")){
+						$msg="New password has been successfully sent to your mailbox, please watch for!";
+					}else{
+						$msg="Failed to send e-mail. This may be due to wrong e-mail address or problems of the mail server.";
+					}*/
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+					$headers .= 'From: beingfunchina@gmail.com' . "\r\n" ;
+					//$headers .= 'Reply-To: webmaster@example.com' . "\r\n";
+					if(mail($vo['mail'], $Title, $Content,$headers)){
+						
+						//$this->assign("jumpUrl","/Public/login.html");
+						$text="<h1>Thank you!</h1><p>We appreciate your time. Check your e-mail inbox for the latest newsletter from Beingfunchina.</p>"; 
+						$this->success($text);
+					}else{
+						$this->error("Oops! Please try again.");
+					}
+					//发送验证邮件
+				}else{
+					$this->error("Oops! Please try again.");
+				}
+			}else{
+				$this->error("Oops! Please try again.");
+			}
+		}else{
+			$this->display();
+		}
+	}//end maillist
+	
+	
+	/**
+	 +----------------------------------------------------------
+	 * 验证订阅的邮件或取消订阅
+	 * @date 2011-3-11 - @time 下午05:54:37
+	 +----------------------------------------------------------
+	 * @static
+	 * @access public
+	 +----------------------------------------------------------
+	 * @param string 
+	 +----------------------------------------------------------
+	 * @return void
+	 +----------------------------------------------------------
+	 */
+	function chmail() {
+		//验证订阅的邮件或取消订阅
+		$key=mydecode($_GET['key']);
+		$key=explode("||", $key);
+		$dao=D("MailList");
+		$condition=array();
+		$condition['email']=$key['0'];
+		$condition['ctime']=$key['1'];
+		$condition['status']=$key['2'];
+		$info=$dao->where($condition)->find();
+		$this->assign("jumpUrl",'/index.html');
+		if($info){
+			$status=$condition['status']=='1'?'0':'1';
+			$dao->where($condition)->save(array("status"=>$status));
+			$this->success("You request has been sent.");
+		}elseif($condition['status']=='1'){
+			$this->error("You've been sucessfully subscribe to Beingfunchina newsletter.");
+		}else{
+			$this->error("You've been unsubscribed sucessfully.Please do not repeat.");
+		}
+		
+	}//end chmail
 }//END PublicAction

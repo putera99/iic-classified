@@ -12,6 +12,9 @@
  +------------------------------------------------------------------------------
  */
 class MailListModel extends Model{
+	protected $_validate=array(
+		array('mail','email','The email address is not correct'),
+	);
 	protected $_auto=array(
 		array('ctime','time',1,'function'),
 		array('status','1',1),
