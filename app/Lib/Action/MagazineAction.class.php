@@ -20,6 +20,7 @@ class MagazineAction extends CommonAction{
 	function ls() {
 		//杂志列表
 		$dao=D("Magazines");
+		self::all_zine($dao);
 		$arc=D("Archives");
 		$condition=array();
 		$condition=array("showtime"=>array('lt',time()),);
@@ -44,7 +45,7 @@ class MagazineAction extends CommonAction{
 			$v['p']=$arc->where($condition)->order("pubdate DESC")->limit("0,5")->findAll();
 
 			$condition['_string']="FIND_IN_SET('f',`flag`) > 0";
-			$v['f']=$arc->where($condition)->order("pubdate DESC")->limit("0,4")->findAll();
+			$v['f']=$arc->where($condition)->order("pubdate DESC")->limit("0,6")->findAll();
 			$temp[]=$v;
 		}
 		$this->assign("list",$temp);
@@ -57,10 +58,15 @@ class MagazineAction extends CommonAction{
 	   *杂志封面页
 	   *@date 2011-2-11 / @time 下午03:53:43
 	   */
-	function index2() {
+	function index() {
 		//杂志封面页
 		//F('dnum_'.$vol,$x,APP_PATH.'/file/');
+		if(!empty($_GET['vol'])){
+			self::detail();
+			exit();
+		}
 		$dao=D("Magazines");
+		self::all_zine($dao);
 		$arc=D("Archives");
 		$condition=array();
 		$condition=array("showtime"=>array('lt',time()),);
@@ -76,10 +82,10 @@ class MagazineAction extends CommonAction{
 			$condition['ismake']='1';
 			$condition['industry']='vol'.$v['vol'];
 			$condition['_string']="FIND_IN_SET('p',`flag`) > 0";
-			$v['p']=$arc->where($condition)->order("pubdate DESC")->limit("0,2")->findAll();
+			$v['p']=$arc->where($condition)->order("pubdate DESC")->limit("0,5")->findAll();
 
 			$condition['_string']="FIND_IN_SET('f',`flag`) > 0";
-			$v['f']=$arc->where($condition)->order("pubdate DESC")->limit("0,4")->findAll();
+			$v['f']=$arc->where($condition)->order("pubdate DESC")->limit("0,6")->findAll();
 			$temp[]=$v;
 		}
 		$this->assign("top",$temp);
@@ -93,10 +99,10 @@ class MagazineAction extends CommonAction{
 		$field="id,flag,title,picurl,itype";
 		foreach ($itype as $v){
 			$condition['itype']=$v;
-			$condition['_string']="FIND_IN_SET('p',`flag`) > 0";
-			$typeall[$v]['p']=$arc->where($condition)->field($field)->order("pubdate DESC")->find();
+			$condition['_string']="FIND_IN_SET('b',`flag`) > 0";
+			$typeall[$v]['p']=$arc->where($condition)->field($field)->order("pubdate DESC")->limit("0,2")->findAll();
 			
-			$condition['_string']="FIND_IN_SET('f',`flag`) > 0";
+			$condition['_string']="FIND_IN_SET('r',`flag`) > 0";
 			$typeall[$v]['f']=$arc->where($condition)->field($field)->order("pubdate DESC")->limit("0,6")->findAll();
 		}
 		$this->assign("typeall",$typeall);
@@ -231,7 +237,7 @@ class MagazineAction extends CommonAction{
 	   *读取数据库的首页
 	   *@date 2011-1-10 / @time 下午06:05:52
 	   */
-	function index() {
+	function detail() {
 		//读取数据库的首页
 		$vol=Input::getVar($_GET['vol']);
 		$dao=D("Magazines");

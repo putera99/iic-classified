@@ -16,6 +16,7 @@ class AlbumModel extends Model{
 		array('uid','get_uid',1,'function'),
 		array('username','get_username',1,'function'),
 		array('dateline','time',1,'function'),
+		array('updatetime','time',2,'function'),
 		array('target_ids','all',1),
 		array('friend','0',1),
 		array('picnum','0',1),

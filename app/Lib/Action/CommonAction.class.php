@@ -1072,7 +1072,7 @@ class CommonAction extends Action{
         return $_POST['pic'];
 	}
 	
-    protected function _photo($tid){
+    protected function _photo($tid,$w='550,120',$h='650,120'){
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
         //设置上传文件大小
@@ -1089,9 +1089,9 @@ class CommonAction extends Action{
        //设置需要生成缩略图的文件后缀
 	    $upload->thumbPrefix   =  'm_,s_';  //生产1张缩略图
        //设置缩略图最大宽度
-		$upload->thumbMaxWidth =  '650,120';
+		$upload->thumbMaxWidth = $w;
        //设置缩略图最大高度
-		$upload->thumbMaxHeight = '550,120';
+		$upload->thumbMaxHeight =$h;
 	   //设置上传文件规则
 	   $upload->saveRule = uniqid;
 	   //删除原图
@@ -1489,14 +1489,14 @@ class CommonAction extends Action{
    *@date 2010-7-16
    *@time 下午03:47:54
    */
-	function _get_role() {
+/*	function _get_role() {
 		//检查权限
 		$uid=$this->user['uid'];
 		$dao=new Model();
 		$sql="SELECT r.id,r.name,r.remark FROM iic_role_user as ru LEFT JOIN iic_role as r ON ru.role_id=r.id WHERE ru.user_id={$uid};";
 		return $dao->query($sql);
 		//dump($dao->query($sql));
-	}//end _r
+	}//end _r*/
 	
 	
 	/**

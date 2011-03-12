@@ -1,0 +1,127 @@
+/var/htdocs/
+	backup					----备份目录
+	mysqladmin_				----PHPMySqladmin
+	www.beingfunchina.com	----BFC网站公共目录及入口
+	defaults				----
+	test.beingfunchina.com	----BFC非public目录
+	www.chinasitemap.com	----CSM非public目录
+
+
+	test.beingfunchina.com 目录下：
+	|-	Inc					----BFC网站框架
+	|-	Admin				----BFC后台
+	|-	digrmb.php			----CSM测试入口
+	|-	index.html			----
+	|-	index_admin			----CSM后台
+	|-	Public				----测试用的 公共文件夹
+	|-	app					----BFC前台项目文件夹
+	|-	Index				----CSM前台项目文件夹
+	|-	index_Inc			----CSM网站框架
+	|-	index_admin.php		----CSM管理入口
+
+	|-app 结构见thinkphp项目目录结构
+		|-Common			----公共函数
+		|-Lang				----语言包文件
+		|-Runtime			----运行时编译的缓存
+		|-file				----记录杂志点击次数的临时文件
+		|-Conf				----配置文件 数据库、路由等等
+		|-Lib				----项目程序
+		|-Tpl				----项目模板
+		|-index.html
+		
+	|-Index 目录结构等同于app
+	
+	
+		
+	www.beingfunchina.com	
+	|-	BeingfunChina
+	|-	member
+	|-	CityGuide
+	|-	mysqladmin
+	|-	Forum.bak
+	|-	robots.txt
+	|-	Public					----暴露在外的文件目录
+	|-	scripts
+	|-	admin
+	|-	sitemap
+	|-	attach	
+	|-	adsense.txt
+	|-	sitemap10.xml			-|
+	|-	sitemap1.xml			 |
+	|-	sitemap2.xml			 |
+	|-	sitemap4.xml			 |
+	|-	sitemap3.xml			 |
+	|-	sitemap5.xml			 |--google 地图
+	|-	sitemap6.xml			 |
+	|-	sitemap7.xml			 |
+	|-	sitemap8.xml			 |
+	|-	sitemap9.xml			_|
+	|-	crossdomain.xml
+	|-	ewebeditor
+	|-	favicon.ico
+	|-	fckeditor
+	|-	googled9960194b4f75bf5.html
+	|-	cache
+	|-	bsd.txt
+	|-	comment_ajax.htm
+	|-	hack
+	|-	template
+	|-	html
+	|-	test.php
+	|-	images
+	|-	upload_files
+	|-	inc
+	|-	vol2.htm.bak
+	|-	index.php				----入口文件
+	|-	webalizer
+	|-	ip.dat
+	|-	xampp
+	|-	magazines				----电子杂志在线阅读版
+
+	www.beingfunchina.com
+		|-	Public
+			|-	Css					----扩展部分Css
+			|-	avatar				----原论坛头像备份
+			|-	ctg					----导入的城市指南文件备份
+			|-	events				----导入的活动数据备份
+			|-	img					----
+			|-	Images				----扩展组件自带图
+			|-	bcastr3.swf			
+			|-	customavatars		----原论坛头像备份
+			|-	excel				----导入的展会数据备份
+			|-	js					----扩展JS
+			|-	Uploads				----其它类上传文件用图
+			|-	biz					----以前的广告用图
+			|-	default				----网站样式表及网站模板用图
+			|-	fair				----展会用图
+			|-	mkrtagsjs			
+			|-	album				----城市指南和相册用图
+			|-	chart				
+			|-	event				----活动用图			
+			|-	flash.swf
+			|-	zine				----杂志用图
+
+
+/var/htdocs/test.beingfunchina.com/app/Lib/Action
+ArcAction.class.php					----文章类 列表及详细
+GroupAction.class.php				----群组封面、群组列表、群组页、群组话题
+BizAction.class.php					----展会
+IndexAction.class.php				----首页
+BlogAction.class.php				----导出到Blog
+LinkAction.class.php				----友情链接
+CityGuideAction.class.php			----城市指南
+MagazineAction.class.php			----电子杂志
+ClassifiedsAction.class.php			----分类信息
+MapsAction.class.php				----生成地图
+CommonAction.class.php				----公共方法类
+McpAction.class.php					----高级管理
+CpAction.class.php					----用户控制面板
+MemberAction.class.php				----废弃
+DbAction.class.php					----调整分类用的 废弃
+NewexAction.class.php				----导入展会、活动用
+EventAction.class.php				----活动
+PublicAction.class.php				----登陆注册等等
+ExAction.class.php					----导入展会、活动用 废弃
+
+
+	

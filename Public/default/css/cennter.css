@@ -92,6 +92,7 @@
 .right{width:234px;padding:0;float:right;margin:0;}
 .next_lssue{ margin:0 0 10px 0;_margin:0 0 5px 0; padding: 0px;}
 .next-bg{color:#fff; height:22px;margin: 0; padding-left:10px; background-color:#706c6d;border: 1px solid #aaaaaa; font-weight:bold;}
+.next-bg a{color:#fff;}
 .next-n{margin:0px;padding:0px; border:1px solid #aaaaaa;background-color:#f3f3f3;font-weight: normal;color: #595959;line-height: 18px; padding-bottom:5px;}
 .next-n ul{padding:0px;list-style-type:none;margin: 0px 5px 0px 3px;_margin: 0 2px 0 1px;}
 .next-n li{margin:0px;padding-left:7px;padding-top:8px;border-bottom-width: 1px;border-bottom-style: dashed;border-bottom-color: #535353;padding-bottom:5px;}
@@ -153,7 +154,67 @@
 .posts dl .r p{background-color:#c75f93; padding:0 5px 0 5px}
 
 
-
-
+.albumlist {
+	height:100%;
+	overflow:hidden;
+	padding:15px 6px 20px 6px;
+	background-color:#f3f3f3;
+}
+.albumlist ul{
+	clear: both;
+    overflow: hidden;
+    padding-bottom: 15px;
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.albumlist ul li {
+	float:left;
+	width:86px;
+	margin:0 5px 15px 14px;
+	_margin:0 3px 15px 14px;
+	display:block;
+*display:inline;
+}
+.albumlist ul a{color: #595959;}
+.albumlist ul a:hover{color: #595959; text-decoration:underline;}
+.albumlist ul li .smallPic {
+	background:url(/Public/img/photoborder_m.png) no-repeat;
+	width:86px;
+	height:86px;
+	overflow:hidden;
+	margin-bottom:7px;
+}
+.albumlist ul li .smallPic img {
+	width:80px;
+	height:80px;
+	padding:1px 5px 5px 1px;
+}
+.albumlist ul .clearit {
+	float:none;
+	width:86px;
+	margin:0;
+}
+.albumlisttxt {
+	width:86px;
+	overflow:hidden;
+	padding-left:2px;
+	word-break:break-all;
+	word-wrap:break-word;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.albumlisttxt em {
+	font-family:Arial;
+	font-size:12px;
+	color:#81928E;
+}
+.albumlis_more {
+	font-size:12px;
+	text-align:right;
+	padding-right:5px;
+}
+.lockAlbumCont {
+	padding:34px 20px 85px 20px;
+}
 
 

@@ -14,9 +14,6 @@
 class RoleUserModel extends Model{
 	protected $_auto=array(
 		array('ctime','time',1,'function'),
-	);
-	protected $_map = array(
-		'roid'=>'role_id',
-		'uid'=>'user_id',
+		array('etime','time',2,'function'),
 	);
 }//end RoleUserModel

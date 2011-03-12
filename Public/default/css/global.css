@@ -129,7 +129,7 @@ a img{border:none;}
 .body_arc{ height:auto;width:95%; margin:0 8px 10px;_margin:0 4px 5px; overflow:hidden;}
 .body_arc h5 {margin: 0px;padding: 0px 0px 7px 10px;font-size: 12px;font-weight: bold;color: #8C2F5E;border-bottom: 1px solid #a9a9a9;}
 .body_arc ul{list-style-type: circle; padding-left:15px;_list-style:none; _margin:0; _padding:0;}
-.body_arc ul li{width:300px;float:left;height:18px;line-height:18px;border-bottom:1px #CCCCCC dotted; margin-right:20px;_margin-right:10px;list-style-image: none;list-style-type: circle;_list-style:none; _margin:0 15px 0 0; _padding:0;_width:310px;}
+.body_arc ul li{width:300px;float:left;height:18px;line-height:18px;border-bottom:1px #CCCCCC dotted; margin-right:20px;_margin-right:10px;list-style-image: none;list-style-type: circle;_list-style:none; _margin:0 15px 0 0; _padding:0;_width:310px; overflow:hidden;}
 .body_arc ul li a{color:#717171;}
 
 .left_biz{margin:0; padding:0; height:auto; overflow:hidden;}
